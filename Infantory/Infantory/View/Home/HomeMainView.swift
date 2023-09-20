@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct HomeMainView: View {
+    @State var text: String = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            VStack {
+                TextField("asd",text: $text)
+            }
+            .padding()
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeMainView()
+            HomeMainView()
     }
 }
