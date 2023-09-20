@@ -9,12 +9,30 @@ import SwiftUI
 
 struct PaymentView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ScrollView {
+                LazyVStack(pinnedViews: .sectionFooters) {
+                    Section {
+                        PaymentAddressView()
+                    
+                        PaymentInfo()
+
+                        PaymentMethodView()
+                        
+                    }
+                }
+                
+            }
+        }
+        .navigationTitle("배송 / 결제")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentView()
+        NavigationStack {
+            PaymentView()
+        }
     }
 }
