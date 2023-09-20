@@ -17,13 +17,13 @@ struct PayButtonView: View {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(Color.gray, lineWidth: 1)
-                    .frame(width: 105, height: 50)
+                    .frame(width: 109, height: 50)
                     .background(.white)
                 
                 Image(payName)
                     .resizable()
                     .frame(width: 70, height: 25)
-                    .padding(.leading)
+                    .padding(.leading, 20)
             }
         }
     }

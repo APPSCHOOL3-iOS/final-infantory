@@ -80,9 +80,9 @@ struct PaymentMethodView: View {
             HStack {
                 PayButtonView(payName: "NaverPay")
                 PayButtonView(payName: "KakaoPay")
-                    .padding(.leading, 5)
+                    .padding(.leading, 4)
                 PayButtonView(payName: "TossPay")
-                    .padding(.leading, 5)
+                    .padding(.leading, 4)
             }
         }
     }
