@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
 		A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5632AB9FB65000894FC /* InfantoryApp.swift */; };
 		A091E5662AB9FB65000894FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5652AB9FB65000894FC /* ContentView.swift */; };
 		A091E5682AB9FB68000894FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A091E5672AB9FB68000894FC /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		A091E5602AB9FB65000894FC /* Infantory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Infantory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A091E5632AB9FB65000894FC /* InfantoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryApp.swift; sourceTree = "<group>"; };
 		A091E5652AB9FB65000894FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111924822ABAC70F003821FD /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				111924852ABAC7B9003821FD /* PaymentView.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
 		A091E5572AB9FB65000894FC = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +187,7 @@
 		A091E57C2ABAA515000894FC /* Auction */ = {
 			isa = PBXGroup;
 			children = (
+				111924822ABAC70F003821FD /* Payment */,
 				A091E5922ABAA624000894FC /* Empty8.swift */,
 			);
 			path = Auction;
@@ -344,6 +355,7 @@
 				A091E5992ABAA63C000894FC /* Empty10.swift in Sources */,
 				A091E59D2ABAAA3B000894FC /* Array+Sorting.swift in Sources */,
 				A091E5662AB9FB65000894FC /* ContentView.swift in Sources */,
+				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				A091E5932ABAA624000894FC /* Empty8.swift in Sources */,
 				A091E59B2ABAA642000894FC /* Empty11.swift in Sources */,
 				A091E5912ABAA61C000894FC /* Empty7.swift in Sources */,
