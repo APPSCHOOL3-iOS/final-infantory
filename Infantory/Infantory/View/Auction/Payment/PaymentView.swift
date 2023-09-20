@@ -13,6 +13,8 @@ struct PaymentView: View {
     }
 }
 
-#Preview {
-    PaymentView()
+struct Payment_Previews: PreviewProvider {
+    static var previews: some View {
+        PaymentView()
+    }
 }
