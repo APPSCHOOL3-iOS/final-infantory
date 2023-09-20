@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */; };
+		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
+		9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */; };
+		9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */; };
+		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
+		64DEB9D52ABAC91E007C4981 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */; };
+		64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */; };
+		0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */; };
+		0CE4021C2ABACA3400F69B7E /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* ImageCell.swift */; };
 		A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5632AB9FB65000894FC /* InfantoryApp.swift */; };
 		A091E5662AB9FB65000894FC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5652AB9FB65000894FC /* ContentView.swift */; };
 		A091E5682AB9FB68000894FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A091E5672AB9FB68000894FC /* Assets.xcassets */; };
@@ -31,6 +39,14 @@
 
 /* Begin PBXFileReference section */
 		84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpView.swift; sourceTree = "<group>"; };
+		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
+		9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayButtonView.swift; sourceTree = "<group>"; };
+		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
+		64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
+		64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoViewModel.swift; sourceTree = "<group>"; };
+		0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegistrationView.swift; sourceTree = "<group>"; };
+		0CE4021B2ABACA3400F69B7E /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		A091E5602AB9FB65000894FC /* Infantory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Infantory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A091E5632AB9FB65000894FC /* InfantoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryApp.swift; sourceTree = "<group>"; };
 		A091E5652AB9FB65000894FC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +80,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		111924822ABAC70F003821FD /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				111924852ABAC7B9003821FD /* PaymentView.swift */,
+				9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */,
+				11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */,
+				64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */,
+				64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */,
+				9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */,
+			);
+			path = PaymentMethod;
+		0CE4021A2ABACA1000F69B7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0CE4021B2ABACA3400F69B7E /* ImageCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A091E5572AB9FB65000894FC = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +226,10 @@
 		A091E57C2ABAA515000894FC /* Auction */ = {
 			isa = PBXGroup;
 			children = (
+				111924822ABAC70F003821FD /* Payment */,
 				A091E5922ABAA624000894FC /* Empty8.swift */,
+				0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */,
+				0CE4021A2ABACA1000F69B7E /* Cell */,
 			);
 			path = Auction;
 			sourceTree = "<group>";
@@ -346,22 +392,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				A091E5802ABAA55D000894FC /* Empty2.swift in Sources */,
+				0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */,
 				A091E5892ABAA5A0000894FC /* HomeMainView.swift in Sources */,
 				A091E5992ABAA63C000894FC /* Empty10.swift in Sources */,
 				A091E59D2ABAAA3B000894FC /* Array+Sorting.swift in Sources */,
 				A091E5662AB9FB65000894FC /* ContentView.swift in Sources */,
+				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
+				0CE4021C2ABACA3400F69B7E /* ImageCell.swift in Sources */,
 				A091E5932ABAA624000894FC /* Empty8.swift in Sources */,
 				A091E59B2ABAA642000894FC /* Empty11.swift in Sources */,
 				A091E5912ABAA61C000894FC /* Empty7.swift in Sources */,
+				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,
+				11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */,
+				64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */,
 				A091E5842ABAA56B000894FC /* Empty4.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
+				64DEB9D52ABAC91E007C4981 /* PaymentInfo.swift in Sources */,
 				A091E5822ABAA564000894FC /* Empty3.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
 				EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */,
 				A091E58F2ABAA616000894FC /* Empty6.swift in Sources */,
 				A091E59F2ABAAC6C000894FC /* TextFieldBasic.swift in Sources */,
 				A091E5972ABAA637000894FC /* Empty9.swift in Sources */,
+				9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,7 +472,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -472,7 +526,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -498,6 +552,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -527,6 +582,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
