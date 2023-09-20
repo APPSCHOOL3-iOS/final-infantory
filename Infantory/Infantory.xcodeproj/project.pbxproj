@@ -99,6 +99,8 @@
 				9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */,
 			);
 			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
 		0CE4021A2ABACA1000F69B7E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
