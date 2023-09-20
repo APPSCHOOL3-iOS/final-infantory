@@ -26,6 +26,7 @@
 		A091E59B2ABAA642000894FC /* Empty11.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E59A2ABAA642000894FC /* Empty11.swift */; };
 		A091E59D2ABAAA3B000894FC /* Array+Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E59C2ABAAA3B000894FC /* Array+Sorting.swift */; };
 		A091E59F2ABAAC6C000894FC /* TextFieldBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E59E2ABAAC6C000894FC /* TextFieldBasic.swift */; };
+		EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B11682ABAC984001303D1 /* LoginSheetView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		A091E59A2ABAA642000894FC /* Empty11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty11.swift; sourceTree = "<group>"; };
 		A091E59C2ABAAA3B000894FC /* Array+Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Sorting.swift"; sourceTree = "<group>"; };
 		A091E59E2ABAAC6C000894FC /* TextFieldBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldBasic.swift; sourceTree = "<group>"; };
+		EC7B11682ABAC984001303D1 /* LoginSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			children = (
 				A091E5902ABAA61C000894FC /* Empty7.swift */,
 				84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */,
+				EC7B11682ABAC984001303D1 /* LoginSheetView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
 				A091E5822ABAA564000894FC /* Empty3.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
+				EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */,
 				A091E58F2ABAA616000894FC /* Empty6.swift in Sources */,
 				A091E59F2ABAAC6C000894FC /* TextFieldBasic.swift in Sources */,
 				A091E5972ABAA637000894FC /* Empty9.swift in Sources */,
