@@ -13,7 +13,7 @@ struct PaymentView: View {
     }
 }
 
-struct Payment_Previews: PreviewProvider {
+struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         PaymentView()
     }
