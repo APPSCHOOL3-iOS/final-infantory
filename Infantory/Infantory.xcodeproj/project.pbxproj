@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
+		9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */; };
+		9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */; };
 		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
 		64DEB9D52ABAC91E007C4981 /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */; };
 		64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
+		9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayButtonView.swift; sourceTree = "<group>"; };
 		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
 		64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoViewModel.swift; sourceTree = "<group>"; };
@@ -72,11 +76,21 @@
 			isa = PBXGroup;
 			children = (
 				111924852ABAC7B9003821FD /* PaymentView.swift */,
+				9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */,
 				11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */,
 				64DEB9D42ABAC91E007C4981 /* PaymentInfo.swift */,
 				64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */,
+				9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */,
+			);
+			path = PaymentMethod;
 			sourceTree = "<group>";
 		};
 		A091E5572AB9FB65000894FC = {
@@ -368,6 +382,7 @@
 				A091E5932ABAA624000894FC /* Empty8.swift in Sources */,
 				A091E59B2ABAA642000894FC /* Empty11.swift in Sources */,
 				A091E5912ABAA61C000894FC /* Empty7.swift in Sources */,
+				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,
 				11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */,
 				64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */,
 				A091E5842ABAA56B000894FC /* Empty4.swift in Sources */,
@@ -378,6 +393,7 @@
 				A091E58F2ABAA616000894FC /* Empty6.swift in Sources */,
 				A091E59F2ABAAC6C000894FC /* TextFieldBasic.swift in Sources */,
 				A091E5972ABAA637000894FC /* Empty9.swift in Sources */,
+				9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
