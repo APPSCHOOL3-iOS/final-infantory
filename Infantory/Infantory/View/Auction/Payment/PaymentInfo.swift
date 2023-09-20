@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PaymentInfo: View {
     
-    let viewTitle: String = "총 결제금액"
+    let viewTitle: String = "최종 주문정보"
     
     var body: some View {
         VStack(alignment: .leading) {
