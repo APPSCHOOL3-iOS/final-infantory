@@ -30,23 +30,24 @@ struct AuctionRegistrationView: View {
             ImageCell()
                 .padding()
             
-            TextField("제목", text: $title)
-            Divider()
-            TextField("응모시작일", text: $apply)
-            Divider()
-            ZStack(alignment: .top) {
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(lineWidth: 1)
-                    .foregroundColor(.gray)
-                    .frame(width: 360, height: 140)
-                TextField("애장품 설명", text: $itemDescription)
-                    .padding(.leading)
+            Group {
+                TextField("제목", text: $title)
+                Divider()
+                TextField("응모시작일", text: $apply)
+                Divider()
+                ZStack(alignment: .top) {
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1)
+                        .foregroundColor(.gray)
+                        .frame(width: 360, height: 140)
+                    TextField("애장품 설명", text: $itemDescription)
+                        .padding(.leading)
+                }
+                TextField("시작가", text: $startingPrice)
+                Divider()
+                TextField("최고가", text: $maximumPrice)
+                Divider()
             }
-            TextField("시작가", text: $startingPrice)
-            Divider()
-            TextField("최고가", text: $maximumPrice)
-            Divider()
-            
             Spacer()
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
