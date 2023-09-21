@@ -71,6 +71,3 @@ struct AuctionRegistrationView_Previews: PreviewProvider {
         AuctionRegistrationView()
     }
 }
-
-
-

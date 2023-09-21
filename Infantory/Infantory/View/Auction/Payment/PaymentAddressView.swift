@@ -28,7 +28,7 @@ struct PaymentAddressView: View {
                     .background(
                         RoundedRectangle(cornerRadius: 25)
                             .stroke(lineWidth: 0.5)
-                            .frame(width: 100,height: 100)
+                            .frame(width: 100, height: 100)
                     )
                     .padding(.trailing)
                     
@@ -60,7 +60,7 @@ struct PaymentAddressView: View {
                                 .background(
                                     RoundedRectangle(cornerRadius: 25)
                                         .stroke(Color.gray, lineWidth: 1)
-                                        .frame(width: 70,height: 25)
+                                        .frame(width: 70, height: 25)
                                 )
                         }
                         .buttonStyle(.plain)

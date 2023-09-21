@@ -52,7 +52,6 @@ struct LoginSheetView: View {
                                 .frame(width: 330, height: 50)
                                 .foregroundColor(.black)
 
-                            
                             HStack(alignment: .center) {
                                 Image("appleLogo")
                                     .resizable()

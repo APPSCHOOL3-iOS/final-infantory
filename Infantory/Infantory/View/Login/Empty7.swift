@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct Empty7: View {
     
     @State private var isShowingLoginSheet: Bool = false
@@ -31,4 +30,3 @@ struct Empty7_Previews: PreviewProvider {
         Empty7()
     }
 }
-
