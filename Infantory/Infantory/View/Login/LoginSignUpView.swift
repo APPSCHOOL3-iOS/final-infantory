@@ -9,48 +9,48 @@ import SwiftUI
 
 struct LoginSignUpView: View {
     
-    @State private var text: String = ""
-    @State private var nickNameText: String = ""
-    @State private var nameText: String = ""
-    @State private var phoneNumberText: String = ""
-    @State private var addressText: String = ""
-    @State private var detailAddressText: String = ""
+    @State private var email: String = ""
+    @State private var nickName: String = ""
+    @State private var name: String = ""
+    @State private var phoneNumber: String = ""
+    @State private var address: String = ""
+    @State private var detailAddress: String = ""
     
     var body: some View {
         VStack(alignment: .leading) {
             Text("*이메일") // 소셜로그인하면서 받아올 예정
-            TextField("", text: $text)
+            TextField("", text: $email)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
             Text("*닉네임")
-            TextField("", text: $nickNameText)
+            TextField("", text: $nickName)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
             Text("이름")
-            TextField("", text: $nameText)
+            TextField("", text: $name)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
             Text("휴대폰 번호")
-            TextField("- 없이 입력", text: $phoneNumberText)
+            TextField("- 없이 입력", text: $phoneNumber)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
             VStack(alignment: .leading) {
                 Text("우편 번호") // 우편번호 검색 버튼 만들 예정
-                TextField("우편 번호를 검색하세요", text: $text)
+                TextField("우편 번호를 검색하세요", text: $address)
                     .overlay(UnderLineOverlay())
                     .padding(.bottom)
                 
                 Text("주소")
-                TextField("우편 번호 검색 후, 자동입력 됩니다.", text: $addressText)
+                TextField("우편 번호 검색 후, 자동입력 됩니다.", text: $address)
                     .overlay(UnderLineOverlay())
                     .padding(.bottom)
                 
                 Text("상세주소")
-                TextField("건물, 아파트, 동/호수 입력", text: $detailAddressText)
+                TextField("건물, 아파트, 동/호수 입력", text: $detailAddress)
                     .overlay(UnderLineOverlay())
                     .padding(.bottom)
                 
