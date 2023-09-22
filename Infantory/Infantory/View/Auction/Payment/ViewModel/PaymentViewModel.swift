@@ -13,25 +13,50 @@ class PaymentViewModel: ObservableObject {
 }
 
 let dummyUser = User(
-    id: "123456",
+    id: "1",
     isInfluencer: .user,
-    profileImageURLString: "https://example.com/profile.jpg",
-    name: "상필",
-    phoneNumber: "555-555-5555",
-    email: "sangpil0101@example.com",
+    profileImageURLString: "https://example.com/profile/1.jpg",
+    name: "John Doe",
+    phoneNumber: "123-456-7890",
+    email: "john@example.com",
+    birthDate: "1990-01-01",
     loginType: .kakao,
-    address: Address(fullAddress: "부산 남구 용소로 45 행복기숙사B0506"),
+    address: Address(fullAddress: "123 Main Street, City"),
     paymentInfos: [
         PaymentInfo(
-            product: "Example Product",
-            deliveryRequest: "Please deliver as soon as possible.",
-            price: 100,
-            commission: 10,
-            deliveryCost: 5,
+            product: "Product 1",
+            deliveryRequest: "Please deliver to my home.",
+            price: 50,
+            commission: 5,
+            deliveryCost: 10,
             paymentMethod: .card
         ),
+        PaymentInfo(
+            product: "Product 2",
+            deliveryRequest: "Leave at the front desk.",
+            price: 30,
+            commission: 3,
+            deliveryCost: 5,
+            paymentMethod: .accountTransfer
+        )
     ],
-    paymentMethod: .card
+    applyTicket: [
+        ApplyTicket(
+            id: "ticket1",
+            userId: "john@example.com",
+            date: Date(),
+            ticketGetAndUse: "Ticket 123",
+            count: 2
+        ),
+        ApplyTicket(
+            id: "ticket2",
+            userId: "john@example.com",
+            date: Date(),
+            ticketGetAndUse: "Ticket 456",
+            count: 1
+        )
+    ],
+    influencerIntroduce: nil
 )
 
 let auctionProduct = AuctionProduct(
