@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PaymentPrice: View {
+    @ObservedObject var viewModel: PaymentViewModel
     
     let viewTitle: String = "최종 주문정보"
     
@@ -68,6 +69,6 @@ struct PaymentPrice: View {
 
 struct PaymentInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentPrice()
+        PaymentPrice(viewModel: PaymentViewModel())
     }
 }

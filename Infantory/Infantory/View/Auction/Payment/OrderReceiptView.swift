@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct orderReceiptView: View {
+struct OrderReceiptView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Text("주문이 완료되었습니다!")
+            
+        }
     }
 }
 
-struct orderReceiptView_Previews: PreviewProvider {
+struct OrderReceiptView_Previews: PreviewProvider {
     static var previews: some View {
-        orderReceiptView()
+        OrderReceiptView()
     }
 }

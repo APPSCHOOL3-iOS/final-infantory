@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @ObservedObject var viewmodel = PaymentViewModel()
+    
     var body: some View {
         VStack {
             ScrollView {
                 LazyVStack(pinnedViews: .sectionFooters) {
                     Section {
-                        PaymentAddressView()
+                        PaymentAddressView(viewModel: viewmodel)
                         
-                        PaymentPrice()
+                        PaymentPrice(viewModel: viewmodel)
                         
-                        PaymentMethodView()
+                        PaymentMethodView(viewModel: viewmodel)
                             .padding(.top)
                         
                         payButton

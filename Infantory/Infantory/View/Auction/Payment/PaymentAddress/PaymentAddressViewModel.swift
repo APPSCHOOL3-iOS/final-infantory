@@ -5,16 +5,26 @@
 //  Created by 이희찬 on 2023/09/22.
 //
 
-import SwiftUI
+import Foundation
 
-struct PaymentAddressViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+enum PaymentAddressViewModel: Int, CaseIterable {
+    case prizeWinner
+    case phoneNumber
+    case address
+    
+    var title: String {
+        switch self {
+        case .prizeWinner: return "받는 분"
+        case .phoneNumber: return "연락처"
+        case .address: return "주소"
+        }
     }
-}
-
-struct PaymentAddressViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        PaymentAddressViewModel()
+    
+    var content: String {
+        switch self {
+        case .prizeWinner: return PaymentViewModel().user.name
+        case .phoneNumber: return PaymentViewModel().user.phoneNumber
+        case .address: return PaymentViewModel().user.address.fullAddress
+        }
     }
 }
