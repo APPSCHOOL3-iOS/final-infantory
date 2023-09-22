@@ -18,9 +18,7 @@
 		0CD2F7072ABD512000FCF88E /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD2F7062ABD512000FCF88E /* AuctionProduct.swift */; };
 		0CD2F7092ABD513700FCF88E /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD2F7082ABD513700FCF88E /* ApplyProduct.swift */; };
 		0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */; };
-
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
-
 		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
 		114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F305A2ABD1A79008497A8 /* AuctionMainView.swift */; };
 		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
@@ -100,9 +98,7 @@
 		0CD2F7062ABD512000FCF88E /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		0CD2F7082ABD513700FCF88E /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
 		0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegistrationView.swift; sourceTree = "<group>"; };
-
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
-
 		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		114F305A2ABD1A79008497A8 /* AuctionMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionMainView.swift; sourceTree = "<group>"; };
 		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
@@ -159,7 +155,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */,
 				849B64B92ABD5B0D00C4AC8D /* FirebaseFirestore in Frameworks */,
 				849B64C12ABD5B0D00C4AC8D /* FirebaseStorageCombine-Community in Frameworks */,
@@ -168,7 +163,6 @@
 				849B64BF2ABD5B0D00C4AC8D /* FirebaseStorage in Frameworks */,
 				849B64B52ABD5B0D00C4AC8D /* FirebaseAuth in Frameworks */,
 				849B64BD2ABD5B0D00C4AC8D /* FirebaseFirestoreSwift in Frameworks */,
-
 				A086C7B22ABD278200F0BF9B /* FirebaseMessaging in Frameworks */,
 				A086C7AC2ABD278200F0BF9B /* FirebaseDatabaseSwift in Frameworks */,
 				A086C7B62ABD278200F0BF9B /* FirebaseStorageCombine-Community in Frameworks */,
@@ -179,7 +173,6 @@
 				A086C7AA2ABD278200F0BF9B /* FirebaseDatabase in Frameworks */,
 				A086C7A62ABD278200F0BF9B /* FirebaseAuth in Frameworks */,
 				A086C7AE2ABD278200F0BF9B /* FirebaseFirestore in Frameworks */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,14 +182,11 @@
 		0CE4021A2ABACA1000F69B7E /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-
 				A091E5AD2ABC78EB000894FC /* InfluencerImageView.swift */,
-
 				0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */,
 				0CD2F6FE2ABD4D8400FCF88E /* AuctionButtonCell.swift */,
 				0CD2F7002ABD4EE100FCF88E /* ProductListView.swift */,
 				0CD2F7022ABD4F6A00FCF88E /* AuctionLogoCell.swift */,
-
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -322,12 +312,9 @@
 			isa = PBXGroup;
 			children = (
 				A091E5832ABAA56B000894FC /* Empty4.swift */,
-
 				849B64C22ABD600D00C4AC8D /* LoginStore.swift */,
-
 				015783372ABD5B5F001FEC98 /* UserViewModel.swift */,
 				015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */,
-
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -353,19 +340,16 @@
 			children = (
 				64E105C92ABD578E00BFD3DF /* Protocol */,
 				A091E5812ABAA564000894FC /* Empty3.swift */,
-
 				11F7EEB52ABBD41D003E3A8C /* User.swift */,
 				849B64C42ABD691600C4AC8D /* SignUpUser.swift */,
 				849B64C62ABD742F00C4AC8D /* ApplyTicket.swift */,
 				11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */,
 				11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */,
 				11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */,
-
 				0CD2F7042ABD50F500FCF88E /* User.swift */,
 				0CD2F7062ABD512000FCF88E /* AuctionProduct.swift */,
 				0CD2F7082ABD513700FCF88E /* ApplyProduct.swift */,
 				015783332ABD5772001FEC98 /* PaymentsInfo.swift */,
-
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,12 +388,9 @@
 				111924822ABAC70F003821FD /* Payment */,
 				A091E5922ABAA624000894FC /* Empty8.swift */,
 				0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */,
-
 				0CE4021A2ABACA1000F69B7E /* Cell */,
-
 				0CE4021A2ABACA1000F69B7E /* SubView */,
 				A091E5AD2ABC78EB000894FC /* AuctionMainView.swift */,
-
 			);
 			path = Auction;
 			sourceTree = "<group>";
@@ -509,7 +490,6 @@
 			);
 			name = Infantory;
 			packageProductDependencies = (
-
 				849B64AF2ABD595B00C4AC8D /* KakaoSDK */,
 				849B64B42ABD5B0D00C4AC8D /* FirebaseAuth */,
 				849B64B62ABD5B0D00C4AC8D /* FirebaseAuthCombine-Community */,
@@ -518,7 +498,6 @@
 				849B64BC2ABD5B0D00C4AC8D /* FirebaseFirestoreSwift */,
 				849B64BE2ABD5B0D00C4AC8D /* FirebaseStorage */,
 				849B64C02ABD5B0D00C4AC8D /* FirebaseStorageCombine-Community */,
-
 				A086C7A32ABD278200F0BF9B /* FirebaseAppCheck */,
 				A086C7A52ABD278200F0BF9B /* FirebaseAuth */,
 				A086C7A72ABD278200F0BF9B /* FirebaseAuthCombine-Community */,
@@ -529,7 +508,6 @@
 				A086C7B12ABD278200F0BF9B /* FirebaseMessaging */,
 				A086C7B32ABD278200F0BF9B /* FirebaseStorage */,
 				A086C7B52ABD278200F0BF9B /* FirebaseStorageCombine-Community */,
-
 			);
 			productName = Infantory;
 			productReference = A091E5602AB9FB65000894FC /* Infantory.app */;
@@ -560,12 +538,9 @@
 			);
 			mainGroup = A091E5572AB9FB65000894FC;
 			packageReferences = (
-
 				849B64AE2ABD595B00C4AC8D /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				849B64B32ABD5B0D00C4AC8D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-
 				A086C7A22ABD278200F0BF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-
 			);
 			productRefGroup = A091E5612AB9FB65000894FC /* Products */;
 			projectDirPath = "";
