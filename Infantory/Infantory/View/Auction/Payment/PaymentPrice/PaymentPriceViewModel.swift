@@ -10,8 +10,6 @@ import Foundation
 enum PaymentInfoViewModel: Int, CaseIterable {
     case totalPrice
     case price
-    case payPoint
-    case inspectionCost
     case commission
     case deliveryCost
     
@@ -19,8 +17,6 @@ enum PaymentInfoViewModel: Int, CaseIterable {
         switch self {
         case .totalPrice: return "총 결제금액"
         case .price: return "구매가"
-        case .payPoint: return "포인트"
-        case .inspectionCost: return "검수비"
         case .commission: return "수수료"
         case .deliveryCost: return "배송비"
         }
@@ -33,8 +29,6 @@ enum PaymentInfoViewModel: Int, CaseIterable {
                 .filter { $0 != .totalPrice }
                 .reduce(0) { $0 + $1.price }
         case .price: return 100000
-        case .payPoint: return -5000
-        case .inspectionCost: return 2000
         case .commission: return 10000
         case .deliveryCost: return 3000
         }

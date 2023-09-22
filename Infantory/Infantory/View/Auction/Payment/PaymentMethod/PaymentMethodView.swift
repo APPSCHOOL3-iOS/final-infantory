@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PaymentMethodView: View {
+    @ObservedObject var viewModel: PaymentViewModel
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("결제 방법")
@@ -90,6 +92,6 @@ struct PaymentMethodView: View {
 
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentMethodView()
+        PaymentMethodView(viewModel: PaymentViewModel())
     }
 }

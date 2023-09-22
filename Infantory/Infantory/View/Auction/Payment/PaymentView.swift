@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct PaymentView: View {
+    @ObservedObject var viewmodel = PaymentViewModel()
+    
     var body: some View {
-        NavigationStack {
+        VStack {
             ScrollView {
                 LazyVStack(pinnedViews: .sectionFooters) {
                     Section {
-                        PaymentAddressView()
-                    
-                        PaymentInfo()
-
-                        PaymentMethodView()
+                        PaymentAddressView(viewModel: viewmodel)
                         
+                        PaymentPrice(viewModel: viewmodel)
+                        
+                        PaymentMethodView(viewModel: viewmodel)
+                            .padding(.top)
+                        
+                        payButton
                     }
                 }
                 
@@ -34,5 +38,29 @@ struct PaymentView_Previews: PreviewProvider {
         NavigationStack {
             PaymentView()
         }
+    }
+}
+
+extension PaymentView {
+    
+    var payButton: some View {
+        Button {
+            payAction()
+        } label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.gray, lineWidth: 1)
+                    .frame(height: 50)
+                    .background(.white)
+                Text("결제하기")
+                    .foregroundColor(.black)
+                    .font(.headline)
+            }
+        }
+        .padding()
+    }
+    
+    func payAction() {
+        
     }
 }

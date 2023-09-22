@@ -9,7 +9,7 @@ import Foundation
 
 struct User: Identifiable {
     var id: String
-    var isInfluencer: UserType // influencer인지 일반 User인지?
+    var isInfluencer: UserType = .user // influencer인지 일반 User인지?
     var profileImageURLString: String?
     var name: String
     var phoneNumber: String
@@ -18,16 +18,16 @@ struct User: Identifiable {
     
     var loginType: LoginType
     var address: Address
-    var paymentInfos: [PaymentsInfo]
+    var paymentInfos: [PaymentInfo]
     
     var follower: [String]? = nil
-    var applyCount: Int
+    var applyTicket: [ApplyTicket]
     var influencerIntroduce: String?
 }
 
 // 상세주소
 struct Address {
-    
+    var fullAddress: String
 }
 
 // 소셜로그인 타입
@@ -36,10 +36,18 @@ enum LoginType: String {
     case apple
     
 }
- 
-enum UserType {
+
+enum UserType: String, Codable {
     case user
     case influencer
+}
+
+enum PaymentMethod: String, CaseIterable {
+    case card
+    case accountTransfer
+    case naverPay
+    case kakaoPay
+    case tossPay
 }
 
 // 샘플 데이터

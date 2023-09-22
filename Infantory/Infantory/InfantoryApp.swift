@@ -7,6 +7,18 @@
 
 import FirebaseCore
 import SwiftUI
+import KakaoSDKCommon
+import KakaoSDKAuth
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+
+    return true
+  }
+}
 
 @main
 struct InfantoryApp: App {
@@ -17,13 +29,9 @@ struct InfantoryApp: App {
             MainTabView()
         }
     }
-}
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-      FirebaseApp.configure()
-
-    return true
-  }
+    
+    init() {
+            // Kakao SDK 초기화
+            KakaoSDK.initSDK(appKey: "45ce2063d86a5a5c18e38528aae46993")
+        }
 }
