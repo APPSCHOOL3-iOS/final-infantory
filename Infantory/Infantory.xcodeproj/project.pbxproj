@@ -15,7 +15,8 @@
 		11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */; };
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
 		11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */; };
-		64DEB9D52ABAC91E007C4981 /* PaymentPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */; };
+		642C4F942ABD7B18003E76A0 /* CardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642C4F932ABD7B18003E76A0 /* CardAddView.swift */; };
+		64DEB9D52ABAC91E007C4981 /* PaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D42ABAC91E007C4981 /* PaymentPriceView.swift */; };
 		64DEB9D72ABAD438007C4981 /* PaymentPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */; };
 		64E105C12ABD2A8C00BFD3DF /* OrderReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C02ABD2A8C00BFD3DF /* OrderReceiptView.swift */; };
 		64E105C42ABD2B5600BFD3DF /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */; };
@@ -62,7 +63,8 @@
 		11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
-		64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPrice.swift; sourceTree = "<group>"; };
+		642C4F932ABD7B18003E76A0 /* CardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAddView.swift; sourceTree = "<group>"; };
+		64DEB9D42ABAC91E007C4981 /* PaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceView.swift; sourceTree = "<group>"; };
 		64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceViewModel.swift; sourceTree = "<group>"; };
 		64E105C02ABD2A8C00BFD3DF /* OrderReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderReceiptView.swift; sourceTree = "<group>"; };
 		64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
@@ -137,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */,
-				64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */,
+				64DEB9D42ABAC91E007C4981 /* PaymentPriceView.swift */,
 			);
 			path = PaymentPrice;
 			sourceTree = "<group>";
@@ -172,6 +174,7 @@
 			children = (
 				9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */,
 				9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */,
+				642C4F932ABD7B18003E76A0 /* CardAddView.swift */,
 			);
 			path = PaymentMethod;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				A091E5AC2ABC76CA000894FC /* MainTabView.swift in Sources */,
 				64E105C12ABD2A8C00BFD3DF /* OrderReceiptView.swift in Sources */,
 				A091E5892ABAA5A0000894FC /* HomeMainView.swift in Sources */,
+				642C4F942ABD7B18003E76A0 /* CardAddView.swift in Sources */,
 				A091E5992ABAA63C000894FC /* Empty10.swift in Sources */,
 				A091E5662AB9FB65000894FC /* ContentView.swift in Sources */,
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
@@ -509,10 +513,10 @@
 				64E105C62ABD4C2700BFD3DF /* PaymentAddressViewModel.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
-				64DEB9D52ABAC91E007C4981 /* PaymentPrice.swift in Sources */,
+				64DEB9D52ABAC91E007C4981 /* PaymentPriceView.swift in Sources */,
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
 				11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */,
-				64DEB9D52ABAC91E007C4981 /* PaymentPrice.swift in Sources */,
+				64DEB9D52ABAC91E007C4981 /* PaymentPriceView.swift in Sources */,
 				A091E5822ABAA564000894FC /* Empty3.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
 				64E105C42ABD2B5600BFD3DF /* PaymentViewModel.swift in Sources */,

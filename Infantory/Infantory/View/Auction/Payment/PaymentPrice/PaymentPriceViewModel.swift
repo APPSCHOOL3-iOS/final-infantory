@@ -22,14 +22,13 @@ enum PaymentInfoViewModel: Int, CaseIterable {
         }
     }
     
-    var price: Int {
+    func priceInfo(price: Int) -> Int {
         switch self {
-        case .totalPrice:
-            return PaymentInfoViewModel.allCases
-                .filter { $0 != .totalPrice }
-                .reduce(0) { $0 + $1.price }
-        case .price: return 100000
-        case .commission: return 10000
+        case .totalPrice: return price + (price / 10) + 3000
+        case .price: return price
+        case .commission:
+            let intCommission = Double(price) / 10
+            return Int(intCommission.rounded())
         case .deliveryCost: return 3000
         }
     }
