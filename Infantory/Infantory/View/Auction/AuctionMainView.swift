@@ -9,7 +9,15 @@ import SwiftUI
 
 struct AuctionMainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            AuctionLogoCell()
+            Divider()
+            AuctionButtonCell()
+            ScrollView {
+                ProductCell()
+                Divider()
+            }
+        }
     }
 }
 
