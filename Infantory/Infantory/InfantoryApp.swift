@@ -5,6 +5,7 @@
 //  Created by 김성훈 on 2023/09/20.
 //
 
+import FirebaseCore
 import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
@@ -21,7 +22,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct InfantoryApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {

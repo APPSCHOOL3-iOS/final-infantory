@@ -2,7 +2,7 @@
 //  ApplyProduct.swift
 //  Infantory
 //
-//  Created by 변상필 on 2023/09/21.
+//  Created by 윤경환 on 2023/09/22.
 //
 
 import Foundation

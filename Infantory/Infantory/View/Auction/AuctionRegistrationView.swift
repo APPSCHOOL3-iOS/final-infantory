@@ -41,7 +41,7 @@ struct AuctionRegistrationView: View {
                     Text("착장 사진")
                         .font(.system(size: 17))
                         .bold()
-                    InfluencerImageView()
+                    InfluencerImageCell()
                 }
                 .padding(.leading)
                 

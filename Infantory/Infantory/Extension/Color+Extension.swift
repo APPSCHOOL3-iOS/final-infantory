@@ -16,4 +16,5 @@ extension Color {
     static let infanMain = Color("Blue")
     static let infanOrange = Color("Orange")
     static let infanYellow = Color("Yellow")
+    static let infanGreen = Color("Green")
 }

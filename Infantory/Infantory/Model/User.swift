@@ -2,7 +2,7 @@
 //  User.swift
 //  Infantory
 //
-//  Created by 변상필 on 2023/09/21.
+//  Created by 윤경환 on 2023/09/22.
 //
 
 import Foundation
@@ -49,3 +49,12 @@ enum PaymentMethod: String, CaseIterable {
     case kakaoPay
     case tossPay
 }
+
+// 샘플 데이터
+#if DEBUG
+extension User {
+    static let sampleData: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
+    static let sampleData2: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
+    static let sampleData3: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
+}
+#endif

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfluencerImageView: View {
+struct InfluencerImageCell: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
@@ -40,8 +40,8 @@ struct ItemIamgeView_Previews: PreviewProvider {
     }
 }
 
-struct InfluencerImageView_Previews: PreviewProvider {
+struct InfluencerImageCell_Previews: PreviewProvider {
     static var previews: some View {
-        InfluencerImageView()
+        InfluencerImageCell()
     }
 }
