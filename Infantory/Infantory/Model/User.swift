@@ -7,18 +7,22 @@
 
 import Foundation
 
-struct User {
+struct User: Identifiable {
     var id: String
-    var isInfluencer: UserType // influencer인지 일반 User인지?
+    var isInfluencer: UserType = .user // influencer인지 일반 User인지?
     var profileImageURLString: String?
     var name: String
     var phoneNumber: String
     var email: String
+    var birthDate: String
     
     var loginType: LoginType
     var address: Address
     var paymentInfos: [PaymentInfo]
-    var paymentMethod: PaymentMethod
+    
+    var follower: [String]? = nil
+    var applyTicket: [ApplyTicket]
+    var influencerIntroduce: String?
 }
 
 // 상세주소
@@ -33,7 +37,7 @@ enum LoginType: String {
     
 }
 
-enum UserType {
+enum UserType: String, Codable {
     case user
     case influencer
 }

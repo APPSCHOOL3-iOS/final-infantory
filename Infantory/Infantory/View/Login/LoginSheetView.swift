@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginSheetView: View {
     
+    @StateObject private var loginStore = LoginStore()
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -23,7 +25,7 @@ struct LoginSheetView: View {
                 Spacer().frame(height: 30)
                 Group {
                     Button {
-                        // login 기능 구현
+                        loginStore.kakaoAuthSignIn()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
