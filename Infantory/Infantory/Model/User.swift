@@ -17,7 +17,7 @@ struct User {
     
     var loginType: LoginType
     var address: Address
-    var paymentInfos: [PaymentInfo]
+    var paymentInfos: [PaymentsInfo]
 }
 
 // 상세주소
