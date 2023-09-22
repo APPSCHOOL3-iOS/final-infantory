@@ -15,7 +15,7 @@ struct PaymentView: View {
                     Section {
                         PaymentAddressView()
                     
-                        PaymentInfo()
+                        PaymentPrice()
 
                         PaymentMethodView()
                         
