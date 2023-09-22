@@ -15,7 +15,6 @@ struct BasicTextField: ViewModifier {
         }
 }
 
-
 extension View {
     func asBasicTextField() -> some View {
         modifier(BasicTextField())
