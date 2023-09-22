@@ -18,6 +18,7 @@ struct PaymentView: View {
                         PaymentPrice()
 
                         PaymentMethodView()
+                            .padding(.top)
                         
                     }
                 }
