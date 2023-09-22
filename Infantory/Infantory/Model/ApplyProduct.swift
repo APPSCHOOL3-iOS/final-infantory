@@ -12,6 +12,7 @@ struct ApplyProduct: Productable {
     
     var id: String
     var productName: String
+    var winningPrice: Int
     var productImageURLStrings: [String]
     var description: String
     

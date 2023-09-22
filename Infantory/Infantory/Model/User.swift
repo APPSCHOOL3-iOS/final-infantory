@@ -24,6 +24,7 @@ struct User {
 // 상세주소
 struct Address {
     var fullAddress: String
+    // postcode....
 }
 
 // 소셜로그인 타입

@@ -17,7 +17,7 @@ struct PaymentView: View {
                     Section {
                         PaymentAddressView(viewModel: viewmodel)
                         
-                        PaymentPrice(viewModel: viewmodel)
+                        PaymentPriceView(viewModel: viewmodel)
                         
                         PaymentMethodView(viewModel: viewmodel)
                             .padding(.top)
