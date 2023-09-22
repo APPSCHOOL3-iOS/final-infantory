@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AuctionProduct {
+struct AuctionProduct: Productable {
     
     var id: String
     var productName: String

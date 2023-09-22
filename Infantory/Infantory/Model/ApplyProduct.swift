@@ -8,7 +8,7 @@
 import Foundation
 
 // 응모
-struct ApplyProduct {
+struct ApplyProduct: Productable {
     
     var id: String
     var productName: String
