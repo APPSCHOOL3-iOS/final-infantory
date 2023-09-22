@@ -9,7 +9,7 @@ import Foundation
 
 class PaymentViewModel: ObservableObject {
     @Published var user: User = dummyUser
-    @Published var product: Product = auctionProduct
+    @Published var product: Productable = auctionProduct
 }
 
 let dummyUser = User(
