@@ -16,7 +16,7 @@
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
 		11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */; };
 		64DEB9D52ABAC91E007C4981 /* PaymentPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */; };
-		64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */; };
+		64DEB9D72ABAD438007C4981 /* PaymentPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */; };
 		84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */; };
 		9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */; };
 		9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */; };
@@ -59,7 +59,7 @@
 		11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
 		64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPrice.swift; sourceTree = "<group>"; };
-		64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfoViewModel.swift; sourceTree = "<group>"; };
+		64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceViewModel.swift; sourceTree = "<group>"; };
 		84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSignUpView.swift; sourceTree = "<group>"; };
 		9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayButtonView.swift; sourceTree = "<group>"; };
@@ -116,12 +116,28 @@
 			isa = PBXGroup;
 			children = (
 				111924852ABAC7B9003821FD /* PaymentView.swift */,
+				64E105BE2ABD1EF600BFD3DF /* PaymentAddress */,
+				64E105BD2ABD1EAF00BFD3DF /* PaymentPrice */,
 				9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */,
-				11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */,
-				64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */,
-				64DEB9D62ABAD438007C4981 /* PaymentInfoViewModel.swift */,
 			);
 			path = Payment;
+			sourceTree = "<group>";
+		};
+		64E105BD2ABD1EAF00BFD3DF /* PaymentPrice */ = {
+			isa = PBXGroup;
+			children = (
+				64DEB9D62ABAD438007C4981 /* PaymentPriceViewModel.swift */,
+				64DEB9D42ABAC91E007C4981 /* PaymentPrice.swift */,
+			);
+			path = PaymentPrice;
+			sourceTree = "<group>";
+		};
+		64E105BE2ABD1EF600BFD3DF /* PaymentAddress */ = {
+			isa = PBXGroup;
+			children = (
+				11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */,
+			);
+			path = PaymentAddress;
 			sourceTree = "<group>";
 		};
 		9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */ = {
@@ -458,7 +474,7 @@
 				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,
 				11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
-				64DEB9D72ABAD438007C4981 /* PaymentInfoViewModel.swift in Sources */,
+				64DEB9D72ABAD438007C4981 /* PaymentPriceViewModel.swift in Sources */,
 				A091E5842ABAA56B000894FC /* Empty4.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
