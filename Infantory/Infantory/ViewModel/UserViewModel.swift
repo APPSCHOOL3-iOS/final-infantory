@@ -8,5 +8,5 @@
 import Foundation
 
 final class UserViewModel: ObservableObject {
-    @Published var user: User = User.sampleData
+    @Published var user: User = User.dummyUser
 }

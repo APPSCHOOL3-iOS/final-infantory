@@ -50,11 +50,53 @@ enum PaymentMethod: String, CaseIterable {
     case tossPay
 }
 
-// 샘플 데이터
 #if DEBUG
 extension User {
-    static let sampleData: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
-    static let sampleData2: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
-    static let sampleData3: Self = User(id: "1234", isInfluencer: UserType.user, profileImageURLString: "", name: "주헌", phoneNumber: "01043255324", email: "fndso@naver.com", birthDate: "990727", loginType: LoginType.kakao, address: Address(), paymentInfos: [], applyCount: 5, influencerIntroduce: "")
+    static let dummyUser = User(
+        id: "1",
+        isInfluencer: .user,
+        profileImageURLString: "https://example.com/profile/1.jpg",
+        name: "John Doe",
+        phoneNumber: "123-456-7890",
+        email: "john@example.com",
+        birthDate: "1990-01-01",
+        loginType: .kakao,
+        address: Address(fullAddress: "123 Main Street, City"),
+        paymentInfos: [
+            PaymentInfo(
+                product: "Product 1",
+                deliveryRequest: "Please deliver to my home.",
+                price: 50,
+                commission: 5,
+                deliveryCost: 10,
+                paymentMethod: .card
+            ),
+            PaymentInfo(
+                product: "Product 2",
+                deliveryRequest: "Leave at the front desk.",
+                price: 30,
+                commission: 3,
+                deliveryCost: 5,
+                paymentMethod: .accountTransfer
+            )
+        ],
+        applyTicket: [
+            ApplyTicket(
+                id: "ticket1",
+                userId: "john@example.com",
+                date: Date(),
+                ticketGetAndUse: "Ticket 123",
+                count: 2
+            ),
+            ApplyTicket(
+                id: "ticket2",
+                userId: "john@example.com",
+                date: Date(),
+                ticketGetAndUse: "Ticket 456",
+                count: 1
+            )
+        ],
+        influencerIntroduce: nil
+    )
 }
 #endif
