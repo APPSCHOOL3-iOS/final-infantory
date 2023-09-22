@@ -18,6 +18,7 @@ struct User {
     var loginType: LoginType
     var address: Address
     var paymentInfos: [PaymentInfo]
+    var paymentMethod: PaymentMethod
 }
 
 // 상세주소
@@ -37,3 +38,10 @@ enum UserType {
     case influencer
 }
 
+enum PaymentMethod: String, CaseIterable {
+    case card
+    case accountTransfer
+    case naverPay
+    case kakaoPay
+    case tossPay
+}
