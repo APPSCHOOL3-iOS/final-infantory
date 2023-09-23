@@ -20,4 +20,7 @@ protocol Productable {
     // 응모 시작일, 마감일
     var startDate: Date { get set }
     var endDate: Date { get set }
+    
+    // 지불 가격
+    var winningPrice: Int { get set }
 }

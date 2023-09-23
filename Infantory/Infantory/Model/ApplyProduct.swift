@@ -25,4 +25,7 @@ struct ApplyProduct: Productable {
     
     // 응모한 유저
     var applyUserIDs: [String]
+    
+    // 지불 가격
+    var winningPrice: Int
 }
