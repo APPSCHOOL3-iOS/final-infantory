@@ -31,7 +31,7 @@ struct PaymentPrice: View {
                             }
                             HStack {
                                 Spacer()
-                                Text("\(item.price)원")
+                                Text("\(item.receipt(productPrice: viewModel.product.winningPrice))원")
                                     .foregroundColor(.red)
                                     .font(.headline)
                                     .padding(.horizontal)
@@ -55,7 +55,7 @@ struct PaymentPrice: View {
                             
                             Spacer()
                             
-                            Text("\(item.price)원")
+                            Text("\(item.receipt(productPrice: viewModel.product.winningPrice))원")
                         }
                         .padding(.horizontal)
                     }
