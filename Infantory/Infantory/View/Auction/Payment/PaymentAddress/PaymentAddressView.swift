@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct Goods {
-    var imgString: String
-    var goodsName: String
-    
-}
-
 struct PaymentAddressView: View {
     @ObservedObject var viewModel: PaymentViewModel
     
