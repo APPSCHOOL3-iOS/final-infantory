@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PaymentPrice: View {
-    @ObservedObject var viewModel: PaymentViewModel
+struct PaymentPriceView: View {
+    let price: Int
     
     let viewTitle: String = "최종 주문정보"
     
@@ -31,7 +31,7 @@ struct PaymentPrice: View {
                             }
                             HStack {
                                 Spacer()
-                                Text("\(item.price)원")
+                                Text("\(item.receipt(productPrice: price))원")
                                     .foregroundColor(.red)
                                     .font(.headline)
                                     .padding(.horizontal)
@@ -55,7 +55,7 @@ struct PaymentPrice: View {
                             
                             Spacer()
                             
-                            Text("\(item.price)원")
+                            Text("\(item.receipt(productPrice: price))원")
                         }
                         .padding(.horizontal)
                     }
@@ -67,8 +67,8 @@ struct PaymentPrice: View {
     }
 }
 
-struct PaymentInfo_Previews: PreviewProvider {
+struct PaymentPriceView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentPrice(viewModel: PaymentViewModel())
+        PaymentPriceView(price: 100000)
     }
 }
