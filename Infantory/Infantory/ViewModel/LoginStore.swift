@@ -24,21 +24,42 @@ final class LoginStore: ObservableObject {
     
     @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
     
-    func kakaoAuthSignIn() {
+    func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
             UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
                 if error != nil { // 에러가 발생했으면 토큰이 유효하지 않다.
-                    self.openKakaoService()
+                    self.openKakaoService(completion: { result in
+                        print("컴플리션 값: \(result)")
+                        if result {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    })
                 } else { // 유효한 토큰
-                    self.loadingInfoDidKakaoAuth()
+                    self.loadingInfoDidKakaoAuth(completion: { result in
+                        print("컴플리션 값: \(result)")
+                        if result {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    })
                 }
             }
         } else { // 만료된 토큰
-            self.openKakaoService()
+            self.openKakaoService(completion: { result in
+                print("컴플리션 값: \(result)")
+                if result {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            })
         }
     }
     
-    func openKakaoService() {
+    func openKakaoService(completion: @escaping (Bool) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() { // 카카오톡 앱 이용 가능한지
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in // 카카오톡 앱으로 로그인
                 if error != nil { // 로그인 실패 -> 종료
@@ -47,7 +68,14 @@ final class LoginStore: ObservableObject {
                 }
                 
                 _ = oauthToken // 로그인 성공
-                self.loadingInfoDidKakaoAuth() // 사용자 정보 불러와서 Firebase Auth 로그인하기
+                self.loadingInfoDidKakaoAuth(completion: { result in
+                    print("컴플리션 값: \(result)")
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }) // 사용자 정보 불러와서 Firebase Auth 로그인하기
             }
         } else { // 카카오톡 앱 이용 불가능한 사람
             UserApi.shared.loginWithKakaoAccount { oauthToken, error in // 카카오 웹으로 로그인
@@ -56,12 +84,19 @@ final class LoginStore: ObservableObject {
                     return
                 }
                 _ = oauthToken // 로그인 성공
-                self.loadingInfoDidKakaoAuth() // 사용자 정보 불러와서 Firebase Auth 로그인하기
+                self.loadingInfoDidKakaoAuth(completion: { result in
+                    print("컴플리션 값: \(result)")
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }) // 사용자 정보 불러와서 Firebase Auth 로그인하기
             }
         }
     }
     
-    func loadingInfoDidKakaoAuth() {  // 사용자 정보 불러오기
+    func loadingInfoDidKakaoAuth(completion: @escaping (Bool) -> Void) {  // 사용자 정보 불러오기
         UserApi.shared.me { kakaoUser, error in
             if error != nil {
                 print("카카오톡 사용자 정보 불러오는데 실패했습니다.")
@@ -78,9 +113,9 @@ final class LoginStore: ObservableObject {
             self.emailAuthSignIn(email: email, password: String(password), completion: { result in
                 print("컴플리션 값: \(result)")
                 if result {
-                    self.isShowingMainView = true
+                    completion(true)
                 } else {
-                    self.isShowingSignUp = true
+                    completion(false)
                 }
             })
         }
@@ -116,13 +151,13 @@ final class LoginStore: ObservableObject {
         }
     }
     
-    func signUpToFirebase() {
+    func signUpToFirebase(completion: @escaping (Bool) -> Void) {
         self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
             self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
                 if result {
-                    self.isShowingMainView = true
+                    completion(true)
                 } else {
-                    self.isShowingSignUp = true
+                    completion(false)
                 }
             })
         }
