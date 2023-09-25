@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginSheetView: View {
+    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
     
@@ -29,7 +30,6 @@ struct LoginSheetView: View {
                     Group {
                         Button {
                             loginStore.kakaoAuthSignIn(completion: { result in
-                                print("찐 컴플리션 값: \(result)")
                                 if result {
                                     dismiss()
                                 } else {
@@ -80,7 +80,6 @@ struct LoginSheetView: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    
                 }
             }
             .fullScreenCover(isPresented: $isShowingSignUp) {

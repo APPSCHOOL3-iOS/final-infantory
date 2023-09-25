@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginSignUpView: View {
+    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
     @State private var email: String = ""
@@ -56,7 +57,6 @@ struct LoginSignUpView: View {
                     TextField("건물, 아파트, 동/호수 입력", text: $detailAddress)
                         .overlay(UnderLineOverlay())
                         .padding(.bottom)
-                    
                 }
                 
                 HStack {
@@ -78,16 +78,12 @@ struct LoginSignUpView: View {
                             .background(.gray)
                             .cornerRadius(5)
                     }
-                    
                     Spacer()
                 }
-                
             }
-            
             .padding()
             .infanNavigationBar(title: "회원가입")
         }
-    
     }
 }
 
