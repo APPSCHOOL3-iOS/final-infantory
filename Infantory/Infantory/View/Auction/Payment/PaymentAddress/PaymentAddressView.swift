@@ -35,6 +35,38 @@ struct PaymentAddressView_Previews: PreviewProvider {
 
 extension PaymentAddressView {
     
+    var productInfo: some View {
+        VStack {
+            HStack(alignment: .top) {
+                AsyncImage(url: URL(string: viewModel.product.productImageURLStrings[0])) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 90, height: 90)
+                } placeholder: {
+                    ProgressView()
+                }
+                .background(
+                    RoundedRectangle(cornerRadius: 25)
+                        .stroke(lineWidth: 0.5)
+                        .frame(width: 100, height: 100)
+                )
+                .padding(.trailing)
+                
+                VStack(alignment: .leading) {
+                    Text(viewModel.product.influencerID)
+                        .fontWeight(.semibold)
+                    
+                    Text(viewModel.product.productName)
+                    
+                    Text(viewModel.product.description)
+                        .foregroundColor(.gray)
+                }
+                
+            }
+        }
+    }
+    
     var addressView: some View {
         VStack(alignment: .leading, spacing: 7) {
             HStack {
@@ -66,38 +98,6 @@ extension PaymentAddressView {
                 }
             }
             
-        }
-    }
-    
-    var productInfo: some View {
-        VStack {
-            HStack(alignment: .top) {
-                AsyncImage(url: URL(string: viewModel.product.productImageURLStrings[0])) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 90, height: 90)
-                } placeholder: {
-                    ProgressView()
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(lineWidth: 0.5)
-                        .frame(width: 100, height: 100)
-                )
-                .padding(.trailing)
-                
-                VStack(alignment: .leading) {
-                    Text(viewModel.product.influencerID)
-                        .fontWeight(.semibold)
-                    
-                    Text(viewModel.product.productName)
-                    
-                    Text(viewModel.product.description)
-                        .foregroundColor(.gray)
-                }
-                
-            }
         }
     }
     
