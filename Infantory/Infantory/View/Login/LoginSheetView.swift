@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct LoginSheetView: View {
-    
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
     
     @State private var isShowingSignUp = false
-    @State private var isShowingMainView = false
     
     var body: some View {
         NavigationStack {
@@ -29,8 +28,14 @@ struct LoginSheetView: View {
                     Spacer().frame(height: 30)
                     Group {
                         Button {
-                            loginStore.kakaoAuthSignIn()
-                            
+                            loginStore.kakaoAuthSignIn(completion: { result in
+                                print("찐 컴플리션 값: \(result)")
+                                if result {
+                                    dismiss()
+                                } else {
+                                    isShowingSignUp = true
+                                }
+                            })
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
@@ -78,14 +83,11 @@ struct LoginSheetView: View {
                     
                 }
             }
-            .presentationDetents([.height(UIScreen.main.bounds.height * 0.7)])
             .fullScreenCover(isPresented: $isShowingSignUp) {
                 LoginSignUpView()
             }
-            .navigationDestination(isPresented: $isShowingMainView) {
-                MainTabView()
-            }
         }
+        .presentationDetents([.height(UIScreen.main.bounds.height * 0.7)])
     }
 }
 

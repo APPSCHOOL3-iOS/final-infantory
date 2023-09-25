@@ -11,7 +11,6 @@ import SwiftUI
 struct Empty7: View {
     
     @StateObject private var loginStore = LoginStore()
-    
     @State private var isShowingLoginSheet: Bool = false
     
     var body: some View {
@@ -21,6 +20,8 @@ struct Empty7: View {
             }, label: {
                 Text("로그인")
             })
+            
+            Text(loginStore.email)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
