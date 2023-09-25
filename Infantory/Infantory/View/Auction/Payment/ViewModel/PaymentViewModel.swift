@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class PaymentViewModel: ObservableObject {
     //받아오고
@@ -13,6 +14,8 @@ class PaymentViewModel: ObservableObject {
     @Published var product: Productable = auctionProduct
     //업로드
     @Published var paymentInfo: PaymentInfo
+    
+    let database = Firestore.firestore()
     
     init(user: User, product: Productable) {
         paymentInfo = PaymentInfo(
@@ -24,9 +27,34 @@ class PaymentViewModel: ObservableObject {
     }
     
     func uploadPaymentInfo() {
-        //파베에 업로드
+        user.paymentInfos.append(paymentInfo)
+        let paymentInfosData: [[String: Any]] = user.paymentInfos.map { paymentInfo in
+            return [
+                "product": paymentInfo.product,
+                "address": [
+                    "fullAddress": paymentInfo.address.fullAddress
+                ],
+                "deliveryRequest": paymentInfo.deliveryRequest,
+                "deliveryCost": paymentInfo.deliveryCost,
+                "paymentMethod": paymentInfo.paymentMethod.rawValue
+            ]
+        }
+        
+        // Firestore에 데이터 저장
+        database.collection("users").document(user.id).setData(["paymentInfos": paymentInfosData]) { error in
+            if let error = error {
+                print("Error saving paymentInfos to Firestore: \(error.localizedDescription)")
+            } else {
+                print("PaymentInfos saved to Firestore successfully!")
+            }
+        }
+        
     }
-     
+    
+    var totalPrice: Int {
+        product.winningPrice + product.winningPrice / 10 + 3000
+    }
+    
 }
 
 let auctionProduct = AuctionProduct(
