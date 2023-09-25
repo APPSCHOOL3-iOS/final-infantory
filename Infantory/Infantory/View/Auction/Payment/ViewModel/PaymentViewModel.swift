@@ -8,8 +8,25 @@
 import Foundation
 
 class PaymentViewModel: ObservableObject {
+    //받아오고
     @Published var user: User = User.dummyUser
     @Published var product: Productable = auctionProduct
+    //업로드
+    @Published var paymentInfo: PaymentInfo
+    
+    init(user: User, product: Productable) {
+        paymentInfo = PaymentInfo(
+            product: product.id,
+            address: user.address,
+            deliveryRequest: "",
+            deliveryCost: 3000,
+            paymentMethod: PaymentMethod.accountTransfer)
+    }
+    
+    func uploadPaymentInfo() {
+        //파베에 업로드
+    }
+     
 }
 
 let auctionProduct = AuctionProduct(

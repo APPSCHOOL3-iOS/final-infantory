@@ -28,7 +28,7 @@ struct PaymentAddressView: View {
 struct PaymentAddressView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentAddressView(viewModel: PaymentViewModel())
+            PaymentAddressView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
         }
     }
 }
