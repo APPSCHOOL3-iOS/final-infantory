@@ -22,9 +22,9 @@ enum PaymentAddressViewModel: Int, CaseIterable {
     
     var content: String {
         switch self {
-        case .prizeWinner: return PaymentViewModel().user.name
-        case .phoneNumber: return PaymentViewModel().user.phoneNumber
-        case .address: return PaymentViewModel().user.address.fullAddress
+        case .prizeWinner: return User.dummyUser.name
+        case .phoneNumber: return User.dummyUser.phoneNumber
+        case .address: return User.dummyUser.address.fullAddress
         }
     }
 }

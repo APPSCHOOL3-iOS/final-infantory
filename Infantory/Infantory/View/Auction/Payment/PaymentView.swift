@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @ObservedObject var viewmodel = PaymentViewModel()
+    @ObservedObject var viewmodel = PaymentViewModel(user: User.dummyUser, product: auctionProduct)
     
     var body: some View {
         VStack {
@@ -27,8 +27,13 @@ struct PaymentView: View {
                 }
                 
             }
+            Button {
+                viewmodel.uploadPaymentInfo()
+            } label: {
+                Text("dsf")
+            }
         }
-        .navigationTitle("배송 / 결제")
+        .infanNavigationBar(title: "배송 / 결재")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -44,8 +49,8 @@ struct PaymentView_Previews: PreviewProvider {
 extension PaymentView {
     
     var payButton: some View {
-        Button {
-            payAction()
+        NavigationLink {
+            ReceiptView(viewModel: viewmodel)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)

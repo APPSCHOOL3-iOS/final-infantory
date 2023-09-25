@@ -6,58 +6,56 @@
 //
 
 import Foundation
+import Firebase
 
 class PaymentViewModel: ObservableObject {
-    @Published var user: User = dummyUser
+    //받아오고
+    @Published var user: User = User.dummyUser
     @Published var product: Productable = auctionProduct
+    //업로드
+    @Published var paymentInfo: PaymentInfo
+    
+    let database = Firestore.firestore()
+    
+    init(user: User, product: Productable) {
+        paymentInfo = PaymentInfo(
+            product: product.id,
+            address: user.address,
+            deliveryRequest: "",
+            deliveryCost: 3000,
+            paymentMethod: PaymentMethod.accountTransfer)
+    }
+    
+    func uploadPaymentInfo() {
+        user.paymentInfos.append(paymentInfo)
+        let paymentInfosData: [[String: Any]] = user.paymentInfos.map { paymentInfo in
+            return [
+                "product": paymentInfo.product,
+                "address": [
+                    "fullAddress": paymentInfo.address.fullAddress
+                ],
+                "deliveryRequest": paymentInfo.deliveryRequest,
+                "deliveryCost": paymentInfo.deliveryCost,
+                "paymentMethod": paymentInfo.paymentMethod.rawValue
+            ]
+        }
+        
+        // Firestore에 데이터 저장
+        database.collection("users").document(user.id).setData(["paymentInfos": paymentInfosData]) { error in
+            if let error = error {
+                print("Error saving paymentInfos to Firestore: \(error.localizedDescription)")
+            } else {
+                print("PaymentInfos saved to Firestore successfully!")
+            }
+        }
+        
+    }
+    
+    var totalPrice: Int {
+        product.winningPrice + product.winningPrice / 10 + 3000
+    }
+    
 }
-
-let dummyUser = User(
-    id: "1",
-    isInfluencer: .user,
-    profileImageURLString: "https://example.com/profile/1.jpg",
-    name: "John Doe",
-    phoneNumber: "123-456-7890",
-    email: "john@example.com",
-    birthDate: "1990-01-01",
-    loginType: .kakao,
-    address: Address(fullAddress: "123 Main Street, City"),
-    paymentInfos: [
-        PaymentInfo(
-            product: "Product 1",
-            deliveryRequest: "Please deliver to my home.",
-            price: 50,
-            commission: 5,
-            deliveryCost: 10,
-            paymentMethod: .card
-        ),
-        PaymentInfo(
-            product: "Product 2",
-            deliveryRequest: "Leave at the front desk.",
-            price: 30,
-            commission: 3,
-            deliveryCost: 5,
-            paymentMethod: .accountTransfer
-        )
-    ],
-    applyTicket: [
-        ApplyTicket(
-            id: "ticket1",
-            userId: "john@example.com",
-            date: Date(),
-            ticketGetAndUse: "Ticket 123",
-            count: 2
-        ),
-        ApplyTicket(
-            id: "ticket2",
-            userId: "john@example.com",
-            date: Date(),
-            ticketGetAndUse: "Ticket 456",
-            count: 1
-        )
-    ],
-    influencerIntroduce: nil
-)
 
 let auctionProduct = AuctionProduct(
     id: "1",

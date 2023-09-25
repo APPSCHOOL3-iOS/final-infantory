@@ -15,61 +15,104 @@ struct PaymentMethodView: View {
             Text("결제 방법")
                 .bold()
                 .padding(.bottom, 7)
-            
-            Text("계좌 간편결제")
-                .font(.callout)
-            
-            Button {
-                print("계좌 등록 View or Sheet")
-            } label: {
-                ZStack {
+            //계좌로 간편결제 선택, 계좌등록
+            accountButton
+            //카드로 간편결제 선택, 카드등록
+            cardButton
+            //페이 간편결제 선택
+            easyPaymentButton
+        }
+    }
+}
+
+struct PaymentMethodView_Previews: PreviewProvider {
+    static var previews: some View {
+        PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+    }
+}
+
+extension PaymentMethodView {
+    
+    var accountButton: some View {
+        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == .accountTransfer
+        
+        return(
+            VStack(alignment: .leading) {
+                Text("계좌 간편결제")
+                    .font(.callout)
+                Button {
+                    viewModel.paymentInfo.paymentMethod  = .accountTransfer
+                } label: {
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 1)
+                        .stroke(
+                            isSelectedMethod ? .black : .gray,
+                            lineWidth: isSelectedMethod ? 2 : 1
+                        )
                         .frame(width: 351, height: 60)
                         .background(.white)
+                        .overlay(
+                            Text("계좌를 등록하세요")
+                                .bold()
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        )
+                }
+                .padding(.bottom, 23)
+            }
+        )
+    }
+    
+    var cardButton: some View {
+        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == .card
+        
+        return (
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("카드 간편결제")
+                        .font(.callout)
                     
-                    Text("계좌를 등록하세요")
-                        .bold()
+                    Text("일시불")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+                
+                Button {
+                    viewModel.paymentInfo.paymentMethod = .card
+                } label: {
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(
+                                isSelectedMethod ? .black : .gray,
+                                lineWidth: isSelectedMethod ? 2 : 1
+                            )
+                            .frame(width: 351, height: 60)
+                            .background(.white)
+                        
+                        HStack {
+                            VStack(alignment: .leading) { // 더미 데이터
+                                Text("토스뱅크카드")
+                                Text("••••-••••-••••-5285")
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "chevron.forward")
+                                    .padding(.leading, 150)
+                            }
+                        }
                         .font(.callout)
                         .foregroundColor(.black)
-                }
-            }
-            .padding(.bottom, 23)
-            
-            HStack {
-                Text("카드 간편결제")
-                    .font(.callout)
-                
-                Text("일시불")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-            }
-            
-            Button {
-                print("카드 간편결제 Sheet")
-            } label: {
-                ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.gray, lineWidth: 1)
-                        .frame(width: 351, height: 60)
-                        .background(.white)
-                    
-                    HStack {
-                        VStack(alignment: .leading) { // 더미 데이터
-                            Text("토스뱅크카드")
-                            Text("••••-••••-••••-5285")
-                        }
-                        
-                        Image(systemName: "chevron.forward")
-                            .padding(.leading, 150)
+                        .padding(.horizontal)
                     }
-                    .font(.callout)
-                    .foregroundColor(.black)
-                    .padding(.horizontal)
                 }
+                .padding(.bottom, 23)
             }
-            .padding(.bottom, 23)
-            
+        )
+    }
+    
+    var easyPaymentButton: some View {
+        VStack(alignment: .leading) {
             HStack {
                 Text("일반 결제")
                     .font(.callout)
@@ -79,19 +122,11 @@ struct PaymentMethodView: View {
                     .foregroundColor(.gray)
             }
             
-            HStack {
-                PayButtonView(payName: "NaverPay")
-                PayButtonView(payName: "KakaoPay")
-                    .padding(.leading, 4)
-                PayButtonView(payName: "TossPay")
-                    .padding(.leading, 4)
+            HStack(alignment: .center, spacing: 15) {
+                PayButtonView(viewModel: viewModel, payName: .naverPay)
+                PayButtonView(viewModel: viewModel, payName: .kakaoPay)
+                PayButtonView(viewModel: viewModel, payName: .tossPay)
             }
         }
-    }
-}
-
-struct PaymentMethodView_Previews: PreviewProvider {
-    static var previews: some View {
-        PaymentMethodView(viewModel: PaymentViewModel())
     }
 }

@@ -53,29 +53,27 @@ enum PaymentMethod: String, CaseIterable {
 #if DEBUG
 extension User {
     static let dummyUser = User(
-        id: "1",
+        id: "sdoYpk7SdDTcGTxgIQJy",
         isInfluencer: .user,
         profileImageURLString: "https://example.com/profile/1.jpg",
-        name: "John Doe",
+        name: "상필 갓",
         phoneNumber: "123-456-7890",
         email: "john@example.com",
         birthDate: "1990-01-01",
         loginType: .kakao,
-        address: Address(fullAddress: "123 Main Street, City"),
+        address: Address(fullAddress: "경상남도 거제시 몽돌해수욕장"),
         paymentInfos: [
             PaymentInfo(
                 product: "Product 1",
+                address: Address(fullAddress: "123 Main Street, City"),
                 deliveryRequest: "Please deliver to my home.",
-                price: 50,
-                commission: 5,
                 deliveryCost: 10,
                 paymentMethod: .card
             ),
             PaymentInfo(
                 product: "Product 2",
+                address: Address(fullAddress: "123 Main Street, City"),
                 deliveryRequest: "Leave at the front desk.",
-                price: 30,
-                commission: 3,
                 deliveryCost: 5,
                 paymentMethod: .accountTransfer
             )

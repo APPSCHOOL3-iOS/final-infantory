@@ -8,10 +8,9 @@
 import Foundation
 
 struct PaymentInfo {
-    var product: String
+    var product: String //productID
+    var address: Address
     var deliveryRequest: String
-    var price: Int
-    var commission: Int
     var deliveryCost: Int
     var paymentMethod: PaymentMethod
 }
