@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Empty7: View {
+struct LoginMainView: View {
     
     @StateObject private var loginStore = LoginStore()
     @State private var isShowingLoginSheet: Bool = false
@@ -32,6 +32,6 @@ struct Empty7: View {
 
 struct Empty7_Previews: PreviewProvider {
     static var previews: some View {
-        Empty7()
+        LoginMainView()
     }
 }
