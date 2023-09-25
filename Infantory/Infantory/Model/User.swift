@@ -65,17 +65,15 @@ extension User {
         paymentInfos: [
             PaymentInfo(
                 product: "Product 1",
+                address: Address(fullAddress: "123 Main Street, City"),
                 deliveryRequest: "Please deliver to my home.",
-                price: 50,
-                commission: 5,
                 deliveryCost: 10,
                 paymentMethod: .card
             ),
             PaymentInfo(
                 product: "Product 2",
+                address: Address(fullAddress: "123 Main Street, City"),
                 deliveryRequest: "Leave at the front desk.",
-                price: 30,
-                commission: 3,
                 deliveryCost: 5,
                 paymentMethod: .accountTransfer
             )
