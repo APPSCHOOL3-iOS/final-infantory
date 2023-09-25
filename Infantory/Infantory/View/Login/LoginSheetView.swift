@@ -26,12 +26,10 @@ struct LoginSheetView: View {
                 Group {
                     Button {
                         Task {
-                            await loginStore.kakaoAuthSignIn() { success in
+                            await loginStore.kakaoAuthSignIn { _ in
                                 isLoginSuccess.toggle()
                             }
                         }
-                      
-                       
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -51,7 +49,6 @@ struct LoginSheetView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    
                     
                     Button {
                         // login 기능 구현

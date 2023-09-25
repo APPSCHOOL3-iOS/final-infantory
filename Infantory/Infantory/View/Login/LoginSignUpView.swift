@@ -26,7 +26,7 @@ struct LoginSignUpView: View {
                 .disabled(true)
             
             Text("*닉네임")
-            TextField("", text: $nickName)
+            TextField("\(loginStore.userName)", text: $nickName)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
@@ -61,7 +61,7 @@ struct LoginSignUpView: View {
             HStack {
                 Spacer()
                 Button {
-                    //
+                    loginStore.signUpToFirebase()
                 } label: {
                     Text("가입하기")
                         .frame(width: 330, height: 40, alignment: .center)
@@ -93,6 +93,7 @@ struct LoginSignUpView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             LoginSignUpView()
+                .environmentObject(LoginStore())
         }
     }
 }
