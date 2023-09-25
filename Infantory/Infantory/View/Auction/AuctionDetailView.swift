@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AuctionDetailView: View {
     @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var auctionViewModel: AuctionProductViewModel
+    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
         NavigationStack {
@@ -33,22 +33,9 @@ struct AuctionDetailView: View {
                     }
                 }
                 Divider()
-                .padding([.horizontal, .top])
-                AuctionDetailImageView(auctionProductVIewModel: auctionViewModel)
-                Text("\(auctionViewModel.auctionProduct[0].productName)")
-                Text("\(auctionViewModel.auctionProduct[0].description)")
-                
-                Button(action: {
-                    
-                }, label: {
-                    Text("경매하기")
-                        .font(.infanTitle)
-                        .frame(width: 150, height: 20)
-                        .padding()
-                        .foregroundColor(.infanDarkGray)
-                        .background(Color.infanYellow)
-                        .cornerRadius(15)
-                })
+                    .padding([.horizontal, .top])
+                AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
+                AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
             }
         }
     }
@@ -56,6 +43,6 @@ struct AuctionDetailView: View {
 
 struct AuctionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionDetailView(userViewModel: UserViewModel(), auctionViewModel: AuctionProductViewModel())
+        AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
     }
 }

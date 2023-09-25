@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct AuctionMainView: View {
-    @EnvironmentObject var auctionViewModel: AuctionProductViewModel
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     
     var body: some View {
-        VStack {
-            AuctionLogoCell()
-            Divider()
-            AuctionButtonCell()
-            ScrollView {
-                ProductListView(userViewModel: UserViewModel(), auctionViewModel: AuctionProductViewModel())
+        NavigationStack {
+            VStack {
+                AuctionLogoCell()
                 Divider()
+                AuctionButtonCell()
+                ScrollView {
+                    ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                    Divider()
+                }
             }
         }
     }
