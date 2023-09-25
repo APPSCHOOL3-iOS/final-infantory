@@ -74,6 +74,7 @@ struct AuctionRegistrationView: View {
                             
                         } label: {
                             Text("작성 완료")
+                                .frame(width: 360, height: 40)
                                 .foregroundColor(.black)
                         }
                     }

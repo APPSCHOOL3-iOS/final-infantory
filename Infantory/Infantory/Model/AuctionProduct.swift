@@ -30,6 +30,6 @@ struct AuctionProduct: Productable, Identifiable {
 
 #if DEBUG
 extension AuctionProduct {
-    static let sampleData: Self = AuctionProduct(id: "1234", productName: "나이키 조던", productImageURLStrings: ["Shose1"], description: "이 신발 신으면 하늘 날아감", influencerID: "123", startDate: Date().addingTimeInterval(86400 * 7), endDate: Date().addingTimeInterval(86400 * 7), minPrice: 40000, maxPrice: 1000000, winningPrice: 50000)
+    static let sampleData: Self = AuctionProduct(id: "1234", productName: "나이키 조던", productImageURLStrings: ["Shose1", "Influencer1"], description: "이 신발 신으면 하늘 날아감", influencerID: "123", startDate: Date().addingTimeInterval(86400 * 7), endDate: Date().addingTimeInterval(86400 * 7), minPrice: 40000, maxPrice: 1000000, winningPrice: 50000)
 }
 #endif
