@@ -16,6 +16,7 @@
 		0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */; };
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
 		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
+		113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A15702AC1195E00ED0555 /* PaymentChoiceView.swift */; };
 		114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F305A2ABD1A79008497A8 /* AuctionMainView.swift */; };
 		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
 		11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */; };
@@ -84,6 +85,7 @@
 		0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegistrationView.swift; sourceTree = "<group>"; };
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
 		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		113A15702AC1195E00ED0555 /* PaymentChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentChoiceView.swift; sourceTree = "<group>"; };
 		114F305A2ABD1A79008497A8 /* AuctionMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionMainView.swift; sourceTree = "<group>"; };
 		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
 		11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		9E5A8FBC2ABAD8BC00654850 /* PaymentMethod */ = {
 			isa = PBXGroup;
 			children = (
+				113A15702AC1195E00ED0555 /* PaymentChoiceView.swift */,
 				9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */,
 				9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */,
 			);
@@ -568,6 +571,7 @@
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */,
+				113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */,
 				A091E5932ABAA624000894FC /* Empty8.swift in Sources */,
 				A091E59B2ABAA642000894FC /* Empty11.swift in Sources */,
 				A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */,
