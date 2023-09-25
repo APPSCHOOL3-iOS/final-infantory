@@ -13,7 +13,6 @@ struct SignUpUser: Identifiable {
     var profileImageURLString: String?
     var name: String
     var phoneNumber: String
-    var birthDate: String
     var loginType: LoginType
     var address: Address
     var follower: [String]? = nil

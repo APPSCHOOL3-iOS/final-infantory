@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginSignUpView: View {
     
+    @EnvironmentObject private var loginStore: LoginStore
     @State private var email: String = ""
     @State private var nickName: String = ""
     @State private var name: String = ""
@@ -19,9 +20,10 @@ struct LoginSignUpView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("*이메일") // 소셜로그인하면서 받아올 예정
-            TextField("", text: $email)
+            TextField("\(loginStore.email)", text: $email)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
+                .disabled(true)
             
             Text("*닉네임")
             TextField("", text: $nickName)
@@ -29,7 +31,7 @@ struct LoginSignUpView: View {
                 .padding(.bottom)
             
             Text("이름")
-            TextField("", text: $name)
+            TextField("\(loginStore.userName)", text: $name)
                 .overlay(UnderLineOverlay())
                 .padding(.bottom)
             
@@ -67,6 +69,7 @@ struct LoginSignUpView: View {
                         .background(.gray)
                         .cornerRadius(5)
                 }
+
                 Spacer()
             }
 

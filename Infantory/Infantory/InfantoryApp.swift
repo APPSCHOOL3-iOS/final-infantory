@@ -5,7 +5,6 @@
 //  Created by 김성훈 on 2023/09/20.
 //
 
-import FirebaseCore
 import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
@@ -13,7 +12,7 @@ import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
     FirebaseApp.configure()
 
     return true
@@ -26,7 +25,7 @@ struct InfantoryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            Empty7()
         }
     }
     
