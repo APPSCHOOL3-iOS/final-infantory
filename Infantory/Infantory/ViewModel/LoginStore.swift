@@ -13,12 +13,19 @@ import KakaoSDKAuth
 import KakaoSDKUser
 
 final class LoginStore: ObservableObject {
-    @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", birthDate: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
+    
+    @Published var email: String = ""
+    @Published var userName: String = ""
+    @Published var password: String = ""
+    
+    @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
+    
+    var isLoginSuccess: Bool = false
     
     func kakaoAuthSignIn() {
             if AuthApi.hasToken() { // 발급된 토큰이 있는지
                 UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
-                    if let error = error { // 에러가 발생했으면 토큰이 유효하지 않다.
+                    if error != nil { // 에러가 발생했으면 토큰이 유효하지 않다.
                         self.openKakaoService()
                     } else { // 유효한 토큰
                         self.loadingInfoDidKakaoAuth()
@@ -54,19 +61,19 @@ final class LoginStore: ObservableObject {
         
         func loadingInfoDidKakaoAuth() {  // 사용자 정보 불러오기
             UserApi.shared.me { kakaoUser, error in
-                if let error = error {
+                if error != nil {
                     print("카카오톡 사용자 정보 불러오는데 실패했습니다.")
                     
                     return
                 }
                 guard let email = kakaoUser?.kakaoAccount?.email else { return }
+                self.email = email
                 guard let password = kakaoUser?.id else { return }
+                self.password = String(password)
                 guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else { return }
-                guard let birthyear = kakaoUser?.kakaoAccount?.birthyear else { return }
-                guard let birthdate = kakaoUser?.kakaoAccount?.birthday else { return }
-                let birthDate = "\(birthyear) \(birthdate)"
-               
-                print(userName)
+                self.userName = userName
+                self.isLoginSuccess = true
+ 
 //                self.emailAuthSignUp(email: email, userName: userName, password: "\(password)") {
 //                    self.emailAuthSignIn(email: email, password: "\(password)")
 //                }

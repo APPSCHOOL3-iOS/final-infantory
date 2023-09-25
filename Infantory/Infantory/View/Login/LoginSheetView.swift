@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LoginSheetView: View {
     
-    @StateObject private var loginStore = LoginStore()
+    @EnvironmentObject private var loginStore: LoginStore
+    @State private var isLoginSuccess: Bool = false
     
     var body: some View {
         ZStack {
@@ -26,6 +27,9 @@ struct LoginSheetView: View {
                 Group {
                     Button {
                         loginStore.kakaoAuthSignIn()
+                        print("sheet: \(isLoginSuccess)")
+                        isLoginSuccess = loginStore.isLoginSuccess
+                        print("sheet: \(isLoginSuccess)")
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -45,6 +49,9 @@ struct LoginSheetView: View {
                         }
                     }
                     .buttonStyle(.plain)
+                    .fullScreenCover(isPresented: $isLoginSuccess) {
+                        LoginSignUpView()
+                    }
                     
                     Button {
                         // login 기능 구현
@@ -70,8 +77,10 @@ struct LoginSheetView: View {
                     }
                     .buttonStyle(.plain)
                 }
+                
             }
         }
+        
         .presentationDetents([.height(UIScreen.main.bounds.height * 0.7)])
     }
 }
@@ -79,5 +88,6 @@ struct LoginSheetView: View {
 struct LoginSheetView_Previews: PreviewProvider {
     static var previews: some View {
         LoginSheetView()
+            .environmentObject(LoginStore())
     }
 }
