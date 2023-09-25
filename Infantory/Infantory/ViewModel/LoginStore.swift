@@ -11,6 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import KakaoSDKAuth
 import KakaoSDKUser
+import SwiftUI
 
 final class LoginStore: ObservableObject {
     
@@ -20,9 +21,9 @@ final class LoginStore: ObservableObject {
     
     @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
     
-    var isLoginSuccess: Bool = false
+    @State var isLoginSuccess: Bool = false
     
-    func kakaoAuthSignIn() {
+    func kakaoAuthSignIn(completion: @escaping (Bool) -> ()) async {
             if AuthApi.hasToken() { // 발급된 토큰이 있는지
                 UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
                     if error != nil { // 에러가 발생했으면 토큰이 유효하지 않다.
@@ -34,6 +35,7 @@ final class LoginStore: ObservableObject {
             } else { // 만료된 토큰
                 self.openKakaoService()
             }
+            completion(true)
         }
     
     func openKakaoService() {
@@ -72,11 +74,10 @@ final class LoginStore: ObservableObject {
                 self.password = String(password)
                 guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else { return }
                 self.userName = userName
-                self.isLoginSuccess = true
  
 //                self.emailAuthSignUp(email: email, userName: userName, password: "\(password)") {
 //                    self.emailAuthSignIn(email: email, password: "\(password)")
-//                }
+//               }
             }
         }
 }
