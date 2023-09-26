@@ -6,17 +6,20 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct SignUpUser: Identifiable {
-    var id: String // 이메일
-    var isInfluencer: UserType = .user // influencer인지 일반 User인지?
-    var profileImageURLString: String?
+struct SignUpUser: Identifiable, Codable {
+    @DocumentID var id: String?
+    var isInfluencer: String = "user" // influencer인지 일반 User인지?
+    var profileImageURLString: String? = nil
     var name: String
+    var nickName: String
     var phoneNumber: String
-    var loginType: LoginType
-    var address: Address
+    var email: String
+    
+    var loginType: String = "kakao"
+    var address: String
+    
     var follower: [String]? = nil
-    var applyTicket: [ApplyTicket]
-    var influencerIntroduce: String?
-    var password: String
+    var influencerIntroduce: String? = nil
 }

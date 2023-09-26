@@ -21,9 +21,9 @@ final class LoginStore: ObservableObject {
     @Published var email: String = ""
     @Published var userName: String = ""
     @Published var password: String = ""
+    @Published var loginType: LoginType = .kakao
     
-    @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
-    
+    // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
             UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
@@ -59,6 +59,7 @@ final class LoginStore: ObservableObject {
         }
     }
     
+    // 카카오 서비스 이용가능한지 확인하는 함수: 카카오 앱이용가능? 가능하지 않다면 -> 웹으로
     func openKakaoService(completion: @escaping (Bool) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() { // 카카오톡 앱 이용 가능한지
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in // 카카오톡 앱으로 로그인
@@ -106,7 +107,17 @@ final class LoginStore: ObservableObject {
             self.email = email
             guard let password = kakaoUser?.id else { return }
             self.password = String(password)
-            guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else { return }
+            guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else {
+                self.emailAuthSignIn(email: email, password: String(password), completion: { result in
+                    print("컴플리션 값: \(result)")
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+                return
+            }
             self.userName = userName
             // 로그인이 되는지 안되는지 확인하는 함수 -> 에러? 로그인이안된다 -> 회원가입이 안되어있다 -> 회원가입뷰로
             // 로그인이 된다 -> 메인뷰로
@@ -151,15 +162,29 @@ final class LoginStore: ObservableObject {
         }
     }
     
-    func signUpToFirebase(completion: @escaping (Bool) -> Void) {
+    func signUpToFireStore(name: String, nickName: String, phoneNumber: String, address: String, completion: (() -> Void)?) {
+        do {
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: address)
+            try Firestore.firestore().collection("User").addDocument(from: signUpUser)
+            
+            completion?()
+            
+        } catch {
+            print("debug : Failed to Create User with \(error.localizedDescription)")
+        }
+    }
+    
+    func signUpToFirebase(name: String, nickName: String, phoneNumber: String, address: String, completion: @escaping (Bool) -> Void) {
         self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
-            self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
-                if result {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            })
+            self.signUpToFireStore(name: name, nickName: nickName, phoneNumber: phoneNumber, address: address) {
+                self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
         }
     }
 }

@@ -62,7 +62,7 @@ struct LoginSignUpView: View {
                 HStack {
                     Spacer()
                     Button {
-                        loginStore.signUpToFirebase(completion: { result in
+                        loginStore.signUpToFirebase(name: name, nickName: nickName, phoneNumber: phoneNumber, address: detailAddress,  completion: { result in
                             print("찐 컴플리션 값: \(result)")
                             if result {
                                 //토스트 : 회원가입에 성공했습니다. 다시 로그인 해주세요.
