@@ -9,27 +9,26 @@ import SwiftUI
 
 struct PaymentChoiceView: View {
     @State var isSelectedCashReceipts = true
+    @State var isSelectedCashReceiptsNotApplied = false
     
     var body: some View {
-        NavigationStack {
             VStack {
                 VStack {
                     accountChoiceView
                     Divider()
-                    cashReceipt
+                    cashReceiptView
                 }
                 .padding()
                  
                 Spacer()
                 
                 Divider()
-                saveAccount
+                saveAccountView
                     .padding(.trailing)
             }
-            
-            .navigationTitle("계좌 선택")
+            .infanNavigationBar(title: "계좌선택")
             .navigationBarTitleDisplayMode(.inline)
-        }
+        
     }
 }
 
@@ -71,30 +70,45 @@ extension PaymentChoiceView {
                     .offset(y: -20)
             }
         }
-        .frame(width: UIScreen.main.bounds.width, height: 200)
+        .frame(width: CGFloat.screenWidth, height: 200)
         .tabViewStyle(PageTabViewStyle())
     }
     
-    var cashReceipt: some View {
+    var cashReceiptView: some View {
         VStack {
             HStack {
                 Text("현금 영수증")
                     .font(.infanHeadlineBold)
                 Spacer()
-                Toggle(isOn: $isSelectedCashReceipts) {
+                Toggle(isOn: Binding(
+                    get: {
+                        !isSelectedCashReceiptsNotApplied
+                    }, set: { value in
+                        if isSelectedCashReceiptsNotApplied {
+                            isSelectedCashReceipts = value
+                            isSelectedCashReceiptsNotApplied = !value
+                        }
+                    }
+                )) {
                     Text("신청함")
-                    
                 }
                 .foregroundColor(.black)
                 .toggleStyle(DotCircleToggleStyle())
                 
-                Toggle(isOn: $isSelectedCashReceipts) {
+                Toggle(isOn: Binding(
+                    get: {
+                        !isSelectedCashReceipts
+                    }, set: { value in
+                        if isSelectedCashReceipts {
+                            isSelectedCashReceipts = !value
+                            isSelectedCashReceiptsNotApplied = value
+                        }
+                    }
+                )) {
                     Text("미신청")
-                    
                 }
                 .foregroundColor(.black)
                 .toggleStyle(DotCircleToggleStyle())
-                
             }
             
             HStack {
@@ -120,9 +134,11 @@ extension PaymentChoiceView {
                 .buttonStyle(.plain)
                 .padding([.trailing, .top])
             }
+            .opacity(isSelectedCashReceipts ? 1 : 0)
+
         }
     }
-    var saveAccount: some View {
+    var saveAccountView: some View {
         HStack {
             Spacer()
             
