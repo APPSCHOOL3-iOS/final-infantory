@@ -45,19 +45,23 @@ extension PaymentMethodView {
                 Button {
                     viewModel.paymentInfo.paymentMethod  = .accountTransfer
                 } label: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(
-                            isSelectedMethod ? .black : .gray,
-                            lineWidth: isSelectedMethod ? 2 : 1
-                        )
-                        .frame(width: 351, height: 60)
-                        .background(.white)
-                        .overlay(
-                            Text("계좌를 등록하세요")
-                                .bold()
-                                .font(.callout)
-                                .foregroundColor(.black)
-                        )
+                    NavigationLink {
+                        PaymentChoiceView()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(
+                                isSelectedMethod ? .black : .gray,
+                                lineWidth: isSelectedMethod ? 2 : 1
+                            )
+                            .frame(width: 351, height: 60)
+                            .background(.white)
+                            .overlay(
+                                Text("계좌를 등록하세요")
+                                    .bold()
+                                    .font(.callout)
+                                    .foregroundColor(.black)
+                            )
+                    }
                 }
                 .padding(.bottom, 23)
             }
