@@ -187,4 +187,18 @@ final class LoginStore: ObservableObject {
             }
         }
     }
+    
+    func duplicateNickName(nickName: String, completion: @escaping (Bool) -> Void) {
+        
+        let query = Firestore.firestore().collection("User").whereField("nickName", isEqualTo: nickName)
+        query.getDocuments { data, _ in
+            if data!.documents.isEmpty {
+                print("데이터 중복 안 됨 가입 진행 가능")
+                completion(true)
+            } else {
+                print("데이터 중복 됨 가입 진행 불가")
+                completion(false)
+            }
+        }
+    }
 }
