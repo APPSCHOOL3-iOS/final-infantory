@@ -66,14 +66,14 @@ extension User {
             PaymentInfo(
                 product: "Product 1",
                 address: Address(fullAddress: "123 Main Street, City"),
-                deliveryRequest: "Please deliver to my home.",
+                deliveryRequest: .door,
                 deliveryCost: 10,
                 paymentMethod: .card
             ),
             PaymentInfo(
                 product: "Product 2",
                 address: Address(fullAddress: "123 Main Street, City"),
-                deliveryRequest: "Leave at the front desk.",
+                deliveryRequest: .securityOffice,
                 deliveryCost: 5,
                 paymentMethod: .accountTransfer
             )
