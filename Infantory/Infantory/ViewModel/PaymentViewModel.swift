@@ -34,7 +34,7 @@ class PaymentViewModel: ObservableObject {
                 "address": [
                     "fullAddress": paymentInfo.address.fullAddress
                 ],
-                "deliveryRequest": paymentInfo.deliveryRequest,
+                "deliveryRequest": paymentInfo.deliveryRequest.rawValue,
                 "deliveryCost": paymentInfo.deliveryCost,
                 "paymentMethod": paymentInfo.paymentMethod.rawValue
             ]
