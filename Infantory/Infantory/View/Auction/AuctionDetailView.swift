@@ -18,7 +18,7 @@ struct AuctionDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 35)
-//                Text("\(userViewModel.user.name)")
+                Text("\(userViewModel.user.name)")
                 Spacer()
                 
                 HStack {
@@ -26,13 +26,23 @@ struct AuctionDetailView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 25, height: 25)
-//                    Text(": \(userViewModel.user.applyTicket[0].count)")
-//                        .font(.infanBody)
-//                        .bold()
+                    Text(": \(userViewModel.user.applyTicket[0].count)")
+                        .font(.infanBody)
+                        .bold()
                 }
             }
             Divider()
                 .padding([.horizontal, .top])
+            
+            Section {
+                HStack {
+                    Text("이런 상품들은 어때요?")
+                    Spacer()
+                }
+                VStack {
+                    AuctionScrollImageView()
+                }
+            }
             AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
             AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
         }

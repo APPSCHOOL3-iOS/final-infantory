@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyDetailView: View {
     @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
+    @ObservedObject var applyProductViewModel: ApplyProductViewModel
     
     var body: some View {
         VStack {
@@ -33,13 +33,21 @@ struct ApplyDetailView: View {
             }
             Divider()
                 .padding([.horizontal, .top])
-            
+            Section {
+                HStack {
+                    Text("이런 상품들은 어때요?")
+                    Spacer()
+                }
+                VStack {
+                    InfluencerApplyImageCell()
+                }
+            }
         }
     }
 }
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+        ApplyDetailView(userViewModel: UserViewModel(), applyProductViewModel: ApplyProductViewModel())
     }
 }
