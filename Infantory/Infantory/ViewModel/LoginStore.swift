@@ -24,7 +24,6 @@ final class LoginStore: ObservableObject {
     
     @Published var isShowingSignUp = false
     @Published var isShowingMainView = false
-    
     @Published var email: String = ""
     @Published var userName: String = ""
     @Published var password: String = ""
@@ -171,6 +170,7 @@ final class LoginStore: ObservableObject {
         }
     }
     
+    
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
         do {
             let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress))
@@ -184,6 +184,8 @@ final class LoginStore: ObservableObject {
             print("debug : Failed to Create User with \(error.localizedDescription)")
         }
     }
+    
+    
     
     func signUpToFirebase(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: @escaping (Bool) -> Void) {
         self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
