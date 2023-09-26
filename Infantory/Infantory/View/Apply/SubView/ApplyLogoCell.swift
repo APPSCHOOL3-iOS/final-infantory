@@ -1,13 +1,13 @@
 //
-//  AuctionLogoCell.swift
+//  ApplyLogoCell.swift
 //  Infantory
 //
-//  Created by 윤경환 on 2023/09/22.
+//  Created by 윤경환 on 2023/09/26.
 //
 
 import SwiftUI
 
-struct AuctionLogoCell: View {
+struct ApplyLogoCell: View {
     var body: some View {
         HStack {
             Text("Infantory")
@@ -23,7 +23,6 @@ struct AuctionLogoCell: View {
                     .frame(width: 20, height: 20)
                     .foregroundColor(.infanDarkGray)
             }
-            .padding(5)
             Button {
                 // alramView 알람창 (네비게이션으로 변경 해야할 것 같습니다.)
             } label: {
@@ -38,8 +37,8 @@ struct AuctionLogoCell: View {
     }
 }
 
-struct AuctionLogoCell_Previews: PreviewProvider {
+struct ApplyLogoCell_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionLogoCell()
+        ApplyLogoCell()
     }
 }
