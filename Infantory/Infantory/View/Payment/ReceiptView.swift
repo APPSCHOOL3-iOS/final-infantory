@@ -14,7 +14,8 @@ struct ReceiptView: View {
         VStack {
             Text("주문이 완료되었습니다!")
                 .font(.headline)
-                .frame(width: CGFloat.screenWidth - 10, alignment: .leading)
+                .frame(width: CGFloat.screenWidth - 10, height: 50, alignment: .leading)
+                .background(.gray.opacity(0.2))
                 .padding(.vertical)
             
             VStack(alignment: .leading, spacing: 10) {
@@ -37,13 +38,24 @@ struct ReceiptView: View {
             }
             Spacer()
             
-            Button {
-                // 홈으로~~~
+            NavigationLink {
+                HomeMainView()
+                    .navigationBarHidden(true)
             } label: {
-                Text("완료")
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: CGFloat.screenWidth - 30, height: 60)
+                    .overlay(
+                        Text("완료")
+                            .foregroundColor(.white)
+                    )
+                    .padding()
+                
             }
         }
         .infanNavigationBar(title: "구매완료")
+        .onAppear {
+            viewModel.uploadPaymentInfo()
+        }
     }
 }
 

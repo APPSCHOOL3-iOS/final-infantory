@@ -27,7 +27,9 @@ struct PaymentMethodView: View {
 
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+        NavigationStack{
+            PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+        }
     }
 }
 
@@ -90,12 +92,12 @@ extension PaymentMethodView {
                         
                         HStack {
                             VStack(alignment: .leading) { // 더미 데이터
-                                Text("토스뱅크카드")
-                                Text("••••-••••-••••-5285")
+                                Text("삼성카드")
+                                Text("••••-••••-••••-1234")
                             }
                             
-                            Button {
-                                
+                            NavigationLink {
+                                PaymentCardAddView()
                             } label: {
                                 Image(systemName: "chevron.forward")
                                     .padding(.leading, 150)
