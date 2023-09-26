@@ -153,6 +153,7 @@ final class LoginStore: ObservableObject {
                 print("로그인 성공! 사용자 이메일: \(String(describing: result?.user.email))")
                 // 성공하면 메인화면
                 completion(true)
+                self.userUid = result?.user.email ?? "user 이메일 없음"
             }
         }
     }
@@ -212,7 +213,6 @@ final class LoginStore: ObservableObject {
             }
         }
     }
-
     
     func fetchUser(userUID: String) async throws {
         
@@ -238,4 +238,5 @@ final class LoginStore: ObservableObject {
         user.applyTicket = ticketList
         self.currentUser = user
     }
+
 }

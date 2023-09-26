@@ -58,6 +58,13 @@ struct MainTabView: View {
                 }
             }
         }
+//        .onAppear {
+//            Task {
+//                if !loginStore.userUid.isEmpty {
+//                    try await loginStore.fetchUser(userUID: loginStore.userUid)
+//                }
+//            }
+//        }
     }
 }
 
