@@ -24,6 +24,5 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     
     // 시작가, 최고가, 낙찰가
     var minPrice: Int
-    var maxPrice: Int
-    var winningPrice: Int
+    var winningPrice: Int?
 }

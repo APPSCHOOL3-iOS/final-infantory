@@ -33,7 +33,7 @@ struct ReceiptView: View {
                 }
                 .padding()
                 
-                PaymentPriceView(price: viewModel.product.winningPrice)
+                PaymentPriceView(price: viewModel.product.winningPrice ?? 0)
             }
             Spacer()
             

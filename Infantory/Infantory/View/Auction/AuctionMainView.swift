@@ -16,10 +16,8 @@ struct AuctionMainView: View {
                 AuctionLogoCell()
                 Divider()
                 AuctionButtonCell()
-                ScrollView {
                     ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
                     Divider()
-                }
             }
         }
     }
