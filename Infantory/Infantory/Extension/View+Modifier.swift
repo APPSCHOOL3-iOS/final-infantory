@@ -11,4 +11,9 @@ extension View {
     func infanNavigationBar(title: String) -> some View {
         modifier(InfanNavigationBar(title: title))
     }
+    
+    /// 앱에서 사용하는 horizontal 기본 패딩 값 (양 옆 20고정)
+    func infanHorizontalPadding() -> some View {
+        modifier(InfanHorizontalPadding())
+    }
 }

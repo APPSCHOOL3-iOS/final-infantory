@@ -13,12 +13,21 @@ struct AuctionMainView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                AuctionLogoCell()
                 Divider()
                 AuctionButtonCell()
-                    ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
-                    Divider()
+                ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                Divider()
             }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: EmptyView()) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+            
         }
     }
 }
