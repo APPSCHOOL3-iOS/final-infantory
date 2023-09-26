@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @StateObject private var loginStore = LoginStore()
+    
     @State private var selectedIndex = 0
     
     var body: some View {
@@ -46,7 +49,15 @@ struct MainTabView: View {
                     Text("마이")
                 }
                 .tag(4)
+                .environmentObject(loginStore)
         }
+//        .onAppear {
+//            Task {
+//                if !loginStore.userUid.isEmpty {
+//                    try await loginStore.fetchUser(userUID: loginStore.userUid)
+//                }
+//            }
+//        }
     }
 }
 

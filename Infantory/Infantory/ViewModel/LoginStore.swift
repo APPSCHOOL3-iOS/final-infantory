@@ -13,7 +13,14 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import SwiftUI
 
+enum LoginStatus {
+    case signIn
+    case signOut
+}
+
 final class LoginStore: ObservableObject {
+    
+    @AppStorage("userId") var userUid: String = ""
     
     @Published var isShowingSignUp = false
     @Published var isShowingMainView = false
@@ -22,6 +29,7 @@ final class LoginStore: ObservableObject {
     @Published var userName: String = ""
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
+    @Published var currenUser: User = User(id: "", name: "", phoneNumber: "", email: "", birthDate: "", loginType: .kakao, address: Address(fullAddress: ""), paymentInfos: [], applyTicket: [])
     
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
@@ -144,6 +152,7 @@ final class LoginStore: ObservableObject {
                 print("로그인 성공! 사용자 이메일: \(String(describing: result?.user.email))")
                 // 성공하면 메인화면
                 completion(true)
+                self.userUid = result?.user.email ?? "user 이메일 없음"
             }
         }
     }
@@ -165,7 +174,7 @@ final class LoginStore: ObservableObject {
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, address: String, completion: (() -> Void)?) {
         do {
             let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: address)
-            try Firestore.firestore().collection("User").addDocument(from: signUpUser)
+            try Firestore.firestore().collection("Users").addDocument(from: signUpUser)
             
             completion?()
             
@@ -190,7 +199,7 @@ final class LoginStore: ObservableObject {
     
     func duplicateNickName(nickName: String, completion: @escaping (Bool) -> Void) {
         
-        let query = Firestore.firestore().collection("User").whereField("nickName", isEqualTo: nickName)
+        let query = Firestore.firestore().collection("Users").whereField("nickName", isEqualTo: nickName)
         query.getDocuments { data, _ in
             if data!.documents.isEmpty {
                 print("데이터 중복 안 됨 가입 진행 가능")
@@ -201,4 +210,28 @@ final class LoginStore: ObservableObject {
             }
         }
     }
+    
+//    func fetchUser(userUID: String) async throws {
+//        let query = Firestore.firestore().collection("Users").whereField("email", isEqualTo: userUID)
+//        query.getDocuments { snapshot, error in
+//            let docs = snapshot!.documents
+//
+//            for doc in docs {
+//                let userDocument = try await Firestore.firestore().collection("Users").document(doc.documentID).getDocument()
+//                let id: String = doc.documentID
+//                if let userData = userDocument.data() {
+//                    let name: String = userData["name"] as? String ?? ""
+//                    let phoneNumber: String = userData["phoneNumber"] as? String ?? ""
+//                    let email: String = userData["email"] as? String ?? ""
+//                    let birthDate: String = userData["birthDate"] as? String ?? ""
+//                    let loginType: LoginType = userData["loginType"] as? LoginType ?? LoginType.kakao
+//                    let address: Address = userData["address"] as? Address ?? Address(fullAddress: "")
+//                    let paymentInfos: [PaymentInfo] = userData["paymentInfos"] as? [PaymentInfo] ?? []
+//                    let applyTicket: [ApplyTicket] = userData["applyTicket"] as? [ApplyTicket] ?? []
+//
+//                    let user = User(id: id, name: name, phoneNumber: phoneNumber, email: email, birthDate: birthDate, loginType: loginType, address: address, paymentInfos: paymentInfos, applyTicket: applyTicket)
+//                }
+//            }
+//        }
+//    }
 }

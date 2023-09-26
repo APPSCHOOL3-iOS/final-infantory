@@ -8,15 +8,36 @@
 import SwiftUI
 
 struct MyMainView: View {
+    
+    @EnvironmentObject var loginStore: LoginStore
+    @State private var isShowingLoginSheet: Bool = false
+    
     var body: some View {
-        NavigationStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if loginStore.userUid.isEmpty {
+                Button(action: {
+                    isShowingLoginSheet = true
+                }, label: {
+                    Text("로그인")
+                })
+            } else {
+                Button(action: {
+                    //
+                }, label: {
+                    Text("로그아웃")
+                })
+            }
+            Text(loginStore.userUid)
         }
-    }
-}
+        .sheet(isPresented: $isShowingLoginSheet, content: {
+            LoginSheetView()
+                .environmentObject(loginStore)
+        })
+    }}
 
 struct MyMainView_Previews: PreviewProvider {
     static var previews: some View {
         MyMainView()
+            .environmentObject(LoginStore())
     }
 }
