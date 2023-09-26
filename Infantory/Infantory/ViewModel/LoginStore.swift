@@ -212,6 +212,7 @@ final class LoginStore: ObservableObject {
             }
         }
     }
+
     
     func fetchUser(userUID: String) async throws {
         
