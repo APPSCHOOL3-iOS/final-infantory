@@ -11,9 +11,7 @@ struct LoginSheetView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
-    
     @State private var isShowingSignUp = false
-    @State private var isShowingProgressView = false
     
     var body: some View {
         NavigationStack {
@@ -30,8 +28,6 @@ struct LoginSheetView: View {
                     Spacer().frame(height: 30)
                     Group {
                         Button {
-                            isShowingProgressView = true
-                            startTask()
                             loginStore.kakaoAuthSignIn(completion: { result in
                                 if result {
                                     dismiss()
@@ -84,14 +80,6 @@ struct LoginSheetView: View {
                         .buttonStyle(.plain)
                     }
                 }
-                if isShowingProgressView {
-                                ProgressView("Loading...")
-                                    .progressViewStyle(CircularProgressViewStyle())
-                                    .onDisappear {
-                                        // 프로그레스 뷰가 사라질 때 작업이 완료된 것으로 가정합니다.
-                                        isShowingProgressView = false
-                                    }
-                            }
             }
             .fullScreenCover(isPresented: $isShowingSignUp) {
                 LoginSignUpView()
@@ -99,19 +87,6 @@ struct LoginSheetView: View {
         }
         .presentationDetents([.height(UIScreen.main.bounds.height * 0.7)])
     }
-    
-    func startTask() {
-            // 비동기 작업을 시뮬레이션하기 위해 DispatchQueue 사용
-            DispatchQueue.global().async {
-                // 여기에서 실행 중인 작업 수행
-                // ...
-
-                // 작업이 완료되면 메인 스레드에서 UI 업데이트를 수행합니다.
-                DispatchQueue.main.async {
-                    isShowingProgressView = false // 프로그레스 뷰를 숨깁니다.
-                }
-            }
-        }
 }
 
 struct LoginSheetView_Previews: PreviewProvider {
