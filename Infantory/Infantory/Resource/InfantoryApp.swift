@@ -25,7 +25,8 @@ struct InfantoryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+           // MainTabView()
+            LoginMainView()
         }
     }
     

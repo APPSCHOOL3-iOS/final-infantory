@@ -30,6 +30,7 @@ final class LoginStore: ObservableObject {
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
     @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(address: "", zonecode: "", addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+
     
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
@@ -177,7 +178,6 @@ final class LoginStore: ObservableObject {
             let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
             try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
             try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)
-            
             completion?()
             
         } catch {
