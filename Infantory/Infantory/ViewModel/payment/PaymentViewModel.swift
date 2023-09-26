@@ -26,14 +26,13 @@ class PaymentViewModel: ObservableObject {
             paymentMethod: PaymentMethod.accountTransfer)
     }
     
-    func uploadPaymentInfo() { // 이거 일단 주석처리 함
+    func uploadPaymentInfo() {
         
     }
     
     var totalPrice: Int {
         let winningPrice = product.winningPrice ?? 0
         return winningPrice + winningPrice / 10 + 3000
-        
     }
     
 }
