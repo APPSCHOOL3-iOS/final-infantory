@@ -33,7 +33,7 @@ struct ProductListView: View {
                                 Image(systemName: heartButton ? "heart.fill" : "heart")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 25)
+                                    .frame(width: 20)
                                     .foregroundColor(.infanDarkGray)
                             })
                         }
