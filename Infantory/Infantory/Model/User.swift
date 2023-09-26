@@ -65,6 +65,25 @@ extension User {
         address: Address(address: "상필님네",
                          zonecode: "몽돌",
                          addressDetail: "해수욕장"),
+        birthDate: "1990-01-01",
+        loginType: .kakao,
+        address: Address(fullAddress: "경상남도 거제시 몽돌해수욕장"),
+        paymentInfos: [
+            PaymentInfo(
+                product: "Product 1",
+                address: Address(fullAddress: "123 Main Street, City"),
+                deliveryRequest: .door,
+                deliveryCost: 10,
+                paymentMethod: .card
+            ),
+            PaymentInfo(
+                product: "Product 2",
+                address: Address(fullAddress: "123 Main Street, City"),
+                deliveryRequest: .securityOffice,
+                deliveryCost: 5,
+                paymentMethod: .accountTransfer
+            )
+        ],
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",

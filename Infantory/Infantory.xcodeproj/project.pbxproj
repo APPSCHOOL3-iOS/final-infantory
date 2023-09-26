@@ -644,6 +644,7 @@
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
 				0C82A3362AC29640009F6D97 /* ApplyDetailImageView.swift in Sources */,
+				64E105C62ABD4C2700BFD3DF /* PaymentAddressViewModel.swift in Sources */,
 				9E37657E2AC294520026CA6F /* DeliveryMessageView.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
 				A0B5AFE32AC3FE130055E714 /* PaymentViewModel.swift in Sources */,
