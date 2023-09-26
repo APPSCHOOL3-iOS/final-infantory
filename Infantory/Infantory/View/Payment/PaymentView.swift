@@ -27,11 +27,6 @@ struct PaymentView: View {
                 }
                 
             }
-            Button {
-                viewmodel.uploadPaymentInfo()
-            } label: {
-                Text("dsf")
-            }
         }
         .infanNavigationBar(title: "배송 / 결재")
         .navigationBarTitleDisplayMode(.inline)
@@ -63,9 +58,5 @@ extension PaymentView {
             }
         }
         .padding()
-    }
-    
-    func payAction() {
-        
     }
 }
