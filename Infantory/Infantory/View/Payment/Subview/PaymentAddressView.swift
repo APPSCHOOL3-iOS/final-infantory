@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PaymentAddressView: View {
     @ObservedObject var viewModel: PaymentViewModel
+    @State var directMessage: String = ""
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -102,27 +103,40 @@ extension PaymentAddressView {
     }
     
     var deliveryRequestView: some View {
-        Button {
-            // 배송 시 요청사항
-        } label: {
-            HStack {
-                Text("배송 시 요청사항을 선택하세요.")
-                    .font(.footnote)
-                    .foregroundColor(.gray)
-                Spacer()
+        VStack(alignment: .leading) {
+            Text("배송 요청사항")
+                .font(.infanFootnote)
+                .padding(.bottom, -7)
+            
+            Button {
                 
-                Image(systemName: "chevron.right")
+            } label: {
+                Picker("Choose a message", selection: $viewModel.paymentInfo.deliveryRequest) {
+                    Text("부재 시 문 앞에 놓아주세요").tag(PaymentInfo.DeliveryMessages.door)
+                    Text("부재 시 경비실에 맡겨 주세요").tag(PaymentInfo.DeliveryMessages.securityOffice)
+                    Text("배송 전 연락 바랍니다").tag(PaymentInfo.DeliveryMessages.call)
+                    Text("직접 입력").tag(PaymentInfo.DeliveryMessages.directMessage)
+                }
+                .pickerStyle(.menu)
+                .accentColor(.infanDarkGray)
+                
+                if viewModel.paymentInfo.deliveryRequest == PaymentInfo.DeliveryMessages.directMessage {
+                    TextField("메시지를 입력해 주세요", text: $directMessage)
+                        .padding(.leading, -20)
+                }
             }
-            .foregroundColor(.black)
-            .padding(.horizontal)
+            
+            .background(
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(lineWidth: 0.5)
+                    .foregroundColor(.gray)
+                    .frame(height: 43)
+            )
+            .padding(.top)
         }
-        
-        .background(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(lineWidth: 1)
-                .foregroundColor(.gray)
-                .frame(height: 45)
-        )
-        .padding(.top)
+    }
+    
+    var directMessageView: some View {
+        TextField("메시지를 입력해 주세요", text: $directMessage)
     }
 }
