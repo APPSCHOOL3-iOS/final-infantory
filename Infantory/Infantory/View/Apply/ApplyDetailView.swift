@@ -1,13 +1,13 @@
 //
-//  AuctionDetailView.swift
+//  ApplyDetailView.swift
 //  Infantory
 //
-//  Created by 봉주헌 on 2023/09/25.
+//  Created by 윤경환 on 2023/09/26.
 //
 
 import SwiftUI
 
-struct AuctionDetailView: View {
+struct ApplyDetailView: View {
     @ObservedObject var userViewModel: UserViewModel
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
@@ -33,14 +33,13 @@ struct AuctionDetailView: View {
             }
             Divider()
                 .padding([.horizontal, .top])
-            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
-            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
+            
         }
     }
 }
 
-struct AuctionDetailView_Previews: PreviewProvider {
+struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+        ApplyDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
     }
 }

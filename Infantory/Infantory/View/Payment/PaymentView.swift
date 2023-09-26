@@ -17,7 +17,7 @@ struct PaymentView: View {
                     Section {
                         PaymentAddressView(viewModel: viewmodel)
                         
-                        PaymentPriceView(price: viewmodel.product.winningPrice)
+                        PaymentPriceView(price: viewmodel.product.winningPrice ?? 0)
                         
                         PaymentMethodView(viewModel: viewmodel)
                             .padding(.top)
