@@ -24,7 +24,7 @@ enum PaymentAddressViewModel: Int, CaseIterable {
         switch self {
         case .prizeWinner: return User.dummyUser.name
         case .phoneNumber: return User.dummyUser.phoneNumber
-        case .address: return User.dummyUser.address.fullAddress
+        case .address: return User.dummyUser.address.detailAddress // 요기 바꿈
         }
     }
 }

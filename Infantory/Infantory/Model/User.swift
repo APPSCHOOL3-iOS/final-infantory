@@ -6,35 +6,37 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct User: Identifiable {
-    var id: String
-    var isInfluencer: UserType = .user // influencer인지 일반 User인지?
-    var profileImageURLString: String?
+struct User: Identifiable, Codable {
+    @DocumentID var id: String?
+    var isInfluencer: String // influencer인지 일반 User인지?
+    var profileImageURLString: String? = nil
     var name: String
     var phoneNumber: String
     var email: String
-    var birthDate: String
     
-    var loginType: LoginType
+    var loginType: String
     var address: Address
-    var paymentInfos: [PaymentInfo]
     
     var follower: [String]? = nil
-    var applyTicket: [ApplyTicket]
-    var influencerIntroduce: String?
+    var applyTicket: [ApplyTicket]? = nil
+    var influencerIntroduce: String? = nil
+    
+    // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
-// 상세주소
-struct Address {
-    var fullAddress: String
+// 주소
+struct Address: Codable {
+    var zipCode: String // 우편번호
+    var streetAddress: String // 도로명주소
+    var detailAddress: String // 상세주소
 }
 
 // 소셜로그인 타입
 enum LoginType: String {
     case kakao
     case apple
-    
 }
 
 enum UserType: String, Codable {
@@ -54,41 +56,22 @@ enum PaymentMethod: String, CaseIterable {
 extension User {
     static let dummyUser = User(
         id: "sdoYpk7SdDTcGTxgIQJy",
-        isInfluencer: .user,
+        isInfluencer: "user",
         profileImageURLString: "https://example.com/profile/1.jpg",
         name: "상필 갓",
         phoneNumber: "123-456-7890",
         email: "john@example.com",
-        birthDate: "1990-01-01",
-        loginType: .kakao,
-        address: Address(fullAddress: "경상남도 거제시 몽돌해수욕장"),
-        paymentInfos: [
-            PaymentInfo(
-                product: "Product 1",
-                address: Address(fullAddress: "123 Main Street, City"),
-                deliveryRequest: "Please deliver to my home.",
-                deliveryCost: 10,
-                paymentMethod: .card
-            ),
-            PaymentInfo(
-                product: "Product 2",
-                address: Address(fullAddress: "123 Main Street, City"),
-                deliveryRequest: "Leave at the front desk.",
-                deliveryCost: 5,
-                paymentMethod: .accountTransfer
-            )
-        ],
+        loginType: "kakao",
+        address: Address(zipCode: "33333", streetAddress: "경상남도 거제시", detailAddress: "몽돌해수욕장"),
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",
-                userId: "john@example.com",
                 date: Date(),
                 ticketGetAndUse: "Ticket 123",
                 count: 2
             ),
             ApplyTicket(
                 id: "ticket2",
-                userId: "john@example.com",
                 date: Date(),
                 ticketGetAndUse: "Ticket 456",
                 count: 1

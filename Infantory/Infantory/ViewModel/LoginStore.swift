@@ -29,7 +29,7 @@ final class LoginStore: ObservableObject {
     @Published var userName: String = ""
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
-    @Published var currenUser: User = User(id: "", name: "", phoneNumber: "", email: "", birthDate: "", loginType: .kakao, address: Address(fullAddress: ""), paymentInfos: [], applyTicket: [])
+    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(zipCode: "", streetAddress: "", detailAddress: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
     
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
@@ -171,11 +171,12 @@ final class LoginStore: ObservableObject {
         }
     }
     
-    func signUpToFireStore(name: String, nickName: String, phoneNumber: String, address: String, completion: (() -> Void)?) {
+    func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
         do {
-            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: address)
-            print("♥️♥️♥️♥️\(userUid)")
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress))
+            let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
             try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
+            try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)
             
             completion?()
             
@@ -184,9 +185,9 @@ final class LoginStore: ObservableObject {
         }
     }
     
-    func signUpToFirebase(name: String, nickName: String, phoneNumber: String, address: String, completion: @escaping (Bool) -> Void) {
+    func signUpToFirebase(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: @escaping (Bool) -> Void) {
         self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
-            self.signUpToFireStore(name: name, nickName: nickName, phoneNumber: phoneNumber, address: address) {
+            self.signUpToFireStore(name: name, nickName: nickName, phoneNumber: phoneNumber, zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress) {
                 self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
                     if result {
                         completion(true)
@@ -212,27 +213,28 @@ final class LoginStore: ObservableObject {
         }
     }
     
-//    func fetchUser(userUID: String) async throws {
-//        let query = Firestore.firestore().collection("Users").whereField("email", isEqualTo: userUID)
-//        query.getDocuments { snapshot, error in
-//            let docs = snapshot!.documents
-//
-//            for doc in docs {
-//                let userDocument = try await Firestore.firestore().collection("Users").document(doc.documentID).getDocument()
-//                let id: String = doc.documentID
-//                if let userData = userDocument.data() {
-//                    let name: String = userData["name"] as? String ?? ""
-//                    let phoneNumber: String = userData["phoneNumber"] as? String ?? ""
-//                    let email: String = userData["email"] as? String ?? ""
-//                    let birthDate: String = userData["birthDate"] as? String ?? ""
-//                    let loginType: LoginType = userData["loginType"] as? LoginType ?? LoginType.kakao
-//                    let address: Address = userData["address"] as? Address ?? Address(fullAddress: "")
-//                    let paymentInfos: [PaymentInfo] = userData["paymentInfos"] as? [PaymentInfo] ?? []
-//                    let applyTicket: [ApplyTicket] = userData["applyTicket"] as? [ApplyTicket] ?? []
-//
-//                    let user = User(id: id, name: name, phoneNumber: phoneNumber, email: email, birthDate: birthDate, loginType: loginType, address: address, paymentInfos: paymentInfos, applyTicket: applyTicket)
-//                }
-//            }
-//        }
-//    }
+    func fetchUser(userUID: String) async throws {
+        
+        let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
+        let user = try userDocument.data(as: User.self)
+        print(user.email)
+        try await fetchApplyTicket(getUser: user, userUID: userUID)
+    }
+    
+    @MainActor
+    func fetchApplyTicket(getUser: User, userUID: String) async throws {
+        
+        var user = getUser
+        var ticketList: [ApplyTicket] = []
+        
+        let ticketDocument = try await Firestore.firestore()
+            .collection("Users").document(userUID).collection("ApplyTicket").getDocuments()
+        let documents = ticketDocument.documents
+        for document in documents {
+            let applyTicket = try document.data(as: ApplyTicket.self)
+            ticketList.append(applyTicket)
+        }
+        user.applyTicket = ticketList
+        self.currentUser = user
+    }
 }

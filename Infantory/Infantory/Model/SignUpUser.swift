@@ -18,7 +18,7 @@ struct SignUpUser: Identifiable, Codable {
     var email: String
     
     var loginType: String = "kakao"
-    var address: String
+    var address: Address
     
     var follower: [String]? = nil
     var influencerIntroduce: String? = nil

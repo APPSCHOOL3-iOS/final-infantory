@@ -51,13 +51,13 @@ struct MainTabView: View {
                 .tag(4)
                 .environmentObject(loginStore)
         }
-//        .onAppear {
-//            Task {
-//                if !loginStore.userUid.isEmpty {
-//                    try await loginStore.fetchUser(userUID: loginStore.userUid)
-//                }
-//            }
-//        }
+        .onAppear {
+            Task {
+                if !loginStore.userUid.isEmpty {
+                    try await loginStore.fetchUser(userUID: loginStore.userUid)
+                }
+            }
+        }
     }
 }
 
