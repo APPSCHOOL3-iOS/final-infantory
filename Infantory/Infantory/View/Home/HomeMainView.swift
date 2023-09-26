@@ -11,6 +11,7 @@ struct HomeMainView: View {
     @State var text: String = ""
     var body: some View {
             VStack {
+                Text("Home")
                 TextField("asd", text: $text)
             }
             .padding()

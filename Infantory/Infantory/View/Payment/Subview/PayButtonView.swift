@@ -12,7 +12,7 @@ struct PayButtonView: View {
     var payName: PaymentMethod
     
     var body: some View {
-        var isSelectedMethod =  viewModel.paymentInfo.paymentMethod == payName
+        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == payName
         
         return (
             Button {
