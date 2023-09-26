@@ -27,11 +27,6 @@ struct MyMainView: View {
                     Text("로그아웃")
                 })
             }
-<<<<<<< HEAD
-            Text(loginStore.currentUser.address.addressDetail)
-=======
-            Text(loginStore.userUid)
->>>>>>> 8a280e5 (Feat: 자동로그인 구현, 데이터 받아오기 하는 중)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
