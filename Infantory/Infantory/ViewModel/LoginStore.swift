@@ -152,7 +152,6 @@ final class LoginStore: ObservableObject {
                 print("로그인 성공! 사용자 이메일: \(String(describing: result?.user.email))")
                 // 성공하면 메인화면
                 completion(true)
-                self.userUid = result?.user.email ?? "user 이메일 없음"
             }
         }
     }
@@ -165,6 +164,7 @@ final class LoginStore: ObservableObject {
             }
             if result != nil {
                 print("사용자 이메일: \(String(describing: result?.user.email))")
+                self.userUid = result?.user.uid ?? "uid 없음"
             }
             
             completion?()
@@ -174,7 +174,8 @@ final class LoginStore: ObservableObject {
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, address: String, completion: (() -> Void)?) {
         do {
             let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: address)
-            try Firestore.firestore().collection("Users").addDocument(from: signUpUser)
+            print("♥️♥️♥️♥️\(userUid)")
+            try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
             
             completion?()
             
