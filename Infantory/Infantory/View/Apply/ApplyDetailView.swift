@@ -40,6 +40,7 @@ struct ApplyDetailView: View {
                 }
                 VStack {
                     InfluencerApplyImageCell()
+                    ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
                 }
             }
         }

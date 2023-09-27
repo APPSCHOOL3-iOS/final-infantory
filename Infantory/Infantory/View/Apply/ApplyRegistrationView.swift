@@ -101,7 +101,7 @@ struct ApplyRegistrationView: View {
                     }
                 }
                 .padding([.leading, .trailing], 20)
-                .alert(isPresented:$showAlert) {
+                .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
@@ -114,4 +114,3 @@ struct ApplyRegistrationView_Previews: PreviewProvider {
         ApplyRegistrationView()
     }
 }
-

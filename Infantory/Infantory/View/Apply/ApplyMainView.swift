@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct ApplyMainView: View {
+    @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
+    
     var body: some View {
         NavigationStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            VStack {
+                Divider()
+                ApplyProductListView(userViewModel: UserViewModel(), applyProductViewModel: applyViewModel)
+                Divider()
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: EmptyView()) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+            
         }
     }
 }
-
 struct ApplyMainView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyMainView()
