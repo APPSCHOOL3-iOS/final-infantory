@@ -64,31 +64,6 @@ extension User {
         address: Address(address: "상필님네",
                          zonecode: "몽돌",
                          addressDetail: "해수욕장"),
-        birthDate: "1990-01-01",
-        loginType: .kakao ,
-        address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                         zonecode: "123456",
-                         addressDetail: "5번째로 큰 파라솔"),
-        paymentInfos: [
-            PaymentInfo(
-                product: "Product 1",
-                address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                                 zonecode: "123456",
-                                 addressDetail: "5번째로 큰 파라솔"),
-                deliveryRequest: .door,
-                deliveryCost: 10,
-                paymentMethod: .card
-            ),
-            PaymentInfo(
-                product: "Product 2",
-                address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                                 zonecode: "123456",
-                                 addressDetail: "5번째로 큰 파라솔"),
-                deliveryRequest: .securityOffice,
-                deliveryCost: 5,
-                paymentMethod: .accountTransfer
-            )
-        ],
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",

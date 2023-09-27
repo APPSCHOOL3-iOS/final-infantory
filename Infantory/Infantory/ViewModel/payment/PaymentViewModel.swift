@@ -27,7 +27,13 @@ class PaymentViewModel: ObservableObject {
     }
     
     func uploadPaymentInfo() {
+        let paymentInfoRef = database.collection("paymentInfos")
         
+        do {
+            try paymentInfoRef.addDocument(from: paymentInfo)
+        } catch let error {
+            print("Error adding payment info: \(error)")
+        }
     }
     
     var totalPrice: Int {
