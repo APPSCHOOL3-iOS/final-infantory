@@ -27,13 +27,16 @@ struct MyMainView: View {
                     Text("로그아웃")
                 })
             }
-            Text(loginStore.currentUser.name)
+            Text(loginStore.currentUser.email)
+            Text(loginStore.currentUser.loginType.rawValue)
+            Text(loginStore.currentUser.isInfluencer.rawValue)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
                 .environmentObject(loginStore)
         })
-    }}
+    }
+}
 
 struct MyMainView_Previews: PreviewProvider {
     static var previews: some View {
