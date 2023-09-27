@@ -27,7 +27,7 @@ struct AuctionDetailView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 25, height: 25)
-                        Text(": \(userViewModel.user.applyTicket[0].count)")
+                        Text(": \(userViewModel.user.applyTicket?[0].count ?? 0)") // 요기바꿈
                             .font(.infanBody)
                             .bold()
                     }

@@ -28,7 +28,7 @@ struct ReceiptView: View {
                     HStack {
                         Text("주소")
                             .frame(width: 50, alignment: .leading)
-                        Text(viewModel.user.address.fullAddress)
+                        Text(viewModel.user.address.detailAddress) // 요기바꿈
                     }
                 }
                 .padding()

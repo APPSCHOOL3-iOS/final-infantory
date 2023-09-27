@@ -15,8 +15,11 @@ struct LoginSignUpView: View {
     @State private var nickName: String = ""
     @State private var name: String = ""
     @State private var phoneNumber: String = ""
+    @State private var zipCode: String = ""
     @State private var address: String = ""
     @State private var detailAddress: String = ""
+    @State private var isCheckedNickName: Bool = false
+    @State private var checkNickNameResult: String = ""
     
     var body: some View {
         NavigationStack {
@@ -27,10 +30,33 @@ struct LoginSignUpView: View {
                     .padding(.bottom)
                     .disabled(true)
                 
-                Text("*닉네임")
-                TextField("\(loginStore.userName)", text: $nickName)
-                    .overlay(UnderLineOverlay())
-                    .padding(.bottom)
+                Group {
+                    Text("*닉네임")
+                    HStack {
+                        TextField("\(loginStore.userName)", text: $nickName)
+                            .overlay(UnderLineOverlay())
+                        
+                        Button {
+                            loginStore.duplicateNickName(nickName: nickName) { result in
+                                if result {
+                                    print("가입가능")
+                                    isCheckedNickName = true
+                                    checkNickNameResult = "사용 가능한 닉네임입니다."
+                                } else {
+                                    print("가입불가")
+                                    isCheckedNickName = false
+                                    checkNickNameResult = "중복된 닉네임입니다."
+                                }
+                            }
+                        } label: {
+                            Text("중복확인")
+                        }
+                    }
+                    Text(checkNickNameResult)
+                        .font(Font.infanFootnote)
+                        .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
+                        .padding(.bottom)
+                }
                 
                 Text("이름")
                 TextField("\(loginStore.userName)", text: $name)
@@ -44,7 +70,7 @@ struct LoginSignUpView: View {
                 
                 VStack(alignment: .leading) {
                     Text("우편 번호") // 우편번호 검색 버튼 만들 예정
-                    TextField("우편 번호를 검색하세요", text: $address)
+                    TextField("우편 번호를 검색하세요", text: $zipCode)
                         .overlay(UnderLineOverlay())
                         .padding(.bottom)
                     
@@ -62,7 +88,14 @@ struct LoginSignUpView: View {
                 HStack {
                     Spacer()
                     Button {
-                        loginStore.signUpToFirebase(completion: { result in
+                        loginStore.signUpToFirebase(
+                            name: name,
+                            nickName: nickName,
+                            phoneNumber: phoneNumber,
+                            zipCode: zipCode,
+                            streetAddress: address,
+                            detailAddress: detailAddress,
+                            completion: { result in
                             print("찐 컴플리션 값: \(result)")
                             if result {
                                 //토스트 : 회원가입에 성공했습니다. 다시 로그인 해주세요.

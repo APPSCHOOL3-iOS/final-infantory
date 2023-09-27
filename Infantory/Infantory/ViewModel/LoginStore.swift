@@ -13,7 +13,14 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import SwiftUI
 
+enum LoginStatus {
+    case signIn
+    case signOut
+}
+
 final class LoginStore: ObservableObject {
+    
+    @AppStorage("userId") var userUid: String = ""
     
     @Published var isShowingSignUp = false
     @Published var isShowingMainView = false
@@ -21,9 +28,10 @@ final class LoginStore: ObservableObject {
     @Published var email: String = ""
     @Published var userName: String = ""
     @Published var password: String = ""
+    @Published var loginType: LoginType = .kakao
+    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(zipCode: "", streetAddress: "", detailAddress: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
     
-    @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
-    
+    // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
             UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
@@ -59,6 +67,7 @@ final class LoginStore: ObservableObject {
         }
     }
     
+    // 카카오 서비스 이용가능한지 확인하는 함수: 카카오 앱이용가능? 가능하지 않다면 -> 웹으로
     func openKakaoService(completion: @escaping (Bool) -> Void) {
         if UserApi.isKakaoTalkLoginAvailable() { // 카카오톡 앱 이용 가능한지
             UserApi.shared.loginWithKakaoTalk { oauthToken, error in // 카카오톡 앱으로 로그인
@@ -106,7 +115,17 @@ final class LoginStore: ObservableObject {
             self.email = email
             guard let password = kakaoUser?.id else { return }
             self.password = String(password)
-            guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else { return }
+            guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else {
+                self.emailAuthSignIn(email: email, password: String(password), completion: { result in
+                    print("컴플리션 값: \(result)")
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+                return
+            }
             self.userName = userName
             // 로그인이 되는지 안되는지 확인하는 함수 -> 에러? 로그인이안된다 -> 회원가입이 안되어있다 -> 회원가입뷰로
             // 로그인이 된다 -> 메인뷰로
@@ -145,21 +164,77 @@ final class LoginStore: ObservableObject {
             }
             if result != nil {
                 print("사용자 이메일: \(String(describing: result?.user.email))")
+                self.userUid = result?.user.uid ?? "uid 없음"
             }
             
             completion?()
         }
     }
     
-    func signUpToFirebase(completion: @escaping (Bool) -> Void) {
-        self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
-            self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
-                if result {
-                    completion(true)
-                } else {
-                    completion(false)
-                }
-            })
+    func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
+        do {
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress))
+            let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
+            try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
+            try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)
+            
+            completion?()
+            
+        } catch {
+            print("debug : Failed to Create User with \(error.localizedDescription)")
         }
+    }
+    
+    func signUpToFirebase(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: @escaping (Bool) -> Void) {
+        self.emailAuthSignUp(email: self.email, password: "\(self.password)") {
+            self.signUpToFireStore(name: name, nickName: nickName, phoneNumber: phoneNumber, zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress) {
+                self.emailAuthSignIn(email: self.email, password: "\(self.password)", completion: { result in
+                    if result {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                })
+            }
+        }
+    }
+    
+    func duplicateNickName(nickName: String, completion: @escaping (Bool) -> Void) {
+        
+        let query = Firestore.firestore().collection("Users").whereField("nickName", isEqualTo: nickName)
+        query.getDocuments { data, _ in
+            if data!.documents.isEmpty {
+                print("데이터 중복 안 됨 가입 진행 가능")
+                completion(true)
+            } else {
+                print("데이터 중복 됨 가입 진행 불가")
+                completion(false)
+            }
+        }
+    }
+    
+    func fetchUser(userUID: String) async throws {
+        
+        let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
+        let user = try userDocument.data(as: User.self)
+        print(user.email)
+        try await fetchApplyTicket(getUser: user, userUID: userUID)
+    }
+    
+    @MainActor
+    func fetchApplyTicket(getUser: User, userUID: String) async throws {
+        
+        var user = getUser
+        var ticketList: [ApplyTicket] = []
+        
+        let ticketDocument = try await Firestore.firestore()
+            .collection("Users").document(userUID).collection("ApplyTicket").getDocuments()
+        let documents = ticketDocument.documents
+        for document in documents {
+            let applyTicket = try document.data(as: ApplyTicket.self)
+            ticketList.append(applyTicket)
+        }
+        user.applyTicket = ticketList
+        self.currentUser = user
     }
 }
