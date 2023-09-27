@@ -114,3 +114,4 @@ struct ApplyRegistrationView_Previews: PreviewProvider {
         ApplyRegistrationView()
     }
 }
+

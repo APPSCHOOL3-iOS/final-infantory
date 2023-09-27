@@ -8,9 +8,8 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct ApplyTicket: Identifiable {
+struct ApplyTicket: Identifiable, Codable {
     @DocumentID var id: String?
-    var userId: String // user의 이메일값, User안으로 들어가면 documentId값으로
     var date: Date
     var ticketGetAndUse: String
     var count: Int

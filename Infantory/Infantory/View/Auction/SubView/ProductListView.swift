@@ -88,6 +88,8 @@ struct ProductListView: View {
                                         }
                                     }
                                 }
+                                .infanHorizontalPadding()
+                                
                             }
                             .infanHorizontalPadding()
                             Rectangle()
@@ -107,7 +109,7 @@ struct ProductListView: View {
                 catch {
                     
                 }
-            }
+        }
         }
     }
 }
