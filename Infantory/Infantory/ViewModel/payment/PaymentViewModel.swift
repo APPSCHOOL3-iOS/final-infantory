@@ -21,7 +21,7 @@ class PaymentViewModel: ObservableObject {
         paymentInfo = PaymentInfo(
             product: product.id,
             address: user.address,
-            deliveryRequest: "",
+            deliveryRequest: .door,
             deliveryCost: 3000,
             paymentMethod: PaymentMethod.accountTransfer)
     }

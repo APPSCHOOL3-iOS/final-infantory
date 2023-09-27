@@ -27,7 +27,9 @@ struct PaymentMethodView: View {
 
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+        NavigationStack {
+            PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+        }
     }
 }
 
@@ -43,19 +45,23 @@ extension PaymentMethodView {
                 Button {
                     viewModel.paymentInfo.paymentMethod  = .accountTransfer
                 } label: {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(
-                            isSelectedMethod ? .black : .gray,
-                            lineWidth: isSelectedMethod ? 2 : 1
-                        )
-                        .frame(width: 351, height: 60)
-                        .background(.white)
-                        .overlay(
-                            Text("계좌를 등록하세요")
-                                .bold()
-                                .font(.callout)
-                                .foregroundColor(.black)
-                        )
+                    NavigationLink {
+                        PaymentChoiceView()
+                    } label: {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(
+                                isSelectedMethod ? .black : .gray,
+                                lineWidth: isSelectedMethod ? 2 : 1
+                            )
+                            .frame(width: 351, height: 60)
+                            .background(.white)
+                            .overlay(
+                                Text("계좌를 등록하세요")
+                                    .bold()
+                                    .font(.callout)
+                                    .foregroundColor(.black)
+                            )
+                    }
                 }
                 .padding(.bottom, 23)
             }
@@ -90,12 +96,12 @@ extension PaymentMethodView {
                         
                         HStack {
                             VStack(alignment: .leading) { // 더미 데이터
-                                Text("토스뱅크카드")
-                                Text("••••-••••-••••-5285")
+                                Text("삼성카드")
+                                Text("••••-••••-••••-1234")
                             }
                             
-                            Button {
-                                
+                            NavigationLink {
+                                PaymentCardAddView()
                             } label: {
                                 Image(systemName: "chevron.forward")
                                     .padding(.leading, 150)
