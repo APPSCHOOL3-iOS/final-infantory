@@ -13,7 +13,7 @@ extension Color {
     static let infanDarkGray = Color("DarkGray")
     static let infanLightGray = Color("LightGray")
     static let infanSky = Color("Sky")
-    static let infanMain = Color("Blue")
+    static let infanMain = Color("Main")
     static let infanOrange = Color("Orange")
     static let infanYellow = Color("Yellow")
     static let infanGreen = Color("Green")

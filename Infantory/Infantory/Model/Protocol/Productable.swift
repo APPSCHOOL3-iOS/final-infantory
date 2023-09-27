@@ -22,5 +22,5 @@ protocol Productable {
     var endDate: Date { get set }
     
     // 지불 가격
-    var winningPrice: Int { get set }
+    var winningPrice: Int? { get set }
 }

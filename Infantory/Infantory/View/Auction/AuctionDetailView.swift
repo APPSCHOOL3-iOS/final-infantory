@@ -12,16 +12,32 @@ struct AuctionDetailView: View {
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
-        NavigationStack {
-            VStack {
+        VStack {
+            HStack {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 35)
+                Text("\(userViewModel.user.name)")
+                Spacer()
+                
                 HStack {
-                    Image(systemName: "person.circle.fill")
+                    Image(systemName: "ticket")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 35)
-                    Text("\(userViewModel.user.name)")
-                    Spacer()
-                    
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 25, height: 25)
+                    Text(": \(userViewModel.user.applyTicket[0].count)")
+                        .font(.infanBody)
+                        .bold()
+                }
+            }
+            Divider()
+                .padding([.horizontal, .top])
+            
+            Section {
+                HStack {
+                    Text("이런 상품들은 어때요?")
+                    Spacer()                    
                     HStack {
                         Image(systemName: "ticket")
                             .resizable()
@@ -32,11 +48,12 @@ struct AuctionDetailView: View {
                             .bold()
                     }
                 }
-                Divider()
-                    .padding([.horizontal, .top])
-                AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
-                AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
+                VStack {
+                    AuctionScrollImageView()
+                }
             }
+            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
+            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
         }
     }
 }
