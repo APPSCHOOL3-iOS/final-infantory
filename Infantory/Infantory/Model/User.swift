@@ -10,19 +10,18 @@ import FirebaseFirestoreSwift
 
 struct User: Identifiable, Codable {
     @DocumentID var id: String?
-    var isInfluencer: String // influencer인지 일반 User인지?
+    var isInfluencer: UserType // influencer인지 일반 User인지?
     var profileImageURLString: String? = nil
     var name: String
     var phoneNumber: String
     var email: String
     
-    var loginType: String
+    var loginType: LoginType
     var address: Address
     
     var follower: [String]? = nil
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
-    
     // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
@@ -34,21 +33,11 @@ struct Address {
 
 }
 
+
 // 소셜로그인 타입
 enum LoginType: String, Codable {
     case kakao
     case apple
-    
-    var loginType: Self {
-        switch self.rawValue {
-        case "kakao" :
-            return .kakao
-        case "apple" :
-            return .apple
-        default :
-            return .kakao
-        }
-    }
 }
 
 enum UserType: String, Codable {
@@ -68,12 +57,12 @@ enum PaymentMethod: String, CaseIterable, Codable {
 extension User {
     static let dummyUser = User(
         id: "sdoYpk7SdDTcGTxgIQJy",
-        isInfluencer: "user",
+        isInfluencer: UserType.user,
         profileImageURLString: "https://example.com/profile/1.jpg",
         name: "상필 갓",
         phoneNumber: "123-456-7890",
         email: "john@example.com",
-        loginType: "kakao",
+        loginType: LoginType.kakao,
         address: Address(zipCode: "33333", streetAddress: "경상남도 거제시", detailAddress: "몽돌해수욕장"),
         applyTicket: [
             ApplyTicket(

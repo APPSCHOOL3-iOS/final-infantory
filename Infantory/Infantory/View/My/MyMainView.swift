@@ -22,17 +22,20 @@ struct MyMainView: View {
                 })
             } else {
                 Button(action: {
-                    //
+                    loginStore.kakaoLogout()
                 }, label: {
                     Text("로그아웃")
                 })
             }
+
+            Text(loginStore.currentUser.email)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
                 .environmentObject(loginStore)
         })
-    }}
+    }
+}
 
 struct MyMainView_Previews: PreviewProvider {
     static var previews: some View {
