@@ -13,9 +13,8 @@ struct AuctionDetailImageView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                    ForEach(auctionProductVIewModel.auctionProduct) { product in
-//                        Image(product.productImageURLStrings[1])
-//                        Image(product.productImageURLStrings[0])
+                ForEach(auctionProductVIewModel.auctionProduct) { product in
+         Image(product.productImageURLStrings[0])
                     }
             }
         }

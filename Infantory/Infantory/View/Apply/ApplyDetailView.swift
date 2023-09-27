@@ -39,7 +39,8 @@ struct ApplyDetailView: View {
                     Spacer()
                 }
                 VStack {
-                    ApplyScrollImageCell()
+                    InfluencerApplyImageCell()
+                    ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
                 }
             }
         }

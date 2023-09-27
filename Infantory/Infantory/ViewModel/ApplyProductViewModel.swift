@@ -15,7 +15,7 @@ final class ApplyProductViewModel: ObservableObject {
     
     //현재 유저 패치작업
     @MainActor
-    func fetchAuctionProducts() async throws {
+    func fetchApplyProducts() async throws {
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
         print("\(snapshot)")
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
