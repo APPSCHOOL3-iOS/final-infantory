@@ -30,6 +30,11 @@ struct LoginSheetView: View {
                         Button {
                             loginStore.kakaoAuthSignIn(completion: { result in
                                 if result {
+                                    Task {
+                                        if !loginStore.userUid.isEmpty {
+                                            try await loginStore.fetchUser(userUID: loginStore.userUid)
+                                        }
+                                    }
                                     dismiss()
                                 } else {
                                     isShowingSignUp = true

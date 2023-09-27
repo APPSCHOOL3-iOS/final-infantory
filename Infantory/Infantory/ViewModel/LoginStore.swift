@@ -150,13 +150,13 @@ final class LoginStore: ObservableObject {
             if result != nil {
                 print("로그인 성공! 사용자 이메일: \(String(describing: result?.user.email))")
                 // 성공하면 메인화면
+                self.userUid = result?.user.uid ?? "uid 없음"
                 completion(true)
             }
         }
     }
     
     func emailAuthSignUp(email: String, password: String, completion: (() -> Void)?) {
-        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if error != nil {
                 print("error: 이미 등록되어있는 사용자입니다.")
@@ -164,6 +164,7 @@ final class LoginStore: ObservableObject {
             if result != nil {
                 print("사용자 이메일: \(String(describing: result?.user.email))")
                 self.userUid = result?.user.uid ?? "uid 없음"
+                print("uid 앱스토리지 저장 : \(self.userUid)")
             }
             
             completion?()
