@@ -20,7 +20,6 @@ struct LoginMainView: View {
             }, label: {
                 Text("로그인")
             })
-            
             Text(loginStore.email)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {

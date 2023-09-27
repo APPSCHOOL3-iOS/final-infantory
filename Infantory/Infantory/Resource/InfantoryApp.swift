@@ -23,14 +23,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct InfantoryApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    var body: some Scene {
-        WindowGroup {
-            MainTabView()
-        }
-    }
-    
     init() {
         // Kakao SDK 초기화
         KakaoSDK.initSDK(appKey: "45ce2063d86a5a5c18e38528aae46993")
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            MainTabView()
+                .onOpenURL { url in
+                    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                        _ = AuthController.handleOpenUrl(url: url)
+                    }
+                }
+        }
     }
 }

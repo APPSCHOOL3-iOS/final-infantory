@@ -34,9 +34,20 @@ struct Address: Codable {
 }
 
 // 소셜로그인 타입
-enum LoginType: String {
+enum LoginType: String, Codable {
     case kakao
     case apple
+    
+    var loginType: Self {
+        switch self.rawValue {
+        case "kakao" :
+            return .kakao
+        case "apple" :
+            return .apple
+        default :
+            return .kakao
+        }
+    }
 }
 
 enum UserType: String, Codable {
