@@ -25,12 +25,11 @@ struct User: Identifiable, Codable {
     // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
-// 상세주소
+// 주소
 struct Address: Codable {
     var address: String
     var zonecode: String
     var addressDetail: String
-
 }
 
 // 소셜로그인 타입
