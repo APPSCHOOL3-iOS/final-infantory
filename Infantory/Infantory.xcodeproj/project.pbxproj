@@ -185,6 +185,16 @@
 			path = Payment;
 			sourceTree = "<group>";
 		};
+		6479BDF82AC3EC4D00AA6545 /* payment */ = {
+			isa = PBXGroup;
+			children = (
+				64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */,
+				64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */,
+				EC4D59C32ABD9CC4007FC25E /* PaymentPriceViewModel.swift */,
+			);
+			path = payment;
+			sourceTree = "<group>";
+		};
 		64E105C92ABD578E00BFD3DF /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,9 +269,7 @@
 				849B64C22ABD600D00C4AC8D /* LoginStore.swift */,
 				015783372ABD5B5F001FEC98 /* UserViewModel.swift */,
 				015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */,
-				64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */,
-				64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */,
-				EC4D59C32ABD9CC4007FC25E /* PaymentPriceViewModel.swift */,
+				6479BDF82AC3EC4D00AA6545 /* payment */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
