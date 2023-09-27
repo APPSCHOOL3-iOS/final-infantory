@@ -1,19 +1,19 @@
 //
-//  AuctionRegistrationView.swift
+//  ApplyRegistrationView.swift
 //  Infantory
 //
-//  Created by 윤경환 on 2023/09/20.
+//  Created by 윤경환 on 2023/09/26.
 //
 
 import SwiftUI
 
-struct AuctionRegistrationView: View {
+struct ApplyRegistrationView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var registViewModel = AuctionProductViewModel()
+    @StateObject var applyViewModel = ApplyProductViewModel()
     @State private var title: String = ""
     @State private var apply: String = ""
     @State private var itemDescription: String = ""
-    @State private var startingPrice: String = ""
+    @State private var winningPrice: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isShowAlert: Bool = false
@@ -29,7 +29,7 @@ struct AuctionRegistrationView: View {
                     //                        .aspectRatio(contentMode: .fill)
                     //                        .frame(width: 20, height: 20)
                     Spacer()
-                    Text("내 경매 등록")
+                    Text("내 응모 등록")
                         .font(.title2)
                         .bold()
                     Spacer()
@@ -67,7 +67,7 @@ struct AuctionRegistrationView: View {
                                 .autocapitalization(.none)
                                 .padding([.leading, .top])
                         }
-                        TextField("시작가", text: $startingPrice)
+                        TextField("시작가", text: $winningPrice)
                             .autocapitalization(.none)
                         Divider()
                     }
@@ -84,12 +84,12 @@ struct AuctionRegistrationView: View {
                             } else if itemDescription.isEmpty {
                                 showAlert = true
                                 alertMessage = "상품 설명을 입력해주세요."
-                            } else if startingPrice.isEmpty {
+                            } else if winningPrice.isEmpty {
                                 showAlert = true
                                 alertMessage = "시작가를 입력해주세요."
                             } else {
                                 Task {
-                                    try await registViewModel.createAuctionProduct(title:title, apply:apply, itemDescription:itemDescription, startingPrice:startingPrice)
+                                    try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
                                 }
                             }
                             //                            dismiss()
@@ -101,7 +101,7 @@ struct AuctionRegistrationView: View {
                     }
                 }
                 .padding([.leading, .trailing], 20)
-                .alert(isPresented:$showAlert) {
+                .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
@@ -109,8 +109,9 @@ struct AuctionRegistrationView: View {
     }
 }
 
-struct AuctionRegistrationView_Previews: PreviewProvider {
+struct ApplyRegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionRegistrationView()
+        ApplyRegistrationView()
     }
 }
+

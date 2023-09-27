@@ -11,7 +11,6 @@ struct LoginSheetView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
-    
     @State private var isShowingSignUp = false
     
     var body: some View {
@@ -31,6 +30,11 @@ struct LoginSheetView: View {
                         Button {
                             loginStore.kakaoAuthSignIn(completion: { result in
                                 if result {
+                                    Task {
+                                        if !loginStore.userUid.isEmpty {
+                                            try await loginStore.fetchUser(userUID: loginStore.userUid)
+                                        }
+                                    }
                                     dismiss()
                                 } else {
                                     isShowingSignUp = true

@@ -29,12 +29,12 @@ struct PaymentReceiptView: View {
                     HStack {
                         Text("주소")
                             .frame(width: 50, alignment: .leading)
-                        Text(viewModel.user.address.detailAddress) // 요기바꿈
+                        Text(viewModel.paymentInfo.address.address)
                     }
                 }
                 .padding()
                 
-                PaymentPriceView(price: viewModel.product.winningPrice)
+                PaymentPriceView(price: viewModel.product.winningPrice ?? 0)
             }
             Spacer()
             

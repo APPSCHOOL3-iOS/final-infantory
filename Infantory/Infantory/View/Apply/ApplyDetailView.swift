@@ -1,15 +1,15 @@
 //
-//  AuctionDetailView.swift
+//  ApplyDetailView.swift
 //  Infantory
 //
-//  Created by 봉주헌 on 2023/09/25.
+//  Created by 윤경환 on 2023/09/26.
 //
 
 import SwiftUI
 
-struct AuctionDetailView: View {
+struct ApplyDetailView: View {
     @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
+    @ObservedObject var applyProductViewModel: ApplyProductViewModel
     
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct AuctionDetailView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 35)
-                Text("\(userViewModel.user.name)")
+//                Text("\(userViewModel.user.name)")
                 Spacer()
                 
                 HStack {
@@ -26,31 +26,28 @@ struct AuctionDetailView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 25, height: 25)
-                    Text(": \(userViewModel.user.applyTicket?[0].count ?? 0)")
-                        .font(.infanBody)
-                        .bold()
+//                    Text(": \(userViewModel.user.applyTicket[0].count)")
+//                        .font(.infanBody)
+//                        .bold()
                 }
             }
             Divider()
                 .padding([.horizontal, .top])
-            
             Section {
                 HStack {
                     Text("이런 상품들은 어때요?")
                     Spacer()
                 }
                 VStack {
-                    AuctionScrollImageView()
+                    ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
                 }
             }
-            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
-            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
         }
     }
 }
 
-struct AuctionDetailView_Previews: PreviewProvider {
+struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+        ApplyDetailView(userViewModel: UserViewModel(), applyProductViewModel: ApplyProductViewModel())
     }
 }

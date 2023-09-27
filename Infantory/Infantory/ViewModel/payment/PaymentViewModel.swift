@@ -37,7 +37,8 @@ class PaymentViewModel: ObservableObject {
     }
     
     var totalPrice: Int {
-        product.winningPrice + product.winningPrice / 10 + 3000
+        let winningPrice = product.winningPrice ?? 0
+        return winningPrice + winningPrice / 10 + 3000
     }
     
 }
@@ -52,6 +53,5 @@ let auctionProduct = AuctionProduct(
     startDate: Date(), // 현재 날짜로 설정
     endDate: Date().addingTimeInterval(7 * 24 * 60 * 60), // 현재 날짜로부터 7일 후로 설정
     minPrice: 100, // 시작가
-    maxPrice: 500, // 최고가
     winningPrice: 100000 // 낙찰가는 아직 결정되지 않았으므로 0으로 설정
 )

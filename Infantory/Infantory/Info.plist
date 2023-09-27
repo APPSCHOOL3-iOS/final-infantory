@@ -12,10 +12,18 @@
 				<string>kakao45ce2063d86a5a5c18e38528aae46993</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array/>
+		</dict>
 	</array>
+	<key>KAKAO_APP_KEY</key>
+	<string>$(KAKAO_APP_KEY)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>kakaompassauth</string>
+		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
 	</array>
 </dict>

@@ -1,13 +1,13 @@
 //
-//  AuctionDetailDescriptionView.swift
+//  ApplyDetailDescriptionView.swift
 //  Infantory
 //
-//  Created by 윤경환 on 2023/09/25.
+//  Created by 윤경환 on 2023/09/26.
 //
 
 import SwiftUI
 
-struct AuctionDetailDescriptionView: View {
+struct ApplyDetailDescriptionView: View {
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
@@ -18,7 +18,7 @@ struct AuctionDetailDescriptionView: View {
             Button(action: {
                 
             }, label: {
-                Text("경매하기")
+                Text("응모하기")
                     .font(.infanTitle)
                     .frame(width: 150, height: 20)
                     .padding()
@@ -30,8 +30,8 @@ struct AuctionDetailDescriptionView: View {
     }
 }
 
-struct AuctionDetailDescriptionView_Previews: PreviewProvider {
+struct ApplyDetailDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
+        ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
     }
 }

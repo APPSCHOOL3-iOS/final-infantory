@@ -24,13 +24,25 @@ final class LoginStore: ObservableObject {
     
     @Published var isShowingSignUp = false
     @Published var isShowingMainView = false
-    
     @Published var email: String = ""
     @Published var userName: String = ""
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
-    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(address: "", zonecode: "", addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+    @Published var currentUser: User = User(id: "",
+                                            isInfluencer: .influencer,
+                                            profileImageURLString: "",
+                                            name: "상필님",
+                                            phoneNumber: "0101010",
+                                            email: "fff@naver.com",
+                                            loginType: .apple,
+                                            address: Address(address: "",
+                                                             zonecode: "",
+                                                             addressDetail: ""),
+                                            follower: nil,
+                                            applyTicket: nil,
+                                            influencerIntroduce: nil)
     
+    // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     @Published var signUpUser: SignUpUser = SignUpUser(id: "",
                                                        name: "",
                                                        nickName: "",
@@ -41,13 +53,11 @@ final class LoginStore: ObservableObject {
                                                                         addressDetail: "5번째로 큰 파라솔")
                                                         )
     
-    // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
             UserApi.shared.accessTokenInfo { _, error in // 해당 토큰이 유효한지
                 if error != nil { // 에러가 발생했으면 토큰이 유효하지 않다.
                     self.openKakaoService(completion: { result in
-                        print("컴플리션 값: \(result)")
                         if result {
                             completion(true)
                         } else {
@@ -56,7 +66,6 @@ final class LoginStore: ObservableObject {
                     })
                 } else { // 유효한 토큰
                     self.loadingInfoDidKakaoAuth(completion: { result in
-                        print("컴플리션 값: \(result)")
                         if result {
                             completion(true)
                         } else {
@@ -67,7 +76,6 @@ final class LoginStore: ObservableObject {
             }
         } else { // 만료된 토큰
             self.openKakaoService(completion: { result in
-                print("컴플리션 값: \(result)")
                 if result {
                     completion(true)
                 } else {
@@ -88,7 +96,6 @@ final class LoginStore: ObservableObject {
                 
                 _ = oauthToken // 로그인 성공
                 self.loadingInfoDidKakaoAuth(completion: { result in
-                    print("컴플리션 값: \(result)")
                     if result {
                         completion(true)
                     } else {
@@ -104,7 +111,6 @@ final class LoginStore: ObservableObject {
                 }
                 _ = oauthToken // 로그인 성공
                 self.loadingInfoDidKakaoAuth(completion: { result in
-                    print("컴플리션 값: \(result)")
                     if result {
                         completion(true)
                     } else {
@@ -127,7 +133,6 @@ final class LoginStore: ObservableObject {
             self.password = String(password)
             guard let userName = kakaoUser?.kakaoAccount?.profile?.nickname else {
                 self.emailAuthSignIn(email: email, password: String(password), completion: { result in
-                    print("컴플리션 값: \(result)")
                     if result {
                         completion(true)
                     } else {
@@ -140,7 +145,6 @@ final class LoginStore: ObservableObject {
             // 로그인이 되는지 안되는지 확인하는 함수 -> 에러? 로그인이안된다 -> 회원가입이 안되어있다 -> 회원가입뷰로
             // 로그인이 된다 -> 메인뷰로
             self.emailAuthSignIn(email: email, password: String(password), completion: { result in
-                print("컴플리션 값: \(result)")
                 if result {
                     completion(true)
                 } else {
@@ -161,19 +165,18 @@ final class LoginStore: ObservableObject {
             if result != nil {
                 print("로그인 성공! 사용자 이메일: \(String(describing: result?.user.email))")
                 // 성공하면 메인화면
+                self.userUid = result?.user.uid ?? "uid 없음"
                 completion(true)
             }
         }
     }
     
     func emailAuthSignUp(email: String, password: String, completion: (() -> Void)?) {
-        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if error != nil {
                 print("error: 이미 등록되어있는 사용자입니다.")
             }
             if result != nil {
-                print("사용자 이메일: \(String(describing: result?.user.email))")
                 self.userUid = result?.user.uid ?? "uid 없음"
             }
             
@@ -181,9 +184,22 @@ final class LoginStore: ObservableObject {
         }
     }
     
+    func kakaoLogout() {
+        UserApi.shared.logout {(error) in
+            if let error = error {
+                print(error)
+            } else {
+                self.userUid = ""
+                self.currentUser = User(id: "", isInfluencer: UserType.influencer, name: "", phoneNumber: "", email: "", loginType: LoginType.apple, address: Address(address: "",
+                                                                                                                                                                      zonecode: "",
+                                                                                                                                                                      addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+            }
+        }
+    }
+    
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
         do {
-            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(address: "", zonecode: "", addressDetail: ""))
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(address: zipCode, zonecode: streetAddress, addressDetail: detailAddress))
             let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
             try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
             try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)
@@ -191,7 +207,7 @@ final class LoginStore: ObservableObject {
             completion?()
             
         } catch {
-            print("debug : Failed to Create User with \(error.localizedDescription)")
+            print("debug : Failed to Create User")
         }
     }
     
@@ -214,10 +230,8 @@ final class LoginStore: ObservableObject {
         let query = Firestore.firestore().collection("Users").whereField("nickName", isEqualTo: nickName)
         query.getDocuments { data, _ in
             if data!.documents.isEmpty {
-                print("데이터 중복 안 됨 가입 진행 가능")
                 completion(true)
             } else {
-                print("데이터 중복 됨 가입 진행 불가")
                 completion(false)
             }
         }
@@ -227,7 +241,6 @@ final class LoginStore: ObservableObject {
         
         let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
         let user = try userDocument.data(as: User.self)
-        print(user.email)
         try await fetchApplyTicket(getUser: user, userUID: userUID)
     }
     
