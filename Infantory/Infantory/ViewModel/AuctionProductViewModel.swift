@@ -28,10 +28,9 @@ final class AuctionProductViewModel: ObservableObject {
     func createAuctionProduct(title: String,
                               apply: String,
                               itemDescription: String,
-                              startingPrice: String,
-                              maximumPrice: String) async throws {
+                              startingPrice: String) async throws {
         do {
-            let product = makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice, maximumPrice: maximumPrice)
+            let product = makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice)
             try Firestore.firestore().collection("AuctionProducts").addDocument(from: product)
         } catch {print(String(describing: error))
             print("debug : Failed to Create User with \(error.localizedDescription)")
@@ -40,10 +39,9 @@ final class AuctionProductViewModel: ObservableObject {
     private func makeAuctionModel(title: String,
                                   apply: String,
                                   itemDescription: String,
-                                  startingPrice: String,
-                                  maximumPrice: String) -> AuctionProduct {
+                                  startingPrice: String) -> AuctionProduct {
         
-        let product = AuctionProduct(id: "user", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "IU", startDate: Date(), endDate: Date(), minPrice: 10000, maxPrice: 100000, winningPrice: 50000)
+        let product = AuctionProduct(id: "user", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "IU", startDate: Date(), endDate: Date(), minPrice: 10000, winningPrice: 50000)
         return product
     }
 }

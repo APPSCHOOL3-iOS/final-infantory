@@ -8,7 +8,7 @@
 import Foundation
 
 // 응모
-struct ApplyProduct: Productable {
+struct ApplyProduct: Productable , Identifiable, Codable {
     
     var id: String
     var productName: String
@@ -27,5 +27,5 @@ struct ApplyProduct: Productable {
     var applyUserIDs: [String]
     
     // 지불 가격
-    var winningPrice: Int
+    var winningPrice: Int?
 }

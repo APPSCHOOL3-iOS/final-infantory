@@ -8,25 +8,37 @@
 import SwiftUI
 
 struct AuctionButtonCell: View {
+    
+    @State private var selectedFilter = AuctionFilter.inProgress
+    
     var body: some View {
         HStack {
-            Button(action: {}, label: {
-                Text("진행경매")
-                    .frame(width: 95, height: 30)
-                    .foregroundColor(.infanLightGray)
-                    .background(Color.infanDarkGray)
-                    .cornerRadius(15)
-            })
-            Button(action: {}, label: {
-                Text("예정경매")
-                    .frame(width: 95, height: 30)
-                    .foregroundColor(.infanDarkGray)
-                    .background(Color.infanLightGray)
-                    .cornerRadius(15)
-            })
+            ForEach(AuctionFilter.allCases, id: \.rawValue) { filter in
+                Button {
+                    selectedFilter = filter
+                } label: {
+                    if selectedFilter == filter {
+                        Text(filter.rawValue)
+                            .padding(10)
+                            .font(.infanHeadlineBold)
+                            .foregroundColor(.white)
+                            .background(Color.infanDarkGray)
+                            .cornerRadius(20)
+                    } else {
+                        Text(filter.rawValue)
+                            .padding(10)
+                            .font(.infanBody)
+                            .foregroundColor(.infanDarkGray)
+                            .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(Color.infanLightGray, lineWidth: 1)
+                            )
+                    }
+                }
+            }
             Spacer()
         }
-        .padding(.horizontal)
+        .infanHorizontalPadding()
     }
 }
 

@@ -31,7 +31,6 @@ struct ItemIamgeView: View {
                     .cornerRadius(10)
             }
         }
-
     }
 }
 struct ItemIamgeView_Previews: PreviewProvider {
