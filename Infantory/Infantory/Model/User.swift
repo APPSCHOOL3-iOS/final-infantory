@@ -61,31 +61,8 @@ extension User {
         name: "상필 갓",
         phoneNumber: "123-456-7890",
         email: "john@example.com",
-        birthDate: "1990-01-01",
         loginType: "kakao",
-        address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                         zonecode: "123456",
-                         addressDetail: "5번째로 큰 파라솔"),
-        paymentInfos: [
-            PaymentInfo(
-                product: "Product 1",
-                address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                                 zonecode: "123456",
-                                 addressDetail: "5번째로 큰 파라솔"),
-                deliveryRequest: .door,
-                deliveryCost: 10,
-                paymentMethod: .card
-            ),
-            PaymentInfo(
-                product: "Product 2",
-                address: Address(address: "경상남도 거제시 몽돌해수욕장",
-                                 zonecode: "123456",
-                                 addressDetail: "5번째로 큰 파라솔"),
-                deliveryRequest: .securityOffice,
-                deliveryCost: 5,
-                paymentMethod: .accountTransfer
-            )
-        ],
+        address: Address(address: "경상남도 거제시", zonecode: "33333", addressDetail: "몽돌해수욕장"),
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",

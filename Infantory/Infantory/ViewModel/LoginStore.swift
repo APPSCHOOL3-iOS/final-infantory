@@ -29,17 +29,17 @@ final class LoginStore: ObservableObject {
     @Published var userName: String = ""
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
-    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(zipCode: "", streetAddress: "", detailAddress: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(address: "", zonecode: "", addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
     
     @Published var signUpUser: SignUpUser = SignUpUser(id: "",
                                                        name: "",
+                                                       nickName: "",
                                                        phoneNumber: "",
-                                                       loginType: .kakao,
+                                                       email: "",
                                                        address: Address(address: "경상남도 거제시 몽돌해수욕장",
                                                                         zonecode: "123456",
-                                                                        addressDetail: "5번째로 큰 파라솔"),
-                                                       applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)],
-                                                       password: "")
+                                                                        addressDetail: "5번째로 큰 파라솔")
+                                                        )
     
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
@@ -183,7 +183,7 @@ final class LoginStore: ObservableObject {
     
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
         do {
-            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress))
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(address: "", zonecode: "", addressDetail: ""))
             let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
             try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
             try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)
