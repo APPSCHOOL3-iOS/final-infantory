@@ -20,7 +20,7 @@ struct User: Identifiable, Codable {
     var address: Address
     
     var follower: [String]? = nil
-    var applyTicket: [ApplyTicket]? = nil 
+    var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
 }
 

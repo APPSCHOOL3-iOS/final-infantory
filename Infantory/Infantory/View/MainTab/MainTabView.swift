@@ -52,7 +52,6 @@ struct MainTabView: View {
                 .environmentObject(loginStore)
         }
         .onAppear {
-            print("onAppear !")
             Task {
                 if !loginStore.userUid.isEmpty {
                     try await loginStore.fetchUser(userUID: loginStore.userUid)
