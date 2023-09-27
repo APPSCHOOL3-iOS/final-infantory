@@ -20,7 +20,7 @@ enum PaymentAddressViewModel: Int, CaseIterable {
         }
     }
     
-    var content: String {
+    func content(viewModel: PaymentViewModel) -> String {
         switch self {
         case .prizeWinner: return User.dummyUser.name
         case .phoneNumber: return User.dummyUser.phoneNumber

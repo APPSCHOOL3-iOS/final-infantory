@@ -26,11 +26,19 @@ struct User: Identifiable, Codable {
     // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
+<<<<<<< HEAD
 // 주소
 struct Address: Codable {
     var zipCode: String // 우편번호
     var streetAddress: String // 도로명주소
     var detailAddress: String // 상세주소
+=======
+// 상세주소
+struct Address {
+    var address: String
+    var zonecode: String
+    var addressDetail: String
+>>>>>>> be94b7d (feat: 주소변경 기능 추가 kakao주소 api연결)
 }
 
 // 소셜로그인 타입
