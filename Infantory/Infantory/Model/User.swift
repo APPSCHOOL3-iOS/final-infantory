@@ -52,7 +52,7 @@ enum UserType: String, Codable {
     case influencer
 }
 
-enum PaymentMethod: String, CaseIterable {
+enum PaymentMethod: String, CaseIterable, Codable {
     case card
     case accountTransfer
     case naverPay

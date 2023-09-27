@@ -49,7 +49,6 @@ class PaymentViewModel: ObservableObject {
 //            }
 //        }
 //
-
     }
     
     var totalPrice: Int {

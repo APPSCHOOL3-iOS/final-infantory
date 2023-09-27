@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-struct PaymentInfo {
+struct PaymentInfo: Codable {
+    @DocumentID var id: String?
     var product: String //productID
     var address: Address
     var deliveryRequest: DeliveryMessages
     var deliveryCost: Int
     var paymentMethod: PaymentMethod
     
-    enum DeliveryMessages: String, CaseIterable, Identifiable {
+    enum DeliveryMessages: String, CaseIterable, Identifiable, Codable {
         case door, securityOffice, call, directMessage
         var id: Self {self}
     }
