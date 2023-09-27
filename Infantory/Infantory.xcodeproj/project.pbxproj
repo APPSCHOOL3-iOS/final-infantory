@@ -76,8 +76,9 @@
 		A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */; };
 		A0B5AFCF2AC1D4C80055E714 /* emptyfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFCE2AC1D4C80055E714 /* emptyfile.swift */; };
 		A0B5AFD12AC1D4D30055E714 /* emptyfile2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */; };
+		A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */; };
 		A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */; };
-		A0B5AFDB2AC2C3830055E714 /* InfanHorizontalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDA2AC2C3830055E714 /* InfanHorizontalPadding.swift */; };
+		A0B5AFDB2AC2C3830055E714 /* InfanHorizontalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDA2AC2C3830055E714 /* InfanHorizontalPadding.swift */; }
 		EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */; };
 		EC4D59C42ABD9CC4007FC25E /* PaymentPriceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4D59C32ABD9CC4007FC25E /* PaymentPriceViewModel.swift */; };
 		EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B11682ABAC984001303D1 /* LoginSheetView.swift */; };
@@ -144,6 +145,8 @@
 		A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMainView.swift; sourceTree = "<group>"; };
 		A0B5AFCE2AC1D4C80055E714 /* emptyfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyfile.swift; sourceTree = "<group>"; };
 		A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyfile2.swift; sourceTree = "<group>"; };
+		A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appkey.swift; sourceTree = "<group>"; };
 		A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionFilter.swift; sourceTree = "<group>"; };
 		A0B5AFDA2AC2C3830055E714 /* InfanHorizontalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanHorizontalPadding.swift; sourceTree = "<group>"; };
 		EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceView.swift; sourceTree = "<group>"; };
@@ -456,6 +459,8 @@
 				A091E5632AB9FB65000894FC /* InfantoryApp.swift */,
 				A091E5672AB9FB68000894FC /* Assets.xcassets */,
 				A091E5A42ABC1E9B000894FC /* Colors.xcassets */,
+				A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */,
+				A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -588,6 +593,7 @@
 				A086C7A12ABD205F00F0BF9B /* InfanNavigationBar.swift in Sources */,
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				A0B5AFCF2AC1D4C80055E714 /* emptyfile.swift in Sources */,
+				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
@@ -639,6 +645,7 @@
 /* Begin XCBuildConfiguration section */
 		A091E56C2AB9FB68000894FC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -699,6 +706,7 @@
 		};
 		A091E56D2AB9FB68000894FC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -753,6 +761,7 @@
 		};
 		A091E56F2AB9FB68000894FC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -784,6 +793,7 @@
 		};
 		A091E5702AB9FB68000894FC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
