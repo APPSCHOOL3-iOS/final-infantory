@@ -27,8 +27,8 @@ struct MyMainView: View {
                     Text("로그아웃")
                 })
             }
-
             Text(loginStore.currentUser.email)
+            Text(loginStore.currentUser.address.address)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()

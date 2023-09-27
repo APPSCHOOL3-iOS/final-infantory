@@ -65,7 +65,7 @@ extension User {
                          zonecode: "몽돌",
                          addressDetail: "해수욕장"),
         birthDate: "1990-01-01",
-        loginType: .kakao,
+        loginType: .kakao ,
         address: Address(address: "경상남도 거제시 몽돌해수욕장",
                          zonecode: "123456",
                          addressDetail: "5번째로 큰 파라솔"),
