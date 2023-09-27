@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LoginMainView: View {
     
-    @StateObject private var loginStore = LoginStore()
+    @EnvironmentObject var loginStore: LoginStore
     @State private var isShowingLoginSheet: Bool = false
     
     var body: some View {

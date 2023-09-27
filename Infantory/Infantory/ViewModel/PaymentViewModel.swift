@@ -25,30 +25,30 @@ class PaymentViewModel: ObservableObject {
             deliveryCost: 3000,
             paymentMethod: PaymentMethod.accountTransfer)
     }
-    
-    func uploadPaymentInfo() {
-        user.paymentInfos.append(paymentInfo)
-        let paymentInfosData: [[String: Any]] = user.paymentInfos.map { paymentInfo in
-            return [
-                "product": paymentInfo.product,
-                "address": [
-                    "fullAddress": paymentInfo.address.address
-                ],
-                "deliveryRequest": paymentInfo.deliveryRequest.rawValue,
-                "deliveryCost": paymentInfo.deliveryCost,
-                "paymentMethod": paymentInfo.paymentMethod.rawValue
-            ]
-        }
-        
-        // Firestore에 데이터 저장
-        database.collection("users").document(user.id).setData(["paymentInfos": paymentInfosData]) { error in
-            if let error = error {
-                print("Error saving paymentInfos to Firestore: \(error.localizedDescription)")
-            } else {
-                print("PaymentInfos saved to Firestore successfully!")
-            }
-        }
-        
+ 
+    func uploadPaymentInfo() { // 이거 일단 주석처리 함
+//        user.paymentInfos.append(paymentInfo)
+//        let paymentInfosData: [[String: Any]] = user.paymentInfos.map { paymentInfo in
+//            return [
+//                "product": paymentInfo.product,
+//                "address": [
+//                    "fullAddress": paymentInfo.address.fullAddress
+//                ],
+//                "deliveryRequest": paymentInfo.deliveryRequest,
+//                "deliveryCost": paymentInfo.deliveryCost,
+//                "paymentMethod": paymentInfo.paymentMethod.rawValue
+//            ]
+//        }
+//
+//        // Firestore에 데이터 저장
+//        database.collection("users").document(user.id).setData(["paymentInfos": paymentInfosData]) { error in
+//            if let error = error {
+//                print("Error saving paymentInfos to Firestore: \(error.localizedDescription)")
+//            } else {
+//                print("PaymentInfos saved to Firestore successfully!")
+//            }
+//        }
+//
     }
     
     var totalPrice: Int {
