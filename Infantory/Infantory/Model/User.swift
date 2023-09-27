@@ -25,12 +25,11 @@ struct User: Identifiable, Codable {
     // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
-// 상세주소
+// 주소
 struct Address: Codable {
     var address: String
     var zonecode: String
     var addressDetail: String
-
 }
 
 // 소셜로그인 타입
@@ -67,18 +66,24 @@ extension User {
                          addressDetail: "해수욕장"),
         birthDate: "1990-01-01",
         loginType: .kakao,
-        address: Address(fullAddress: "경상남도 거제시 몽돌해수욕장"),
+        address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                         zonecode: "123456",
+                         addressDetail: "5번째로 큰 파라솔"),
         paymentInfos: [
             PaymentInfo(
                 product: "Product 1",
-                address: Address(fullAddress: "123 Main Street, City"),
+                address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                 zonecode: "123456",
+                                 addressDetail: "5번째로 큰 파라솔"),
                 deliveryRequest: .door,
                 deliveryCost: 10,
                 paymentMethod: .card
             ),
             PaymentInfo(
                 product: "Product 2",
-                address: Address(fullAddress: "123 Main Street, City"),
+                address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                 zonecode: "123456",
+                                 addressDetail: "5번째로 큰 파라솔"),
                 deliveryRequest: .securityOffice,
                 deliveryCost: 5,
                 paymentMethod: .accountTransfer
