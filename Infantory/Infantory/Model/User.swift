@@ -28,9 +28,9 @@ struct User: Identifiable, Codable {
 
 // 주소
 struct Address: Codable {
-    var zipCode: String // 우편번호
-    var streetAddress: String // 도로명주소
-    var detailAddress: String // 상세주소
+    var address: String
+    var zonecode: String
+    var addressDetail: String
 }
 
 // 소셜로그인 타입
@@ -61,8 +61,31 @@ extension User {
         name: "상필 갓",
         phoneNumber: "123-456-7890",
         email: "john@example.com",
+        birthDate: "1990-01-01",
         loginType: "kakao",
-        address: Address(zipCode: "33333", streetAddress: "경상남도 거제시", detailAddress: "몽돌해수욕장"),
+        address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                         zonecode: "123456",
+                         addressDetail: "5번째로 큰 파라솔"),
+        paymentInfos: [
+            PaymentInfo(
+                product: "Product 1",
+                address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                 zonecode: "123456",
+                                 addressDetail: "5번째로 큰 파라솔"),
+                deliveryRequest: .door,
+                deliveryCost: 10,
+                paymentMethod: .card
+            ),
+            PaymentInfo(
+                product: "Product 2",
+                address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                 zonecode: "123456",
+                                 addressDetail: "5번째로 큰 파라솔"),
+                deliveryRequest: .securityOffice,
+                deliveryCost: 5,
+                paymentMethod: .accountTransfer
+            )
+        ],
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",

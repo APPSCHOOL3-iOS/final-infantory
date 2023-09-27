@@ -25,12 +25,6 @@ struct PaymentView: View {
                         payButton
                     }
                 }
-                
-            }
-            Button {
-                viewmodel.uploadPaymentInfo()
-            } label: {
-                Text("dsf")
             }
         }
         .infanNavigationBar(title: "배송 / 결재")
@@ -50,7 +44,7 @@ extension PaymentView {
     
     var payButton: some View {
         NavigationLink {
-            ReceiptView(viewModel: viewmodel)
+            PaymentReceiptView(viewModel: viewmodel)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
@@ -63,9 +57,5 @@ extension PaymentView {
             }
         }
         .padding()
-    }
-    
-    func payAction() {
-        
     }
 }

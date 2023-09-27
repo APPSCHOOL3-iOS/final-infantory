@@ -21,11 +21,11 @@ class PaymentViewModel: ObservableObject {
         paymentInfo = PaymentInfo(
             product: product.id,
             address: user.address,
-            deliveryRequest: "",
+            deliveryRequest: .door,
             deliveryCost: 3000,
             paymentMethod: PaymentMethod.accountTransfer)
     }
-    
+ 
     func uploadPaymentInfo() { // 이거 일단 주석처리 함
 //        user.paymentInfos.append(paymentInfo)
 //        let paymentInfosData: [[String: Any]] = user.paymentInfos.map { paymentInfo in

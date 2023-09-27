@@ -31,6 +31,16 @@ final class LoginStore: ObservableObject {
     @Published var loginType: LoginType = .kakao
     @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(zipCode: "", streetAddress: "", detailAddress: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
     
+    @Published var signUpUser: SignUpUser = SignUpUser(id: "",
+                                                       name: "",
+                                                       phoneNumber: "",
+                                                       loginType: .kakao,
+                                                       address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                                                        zonecode: "123456",
+                                                                        addressDetail: "5번째로 큰 파라솔"),
+                                                       applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)],
+                                                       password: "")
+    
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
