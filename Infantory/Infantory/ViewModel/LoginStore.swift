@@ -22,7 +22,15 @@ final class LoginStore: ObservableObject {
     @Published var userName: String = ""
     @Published var password: String = ""
     
-    @Published var signUpUser: SignUpUser = SignUpUser(id: "", name: "", phoneNumber: "", loginType: .kakao, address: Address(fullAddress: ""), applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)], password: "")
+    @Published var signUpUser: SignUpUser = SignUpUser(id: "",
+                                                       name: "",
+                                                       phoneNumber: "",
+                                                       loginType: .kakao,
+                                                       address: Address(address: "경상남도 거제시 몽돌해수욕장",
+                                                                        zonecode: "123456",
+                                                                        addressDetail: "5번째로 큰 파라솔"),
+                                                       applyTicket: [ApplyTicket(userId: "", date: Date(), ticketGetAndUse: "회원가입", count: 5)],
+                                                       password: "")
     
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지

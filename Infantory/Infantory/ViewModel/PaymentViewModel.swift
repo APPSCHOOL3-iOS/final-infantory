@@ -32,7 +32,7 @@ class PaymentViewModel: ObservableObject {
             return [
                 "product": paymentInfo.product,
                 "address": [
-                    "fullAddress": paymentInfo.address.fullAddress
+                    "fullAddress": paymentInfo.address.address
                 ],
                 "deliveryRequest": paymentInfo.deliveryRequest.rawValue,
                 "deliveryCost": paymentInfo.deliveryCost,

@@ -77,8 +77,9 @@ extension PaymentAddressView {
                 
                 Spacer()
                 
-                Button {
-                    // 주소 변경
+                NavigationLink {
+                    PaymentAddressWebView(viewModel: viewModel)
+                        .navigationBarBackButtonHidden(true)
                 } label: {
                     Text("주소 변경")
                         .font(.footnote)
@@ -95,7 +96,7 @@ extension PaymentAddressView {
                 HStack {
                     Text(item.title)
                         .frame(width: 50, alignment: .leading)
-                    Text(item.content)
+                    Text(item.content(viewModel: viewModel))
                 }
             }
             
