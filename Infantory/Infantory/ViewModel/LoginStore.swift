@@ -28,7 +28,19 @@ final class LoginStore: ObservableObject {
     @Published var userName: String = ""
     @Published var password: String = ""
     @Published var loginType: LoginType = .kakao
-    @Published var currentUser: User = User(id: "", isInfluencer: "", name: "", phoneNumber: "", email: "", loginType: "", address: Address(address: "", zonecode: "", addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+    @Published var currentUser: User = User(id: "",
+                                            isInfluencer: .influencer,
+                                            profileImageURLString: "",
+                                            name: "상필님",
+                                            phoneNumber: "0101010",
+                                            email: "fff@naver.com",
+                                            loginType: .apple,
+                                            address: Address(address: "",
+                                                             zonecode: "",
+                                                             addressDetail: ""),
+                                            follower: nil,
+                                            applyTicket: nil,
+                                            influencerIntroduce: nil)
     
     // 카카오 로그인 메인 함수: 토큰값 있는지 확인
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
@@ -168,14 +180,16 @@ final class LoginStore: ObservableObject {
                 print(error)
             } else {
                 self.userUid = ""
-                self.currentUser = User(id: "", isInfluencer: UserType.influencer, name: "", phoneNumber: "", email: "", loginType: LoginType.apple, address: Address(zipCode: "", streetAddress: "", detailAddress: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+                self.currentUser = User(id: "", isInfluencer: UserType.influencer, name: "", phoneNumber: "", email: "", loginType: LoginType.apple, address: Address(address: "",
+                                                                                                                                                                      zonecode: "",
+                                                                                                                                                                      addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
             }
         }
     }
     
     func signUpToFireStore(name: String, nickName: String, phoneNumber: String, zipCode: String, streetAddress: String, detailAddress: String, completion: (() -> Void)?) {
         do {
-            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(zipCode: zipCode, streetAddress: streetAddress, detailAddress: detailAddress))
+            let signUpUser = SignUpUser(name: name, nickName: nickName, phoneNumber: phoneNumber, email: self.email, loginType: self.loginType.rawValue, address: Address(address: zipCode, zonecode: streetAddress, addressDetail: detailAddress))
             let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "회원가입", count: 5)
             try Firestore.firestore().collection("Users").document(userUid).setData(from: signUpUser)
             try Firestore.firestore().collection("Users").document(userUid).collection("ApplyTickets").addDocument(from: applyTicket)

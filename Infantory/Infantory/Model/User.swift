@@ -26,13 +26,12 @@ struct User: Identifiable, Codable {
 }
 
 // 상세주소
-struct Address {
+struct Address: Codable {
     var address: String
     var zonecode: String
     var addressDetail: String
 
 }
-
 
 // 소셜로그인 타입
 enum LoginType: String, Codable {
@@ -63,7 +62,9 @@ extension User {
         phoneNumber: "123-456-7890",
         email: "john@example.com",
         loginType: LoginType.kakao,
-        address: Address(zipCode: "33333", streetAddress: "경상남도 거제시", detailAddress: "몽돌해수욕장"),
+        address: Address(address: "상필님네",
+                         zonecode: "몽돌",
+                         addressDetail: "해수욕장"),
         applyTicket: [
             ApplyTicket(
                 id: "ticket1",
