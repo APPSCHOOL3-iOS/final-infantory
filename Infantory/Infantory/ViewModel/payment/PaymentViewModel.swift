@@ -19,6 +19,7 @@ class PaymentViewModel: ObservableObject {
     
     init(user: User, product: Productable) {
         paymentInfo = PaymentInfo(
+            userId: user.id ?? "",
             product: product.id,
             address: user.address,
             deliveryRequest: .door,
@@ -28,19 +29,27 @@ class PaymentViewModel: ObservableObject {
     
     func uploadPaymentInfo() {
         let paymentInfoRef = database.collection("paymentInfos")
-        
+        let paymentInfoId = UUID().uuidString
         do {
-            try paymentInfoRef.addDocument(from: paymentInfo)
+            try paymentInfoRef.document(paymentInfoId).setData(from: paymentInfo) { error in
+                // 유저에 업데이트된 결제정보 저장
+                if error == nil {
+                    self.database.collection("users").document(self.user.id ?? "")
+                        .updateData([
+                            "paymentInfos": FieldValue.arrayUnion([paymentInfoId])
+                        ]) { updateError in
+                            if let updateError = updateError {
+                                print("DEBUG: Error updating: \(updateError)")
+                            } else {
+                                print("DEBUG: successfully updated!")
+                            }
+                        }
+                }
+            }
         } catch let error {
-            print("Error adding payment info: \(error)")
+            print("DEBUG: Error adding paymentInfo: \(error)")
         }
         
-        //유저에 paymentInfo Id 저장하기.
-    }
-    
-    var totalPrice: Int {
-        let winningPrice = product.winningPrice ?? 0
-        return winningPrice + winningPrice / 10 + 3000
     }
     
 }
