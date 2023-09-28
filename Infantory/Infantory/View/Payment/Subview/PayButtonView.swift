@@ -40,7 +40,8 @@ struct PayButtonView: View {
 struct PayButtonView_Previews: PreviewProvider {
     static var previews: some View {
         PayButtonView(
-            viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct),
+            viewModel: PaymentViewModel(user: User.dummyUser,
+                                        product: AuctionProduct.dummyProduct),
             payName: PaymentMethod.naverPay
         )
     }

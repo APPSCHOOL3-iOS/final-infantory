@@ -22,7 +22,8 @@ struct PaymentAddressWebView: View {
 
 struct PaymentAddressWebView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentAddressWebView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+        PaymentAddressWebView(viewModel: PaymentViewModel(user: User.dummyUser,
+                                                          product: AuctionProduct.dummyProduct))
     }
 }
 
