@@ -11,7 +11,7 @@ import Firebase
 class PaymentViewModel: ObservableObject {
     //받아오고
     @Published var user: User = User.dummyUser
-    @Published var product: Productable = auctionProduct
+    @Published var product: Productable = AuctionProduct.dummyProduct
     //업로드
     @Published var paymentInfo: PaymentInfo
     
@@ -19,6 +19,7 @@ class PaymentViewModel: ObservableObject {
     
     init(user: User, product: Productable) {
         paymentInfo = PaymentInfo(
+            userId: user.id ?? "",
             product: product.id,
             address: user.address,
             deliveryRequest: .door,
@@ -28,30 +29,27 @@ class PaymentViewModel: ObservableObject {
     
     func uploadPaymentInfo() {
         let paymentInfoRef = database.collection("paymentInfos")
-        
+        let paymentInfoId = UUID().uuidString
         do {
-            try paymentInfoRef.addDocument(from: paymentInfo)
+            try paymentInfoRef.document(paymentInfoId).setData(from: paymentInfo) { error in
+                // 유저에 업데이트된 결제정보 저장
+                if error == nil {
+                    self.database.collection("users").document(self.user.id ?? "")
+                        .updateData([
+                            "paymentInfos": FieldValue.arrayUnion([paymentInfoId])
+                        ]) { updateError in
+                            if let updateError = updateError {
+                                print("DEBUG: Error updating: \(updateError)")
+                            } else {
+                                print("DEBUG: successfully updated!")
+                            }
+                        }
+                }
+            }
         } catch let error {
-            print("Error adding payment info: \(error)")
+            print("DEBUG: Error adding paymentInfo: \(error)")
         }
-    }
-    
-    var totalPrice: Int {
-        let winningPrice = product.winningPrice ?? 0
-        return winningPrice + winningPrice / 10 + 3000
+        
     }
     
 }
-
-let auctionProduct = AuctionProduct(
-    id: "1",
-    productName: "Example Product",
-    productImageURLStrings: ["https://dimg.donga.com/wps/NEWS/IMAGE/2021/12/11/110733453.1.jpg"],
-    description: "This is an example product for auction.",
-    influencerID: "상필갓",
-    winningUserID: nil, // 낙찰자가 아직 없는 경우 nil로 설정
-    startDate: Date(), // 현재 날짜로 설정
-    endDate: Date().addingTimeInterval(7 * 24 * 60 * 60), // 현재 날짜로부터 7일 후로 설정
-    minPrice: 100, // 시작가
-    winningPrice: 100000 // 낙찰가는 아직 결정되지 않았으므로 0으로 설정
-)

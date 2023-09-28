@@ -9,8 +9,6 @@ import Foundation
 
 // 응모
 struct ApplyProduct: Productable, Identifiable, Codable {
-
-    
     var id: String
     var productName: String
     var productImageURLStrings: [String]

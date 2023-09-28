@@ -9,7 +9,8 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct PaymentInfo: Codable {
-    @DocumentID var id: String?
+    var id: UUID?
+    var userId: String
     var product: String //productID
     var address: Address
     var deliveryRequest: DeliveryMessages

@@ -109,7 +109,7 @@ struct ProductListView: View {
                 catch {
                     
                 }
-        }
+            }
         }
     }
 }

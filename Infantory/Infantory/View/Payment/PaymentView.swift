@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @ObservedObject var viewmodel = PaymentViewModel(user: User.dummyUser, product: auctionProduct)
+    @ObservedObject var viewmodel = PaymentViewModel(user: User.dummyUser, product: AuctionProduct.dummyProduct)
     
     var body: some View {
         VStack {
