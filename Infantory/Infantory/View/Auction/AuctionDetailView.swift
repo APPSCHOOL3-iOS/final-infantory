@@ -12,7 +12,7 @@ struct AuctionDetailView: View {
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
-        VStack {
+        ScrollView(showsIndicators: false) {
             HStack {
                 Image(systemName: "person.circle.fill")
                     .resizable()
@@ -34,23 +34,77 @@ struct AuctionDetailView: View {
             Divider()
                 .padding([.horizontal, .top])
             
-            Section {
-                HStack {
-                    Text("이런 상품들은 어때요?")
-                    Spacer()
+            Text("상품명")
+            
+            AuctionBuyerView()
+            
+            LazyVStack(pinnedViews: [.sectionFooters], content: {
+                Section(footer: Footer()) {
+
+                    ItemIamgeView()
+                        .padding()
+                    
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(lineWidth: 1)
+                        .frame(width: CGFloat.screenWidth, height: 300)
+                        .padding()
                 }
-                VStack {
-                    AuctionScrollImageView()
-                }
-            }
-            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
-            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
+            })
+//            Section {
+//                HStack {
+//                    Text("이런 상품들은 어때요?")
+//                    Spacer()
+//                }
+//                VStack {
+//                    AuctionScrollImageView()
+//                }
+//            }
+//            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
+//            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
         }
+    }
+}
+
+//MARK: - 경매하기 버튼 Footer
+struct Footer: View {
+    var body: some View {
+        VStack {
+            Button {
+                // 입찰하기 버튼
+            } label: {
+                Text("입찰 : 10000원")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.infanMain)
+                            .frame(width: CGFloat.screenWidth - 20,height: 55)
+                    )
+            }
+            .padding()
+            
+            .offset(y: -20)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 110)
+        .background(
+            Rectangle()
+                .stroke(lineWidth: 0.1)
+                .background(.white)
+            
+        )
+        .offset(x: 0, y: 40)
+        Rectangle()
+            .frame(height: 40)
+            .foregroundColor(.white)
     }
 }
 
 struct AuctionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+        NavigationStack {
+            AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+        }
     }
 }
