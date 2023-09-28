@@ -18,7 +18,6 @@ struct ApplyRegistrationView: View {
     @State private var alertMessage = ""
     @State private var isShowAlert: Bool = false
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
@@ -114,4 +113,3 @@ struct ApplyRegistrationView_Previews: PreviewProvider {
         ApplyRegistrationView()
     }
 }
-

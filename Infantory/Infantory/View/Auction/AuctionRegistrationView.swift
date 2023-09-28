@@ -18,7 +18,6 @@ struct AuctionRegistrationView: View {
     @State private var alertMessage = ""
     @State private var isShowAlert: Bool = false
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
@@ -89,7 +88,7 @@ struct AuctionRegistrationView: View {
                                 alertMessage = "시작가를 입력해주세요."
                             } else {
                                 Task {
-                                    try await registViewModel.createAuctionProduct(title:title, apply:apply, itemDescription:itemDescription, startingPrice:startingPrice)
+                                    try await registViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice)
                                 }
                             }
                             //                            dismiss()
@@ -101,7 +100,7 @@ struct AuctionRegistrationView: View {
                     }
                 }
                 .padding([.leading, .trailing], 20)
-                .alert(isPresented:$showAlert) {
+                .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }

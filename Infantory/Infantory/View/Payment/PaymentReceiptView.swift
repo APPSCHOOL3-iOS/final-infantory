@@ -63,7 +63,7 @@ struct ReceiptView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             PaymentReceiptView(viewModel: PaymentViewModel(user: User.dummyUser,
-                                                           product:AuctionProduct.dummyProduct))
+                                                           product: AuctionProduct.dummyProduct))
         }
     }
 }

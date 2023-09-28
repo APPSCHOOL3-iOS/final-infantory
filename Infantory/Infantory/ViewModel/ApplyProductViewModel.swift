@@ -46,6 +46,3 @@ final class ApplyProductViewModel: ObservableObject {
         return product
     }
 }
-
-
-
