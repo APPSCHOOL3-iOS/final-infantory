@@ -1,13 +1,13 @@
 //
-//  AuctionItemImge.swift
+//  ApplyItemImage.swift
 //  Infantory
 //
-//  Created by 변상필 on 10/3/23.
+//  Created by 안지영 on 2023/10/04.
 //
 
 import SwiftUI
 
-struct AuctionItemImage: View {
+struct ApplyItemImageView: View {
     var body: some View {
         TabView {
             ForEach(0..<5) { _ in
@@ -21,12 +21,8 @@ struct AuctionItemImage: View {
     }
 }
 
-struct AuctionItemImage_Previews: PreviewProvider {
+struct ApplyItemImage_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionItemImage()
+        ApplyItemImageView()
     }
 }
-
-//#Preview {
-//    AuctionItemImage()
-//}

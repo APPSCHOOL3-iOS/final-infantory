@@ -11,7 +11,7 @@ struct LoginSheetView: View {
     
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
-    @State private var isShowingSignUp = false
+    @Binding var isShowingSignUp: Bool
     
     var body: some View {
         NavigationStack {
@@ -96,7 +96,7 @@ struct LoginSheetView: View {
 
 struct LoginSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginSheetView()
+        LoginSheetView(isShowingSignUp: .constant(false))
             .environmentObject(LoginStore())
     }
 }

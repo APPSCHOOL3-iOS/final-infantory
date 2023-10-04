@@ -15,18 +15,15 @@ struct AuctionDetailView: View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-                
-                
+                         
                 Divider()
                 
                 AuctionBuyerView()
-                
-                
+                           
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
-                
-                
+                       
                 HStack {
                     Text("멋쟁이 신발")
                         .font(.infanTitle2)
@@ -89,9 +86,6 @@ struct Footer: View {
             AuctionBidSheetView()
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
-            
-            
-            
         })
     }
 }

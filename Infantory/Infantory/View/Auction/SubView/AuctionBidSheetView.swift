@@ -97,6 +97,12 @@ extension AuctionBidSheetView {
     }
 }
 
-#Preview {
-    AuctionBidSheetView()
+struct AuctionBidSheetView_Previews: PreviewProvider {
+    static var previews: some View {
+        AuctionBidSheetView()
+    }
 }
+
+//#Preview {
+//    AuctionBidSheetView()
+//}

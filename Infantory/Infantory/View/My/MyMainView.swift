@@ -31,7 +31,7 @@ struct MyMainView: View {
             Text(loginStore.currentUser.address.address)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
-            LoginSheetView()
+            LoginSheetView(isShowingSignUp: $isShowingLoginSheet)
                 .environmentObject(loginStore)
         })
     }

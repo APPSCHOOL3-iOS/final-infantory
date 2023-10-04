@@ -45,6 +45,10 @@
 		64E105C62ABD4C2700BFD3DF /* PaymentAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */; };
 		64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C72ABD575A00BFD3DF /* Productable.swift */; };
 		844BB4E92ACBE8A3004891DD /* LoginAddressWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */; };
+		844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4EA2ACD2CCC004891DD /* ApplySheetView.swift */; };
+		844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */; };
+		844BB4EF2ACD470B004891DD /* ApplyItemImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4EE2ACD470B004891DD /* ApplyItemImageView.swift */; };
+		844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F02ACD4E8B004891DD /* ApplyMyTicketView.swift */; };
 		8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */; };
 		849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 849B64AF2ABD595B00C4AC8D /* KakaoSDK */; };
 		849B64B22ABD5ABC00C4AC8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */; };
@@ -132,10 +136,13 @@
 		64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardAddView.swift; sourceTree = "<group>"; };
 		64A6826E2AC2C55E007BF628 /* PaymentAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressWebView.swift; sourceTree = "<group>"; };
 		64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentReceiptView.swift; sourceTree = "<group>"; };
-		64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressViewModel.swift; sourceTree = "<group>"; };
 		64E105C72ABD575A00BFD3DF /* Productable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productable.swift; sourceTree = "<group>"; };
 		844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAddressWebView.swift; sourceTree = "<group>"; };
+		844BB4EA2ACD2CCC004891DD /* ApplySheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplySheetView.swift; sourceTree = "<group>"; };
+		844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyBuyerView.swift; sourceTree = "<group>"; };
+		844BB4EE2ACD470B004891DD /* ApplyItemImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyItemImageView.swift; sourceTree = "<group>"; };
+		844BB4F02ACD4E8B004891DD /* ApplyMyTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMyTicketView.swift; sourceTree = "<group>"; };
 		8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -206,6 +213,10 @@
 			children = (
 				0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */,
 				0C82A3332AC29625009F6D97 /* ApplyDetailDescriptionView.swift */,
+				844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */,
+				844BB4F02ACD4E8B004891DD /* ApplyMyTicketView.swift */,
+				844BB4EE2ACD470B004891DD /* ApplyItemImageView.swift */,
+				844BB4EA2ACD2CCC004891DD /* ApplySheetView.swift */,
 				0C82A3352AC29640009F6D97 /* ApplyDetailImageView.swift */,
 				0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */,
 				0C82A3372AC29A0B009F6D97 /* ApplyLogoCell.swift */,
@@ -373,7 +384,6 @@
 				A091E5902ABAA61C000894FC /* LoginMainView.swift */,
 				84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */,
 				844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */,
-				EC7B11682ABAC984001303D1 /* LoginSheetView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -474,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */,
+				EC7B11682ABAC984001303D1 /* LoginSheetView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -642,6 +653,7 @@
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */,
 				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
+				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
@@ -667,11 +679,13 @@
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
+				844BB4EF2ACD470B004891DD /* ApplyItemImageView.swift in Sources */,
 				0C82A3362AC29640009F6D97 /* ApplyDetailImageView.swift in Sources */,
 				64E105C62ABD4C2700BFD3DF /* PaymentAddressViewModel.swift in Sources */,
 				9E37657E2AC294520026CA6F /* DeliveryMessageView.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
 				A0B5AFE32AC3FE130055E714 /* PaymentViewModel.swift in Sources */,
+				844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
 				112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */,
@@ -689,6 +703,7 @@
 				0C82A33A2AC29AAE009F6D97 /* ApplyScrollImageCell.swift in Sources */,
 				0CD2F7012ABD4EE100FCF88E /* ProductListView.swift in Sources */,
 				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
+				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
 				A0B5AFE22AC3FE130055E714 /* PaymentAddressViewModel.swift in Sources */,
 				A091E58F2ABAA616000894FC /* Empty6.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,

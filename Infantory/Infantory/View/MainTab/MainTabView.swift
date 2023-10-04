@@ -37,6 +37,7 @@ struct MainTabView: View {
                     Text("응모")
                 }
                 .tag(2)
+                .environmentObject(loginStore)
             
         ApplyImagePickerView(selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
                 .tabItem {
