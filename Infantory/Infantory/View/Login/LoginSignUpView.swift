@@ -42,12 +42,13 @@ struct LoginSignUpView: View {
                             showToastMessage = true
                             toastMessageText = "토스트메세지 입니다."
                             loginStore.duplicateNickName(nickName: nickName) { result in
-                                if result {
-                                    print("가입가능")
+                                if nickName == "" {
+                                    isCheckedNickName = false
+                                    checkNickNameResult = "닉네임을 입력해주세요."
+                                } else if result {
                                     isCheckedNickName = true
                                     checkNickNameResult = "사용 가능한 닉네임입니다."
                                 } else {
-                                    print("가입불가")
                                     isCheckedNickName = false
                                     checkNickNameResult = "중복된 닉네임입니다."
                                 }
@@ -77,15 +78,30 @@ struct LoginSignUpView: View {
                     .padding(.bottom)
                 
                 VStack(alignment: .leading) {
-                    Text("우편 번호") // 우편번호 검색 버튼 만들 예정
-                    TextField("우편 번호를 검색하세요", text: $zipCode)
-                        .overlay(UnderLineOverlay())
-                        .padding(.bottom)
+                        Text("우편 번호") // 우편번호 검색 버튼 만들 예정
+                    HStack {
+                        TextField("우편 번호를 검색하세요", text: $zipCode)
+                            .overlay(UnderLineOverlay())
+                            .padding(.bottom)
+                            .disabled(true)
+                        
+                        NavigationLink {
+                            LoginAddressWebView(zipCode: $zipCode, address: $address)
+                                .navigationBarBackButtonHidden(true)
+                        } label: {
+                            Text("우편번호")
+                                .padding(5)
+                                .foregroundColor(.white)
+                                .background(Color.infanMain.opacity(0.8))
+                                .cornerRadius(5)
+                        }
+                    }
                     
                     Text("주소")
                     TextField("우편 번호 검색 후, 자동입력 됩니다.", text: $address)
                         .overlay(UnderLineOverlay())
                         .padding(.bottom)
+                        .disabled(true)
                     
                     Text("상세주소")
                     TextField("건물, 아파트, 동/호수 입력", text: $detailAddress)
