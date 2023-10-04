@@ -15,42 +15,33 @@ struct AuctionDetailView: View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-                HStack {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 35)
-                    Text("\(userViewModel.user.name)")
-                    Spacer()
-                    
-                }
-                .infanHorizontalPadding()
+                
                 
                 Divider()
                 
-                HStack {
-                    // 남은 시간
-                    Text("03:22:15")
-                        .infanHorizontalPadding()
-                        .padding(.top)
-                    Spacer()
-                }
-                   
                 AuctionBuyerView()
-                HStack {
-                    Text("멋쟁이 신발")
-                        .font(.infanTitle2)
-                    Spacer()
-                }
-                .infanHorizontalPadding()
+                
                 
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
                 
+                
+                HStack {
+                    Text("멋쟁이 신발")
+                        .font(.infanTitle2)
+                    Spacer()
+                    // 남은 시간
+                    Label("03:22:15", systemImage: "timer")
+                        .foregroundColor(.infanMain)
+                        .font(.infanFootnote)
+                }
+                .padding(.top)
+                .infanHorizontalPadding()
+                
                 // 제품 설명
                 Text("제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl")
-//                    .lineLimit(3)
+                //                    .lineLimit(3)
                     .infanHorizontalPadding()
                     .padding(.top)
                     .padding(.bottom, 100)
@@ -98,9 +89,9 @@ struct Footer: View {
             AuctionBidSheetView()
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
-                
-                
-                
+            
+            
+            
         })
     }
 }

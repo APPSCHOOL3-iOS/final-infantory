@@ -25,9 +25,11 @@ struct AuctionBidSheetView: View {
             HStack {
                 Text("11000 원")
                 Text("•")
-                Text("03:22:15")
+                Label("03:22:15", systemImage: "timer")
+
             }
-            .foregroundColor(.gray)
+            .foregroundColor(.infanMain)
+            .font(.infanFootnote)
             .padding(.bottom)
             
             ForEach(1..<4) { index in
