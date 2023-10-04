@@ -42,6 +42,8 @@ struct AuctionBuyerView: View {
     }
 }
 
-#Preview {
-    AuctionBuyerView()
+struct AuctionBuyerView_Previews: PreviewProvider {
+    static var previews: some View {
+        AuctionBuyerView()
+    }
 }
