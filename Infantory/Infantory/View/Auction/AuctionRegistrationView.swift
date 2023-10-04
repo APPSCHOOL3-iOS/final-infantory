@@ -17,6 +17,10 @@ struct AuctionRegistrationView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isShowAlert: Bool = false
+    @State private var auctionProductSelectedImages: [UIImage] = []
+    @State private var auctionProductSelectedImageNames: [String] = []
+    @State private var auctionCustumeSelectedImages: [UIImage] = []
+    @State private var auctionCustumeSelectedImageNames: [String] = []
     
     var body: some View {
         ScrollView {
@@ -37,7 +41,7 @@ struct AuctionRegistrationView: View {
                     Text("상품 사진")
                         .font(.system(size: 17))
                         .bold()
-                    ItemIamgeView()
+                    ApplyImagePickerView(selectedImages: $auctionProductSelectedImages, selectedImageNames: $auctionProductSelectedImageNames)
                 }
                 .padding(.leading)
                 
@@ -45,7 +49,7 @@ struct AuctionRegistrationView: View {
                     Text("착장 사진")
                         .font(.system(size: 17))
                         .bold()
-                    InfluencerImageCell()
+                    ApplyImagePickerView(selectedImages: $auctionCustumeSelectedImages, selectedImageNames: $auctionCustumeSelectedImageNames)
                 }
                 .padding(.leading)
                 
@@ -91,7 +95,6 @@ struct AuctionRegistrationView: View {
                                     try await registViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice)
                                 }
                             }
-                            //                            dismiss()
                         } label: {
                             Text("작성 완료")
                                 .frame(width: 360, height: 40)
