@@ -27,7 +27,7 @@ struct ItemIamgeView: View {
                 Image("Shose1")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-//                    .frame(width: 150, height: 200)
+                    .frame(width: 150, height: 200)
                     .cornerRadius(10)
             }
         }

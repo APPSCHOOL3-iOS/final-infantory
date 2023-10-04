@@ -10,29 +10,26 @@ import SwiftUI
 struct AuctionBuyerView: View {
     @State private var currentIndex = 0
     var body: some View {
-        NavigationStack {
-                TabView(selection: $currentIndex) {
-                    ForEach(0..<5) { item in
-                        NavigationLink {
-                            AuctionBuyerDetailView()
-                        } label: {
-                            HStack {
-                                Text("경매상황 ")
-                                Spacer()
-                                Text("홍길동 \(item)원")
-                            }
-                            .foregroundStyle(.black)
-                            .padding()
-                        }
-                    }
-                }
-                .background(
-                    Rectangle()
-                        .stroke(lineWidth: 1)
-                        .background(Color.infanMain))
-                .frame(width: CGFloat.screenWidth, height: 80)
-                .tabViewStyle(PageTabViewStyle())
+        
+        NavigationLink {
+            AuctionBuyerDetailView()
+        } label: {
+            HStack {
+                Text("경매상황 ")
+                Spacer()
+                Text("123원")
+            }
+            .foregroundStyle(.black)
+            .padding()
         }
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(lineWidth: 1)
+                .fill(Color.infanMain))
+        .infanHorizontalPadding()
+        .frame(width: CGFloat.screenWidth, height: 80)
+        
+        
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                 if currentIndex < 5 {

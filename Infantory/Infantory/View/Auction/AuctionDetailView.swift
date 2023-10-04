@@ -12,78 +12,77 @@ struct AuctionDetailView: View {
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            HStack {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 35)
-                Text("\(userViewModel.user.name)")
-                Spacer()
+        ZStack(alignment: .bottom) {
+            ScrollView(showsIndicators: false) {
+                // 인플루언서 프로필
+                HStack {
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 35)
+                    Text("\(userViewModel.user.name)")
+                    Spacer()
+                    
+                }
+                .infanHorizontalPadding()
+                
+                Divider()
                 
                 HStack {
-                    Image(systemName: "ticket")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 25, height: 25)
-                    Text(": \(userViewModel.user.applyTicket?[0].count ?? 0)")
-                        .font(.infanBody)
-                        .bold()
+                    // 남은 시간
+                    Text("03:22:15")
+                        .infanHorizontalPadding()
+                        .padding(.top)
+                    Spacer()
                 }
+                   
+                AuctionBuyerView()
+                HStack {
+                    Text("멋쟁이 신발")
+                        .font(.infanTitle2)
+                    Spacer()
+                }
+                .infanHorizontalPadding()
+                
+                AuctionItemImage()
+                    .frame(width: .screenWidth - 40, height: .screenWidth - 40)
+                    .cornerRadius(8)
+                
+                // 제품 설명
+                Text("제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl제품 설명 최대 3줄로 하고 리딩 정렬하고 3줄 넘으면 ...으로 보이게 하rl")
+//                    .lineLimit(3)
+                    .infanHorizontalPadding()
+                    .padding(.top)
+                    .padding(.bottom, 100)
             }
-            Divider()
-                .padding([.horizontal, .top])
             
-            Text("상품명")
+            Footer()
             
-            AuctionBuyerView()
-            
-            LazyVStack(pinnedViews: [.sectionFooters], content: {
-                Section(footer: Footer()) {
-
-                    ItemIamgeView()
-                        .padding()
-                    
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(lineWidth: 1)
-                        .frame(width: CGFloat.screenWidth, height: 300)
-                        .padding()
-                }
-            })
-//            Section {
-//                HStack {
-//                    Text("이런 상품들은 어때요?")
-//                    Spacer()
-//                }
-//                VStack {
-//                    AuctionScrollImageView()
-//                }
-//            }
-//            AuctionDetailImageView(auctionProductVIewModel: auctionProductViewModel)
-//            AuctionDetailDescriptionView(auctionProductViewModel: auctionProductViewModel)
         }
+        
     }
 }
 
-//MARK: - 경매하기 버튼 Footer
+// MARK: - 경매하기 버튼 Footer
 struct Footer: View {
+    
+    @State private var isShowingAuctionBidSheet: Bool = false
+    
     var body: some View {
         VStack {
             Button {
-                // 입찰하기 버튼
+                isShowingAuctionBidSheet.toggle()
             } label: {
-                Text("입찰 : 10000원")
+                Text("입찰 10000원")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .background(
                         RoundedRectangle(cornerRadius: 5)
                             .fill(Color.infanMain)
-                            .frame(width: CGFloat.screenWidth - 20,height: 55)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )
             }
-            .padding()
-            
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -95,9 +94,14 @@ struct Footer: View {
             
         )
         .offset(x: 0, y: 40)
-        Rectangle()
-            .frame(height: 40)
-            .foregroundColor(.white)
+        .sheet(isPresented: $isShowingAuctionBidSheet, content: {
+            AuctionBidSheetView()
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium])
+                
+                
+                
+        })
     }
 }
 
