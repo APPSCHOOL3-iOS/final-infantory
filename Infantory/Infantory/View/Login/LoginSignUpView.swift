@@ -20,8 +20,9 @@ struct LoginSignUpView: View {
     @State private var detailAddress: String = ""
     @State private var isCheckedNickName: Bool = false
     @State private var checkNickNameResult: String = ""
-    @State var showToastMessage: Bool = false
-    @State var toastMessageText: String = ""
+    @State private var showToastMessage: Bool = false
+    @State private var toastMessageText: String = ""
+    @State private var showAlert: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -39,8 +40,6 @@ struct LoginSignUpView: View {
                             .overlay(UnderLineOverlay())
 
                         Button {
-                            showToastMessage = true
-                            toastMessageText = "토스트메세지 입니다."
                             loginStore.duplicateNickName(nickName: nickName) { result in
                                 if nickName == "" {
                                     isCheckedNickName = false
@@ -113,21 +112,7 @@ struct LoginSignUpView: View {
                 HStack {
                     Spacer()
                     Button {
-                        loginStore.signUpToFirebase(
-                            name: name,
-                            nickName: nickName,
-                            phoneNumber: phoneNumber,
-                            zipCode: zipCode,
-                            streetAddress: address,
-                            detailAddress: detailAddress,
-                            completion: { result in
-                                if result {
-                                    //토스트 : 회원가입에 성공했습니다. 다시 로그인 해주세요.
-                                    dismiss()
-                                } else {
-                                    // 토스트 : 회원가입에 실패했습니다.
-                                }
-                            })
+                        checkSignUp()
                     } label: {
                         Text("가입하기")
                             .font(Font.infanTitle2Bold)
@@ -144,6 +129,41 @@ struct LoginSignUpView: View {
             .overlay(
                 ToastMessage(content: Text("\(toastMessageText)"), isPresented: $showToastMessage)
             )
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("회원가입 성공"), message: Text("회원가입에 성공했습니다. 로그인을 다시 해주세요."), dismissButton: .default(Text("확인")) {
+                    dismiss()
+                })
+            }
+        }
+    }
+    
+    func signUpToFirebase() {
+        loginStore.signUpToFirebase(
+            name: name,
+            nickName: nickName,
+            phoneNumber: phoneNumber,
+            zipCode: zipCode,
+            streetAddress: address,
+            detailAddress: detailAddress,
+            completion: { result in
+                if result {
+                    showAlert = true
+                } else {
+                    showToastMessage = true
+                    toastMessageText = "회원가입에 실패했습니다. 다시 시도해주세요."
+                }
+            })
+    }
+    
+    func checkSignUp() {
+        if !isCheckedNickName {
+            showToastMessage = true
+            toastMessageText = "닉네임 중복확인을 해주세요."
+        } else if nickName.isEmpty || name.isEmpty || phoneNumber.isEmpty || zipCode.isEmpty || address.isEmpty || detailAddress.isEmpty {
+            showToastMessage = true
+            toastMessageText = "빈칸을 입력해주세요."
+        } else {
+            signUpToFirebase()
         }
     }
 }

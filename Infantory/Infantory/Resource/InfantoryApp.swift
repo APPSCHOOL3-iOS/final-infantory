@@ -32,7 +32,7 @@ struct InfantoryApp: App {
         WindowGroup {
             MainTabView()
                 .onOpenURL { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) { 
+                    if AuthApi.isKakaoTalkLoginUrl(url) {
                         _ = AuthController.handleOpenUrl(url: url)
                     }
                 }
