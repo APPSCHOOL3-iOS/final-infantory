@@ -20,7 +20,8 @@ struct ApplyMyTicketView: View {
                 .resizable()
                 .frame(width: 30, height: 30)
                 .aspectRatio(contentMode: .fit)
-            Text("\(loginStore.currentUser.applyTicket?.count ?? 0) 장")
+            Text("\(loginStore.totalApplyTicketCount) 장")
+            // Text("1 장")
         }
         .padding()
         .background(

@@ -77,7 +77,7 @@ struct ApplyFooter: View {
         .sheet(isPresented: $isShowingApplySheet) {
             ApplySheetView()
                 .presentationDragIndicator(.visible)
-                .presentationDetents([.fraction(0.3)])
+                .presentationDetents([.medium])
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
