@@ -39,6 +39,8 @@
 		64E105C12ABD2A8C00BFD3DF /* PaymentReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */; };
 		64E105C62ABD4C2700BFD3DF /* PaymentAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */; };
 		64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C72ABD575A00BFD3DF /* Productable.swift */; };
+		844BB4E92ACBE8A3004891DD /* LoginAddressWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */; };
+		8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */; };
 		849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 849B64AF2ABD595B00C4AC8D /* KakaoSDK */; };
 		849B64B22ABD5ABC00C4AC8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */; };
 		849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B64C22ABD600D00C4AC8D /* LoginStore.swift */; };
@@ -122,6 +124,8 @@
 		64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentReceiptView.swift; sourceTree = "<group>"; };
 		64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressViewModel.swift; sourceTree = "<group>"; };
 		64E105C72ABD575A00BFD3DF /* Productable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productable.swift; sourceTree = "<group>"; };
+		844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAddressWebView.swift; sourceTree = "<group>"; };
+		8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		849B64C22ABD600D00C4AC8D /* LoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
@@ -352,6 +356,7 @@
 			children = (
 				A091E5902ABAA61C000894FC /* LoginMainView.swift */,
 				84BF5D422ABAC84F008C0766 /* LoginSignUpView.swift */,
+				844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */,
 				EC7B11682ABAC984001303D1 /* LoginSheetView.swift */,
 			);
 			path = Login;
@@ -435,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B5AFCE2AC1D4C80055E714 /* emptyfile.swift */,
+				8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */,
 			);
 			path = CommonComponent;
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 			files = (
 				0C82A3312AC2934E009F6D97 /* ApplyDetailView.swift in Sources */,
 				A091E5802ABAA55D000894FC /* Empty2.swift in Sources */,
+				844BB4E92ACBE8A3004891DD /* LoginAddressWebView.swift in Sources */,
 				0C82A3342AC29625009F6D97 /* ApplyDetailDescriptionView.swift in Sources */,
 				0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */,
 				0C82A32D2AC278A6009F6D97 /* ApplyRegistrationView.swift in Sources */,
@@ -660,6 +667,7 @@
 				0C82A33A2AC29AAE009F6D97 /* ApplyScrollImageCell.swift in Sources */,
 				0C82A33A2AC29AAE009F6D97 /* ApplyScrollImageCell.swift in Sources */,
 				0CD2F7012ABD4EE100FCF88E /* ProductListView.swift in Sources */,
+				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
 				A0B5AFE22AC3FE130055E714 /* PaymentAddressViewModel.swift in Sources */,
 				A091E58F2ABAA616000894FC /* Empty6.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,

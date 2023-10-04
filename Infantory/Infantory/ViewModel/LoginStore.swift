@@ -31,9 +31,9 @@ final class LoginStore: ObservableObject {
     @Published var currentUser: User = User(id: "",
                                             isInfluencer: .influencer,
                                             profileImageURLString: "",
-                                            name: "상필님",
-                                            phoneNumber: "0101010",
-                                            email: "fff@naver.com",
+                                            name: "",
+                                            phoneNumber: "",
+                                            email: "",
                                             loginType: .apple,
                                             address: Address(address: "",
                                                              zonecode: "",
@@ -190,9 +190,13 @@ final class LoginStore: ObservableObject {
                 print(error)
             } else {
                 self.userUid = ""
-                self.currentUser = User(id: "", isInfluencer: UserType.influencer, name: "", phoneNumber: "", email: "", loginType: LoginType.apple, address: Address(address: "",
-                                                                                                                                                                      zonecode: "",
-                                                                                                                                                                      addressDetail: ""), applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
+                self.currentUser = User(id: "",
+                                        isInfluencer: UserType.influencer,
+                                        name: "", phoneNumber: "",
+                                        email: "",
+                                        loginType: LoginType.apple,
+                                        address: Address(address: "", zonecode: "", addressDetail: ""),
+                                        applyTicket: [ApplyTicket(date: Date(), ticketGetAndUse: "", count: 0)])
             }
         }
     }
