@@ -31,7 +31,7 @@ struct InfantoryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView(selectedImages: .constant([]), selectedImageNames: .constant([""]))
+            MainTabView()
                 .onOpenURL { url in
                     if AuthApi.isKakaoTalkLoginUrl(url) {
                         _ = AuthController.handleOpenUrl(url: url)

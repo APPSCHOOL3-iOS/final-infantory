@@ -13,7 +13,12 @@ struct AuctionMainView: View {
     var body: some View {
         NavigationStack {
             VStack {
-//                Divider()
+                NavigationLink {
+                    AuctionRegistrationView()
+                } label: {
+                    Text("임시")
+                }
+                Divider()
                 AuctionButtonCell()
                 ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
                 Divider()

@@ -8,7 +8,6 @@
 import SwiftUI
 import Photos
 import UIKit
-//import BinGongGanCore
 
 struct ApplyImagePickerView: View {
     @Binding var selectedImages: [UIImage]
@@ -19,7 +18,7 @@ struct ApplyImagePickerView: View {
     var body: some View {
         VStack {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 15) {
+                HStack {
                     if selectedImages.count < 5 {
                         Button {
                             requestGalleryPermission()
@@ -28,22 +27,25 @@ struct ApplyImagePickerView: View {
                             }
                             
                         } label: {
-                            Image(systemName: "camera")
-                                .resizable()
-                                .frame(width: 15, height: 15)
-                                .foregroundColor(.black)
-                                .padding(25)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.gray, lineWidth: 1)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(Color.gray, lineWidth: 1)
+                                    .frame(width: 100, height: 150)
+                                VStack {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(.black)
+                                        .padding()
                                 }
+                            }
                         }
                     }
                     ForEach(selectedImages, id: \.self) { image in
                         Image(uiImage: image)
                             .resizable()
                             .cornerRadius(10)
-                            .frame(width: 70, height: 70)
+                            .frame(width: 100, height: 150)
                             .padding(.leading, 5)
                             .aspectRatio(contentMode: .fill)
                             .overlay(alignment: .topTrailing) {
@@ -81,7 +83,6 @@ struct ApplyImagePickerView: View {
             }
         }
     }
-    
 }
 
 struct MultiPhotoPickerView: UIViewControllerRepresentable {
@@ -118,6 +119,7 @@ struct MultiPhotoPickerView: UIViewControllerRepresentable {
             }
             if let selectedImage = info[.originalImage] as? UIImage {
                 parent.selectedImages.append(selectedImage)
+                //                print(parent.selectedImages)
             }
             parent.presentationMode.wrappedValue.dismiss()
         }
