@@ -13,7 +13,7 @@ struct AuctionMainView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Divider()
+//                Divider()
                 AuctionButtonCell()
                 ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
                 Divider()
@@ -26,7 +26,13 @@ struct AuctionMainView: View {
                             .foregroundColor(.black)
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("경매")
+                        .font(.infanHeadlineBold)
+                }
             }
+            .navigationBarTitleDisplayMode(.inline)
             
         }
     }
