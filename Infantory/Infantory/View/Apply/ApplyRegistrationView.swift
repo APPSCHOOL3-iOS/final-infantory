@@ -17,6 +17,11 @@ struct ApplyRegistrationView: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isShowAlert: Bool = false
+    @State private var productSelectedImages: [UIImage] = []
+    @State private var productSelectedImageNames: [String] = []
+    @State private var custumeSelectedImages: [UIImage] = []
+    @State private var custumeSelectedImageNames: [String] = []
+    
     
     var body: some View {
         ScrollView {
@@ -37,7 +42,7 @@ struct ApplyRegistrationView: View {
                     Text("상품 사진")
                         .font(.system(size: 17))
                         .bold()
-                    ItemIamgeView()
+                    ApplyImagePickerView(selectedImages: $productSelectedImages, selectedImageNames: $productSelectedImageNames)
                 }
                 .padding(.leading)
                 
@@ -45,7 +50,7 @@ struct ApplyRegistrationView: View {
                     Text("착장 사진")
                         .font(.system(size: 17))
                         .bold()
-                    InfluencerImageCell()
+                    ApplyImagePickerView(selectedImages: $custumeSelectedImages, selectedImageNames: $custumeSelectedImageNames)
                 }
                 .padding(.leading)
                 

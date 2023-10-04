@@ -11,8 +11,6 @@ import Photos
 struct MainTabView: View {
     
     @StateObject private var loginStore = LoginStore()
-    @Binding var selectedImages: [UIImage]
-    @Binding var selectedImageNames: [String]
     @State private var selectedIndex = 0
     
     var body: some View {
@@ -38,7 +36,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-        ApplyImagePickerView(selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
+        ActivityMainView()
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
                     Text("활동")
@@ -65,6 +63,6 @@ struct MainTabView: View {
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
-        MainTabView(selectedImages: .constant([]), selectedImageNames: .constant([""]))
+        MainTabView()
     }
 }
