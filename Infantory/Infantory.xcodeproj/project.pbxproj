@@ -29,8 +29,12 @@
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
 		0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */; };
 		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
+		112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */; };
+		112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */; };
 		113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113A15702AC1195E00ED0555 /* PaymentChoiceView.swift */; };
 		114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F305A2ABD1A79008497A8 /* AuctionMainView.swift */; };
+		11BAE3732ACC084600F887C7 /* AuctionItemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAE3722ACC084600F887C7 /* AuctionItemImage.swift */; };
+		11BAE3752ACCE82400F887C7 /* AuctionBidSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */; };
 		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
 		11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */; };
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
@@ -113,8 +117,12 @@
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
 		0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyImagePickerView.swift; sourceTree = "<group>"; };
 		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBuyerView.swift; sourceTree = "<group>"; };
+		112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBuyerDetailView.swift; sourceTree = "<group>"; };
 		113A15702AC1195E00ED0555 /* PaymentChoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentChoiceView.swift; sourceTree = "<group>"; };
 		114F305A2ABD1A79008497A8 /* AuctionMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionMainView.swift; sourceTree = "<group>"; };
+		11BAE3722ACC084600F887C7 /* AuctionItemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemImage.swift; sourceTree = "<group>"; };
+		11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBidSheetView.swift; sourceTree = "<group>"; };
 		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
 		11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
@@ -122,6 +130,7 @@
 		64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardAddView.swift; sourceTree = "<group>"; };
 		64A6826E2AC2C55E007BF628 /* PaymentAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressWebView.swift; sourceTree = "<group>"; };
 		64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentReceiptView.swift; sourceTree = "<group>"; };
+		64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressViewModel.swift; sourceTree = "<group>"; };
 		64E105C72ABD575A00BFD3DF /* Productable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productable.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +220,10 @@
 				0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */,
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
 				0C82A33B2AC2AD3A009F6D97 /* AuctionScrollImageView.swift */,
+				112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */,
+				112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */,
+				11BAE3722ACC084600F887C7 /* AuctionItemImage.swift */,
+				11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -604,6 +617,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BAE3732ACC084600F887C7 /* AuctionItemImage.swift in Sources */,
 				0C82A3312AC2934E009F6D97 /* ApplyDetailView.swift in Sources */,
 				A091E5802ABAA55D000894FC /* Empty2.swift in Sources */,
 				0C82A3342AC29625009F6D97 /* ApplyDetailDescriptionView.swift in Sources */,
@@ -621,9 +635,11 @@
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */,
 				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
+				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
 				0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */,
+				11BAE3752ACCE82400F887C7 /* AuctionBidSheetView.swift in Sources */,
 				113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */,
 				A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */,
 				A091E5A72ABC740D000894FC /* Font+Extension.swift in Sources */,
@@ -651,6 +667,7 @@
 				A0B5AFE32AC3FE130055E714 /* PaymentViewModel.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
+				112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */,
 				11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */,
 				0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
