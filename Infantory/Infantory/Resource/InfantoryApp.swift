@@ -9,6 +9,7 @@ import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
 import FirebaseCore
+import Photos
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -30,7 +31,7 @@ struct InfantoryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            MainTabView(selectedImages: .constant([]), selectedImageNames: .constant([""]))
                 .onOpenURL { url in
                     if AuthApi.isKakaoTalkLoginUrl(url) {
                         _ = AuthController.handleOpenUrl(url: url)
