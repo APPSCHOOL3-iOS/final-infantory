@@ -238,7 +238,6 @@
 				A0B5AFDF2AC3FE120055E714 /* PaymentAddressViewModel.swift */,
 				A0B5AFE12AC3FE130055E714 /* PaymentPriceViewModel.swift */,
 				A0B5AFE02AC3FE130055E714 /* PaymentViewModel.swift */,
-				64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */,
 				64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */,
 			);
 			path = payment;

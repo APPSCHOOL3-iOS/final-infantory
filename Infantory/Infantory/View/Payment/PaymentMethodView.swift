@@ -28,7 +28,8 @@ struct PaymentMethodView: View {
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser, product: auctionProduct))
+            PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser,
+                                                          product: AuctionProduct.dummyProduct))
         }
     }
 }

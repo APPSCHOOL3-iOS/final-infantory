@@ -45,4 +45,3 @@ final class AuctionProductViewModel: ObservableObject {
         return product
     }
 }
-
