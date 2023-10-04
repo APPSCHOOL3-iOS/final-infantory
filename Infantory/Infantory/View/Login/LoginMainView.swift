@@ -23,7 +23,7 @@ struct LoginMainView: View {
             Text(loginStore.email)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
-            LoginSheetView(isShowingSignUp: $isShowingLoginSheet)
+            LoginSheetView()
                 .environmentObject(loginStore)
         })
     }

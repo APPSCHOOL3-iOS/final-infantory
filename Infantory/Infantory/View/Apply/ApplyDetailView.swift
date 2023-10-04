@@ -80,7 +80,7 @@ struct ApplyFooter: View {
                 .presentationDetents([.fraction(0.3)])
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
-            LoginSheetView(isShowingSignUp: $isShowingLoginSheet)
+            LoginSheetView()
                 .environmentObject(loginStore)
         })
     }
