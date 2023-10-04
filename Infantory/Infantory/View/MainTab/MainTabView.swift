@@ -28,6 +28,7 @@ struct MainTabView: View {
                     Text("경매")
                 }
                 .tag(1)
+                .environmentObject(loginStore)
             
             ApplyMainView()
                 .tabItem {
@@ -50,6 +51,7 @@ struct MainTabView: View {
                 }
                 .tag(4)
                 .environmentObject(loginStore)
+            
         }
         .onAppear {
             Task {

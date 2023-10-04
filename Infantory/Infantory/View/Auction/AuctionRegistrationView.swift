@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AuctionRegistrationView: View {
+    @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
-    @StateObject var registViewModel = AuctionProductViewModel()
+    @StateObject var registViewModel = AuctionRegisterStore()
     @State private var title: String = ""
     @State private var apply: String = ""
     @State private var itemDescription: String = ""
@@ -21,6 +22,7 @@ struct AuctionRegistrationView: View {
     @State private var auctionProductSelectedImageNames: [String] = []
     @State private var auctionCustumeSelectedImages: [UIImage] = []
     @State private var auctionCustumeSelectedImageNames: [String] = []
+    
     
     var body: some View {
         ScrollView {
@@ -91,8 +93,11 @@ struct AuctionRegistrationView: View {
                                 showAlert = true
                                 alertMessage = "시작가를 입력해주세요."
                             } else {
+                                var product = registViewModel.makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice, imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames, user: loginStore.currentUser)
+                                
                                 Task {
-                                    try await registViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice)
+                                    await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
+                                    })
                                 }
                             }
                         } label: {
