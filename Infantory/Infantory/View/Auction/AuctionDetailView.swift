@@ -10,22 +10,20 @@ import SwiftUI
 struct AuctionDetailView: View {
     @ObservedObject var userViewModel: UserViewModel
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
+    @StateObject var auctionViewModel: AuctionViewModel = AuctionViewModel()
     
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-                
-                
+        
                 Divider()
                 
                 AuctionBuyerView()
                 
-                
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
-                
                 
                 HStack {
                     Text("멋쟁이 신발")
@@ -47,15 +45,15 @@ struct AuctionDetailView: View {
                     .padding(.bottom, 100)
             }
             
-            Footer()
+            Footer(auctionViewModel: AuctionViewModel())
             
-        }
-        
+        }        
     }
 }
 
 // MARK: - 경매하기 버튼 Footer
 struct Footer: View {
+    @ObservedObject var auctionViewModel: AuctionViewModel
     
     @State private var isShowingAuctionBidSheet: Bool = false
     
@@ -63,8 +61,9 @@ struct Footer: View {
         VStack {
             Button {
                 isShowingAuctionBidSheet.toggle()
+                print("footer \(auctionViewModel.biddingInfos)")
             } label: {
-                Text("입찰 10000원")
+                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 123)")
                     .font(.title2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -89,9 +88,6 @@ struct Footer: View {
             AuctionBidSheetView()
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
-            
-            
-            
         })
     }
 }

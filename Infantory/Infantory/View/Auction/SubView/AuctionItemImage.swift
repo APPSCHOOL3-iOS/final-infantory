@@ -21,6 +21,8 @@ struct AuctionItemImage: View {
     }
 }
 
-#Preview {
-    AuctionItemImage()
+struct AuctionItemImage_Previews: PreviewProvider {
+    static var previews: some View {
+        AuctionItemImage()
+    }
 }
