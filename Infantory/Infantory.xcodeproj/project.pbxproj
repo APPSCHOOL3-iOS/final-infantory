@@ -27,6 +27,7 @@
 		0CD2F7052ABD50F500FCF88E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CD2F7042ABD50F500FCF88E /* User.swift */; };
 		0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */; };
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
+		11183A6F2ACD40D30010012C /* AuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A6E2ACD40D30010012C /* AuctionViewModel.swift */; };
 		111924862ABAC7B9003821FD /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111924852ABAC7B9003821FD /* PaymentView.swift */; };
 		112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */; };
 		112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */; };
@@ -114,6 +115,7 @@
 		0CD2F7042ABD50F500FCF88E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0CE402182ABAC91A00F69B7E /* AuctionRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegistrationView.swift; sourceTree = "<group>"; };
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
+		11183A6E2ACD40D30010012C /* AuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionViewModel.swift; sourceTree = "<group>"; };
 		111924852ABAC7B9003821FD /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBuyerView.swift; sourceTree = "<group>"; };
 		112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBuyerDetailView.swift; sourceTree = "<group>"; };
@@ -128,7 +130,6 @@
 		64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardAddView.swift; sourceTree = "<group>"; };
 		64A6826E2AC2C55E007BF628 /* PaymentAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressWebView.swift; sourceTree = "<group>"; };
 		64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentReceiptView.swift; sourceTree = "<group>"; };
-		64E105C32ABD2B5600BFD3DF /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		64E105C52ABD4C2700BFD3DF /* PaymentAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressViewModel.swift; sourceTree = "<group>"; };
 		64E105C72ABD575A00BFD3DF /* Productable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Productable.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -325,6 +326,7 @@
 				015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */,
 				0C82A32E2AC279BB009F6D97 /* ApplyProductViewModel.swift */,
 				6479BDF82AC3EC4D00AA6545 /* payment */,
+				11183A6E2ACD40D30010012C /* AuctionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -632,6 +634,7 @@
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
+				11183A6F2ACD40D30010012C /* AuctionViewModel.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
 				0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */,
