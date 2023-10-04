@@ -20,6 +20,8 @@ struct LoginSignUpView: View {
     @State private var detailAddress: String = ""
     @State private var isCheckedNickName: Bool = false
     @State private var checkNickNameResult: String = ""
+    @State var showToastMessage: Bool = false
+    @State var toastMessageText: String = ""
     
     var body: some View {
         NavigationStack {
@@ -35,8 +37,10 @@ struct LoginSignUpView: View {
                     HStack {
                         TextField("\(loginStore.userName)", text: $nickName)
                             .overlay(UnderLineOverlay())
-                        
+
                         Button {
+                            showToastMessage = true
+                            toastMessageText = "토스트메세지 입니다."
                             loginStore.duplicateNickName(nickName: nickName) { result in
                                 if result {
                                     print("가입가능")
@@ -50,6 +54,10 @@ struct LoginSignUpView: View {
                             }
                         } label: {
                             Text("중복확인")
+                                .padding(5)
+                                .foregroundColor(.white)
+                                .background(Color.infanMain.opacity(0.8))
+                                .cornerRadius(5)
                         }
                     }
                     Text(checkNickNameResult)
@@ -84,6 +92,7 @@ struct LoginSignUpView: View {
                         .overlay(UnderLineOverlay())
                         .padding(.bottom)
                 }
+                .padding(.bottom, 30)
                 
                 HStack {
                     Spacer()
@@ -96,18 +105,19 @@ struct LoginSignUpView: View {
                             streetAddress: address,
                             detailAddress: detailAddress,
                             completion: { result in
-                            if result {
-                                //토스트 : 회원가입에 성공했습니다. 다시 로그인 해주세요.
-                                dismiss()
-                            } else {
-                                // 토스트 : 회원가입에 실패했습니다.
-                            }
-                        })
+                                if result {
+                                    //토스트 : 회원가입에 성공했습니다. 다시 로그인 해주세요.
+                                    dismiss()
+                                } else {
+                                    // 토스트 : 회원가입에 실패했습니다.
+                                }
+                            })
                     } label: {
                         Text("가입하기")
-                            .frame(width: 330, height: 40, alignment: .center)
+                            .font(Font.infanTitle2Bold)
+                            .frame(width: .screenWidth * 0.9, height: .screenHeight * 0.06)
                             .foregroundColor(.white)
-                            .background(.gray)
+                            .background(Color.infanMain.opacity(0.8))
                             .cornerRadius(5)
                     }
                     Spacer()
@@ -115,6 +125,9 @@ struct LoginSignUpView: View {
             }
             .padding()
             .infanNavigationBar(title: "회원가입")
+            .overlay(
+                ToastMessage(content: Text("\(toastMessageText)"), isPresented: $showToastMessage)
+            )
         }
     }
 }
