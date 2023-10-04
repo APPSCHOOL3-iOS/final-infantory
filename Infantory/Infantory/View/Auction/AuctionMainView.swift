@@ -31,7 +31,14 @@ struct AuctionMainView: View {
                             .foregroundColor(.black)
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("경매")
+                        .font(.infanHeadlineBold)
+                }
             }
+            .navigationBarTitleDisplayMode(.inline)
+            
         }
     }
 }

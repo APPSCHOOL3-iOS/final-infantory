@@ -16,97 +16,114 @@ struct ProductListView: View {
         ScrollView {
             LazyVStack {
                 ForEach(auctionViewModel.auctionProduct) { product in
-                    HStack {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .cornerRadius(25)
-                        
-                        Text("\(userViewModel.user.name)")
-                            .font(.infanHeadline)
-                        
-                        Spacer()
-                        Button(action: {
-                            heartButton.toggle()
-                        }, label: {
-                            Image(systemName: heartButton ? "heart.fill" : "heart")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25)
-                                .foregroundColor(.infanDarkGray)
-                        })
-                    }
-                    .infanHorizontalPadding()
                     
-                    NavigationLink {
-                        AuctionDetailView(userViewModel: userViewModel, auctionProductViewModel: auctionViewModel)
-                    } label: {
-                        VStack {
-                            // 배열의 첫번째 값 넣어둠.
+                    VStack {
+                        HStack {
+                            Image("Influencer1")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
                             
-                            VStack(alignment: .leading, spacing: 16) {
-                                HStack {
+                            Text("\(userViewModel.user.name)")
+                                .font(.infanFootnoteBold)
+                            
+                            Spacer()
+                            Label("03:22:15", systemImage: "timer")
+                                .foregroundColor(.infanMain)
+                                .font(.infanFootnote)
+                                .frame(height: 24)
+                                .padding(4)
+
+                        }
+                        .infanHorizontalPadding()
+                        
+                        NavigationLink {
+                            AuctionDetailView(userViewModel: userViewModel, auctionProductViewModel: auctionViewModel)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 20) {
+                                HStack(spacing: 16) {
                                     if product.productImageURLStrings.count > 0 {
-                                        Image("\(product.productImageURLStrings[0])")
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 150, height: 140)
-                                    } else {
-                                        Image("appleLogo")
-                                            .resizable()
-                                            .frame(width: 150, height: 140)
-                                    }
-                                    
-                                    VStack(alignment: .leading, spacing: 20) {
-                                        HStack {
-                                            Text("Hot")
-                                                .font(.infanFootnote)
-                                                .frame(width: 40, height: 20)
-                                                .foregroundColor(.infanDarkGray)
-                                                .background(Color.infanRed)
-                                                .cornerRadius(10)
-                                            Text("New")
-                                                .font(.infanFootnote)
-                                                .frame(width: 40, height: 20)
-                                                .foregroundColor(.infanDarkGray)
-                                                .background(Color.infanGreen)
-                                                .cornerRadius(10)
-                                        }
-                                        VStack(alignment: .leading, spacing: 20) {
-                                            Text("상품명: \(product.productName)")
-                                                .font(.infanTitle2)
-                                                .foregroundColor(.infanDarkGray)
-                                            VStack(alignment: .leading) {
-                                                Text("남은시간: 03:02:01")
-                                                    .font(.infanBody)
-                                                    .foregroundColor(.infanDarkGray)
-                                                Text("현재 입찰가: \(product.winningPrice ?? 0)")
-                                                    .font(.infanBody)
-                                                    .foregroundColor(.infanDarkGray)
+                                        if let url = URL(string: product.productImageURLStrings[0]) {
+                                            AsyncImage(url: url) { image in
+                                                
+                                                ZStack(alignment: .topLeading) {
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                        .cornerRadius(4)
+                                                        .clipped()
+                                                    
+                                                }
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .scaledToFill()
+                                                    .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                    .cornerRadius(4)
+                                                    .clipped()
                                             }
                                         }
+                                    } else {
+                                        ZStack(alignment: .topLeading) {
+                                            
+                                            Image("appleLogo")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
+                                                .cornerRadius(4)
+                                                .clipped()
+                                            
+                                            Label("03:22:15", systemImage: "timer")
+                                                .foregroundColor(.infanMain)
+                                                .font(.infanFootnote)
+                                                .frame(height: 24)
+                                                .padding(4)
+//                                                .background(Color.black.opacity(0.1))
+//                                                .cornerRadius(4)
+                                        }
                                     }
+                                    
+                                    VStack(alignment: .leading, spacing: 8) {
+                           
+                                        Text("\(product.productName)")
+                                            .font(.infanBody)
+                                            .foregroundColor(.infanDarkGray)
+                                            .multilineTextAlignment(.leading)
+                                                               
+                                        Text("\(product.winningPrice ?? 0)원")
+                                            .font(.infanHeadlineBold)
+                                            .foregroundColor(.infanDarkGray)
+
+                                        Spacer()
+                                        VStack {
+                                            Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
+                                                .font(.infanFootnote)
+                                                .foregroundColor(.infanGray)
+                                            
+                                            Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
+                                                .font(.infanFootnote)
+                                                .foregroundColor(.infanGray)
+                                        }
+                                        
+                                    }
+                                    .padding(.vertical, 10)
+                                    
                                 }
-                                .infanHorizontalPadding()
-                                
+                                Divider()
                             }
                             .infanHorizontalPadding()
-                            Rectangle()
-                                .fill(Color.infanLightGray)
-                                .frame(height: 2)
                         }
                     }
+                    .padding(.top)
                 }
             }
         }
-        .padding(.vertical)
         .onAppear {
             Task {
                 do {
                     try await auctionViewModel.fetchAuctionProducts()
-                }
-                catch {
+                } catch {
                     
                 }
             }

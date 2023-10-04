@@ -18,13 +18,16 @@ struct MainTabView: View {
             HomeMainView()
                 .tabItem {
                     Image(systemName: "house")
+                        .environment(\.symbolVariants, .none)
                     Text("홈")
                 }
+                .foregroundColor(.black)
                 .tag(0)
             
             AuctionMainView()
                 .tabItem {
-                    Image(systemName: "dollarsign.circle")
+                    Image("auction")
+                        .renderingMode(.template)
                     Text("경매")
                 }
                 .tag(1)
@@ -32,7 +35,8 @@ struct MainTabView: View {
             
             ApplyMainView()
                 .tabItem {
-                    Image(systemName: "ticket")
+                    Image("apply")
+                        .renderingMode(.template)
                     Text("응모")
                 }
                 .tag(2)
@@ -40,6 +44,7 @@ struct MainTabView: View {
         ActivityMainView()
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
                     Text("활동")
                 }
                 .tag(3)
@@ -47,12 +52,16 @@ struct MainTabView: View {
             MyMainView()
                 .tabItem {
                     Image(systemName: "person")
+                    
+                        .environment(\.symbolVariants, .none)
                     Text("마이")
                 }
                 .tag(4)
                 .environmentObject(loginStore)
             
         }
+        
+        .tint(Color.infanMain)
         .onAppear {
             Task {
                 if !loginStore.userUid.isEmpty {
