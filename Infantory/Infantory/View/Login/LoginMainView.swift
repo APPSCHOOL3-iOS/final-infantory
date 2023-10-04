@@ -32,5 +32,6 @@ struct LoginMainView: View {
 struct Empty7_Previews: PreviewProvider {
     static var previews: some View {
         LoginMainView()
+            .environmentObject(LoginStore())
     }
 }

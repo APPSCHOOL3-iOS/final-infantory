@@ -21,14 +21,14 @@ extension Font {
     /// 22, bold
     static let infanTitle2Bold = Font.system(size: 22, weight: .bold)
     
-    /// 17, semibold
-    static let infanHeadline = Font.system(size: 17, weight: .semibold)
+    /// 16, semibold
+    static let infanHeadline = Font.system(size: 16, weight: .semibold)
     
-    /// 17, bold
-    static let infanHeadlineBold = Font.system(size: 17, weight: .bold)
+    /// 16, bold
+    static let infanHeadlineBold = Font.system(size: 16, weight: .bold)
     
-    /// 17, regular
-    static let infanBody = Font.system(size: 17, weight: .regular)
+    /// 16, regular
+    static let infanBody = Font.system(size: 16, weight: .regular)
     
     /// 13, regular
     static let infanFootnote = Font.system(size: 13, weight: .regular)

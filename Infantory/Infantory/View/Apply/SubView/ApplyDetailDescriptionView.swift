@@ -8,23 +8,28 @@
 import SwiftUI
 
 struct ApplyDetailDescriptionView: View {
+    
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     var body: some View {
         VStack {
-//            Text("\(auctionProductViewModel.auctionProduct[0].productName)")
-//            Text("\(auctionProductViewModel.auctionProduct[0].description)")
             
             Button(action: {
                 
             }, label: {
-                Text("응모하기")
-                    .font(.infanTitle)
-                    .frame(width: 150, height: 20)
-                    .padding()
-                    .foregroundColor(.infanDarkGray)
-                    .background(Color.infanYellow)
-                    .cornerRadius(15)
+                HStack {
+                    Image("applyTicket1")
+                        .resizable()
+                        .frame(width: 50, height: 40)
+                        .aspectRatio(contentMode: .fit)
+                    Text("응모하기")
+                }
+                .frame(width: .screenWidth * 0.8, height: .screenHeight * 0.03)
+                .font(.infanTitle)
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.infanMain)
+                .cornerRadius(15)
             })
         }
     }

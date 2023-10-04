@@ -9,6 +9,7 @@ import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
 import FirebaseCore
+import Photos
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
