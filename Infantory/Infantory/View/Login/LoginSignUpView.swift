@@ -28,13 +28,13 @@ struct LoginSignUpView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 20) {
     
-                InfanTextField(textFieldTitle: "이메일", title: loginStore.userName, text: $email)
+                InfanTextField(textFieldTitle: "이메일", placeholder: loginStore.userName, text: $email)
                     .disabled(true)
                 
                 VStack(alignment: .leading) {
                     HStack {
                         
-                        InfanTextField(textFieldTitle: "닉네임", title: loginStore.userName, text: $nickName)
+                        InfanTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
                         
                         Button {
                             loginStore.duplicateNickName(nickName: nickName) { result in
@@ -69,13 +69,13 @@ struct LoginSignUpView: View {
                 }
             
                 InfanTextField(textFieldTitle: "휴대폰 번호",
-                               title: "- 없이 입력",
+                               placeholder: "- 없이 입력",
                                text: $phoneNumber)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         
-                        InfanTextField(textFieldTitle: "우편 번호", title: "우편 번호를 검색하세요", text: $zipCode)
+                        InfanTextField(textFieldTitle: "우편 번호", placeholder: "우편 번호를 검색하세요", text: $zipCode)
                             .disabled(true)
                         
                         NavigationLink {
@@ -95,10 +95,10 @@ struct LoginSignUpView: View {
                         }
                     }
                     
-                    InfanTextField(textFieldTitle: "주소", title: "우편 번호 검색 후, 자동 입력 됩니다", text: $address)
+                    InfanTextField(textFieldTitle: "주소", placeholder: "우편 번호 검색 후, 자동 입력 됩니다", text: $address)
                         .disabled(true)
                     
-                    InfanTextField(textFieldTitle: "상세주소", title: "건물, 아파트, 동/호수 입력", text: $detailAddress)
+                    InfanTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $detailAddress)
                     
                 }
                 .padding(.bottom, 30)

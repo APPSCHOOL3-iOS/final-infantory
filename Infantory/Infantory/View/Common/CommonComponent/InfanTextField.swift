@@ -10,7 +10,7 @@ import SwiftUI
 struct InfanTextField: View {
     
     var textFieldTitle: String? = nil
-    let title: String
+    let placeholder: String
     @Binding var text: String
     @FocusState private var isFocused: Bool
     
@@ -21,8 +21,7 @@ struct InfanTextField: View {
                     .font(.infanHeadlineBold)
             }
             
-            TextField(title, text: $text)
-            //            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+            TextField(placeholder, text: $text)
                 .font(.infanBody)
                 .foregroundColor(.black)
                 .focused($isFocused)
@@ -30,9 +29,8 @@ struct InfanTextField: View {
                 .disableAutocorrection(true)
                 .padding(.bottom, 4)
         
-            
             Rectangle()
-                .foregroundColor(isFocused ? Color.infanMain : Color.infanGray)
+                .foregroundColor(isFocused ? Color.black : Color.infanGray)
                 .frame(height: 1)
      
         }
