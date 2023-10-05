@@ -15,7 +15,7 @@ struct ApplyProductListView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(applyViewModel.applyProduct) { product in
+                ForEach($applyViewModel.applyProduct) { $product in
                     
                     VStack {
                         HStack {
@@ -38,7 +38,7 @@ struct ApplyProductListView: View {
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-                            ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                            ApplyDetailView(applyViewModel: applyViewModel, product: $product)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
