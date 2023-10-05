@@ -3,7 +3,7 @@ import Firebase
 import Combine
 
 class AuctionViewModel: ObservableObject {
-    
+    @Published var product: AuctionProduct = AuctionProduct.dummyProduct
     @Published var biddingInfos: [BiddingInfo] = []
     @Published var bidIncrement: Int = 5000
     
@@ -60,8 +60,10 @@ class AuctionViewModel: ObservableObject {
         newBidRef.setValue(bidData)
     }
     
+    var remainingTime: Double {
+        return product.endDate.timeIntervalSince(Date())
+    }
 }
-
 
 struct BiddingInfo {
     var id: UUID
