@@ -10,7 +10,6 @@ import SwiftUI
 struct ApplySheetView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    //    @State private var selection: Int = 0
     @State private var tempCount: Int = 0
     @State private var applyTicketCount: String = "0"
     @State private var isShowingAlert: Bool = false
@@ -18,6 +17,9 @@ struct ApplySheetView: View {
     @State private var isShowingToastMessage: Bool = false
     
     @Binding var isShowingApplySheet: Bool
+    
+    var product: ApplyProduct
+    var viewModel: ApplyProductViewModel
     
     var body: some View {
         VStack {
@@ -130,6 +132,7 @@ struct ApplySheetView: View {
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .cancel(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
+                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email)
                 isShowingApplySheet = false
             })
         }
@@ -138,7 +141,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(isShowingApplySheet: .constant(true))
+        ApplySheetView(isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]), viewModel: ApplyProductViewModel())
             .environmentObject(LoginStore())
     }
 }
