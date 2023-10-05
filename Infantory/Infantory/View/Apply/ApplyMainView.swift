@@ -34,7 +34,7 @@ struct ApplyMainView: View {
                         }
                     }
                     .navigationBarTitleDisplayMode(.inline)
-                    FloatingButton(action: {
+                    ApplyFloatingButton(action: {
                         print("push ok")
                     }, icon: "plus")
                 }
@@ -64,7 +64,7 @@ struct ApplyMainView: View {
         }
     }
 }
-struct FloatingButton: View {
+struct ApplyFloatingButton: View {
     let action: () -> Void
     let icon: String
     var body: some View {
