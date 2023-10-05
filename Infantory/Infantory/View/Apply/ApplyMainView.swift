@@ -8,35 +8,65 @@
 import SwiftUI
 
 struct ApplyMainView: View {
-    
     @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
+    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                NavigationLink {
-                    ApplyRegistrationView()
-                } label: {
-                    Text("임시")
+        if userViewModel.user.isInfluencer == UserType.influencer {
+            NavigationStack {
+                VStack {
+                    NavigationLink {
+                        AuctionRegistrationView()
+                    } label: {
+                        Text("임시")
+                    }
+                    Divider()
+                    ApplyProductListView(applyViewModel: applyViewModel)
+                    Divider()
                 }
-                
-                Divider()
-                ApplyProductListView(applyViewModel: applyViewModel)
-                Divider()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: EmptyView()) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: EmptyView()) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("경매")
+                            .font(.infanHeadlineBold)
                     }
                 }
+                .navigationBarTitleDisplayMode(.inline)
             }
-            
+        } else {
+            NavigationStack {
+                VStack {
+                    Divider()
+                    ApplyProductListView(applyViewModel: applyViewModel)
+                    Divider()
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: EmptyView()) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("경매")
+                            .font(.infanHeadlineBold)
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+            }
         }
     }
 }
+
 struct ApplyMainView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyMainView()
