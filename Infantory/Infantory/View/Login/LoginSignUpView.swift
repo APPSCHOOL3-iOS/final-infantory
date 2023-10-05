@@ -35,7 +35,7 @@ struct LoginSignUpView: View {
                     HStack {
                         
                         InfanTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
-                        
+                    
                         Button {
                             loginStore.duplicateNickName(nickName: nickName) { result in
                                 if nickName == "" {
@@ -99,7 +99,6 @@ struct LoginSignUpView: View {
                         .disabled(true)
                     
                     InfanTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $detailAddress)
-                    
                 }
                 .padding(.bottom, 30)
                 

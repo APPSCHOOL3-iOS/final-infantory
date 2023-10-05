@@ -2,7 +2,6 @@
 //  InfanTextField.swift
 //  Infantory
 //
-//  Created by 김성훈 on 2023/10/05.
 //
 
 import SwiftUI

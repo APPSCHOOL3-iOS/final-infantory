@@ -25,6 +25,7 @@ struct AuctionRegistrationView: View {
     
     var body: some View {
         ScrollView {
+
             VStack(spacing: 16) {
                 VStack(alignment: .leading) {
                     Text("상품 사진")
