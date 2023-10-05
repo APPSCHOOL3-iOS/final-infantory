@@ -10,7 +10,8 @@ import SwiftUI
 struct ApplyDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    var product: ApplyProduct
+    var applyViewModel: ApplyProductViewModel
+    @Binding var product: ApplyProduct
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -28,12 +29,18 @@ struct ApplyDetailView: View {
                 }
                 .infanHorizontalPadding()
                 
-                ApplyItemImageView()
+                ApplyItemImageView(product: product)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
+                
+                Text(product.description)
+                    .infanHorizontalPadding()
+                    .padding(.top)
+                    .padding(.bottom, 100)
+                    .multilineTextAlignment(.leading)
             }
             
-            ApplyFooter()
+            ApplyFooter(product: $product)
         }
     }
 }
@@ -43,6 +50,7 @@ struct ApplyFooter: View {
     @EnvironmentObject var loginStore: LoginStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
+    @Binding var product: ApplyProduct
     
     var body: some View {
         VStack {
@@ -75,9 +83,9 @@ struct ApplyFooter: View {
         )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingApplySheet) {
-            ApplySheetView(isShowingApplySheet: $isShowingApplySheet)
+            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductViewModel())
                 .presentationDragIndicator(.visible)
-                .presentationDetents([.medium])
+                .presentationDetents([.fraction(0.45)])
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
@@ -88,7 +96,8 @@ struct ApplyFooter: View {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+        ApplyDetailView(applyViewModel: ApplyProductViewModel(), product:
+                .constant(ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])))
             .environmentObject(LoginStore())
     }
 }

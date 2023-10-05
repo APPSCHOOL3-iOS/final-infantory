@@ -15,7 +15,7 @@ struct ApplyProductListView: View {
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(applyViewModel.applyProduct) { product in
+                ForEach($applyViewModel.applyProduct) { $product in
                     
                     VStack {
                         HStack {
@@ -38,7 +38,7 @@ struct ApplyProductListView: View {
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-                            ApplyDetailView(product: product)
+                            ApplyDetailView(applyViewModel: applyViewModel, product: $product)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
@@ -63,21 +63,12 @@ struct ApplyProductListView: View {
                                             }
                                         }
                                     } else {
-                                        ZStack(alignment: .topLeading) {
-                                            
-                                            Image("appleLogo")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
-                                                .cornerRadius(4)
-                                                .clipped()
-                                            
-                                            Label("03:22:15", systemImage: "timer")
-                                                .foregroundColor(.infanMain)
-                                                .font(.infanFootnote)
-                                                .frame(height: 24)
-                                                .padding(4)
-                                        }
+                                        Image("appleLogo")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
+                                            .cornerRadius(4)
+                                            .clipped()
                                     }
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("\(product.productName)")
@@ -89,11 +80,11 @@ struct ApplyProductListView: View {
                                         VStack {
                                             Text("시작일  10/4 8:00")
                                                 .font(.infanFootnote)
-                                            //                                                .foregroundColor(.infanGray)
+                                                .foregroundColor(.infanGray)
                                             
                                             Text("마감일  10/5 8:00")
                                                 .font(.infanFootnote)
-                                            //                                                .foregroundColor(.infanGray)
+                                                .foregroundColor(.infanGray)
                                         }
                                     }
                                     .padding(.vertical, 10)
@@ -111,7 +102,6 @@ struct ApplyProductListView: View {
             Task {
                 do {
                     try await applyViewModel.fetchApplyProducts()
-                    
                 } catch {
                 }
             }
