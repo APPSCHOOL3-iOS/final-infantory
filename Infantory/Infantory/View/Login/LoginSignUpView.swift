@@ -26,19 +26,16 @@ struct LoginSignUpView: View {
     
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
-                Text("*이메일") // 소셜로그인하면서 받아올 예정
-                TextField("\(loginStore.email)", text: $email)
-                    .overlay(UnderLineOverlay())
-                    .padding(.bottom)
+            VStack(alignment: .leading, spacing: 20) {
+    
+                InfanTextField(textFieldTitle: "이메일", title: loginStore.userName, text: $email)
                     .disabled(true)
                 
-                Group {
-                    Text("*닉네임")
+                VStack(alignment: .leading) {
                     HStack {
-                        TextField("\(loginStore.userName)", text: $nickName)
-                            .overlay(UnderLineOverlay())
-
+                        
+                        InfanTextField(textFieldTitle: "닉네임", title: loginStore.userName, text: $nickName)
+                        
                         Button {
                             loginStore.duplicateNickName(nickName: nickName) { result in
                                 if nickName == "" {
@@ -53,59 +50,56 @@ struct LoginSignUpView: View {
                                 }
                             }
                         } label: {
-                            Text("중복확인")
-                                .padding(5)
-                                .foregroundColor(.white)
-                                .background(Color.infanMain.opacity(0.8))
-                                .cornerRadius(5)
+                            VStack {
+                                Text(" ")
+                                    .font(.infanFootnote)
+                                Text("중복확인")
+                                    .font(.infanFootnote)
+                                    .padding(6)
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(5)
+                            }
                         }
                     }
                     Text(checkNickNameResult)
-                        .font(Font.infanFootnote)
+                        .font(.infanFootnote)
                         .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
                         .padding(.bottom)
                 }
+            
+                InfanTextField(textFieldTitle: "휴대폰 번호",
+                               title: "- 없이 입력",
+                               text: $phoneNumber)
                 
-                Text("이름")
-                TextField("\(loginStore.userName)", text: $name)
-                    .overlay(UnderLineOverlay())
-                    .padding(.bottom)
-                
-                Text("휴대폰 번호")
-                TextField("- 없이 입력", text: $phoneNumber)
-                    .overlay(UnderLineOverlay())
-                    .padding(.bottom)
-                
-                VStack(alignment: .leading) {
-                        Text("우편 번호") // 우편번호 검색 버튼 만들 예정
+                VStack(alignment: .leading, spacing: 20) {
                     HStack {
-                        TextField("우편 번호를 검색하세요", text: $zipCode)
-                            .overlay(UnderLineOverlay())
-                            .padding(.bottom)
+                        
+                        InfanTextField(textFieldTitle: "우편 번호", title: "우편 번호를 검색하세요", text: $zipCode)
                             .disabled(true)
                         
                         NavigationLink {
                             LoginAddressWebView(zipCode: $zipCode, address: $address)
                                 .navigationBarBackButtonHidden(true)
                         } label: {
-                            Text("우편번호")
-                                .padding(5)
-                                .foregroundColor(.white)
-                                .background(Color.infanMain.opacity(0.8))
-                                .cornerRadius(5)
+                            VStack {
+                                Text(" ")
+                                    .font(.infanFootnote)
+                                Text("우편번호")
+                                    .font(.infanFootnote)
+                                    .padding(6)
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(5)
+                            }
                         }
                     }
                     
-                    Text("주소")
-                    TextField("우편 번호 검색 후, 자동입력 됩니다.", text: $address)
-                        .overlay(UnderLineOverlay())
-                        .padding(.bottom)
+                    InfanTextField(textFieldTitle: "주소", title: "우편 번호 검색 후, 자동 입력 됩니다", text: $address)
                         .disabled(true)
                     
-                    Text("상세주소")
-                    TextField("건물, 아파트, 동/호수 입력", text: $detailAddress)
-                        .overlay(UnderLineOverlay())
-                        .padding(.bottom)
+                    InfanTextField(textFieldTitle: "상세주소", title: "건물, 아파트, 동/호수 입력", text: $detailAddress)
+                    
                 }
                 .padding(.bottom, 30)
                 
@@ -115,10 +109,10 @@ struct LoginSignUpView: View {
                         checkSignUp()
                     } label: {
                         Text("가입하기")
-                            .font(Font.infanTitle2Bold)
+                            .font(.infanHeadlineBold)
                             .frame(width: .screenWidth * 0.9, height: .screenHeight * 0.06)
                             .foregroundColor(.white)
-                            .background(Color.infanMain.opacity(0.8))
+                            .background(Color.infanMain)
                             .cornerRadius(5)
                     }
                     Spacer()
