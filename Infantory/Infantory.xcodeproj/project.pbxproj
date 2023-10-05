@@ -59,6 +59,8 @@
 		9E37657E2AC294520026CA6F /* DeliveryMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E37657D2AC294520026CA6F /* DeliveryMessageView.swift */; };
 		9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */; };
 		9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */; };
+		A00EE0A12ACE447200E03146 /* InfanTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00EE0A02ACE447200E03146 /* InfanTextField.swift */; };
+		A05C94F32ACF1374003243B7 /* InfanMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C94F22ACF1374003243B7 /* InfanMainButton.swift */; };
 		A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086C79E2ABD16DC00F0BF9B /* CGFloat+Extension.swift */; };
 		A086C7A12ABD205F00F0BF9B /* InfanNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086C7A02ABD205E00F0BF9B /* InfanNavigationBar.swift */; };
 		A086C7A42ABD278200F0BF9B /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = A086C7A32ABD278200F0BF9B /* FirebaseAppCheck */; };
@@ -72,6 +74,7 @@
 		A086C7B42ABD278200F0BF9B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A086C7B32ABD278200F0BF9B /* FirebaseStorage */; };
 		A086C7B62ABD278200F0BF9B /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = A086C7B52ABD278200F0BF9B /* FirebaseStorageCombine-Community */; };
 		A086C7BA2ABD308200F0BF9B /* View+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086C7B92ABD308200F0BF9B /* View+Modifier.swift */; };
+		A08EECBA2ACEF842009DFCDE /* InfanTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08EECB92ACEF842009DFCDE /* InfanTextEditor.swift */; };
 		A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5632AB9FB65000894FC /* InfantoryApp.swift */; };
 		A091E5682AB9FB68000894FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A091E5672AB9FB68000894FC /* Assets.xcassets */; };
 		A091E56B2AB9FB68000894FC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A091E56A2AB9FB68000894FC /* Preview Assets.xcassets */; };
@@ -153,9 +156,12 @@
 		9E37657D2AC294520026CA6F /* DeliveryMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMessageView.swift; sourceTree = "<group>"; };
 		9E5A8FB82ABACD7C00654850 /* PaymentMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodView.swift; sourceTree = "<group>"; };
 		9E5A8FBA2ABAD8B400654850 /* PayButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayButtonView.swift; sourceTree = "<group>"; };
+		A00EE0A02ACE447200E03146 /* InfanTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanTextField.swift; sourceTree = "<group>"; };
+		A05C94F22ACF1374003243B7 /* InfanMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanMainButton.swift; sourceTree = "<group>"; };
 		A086C79E2ABD16DC00F0BF9B /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		A086C7A02ABD205E00F0BF9B /* InfanNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanNavigationBar.swift; sourceTree = "<group>"; };
 		A086C7B92ABD308200F0BF9B /* View+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifier.swift"; sourceTree = "<group>"; };
+		A08EECB92ACEF842009DFCDE /* InfanTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanTextEditor.swift; sourceTree = "<group>"; };
 		A091E5602AB9FB65000894FC /* Infantory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Infantory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A091E5632AB9FB65000894FC /* InfantoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryApp.swift; sourceTree = "<group>"; };
 		A091E5672AB9FB68000894FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -466,6 +472,9 @@
 			isa = PBXGroup;
 			children = (
 				8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */,
+				A00EE0A02ACE447200E03146 /* InfanTextField.swift */,
+				A08EECB92ACEF842009DFCDE /* InfanTextEditor.swift */,
+				A05C94F22ACF1374003243B7 /* InfanMainButton.swift */,
 				ECCFA1C22ACF015300DEAA5C /* InfanTextField.swift */,
 			);
 			path = CommonComponent;
@@ -650,6 +659,8 @@
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */,
+				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
+				A00EE0A12ACE447200E03146 /* InfanTextField.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				ECCFA1C32ACF015300DEAA5C /* InfanTextField.swift in Sources */,
@@ -662,6 +673,7 @@
 				113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */,
 				A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */,
 				A091E5A72ABC740D000894FC /* Font+Extension.swift in Sources */,
+				A08EECBA2ACEF842009DFCDE /* InfanTextEditor.swift in Sources */,
 				64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */,
 				A091E5912ABAA61C000894FC /* LoginMainView.swift in Sources */,
 				64A6826F2AC2C55E007BF628 /* PaymentAddressWebView.swift in Sources */,
@@ -677,6 +689,7 @@
 				0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */,
 				0CD2F7052ABD50F500FCF88E /* User.swift in Sources */,
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
+				A05C94F32ACF1374003243B7 /* InfanMainButton.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
 				844BB4EF2ACD470B004891DD /* ApplyItemImageView.swift in Sources */,

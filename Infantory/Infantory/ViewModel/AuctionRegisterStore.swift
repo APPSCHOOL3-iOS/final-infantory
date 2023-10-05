@@ -16,18 +16,29 @@ class AuctionRegisterStore: ObservableObject {
     private let dbRef = Firestore.firestore().collection("AuctionProducts")
     private let storage = Storage.storage().reference()
     
-    init(){}
+    init() {
+        
+    }
     
-    func addAuctionProduct(auctionProduct: AuctionProduct, images: [UIImage], completion: @escaping (Bool) -> ()) async {
+    func addAuctionProduct(auctionProduct: AuctionProduct,
+                           images: [UIImage],
+                           completion: @escaping (Bool) -> ()) async throws {
         var auctionProduct = auctionProduct
         await uploadImages(images, auctionProduct: auctionProduct) { urls in
             auctionProduct.productImageURLStrings = urls
-            try? self.dbRef.addDocument(from: auctionProduct)
+            do {
+                try self.dbRef.addDocument(from: auctionProduct)
+            } catch {
+                completion(false)
+            }
             completion(true)
         }
     }
     
-    func uploadImages(_ images: [UIImage], auctionProduct: AuctionProduct, completion: @escaping ([String]) -> Void) async {
+    func uploadImages(_ images: [UIImage],
+                      auctionProduct: AuctionProduct,
+                      completion: @escaping ([String]) -> Void) async {
+        
         var urlStringList: [String] = []
         for (index, image) in images.enumerated() {
             guard let imageData = image.jpegData(compressionQuality: 0.1) else {
@@ -35,7 +46,7 @@ class AuctionRegisterStore: ObservableObject {
             }
             let imageRef = storage.child("auctionProduct/\(auctionProduct.id)/\(auctionProduct.productImageURLStrings[index])") //경로
             
-            let _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
+            _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
                 if let error = error {
                     print("Error uploading image \(index): \(error.localizedDescription)")
                 } else {
@@ -62,9 +73,15 @@ class AuctionRegisterStore: ObservableObject {
                           imageStrings: [String],
                           user: User
     ) -> AuctionProduct {
-        let product: AuctionProduct = AuctionProduct(id: UUID().uuidString, productName: title, productImageURLStrings: imageStrings, description: itemDescription, influencerID: user.id ?? UUID().uuidString, startDate: Date(), endDate: Date(), minPrice: Int(startingPrice) ?? 0)
+        let product: AuctionProduct = AuctionProduct(id: UUID().uuidString,
+                                                     productName: title,
+                                                     productImageURLStrings: imageStrings,
+                                                     description: itemDescription,
+                                                     influencerID: user.id ?? UUID().uuidString,
+                                                     startDate: Date(),
+                                                     endDate: Date(),
+                                                     minPrice: Int(startingPrice) ?? 0)
         
         return product
     }
 }
-
