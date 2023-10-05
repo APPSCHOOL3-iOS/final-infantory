@@ -35,31 +35,30 @@ struct ApplyMainView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     ApplyFloatingButton(action: {
-                        print("push ok")
                     }, icon: "plus")
                 }
             }
         } else {
             NavigationStack {
-                    VStack {
-                        Divider()
-                        ApplyProductListView(applyViewModel: applyViewModel)
-                        Divider()
-                    }
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: EmptyView()) {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        
-                        ToolbarItem(placement: .navigationBarLeading) {
-                            Text("응모")
-                                .font(.infanHeadlineBold)
+                VStack {
+                    Divider()
+                    ApplyProductListView(applyViewModel: applyViewModel)
+                    Divider()
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: EmptyView()) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
                         }
                     }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("응모")
+                            .font(.infanHeadlineBold)
+                    }
+                }
             }
         }
     }
@@ -85,7 +84,6 @@ struct ApplyFloatingButton: View {
                         .offset(x: -25, y: -25)
                 }
             }
-            
         }
     }
 }

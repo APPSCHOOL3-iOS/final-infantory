@@ -35,7 +35,6 @@ struct AuctionMainView: View {
                     }
                     .navigationBarTitleDisplayMode(.inline)
                     AuctionFloatingButton(action: {
-                        print("push ok")
                     }, icon: "plus")
                 }
             }
