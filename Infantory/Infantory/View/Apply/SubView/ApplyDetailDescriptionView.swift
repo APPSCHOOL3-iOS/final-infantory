@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ApplyDetailDescriptionView: View {
     
-    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
+    @State private var isShowingApplySheet: Bool = false
     
     var body: some View {
         VStack {
             
             Button(action: {
-                
+                isShowingApplySheet = true
             }, label: {
                 HStack {
                     Image("applyTicket1")
@@ -32,11 +32,12 @@ struct ApplyDetailDescriptionView: View {
                 .cornerRadius(15)
             })
         }
+        
     }
 }
 
 struct ApplyDetailDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
+        ApplyDetailDescriptionView()
     }
 }

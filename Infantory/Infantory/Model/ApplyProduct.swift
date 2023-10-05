@@ -6,16 +6,18 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 // 응모
-struct ApplyProduct: Productable, Identifiable, Codable {
-    var id: String
+struct ApplyProduct: Productable, Identifiable, Codable {    
+    @DocumentID var id: String?
     var productName: String
     var productImageURLStrings: [String]
     var description: String
     
     // 인플루언서 누구인지, 낙찰자
     var influencerID: String
+    var influencerNickname: String
     var winningUserID: String?
     
     // 응모 시작일, 마감일
@@ -38,6 +40,7 @@ extension ApplyProduct {
             productImageURLStrings: ["image1", "image2", "image3"],
             description: "This is the description for Product 1",
             influencerID: "influencer1",
+            influencerNickname: "",
             winningUserID: "user1",
             startDate: Date(),
             endDate: Date().addingTimeInterval(86400), // 1 day from now
@@ -51,6 +54,7 @@ extension ApplyProduct {
             productImageURLStrings: ["image4", "image5"],
             description: "This is the description for Product 2",
             influencerID: "influencer2",
+            influencerNickname: "",
             winningUserID: nil,
             startDate: Date().addingTimeInterval(86400), // 1 day from now
             endDate: Date().addingTimeInterval(172800), // 2 days from now

@@ -8,46 +8,87 @@
 import SwiftUI
 
 struct ApplyDetailView: View {
-    @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var applyProductViewModel: ApplyProductViewModel
+    
+    @EnvironmentObject var loginStore: LoginStore
+    var product: ApplyProduct
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            ScrollView {
+                ApplyBuyerView(product: product)
+                HStack {
+                    Image("Influencer1")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(20)
+                    Text(product.influencerNickname)
+                        .font(.infanTitle2)
+                    Spacer()
+                }
+                .infanHorizontalPadding()
+                
+                ApplyItemImageView()
+                    .frame(width: .screenWidth - 40, height: .screenWidth - 40)
+                    .cornerRadius(8)
+            }
+            
+            ApplyFooter()
+        }
+    }
+}
+
+struct ApplyFooter: View {
+    
+    @EnvironmentObject var loginStore: LoginStore
+    @State private var isShowingApplySheet: Bool = false
+    @State private var isShowingLoginSheet: Bool = false
     
     var body: some View {
         VStack {
-            HStack {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 35)
-//                Text("\(userViewModel.user.name)")
-                Spacer()
-                
-                HStack {
-                    Image(systemName: "ticket")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 25, height: 25)
-//                    Text(": \(userViewModel.user.applyTicket[0].count)")
-//                        .font(.infanBody)
-//                        .bold()
+            Button {
+                if loginStore.userUid.isEmpty {
+                    isShowingLoginSheet = true
+                } else {
+                    isShowingApplySheet.toggle()
                 }
+            } label: {
+                Text("응모하기")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.infanMain)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
+                    )
             }
-            Divider()
-                .padding([.horizontal, .top])
-            Section {
-                HStack {
-                    Text("이런 상품들은 어때요?")
-                    Spacer()
-                }
-                VStack {
-                    ApplyDetailDescriptionView(auctionProductViewModel: AuctionProductViewModel())
-                }
-            }
+            .offset(y: -20)
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 110)
+        .background(
+            Rectangle()
+                .stroke(lineWidth: 0.1)
+                .background(.white)
+            
+        )
+        .offset(x: 0, y: 40)
+        .sheet(isPresented: $isShowingApplySheet) {
+            ApplySheetView(isShowingApplySheet: $isShowingApplySheet)
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium])
+        }
+        .sheet(isPresented: $isShowingLoginSheet, content: {
+            LoginSheetView()
+                .environmentObject(loginStore)
+        })
     }
 }
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(userViewModel: UserViewModel(), applyProductViewModel: ApplyProductViewModel())
+        ApplyDetailView(product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+            .environmentObject(LoginStore())
     }
 }

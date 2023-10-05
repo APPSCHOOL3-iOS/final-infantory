@@ -8,7 +8,7 @@
 import Foundation
 
 protocol Productable {
-    var id: String { get set }
+    var id: String? { get set }
     var productName: String { get set }
     var productImageURLStrings: [String] { get set }
     var description: String { get set }

@@ -52,6 +52,12 @@ final class LoginStore: ObservableObject {
                                                                         zonecode: "123456",
                                                                         addressDetail: "5번째로 큰 파라솔")
                                                         )
+
+    var totalApplyTicketCount: Int {
+        return currentUser.applyTicket?.reduce(0) { (result, applyTicket) in
+            return result + applyTicket.count
+        } ?? 0
+    }
     
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
@@ -255,7 +261,7 @@ final class LoginStore: ObservableObject {
         var ticketList: [ApplyTicket] = []
         
         let ticketDocument = try await Firestore.firestore()
-            .collection("Users").document(userUID).collection("ApplyTicket").getDocuments()
+            .collection("Users").document(userUID).collection("ApplyTickets").getDocuments()
         let documents = ticketDocument.documents
         for document in documents {
             let applyTicket = try document.data(as: ApplyTicket.self)
