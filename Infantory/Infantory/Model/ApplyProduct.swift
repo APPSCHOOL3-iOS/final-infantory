@@ -40,7 +40,7 @@ extension ApplyProduct {
             productImageURLStrings: ["image1", "image2", "image3"],
             description: "This is the description for Product 1",
             influencerID: "influencer1",
-            influencerNickname: "",
+            influencerNickname: "", // 추가 됨
             winningUserID: "user1",
             startDate: Date(),
             endDate: Date().addingTimeInterval(86400), // 1 day from now

@@ -19,7 +19,6 @@ struct ApplyMainView: View {
                 } label: {
                     Text("임시")
                 }
-                
                 Divider()
                 ApplyProductListView(applyViewModel: applyViewModel)
                 Divider()
@@ -33,10 +32,10 @@ struct ApplyMainView: View {
                     }
                 }
             }
-            
         }
     }
 }
+
 struct ApplyMainView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyMainView()

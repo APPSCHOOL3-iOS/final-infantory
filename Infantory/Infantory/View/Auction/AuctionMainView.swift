@@ -38,7 +38,6 @@ struct AuctionMainView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            
         }
     }
 }
