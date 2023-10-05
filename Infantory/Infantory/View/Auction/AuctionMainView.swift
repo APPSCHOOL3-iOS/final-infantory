@@ -9,35 +9,62 @@ import SwiftUI
 
 struct AuctionMainView: View {
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                NavigationLink {
-                    AuctionRegistrationView()
-                } label: {
-                    Text("임시")
+        if userViewModel.user.isInfluencer == UserType.influencer {
+            NavigationStack {
+                VStack {
+                    NavigationLink {
+                        AuctionRegistrationView()
+                    } label: {
+                        Text("임시")
+                    }
+                    Divider()
+                    AuctionButtonCell()
+                    ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                    Divider()
                 }
-                Divider()
-                AuctionButtonCell()
-                ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
-                Divider()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: EmptyView()) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: EmptyView()) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("경매")
+                            .font(.infanHeadlineBold)
                     }
                 }
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("경매")
-                        .font(.infanHeadlineBold)
-                }
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationBarTitleDisplayMode(.inline)
+        } else {
+            NavigationStack {
+                VStack {
+                    Divider()
+                    AuctionButtonCell()
+                    ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                    Divider()
+                }
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: EmptyView()) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("경매")
+                            .font(.infanHeadlineBold)
+                    }
+                }
+                .navigationBarTitleDisplayMode(.inline)
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ enum PaymentMethod: String, CaseIterable, Codable {
 extension User {
     static let dummyUser = User(
         id: "sdoYpk7SdDTcGTxgIQJy",
-        isInfluencer: UserType.user,
+        isInfluencer: UserType.influencer,
         profileImageURLString: "https://example.com/profile/1.jpg",
         name: "상필 갓",
         phoneNumber: "123-456-7890",
