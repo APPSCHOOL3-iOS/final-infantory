@@ -21,6 +21,7 @@ struct ApplyMyTicketView: View {
                 .frame(width: 30, height: 30)
                 .aspectRatio(contentMode: .fit)
             Text("\(loginStore.totalApplyTicketCount) 장")
+                .font(.infanTitle2)
             // Text("1 장")
         }
         .padding()

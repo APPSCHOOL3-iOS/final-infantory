@@ -75,7 +75,7 @@ struct ApplyFooter: View {
         )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingApplySheet) {
-            ApplySheetView()
+            ApplySheetView(isShowingApplySheet: $isShowingApplySheet)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         }
