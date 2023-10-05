@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ApplyMainView: View {
+    
     @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
     
     var body: some View {
@@ -20,7 +21,7 @@ struct ApplyMainView: View {
                 }
                 
                 Divider()
-                ApplyProductListView(userViewModel: UserViewModel(), applyProductViewModel: applyViewModel)
+                ApplyProductListView(applyViewModel: applyViewModel)
                 Divider()
             }
             .navigationBarTitleDisplayMode(.inline)

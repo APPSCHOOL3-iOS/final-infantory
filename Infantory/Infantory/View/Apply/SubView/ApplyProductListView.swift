@@ -8,109 +8,121 @@
 import SwiftUI
 
 struct ApplyProductListView: View {
-    @ObservedObject var userViewModel: UserViewModel
-    @ObservedObject var applyProductViewModel: ApplyProductViewModel
+    
+    @StateObject var applyViewModel: ApplyProductViewModel
     @State private var heartButton: Bool = false
     
     var body: some View {
         ScrollView {
             LazyVStack {
-                ForEach(applyProductViewModel.applyProduct) { product in
-                    HStack {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .cornerRadius(25)
-                        
-                        Text("\(userViewModel.user.name)")
-                            .font(.infanHeadline)
-                        
-                        Spacer()
-                        Button(action: {
-                            heartButton.toggle()
-                        }, label: {
-                            Image(systemName: heartButton ? "heart.fill" : "heart")
+                ForEach(applyViewModel.applyProduct) { product in
+
+                    VStack {
+                        HStack {
+                            Image("Influencer1")
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 25)
-                                .foregroundColor(.infanDarkGray)
-                        })
-                    }
-                    .infanHorizontalPadding()
-                    
-                    NavigationLink {
-                        ApplyDetailView(userViewModel: userViewModel, applyProductViewModel: applyProductViewModel)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 16) {
-                            HStack {
-                                if product.productImageURLStrings.count > 0 {
-                                    Image("\(product.productImageURLStrings[0])")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 150, height: 140)
-                                } else {
-                                    Image("appleLogo")
-                                        .resizable()
-                                        .frame(width: 150, height: 140)
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 20) {
-                                    HStack {
-                                        Text("Hot")
-                                            .font(.infanFootnote)
-                                            .frame(width: 40, height: 20)
-                                            .foregroundColor(.infanDarkGray)
-                                            .background(Color.infanRed)
-                                            .cornerRadius(10)
-                                        Text("New")
-                                            .font(.infanFootnote)
-                                            .frame(width: 40, height: 20)
-                                            .foregroundColor(.infanDarkGray)
-                                            .background(Color.infanGreen)
-                                            .cornerRadius(10)
-                                    }
-                                    VStack(alignment: .leading, spacing: 20) {
-                                        Text("상품명: \(product.productName)")
-                                            .font(.infanTitle2)
-                                            .foregroundColor(.infanDarkGray)
-                                        VStack(alignment: .leading) {
-                                            Text("남은시간: 03:02:01")
-                                                .font(.infanBody)
-                                                .foregroundColor(.infanDarkGray)
-                                            Text("응모 횟수: \(product.applyUserIDs.count )")
-                                                .font(.infanBody)
-                                                .foregroundColor(.infanDarkGray)
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
+                            
+                            Text(product.influencerNickname)
+                                .font(.infanFootnoteBold)
+                            
+                            Spacer()
+                            Label("03:22:15", systemImage: "timer")
+                                .foregroundColor(.infanMain)
+                                .font(.infanFootnote)
+                                .frame(height: 24)
+                                .padding(4)
+                        }
+                        .infanHorizontalPadding()
+                        
+                        NavigationLink {
+                            ApplyDetailView(product: product)
+                        } label: {
+                            VStack(alignment: .leading, spacing: 20) {
+                                HStack(spacing: 16) {
+                                    if product.productImageURLStrings.count > 0 {
+                                        if let url = URL(string: product.productImageURLStrings[0]) {
+                                            AsyncImage(url: url) { image in
+
+                                                ZStack(alignment: .topLeading) {
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                        .cornerRadius(4)
+                                                        .clipped()
+                                                }
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .scaledToFill()
+                                                    .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                    .cornerRadius(4)
+                                                    .clipped()
+                                            }
+                                        }
+                                    } else {
+                                        ZStack(alignment: .topLeading) {
+
+                                            Image("appleLogo")
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
+                                                .cornerRadius(4)
+                                                .clipped()
+
+                                            Label("03:22:15", systemImage: "timer")
+                                                .foregroundColor(.infanMain)
+                                                .font(.infanFootnote)
+                                                .frame(height: 24)
+                                                .padding(4)
                                         }
                                     }
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text("\(product.productName)")
+                                            .font(.infanBody)
+                                            .foregroundColor(.infanDarkGray)
+                                            .multilineTextAlignment(.leading)
+
+                                        Spacer()
+                                        VStack {
+                                            Text("시작일  10/4 8:00")
+                                                .font(.infanFootnote)
+//                                                .foregroundColor(.infanGray)
+
+                                            Text("마감일  10/5 8:00")
+                                                .font(.infanFootnote)
+//                                                .foregroundColor(.infanGray)
+                                        }
+                                    }
+                                    .padding(.vertical, 10)
                                 }
+                                Divider()
                             }
                             .infanHorizontalPadding()
-                            Rectangle()
-                                .fill(Color.infanLightGray)
-                                .frame(height: 2)
                         }
                     }
+                    .padding(.top)
                 }
             }
         }
-        .padding(.vertical)
-        .onAppear {
-            Task {
-                do {
-                    try await applyProductViewModel.fetchApplyProducts()
-                } catch {
-                    
-                }
-            }
-        }
+//        .onAppear {
+//            Task {
+//                do {
+//                    try await applyViewModel.fetchApplyProducts()
+//
+//                } catch {
+//                }
+//            }
+//        }
     }
 }
 
 struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ApplyProductListView(userViewModel: UserViewModel(), applyProductViewModel: ApplyProductViewModel())
+            ApplyProductListView(applyViewModel: ApplyProductViewModel())
         }
     }
 }
