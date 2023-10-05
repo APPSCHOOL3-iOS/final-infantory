@@ -14,6 +14,12 @@ struct ApplyMainView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                NavigationLink {
+                    ApplyRegistrationView()
+                } label: {
+                    Text("임시")
+                }
+                
                 Divider()
                 ApplyProductListView(applyViewModel: applyViewModel)
                 Divider()

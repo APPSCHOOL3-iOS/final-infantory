@@ -20,14 +20,14 @@ struct AuctionButtonCell: View {
                     if selectedFilter == filter {
                         Text(filter.rawValue)
                             .padding(10)
-                            .font(.infanHeadlineBold)
+                            .font(.infanFootnoteBold)
                             .foregroundColor(.white)
                             .background(Color.infanDarkGray)
                             .cornerRadius(20)
                     } else {
                         Text(filter.rawValue)
                             .padding(10)
-                            .font(.infanBody)
+                            .font(.infanFootnote)
                             .foregroundColor(.infanDarkGray)
                             .overlay(
                             RoundedRectangle(cornerRadius: 20)

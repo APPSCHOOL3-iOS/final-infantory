@@ -27,8 +27,7 @@ struct AuctionBuyerView: View {
                 .stroke(lineWidth: 1)
                 .fill(Color.infanMain))
         .infanHorizontalPadding()
-        .frame(width: CGFloat.screenWidth, height: 80)
-        
+        .frame(width: CGFloat.screenWidth, height: 80)   
         .onAppear {
             Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                 if currentIndex < 5 {
