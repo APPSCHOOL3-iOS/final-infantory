@@ -13,20 +13,14 @@ struct ApplyMainView: View {
     @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
-        if userViewModel.user.isInfluencer != UserType.influencer {
+        if userViewModel.user.isInfluencer == UserType.influencer {
             NavigationStack {
                 ZStack {
                     VStack {
-                        NavigationLink {
-                            ApplyRegistrationView()
-                        } label: {
-                            Text("임시")
-                        }
                         Divider()
                         ApplyProductListView(applyViewModel: applyViewModel)
                         Divider()
                     }
-                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: EmptyView()) {
@@ -34,7 +28,12 @@ struct ApplyMainView: View {
                                     .foregroundColor(.black)
                             }
                         }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Text("응모")
+                                .font(.infanHeadlineBold)
+                        }
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                     FloatingButton(action: {
                         print("push ok")
                     }, icon: "plus")
@@ -42,7 +41,6 @@ struct ApplyMainView: View {
             }
         } else {
             NavigationStack {
-                ZStack {
                     VStack {
                         Divider()
                         ApplyProductListView(applyViewModel: applyViewModel)
@@ -56,11 +54,12 @@ struct ApplyMainView: View {
                                     .foregroundColor(.black)
                             }
                         }
+                        
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Text("응모")
+                                .font(.infanHeadlineBold)
+                        }
                     }
-                    FloatingButton(action: {
-                        print("push ok")
-                    }, icon: "plus")
-                }
             }
         }
     }
