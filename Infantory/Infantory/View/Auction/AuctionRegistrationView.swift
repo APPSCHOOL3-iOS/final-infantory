@@ -23,16 +23,10 @@ struct AuctionRegistrationView: View {
     @State private var auctionCustumeSelectedImages: [UIImage] = []
     @State private var auctionCustumeSelectedImageNames: [String] = []
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
                 HStack {
-                    // 네비게이션링크를 사용하면 백버튼이 생성됨
-                    //                    Image(systemName: "xmark")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 20, height: 20)
                     Spacer()
                     Text("내 경매 등록")
                         .font(.title2)
@@ -60,7 +54,7 @@ struct AuctionRegistrationView: View {
                         TextField("제목", text: $title)
                             .autocapitalization(.none)
                         Divider()
-                        TextField("응모시작일", text: $apply)
+                        TextField("경매시작일", text: $apply)
                             .autocapitalization(.none)
                         Divider()
                         ZStack(alignment: .top) {

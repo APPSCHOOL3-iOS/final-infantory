@@ -14,31 +14,28 @@ struct ApplyMainView: View {
     var body: some View {
         if userViewModel.user.isInfluencer == UserType.influencer {
             NavigationStack {
-                VStack {
-                    NavigationLink {
-                        AuctionRegistrationView()
-                    } label: {
-                        Text("임시")
+                ZStack {
+                    VStack {
+                        Divider()
+                        ApplyProductListView(applyViewModel: applyViewModel)
+                        Divider()
                     }
-                    Divider()
-                    ApplyProductListView(applyViewModel: applyViewModel)
-                    Divider()
-                }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: EmptyView()) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.black)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: EmptyView()) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Text("응모")
+                                .font(.infanHeadlineBold)
                         }
                     }
-                    
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Text("경매")
-                            .font(.infanHeadlineBold)
-                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    ApplyFloatingButton(action: {
+                    }, icon: "plus")
                 }
-                .navigationBarTitleDisplayMode(.inline)
             }
         } else {
             NavigationStack {
@@ -57,9 +54,33 @@ struct ApplyMainView: View {
                     }
                     
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Text("경매")
+                        Text("응모")
                             .font(.infanHeadlineBold)
                     }
+                }
+            }
+        }
+    }
+}
+struct ApplyFloatingButton: View {
+    let action: () -> Void
+    let icon: String
+    var body: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                NavigationLink {
+                    ApplyRegistrationView()
+                } label: {
+                    Image(systemName: icon)
+                        .font(.system(size: 25))
+                        .foregroundColor(.white)
+                        .frame(width: 60, height: 60)
+                        .background(Color.infanMain)
+                        .cornerRadius(30)
+                        .shadow(radius: 10)
+                        .offset(x: -25, y: -25)
                 }
                 .navigationBarTitleDisplayMode(.inline)
             }
