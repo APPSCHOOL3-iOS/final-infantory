@@ -45,19 +45,36 @@ final class ApplyProductViewModel: ObservableObject {
         let product = ApplyProduct(id: "", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "", influencerNickname: "", startDate: Date(), endDate: Date(), applyUserIDs: [])
         return product
     }
-    
+
     func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String) {
         
-        var tempArray: [String] = []
-        
-        for _ in 1...ticketCount {
-            tempArray.append(userID)
+        let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
+
+        documentReference.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // 문서가 존재하는 경우, 현재 배열 필드 값을 가져옵니다.
+                var currentArray = document.data()?["applyUserIDs"] as? [String] ?? []
+
+                // 새 값을 배열에 추가하고 중복된 값도 허용합니다.
+                for _ in 1 ... ticketCount {
+                    currentArray.append(userID)
+                }
+
+                // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
+                documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
+                    if let error = error {
+                        print("Error updating document: \(error)")
+                    } else {
+                        print("Document successfully updated")
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
         }
-        Firestore.firestore().collection("ApplyProducts").document(product.id ?? "(ID 없음)")
-            .setData(["applyUserIDs": tempArray], merge: true)
-//        Task {
-//           try await self.fetchApplyProducts()
-//        }
+        Task {
+           try await self.fetchApplyProducts()
+        }
     }
     
     func reduceApplyTicket() {
