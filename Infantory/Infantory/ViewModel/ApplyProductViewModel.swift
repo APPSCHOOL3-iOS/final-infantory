@@ -11,22 +11,8 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class ApplyProductViewModel: ObservableObject {
-    @Published var applyProduct: [ApplyProduct] = [
-        ApplyProduct(id: "1",
-        productName: "Product 1",
-        productImageURLStrings: ["image1", "image2", "image3"],
-        description: "This is the description for Product 1",
-        influencerID: "influencer1",
-        influencerNickname: "볼빨간사춘기",
-        winningUserID: "user1",
-        startDate: Date(),
-        endDate: Date().addingTimeInterval(86400), // 1 day from now
-        applyUserIDs: ["user2", "user3"],
-        winningPrice: 100
-    )
-    ]
+    @Published var applyProduct: [ApplyProduct] = []
 
-    
     //현재 유저 패치작업
     @MainActor
     func fetchApplyProducts() async throws {
@@ -35,7 +21,6 @@ final class ApplyProductViewModel: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
         self.applyProduct = products
-        
     }
     
     @MainActor

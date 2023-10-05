@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct ApplyItemImageView: View {
+    
+    var product: ApplyProduct
+    
     var body: some View {
         TabView {
-            ForEach(0..<5) { _ in
-                Image("Influencer1")
-                    .resizable()
-                    .scaledToFill()
-                    .clipped()
+            ForEach(product.productImageURLStrings, id: \.self) { url in
+                AsyncImage(url: URL(string: url), content: { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .clipped()
+                }, placeholder: {
+                    ProgressView()
+                })
             }
         }
         .tabViewStyle(PageTabViewStyle())
@@ -23,6 +30,7 @@ struct ApplyItemImageView: View {
 
 struct ApplyItemImage_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyItemImageView()
+        ApplyItemImageView(product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+            .environmentObject(LoginStore())
     }
 }
