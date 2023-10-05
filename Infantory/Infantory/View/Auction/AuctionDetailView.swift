@@ -12,11 +12,13 @@ struct AuctionDetailView: View {
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     @StateObject var auctionViewModel: AuctionViewModel = AuctionViewModel()
     
+    @State var timer: String = ""
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-        
+                
                 Divider()
                 
                 AuctionBuyerView(auctionViewModel: auctionViewModel)
@@ -30,9 +32,7 @@ struct AuctionDetailView: View {
                         .font(.infanTitle2)
                     Spacer()
                     // 남은 시간
-                    Label("\(InfanDateFormatter.shared.timeString(from: auctionViewModel.biddingInfos.last?.timeStamp ?? Date()))", systemImage: "timer")
-                        .foregroundColor(.infanMain)
-                        .font(.infanFootnote)
+                    TimerView(remainingTime: auctionViewModel.remainingTime)
                 }
                 .padding(.top)
                 .infanHorizontalPadding()
@@ -47,8 +47,8 @@ struct AuctionDetailView: View {
             
             Footer(auctionViewModel: AuctionViewModel())
             
-        }     
-
+        }
+        
     }
 }
 
