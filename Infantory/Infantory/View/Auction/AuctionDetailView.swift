@@ -19,7 +19,7 @@ struct AuctionDetailView: View {
         
                 Divider()
                 
-                AuctionBuyerView()
+                AuctionBuyerView(auctionViewModel: auctionViewModel)
                 
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
@@ -30,7 +30,7 @@ struct AuctionDetailView: View {
                         .font(.infanTitle2)
                     Spacer()
                     // 남은 시간
-                    Label("03:22:15", systemImage: "timer")
+                    Label("\(InfanDateFormatter.shared.timeString(from: auctionViewModel.biddingInfos.last?.timeStamp ?? Date()))", systemImage: "timer")
                         .foregroundColor(.infanMain)
                         .font(.infanFootnote)
                 }
@@ -47,7 +47,8 @@ struct AuctionDetailView: View {
             
             Footer(auctionViewModel: AuctionViewModel())
             
-        }        
+        }     
+
     }
 }
 
@@ -61,10 +62,9 @@ struct Footer: View {
         VStack {
             Button {
                 isShowingAuctionBidSheet.toggle()
-                print("footer \(auctionViewModel.biddingInfos)")
             } label: {
-                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 123)")
-                    .font(.title2)
+                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) 원")
+                    .font(.infanTitle2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .background(
@@ -81,11 +81,10 @@ struct Footer: View {
             Rectangle()
                 .stroke(lineWidth: 0.1)
                 .background(.white)
-            
         )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingAuctionBidSheet, content: {
-            AuctionBidSheetView()
+            AuctionBidSheetView(auctionViewModel: auctionViewModel)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         })

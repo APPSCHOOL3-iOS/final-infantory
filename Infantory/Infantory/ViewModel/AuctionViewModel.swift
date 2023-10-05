@@ -1,10 +1,13 @@
 import Foundation
 import Firebase
+import Combine
 
 class AuctionViewModel: ObservableObject {
-    private var dbRef: DatabaseReference!
     
     @Published var biddingInfos: [BiddingInfo] = []
+    @Published var bidIncrement: Int = 5000
+    
+    private var dbRef: DatabaseReference!
     
     init() {
         self.dbRef = Database.database().reference()
@@ -12,34 +15,34 @@ class AuctionViewModel: ObservableObject {
     }
     
     func fetchData() {   dbRef.child("biddingInfos/1").observe(.value, with: { snapshot in
-            var parsedBiddingInfos: [BiddingInfo] = []
-            
-            for child in snapshot.children {
-                if let childSnapshot = child as? DataSnapshot,
-                   let bidData = childSnapshot.value as? [String: Any],
-                   let participants = bidData["participants"] as? String,
-                   let biddingPrice = bidData["biddingPrice"] as? Int,
-                   let timeStamp = (bidData["timeStamp"] as? Double).map({ Date(timeIntervalSince1970: $0) }) {
-                    
-                    let biddingInfo = BiddingInfo(
-                        id: UUID(uuidString: childSnapshot.key) ?? UUID(),
-                        timeStamp: timeStamp,
-                        participants: participants,
-                        biddingPrice: biddingPrice
-                    )
-                    
-                    parsedBiddingInfos.append(biddingInfo)
-                    
-                }
+        var parsedBiddingInfos: [BiddingInfo] = []
+        
+        for child in snapshot.children {
+            if let childSnapshot = child as? DataSnapshot,
+               let bidData = childSnapshot.value as? [String: Any],
+               let participants = bidData["participants"] as? String,
+               let biddingPrice = bidData["biddingPrice"] as? Int,
+               let timeStamp = (bidData["timeStamp"] as? Double).map({ Date(timeIntervalSince1970: $0) }) {
+                
+                let biddingInfo = BiddingInfo(
+                    id: UUID(uuidString: childSnapshot.key) ?? UUID(),
+                    timeStamp: timeStamp,
+                    participants: participants,
+                    biddingPrice: biddingPrice
+                )
+                
+                parsedBiddingInfos.append(biddingInfo)
                 
             }
-//        print(parsedBiddingInfos)
             
-            // 파싱된 데이터로 모델 업데이트
-            self.biddingInfos = parsedBiddingInfos
-//            print(self.biddingInfos)
-            // 필요하다면 UI 업데이트를 위해 추가적인 로직을 여기에 추가할 수 있습니다.
-        })
+        }
+        //        print(parsedBiddingInfos)
+        
+        // 파싱된 데이터로 모델 업데이트
+        self.biddingInfos = parsedBiddingInfos
+        //            print(self.biddingInfos)
+        // 필요하다면 UI 업데이트를 위해 추가적인 로직을 여기에 추가할 수 있습니다.
+    })
     }
     
     func addBid(forAuction auctionId: String, biddingInfo: BiddingInfo) {
@@ -56,13 +59,9 @@ class AuctionViewModel: ObservableObject {
         // 데이터 쓰기
         newBidRef.setValue(bidData)
     }
-}
-
-struct Auction {
-    var biddingInfos: [BiddingInfo]
-    var bidIncrement: Int
     
 }
+
 
 struct BiddingInfo {
     var id: UUID
@@ -70,5 +69,3 @@ struct BiddingInfo {
     var participants: String
     var biddingPrice: Int
 }
-
-

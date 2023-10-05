@@ -9,15 +9,20 @@ import SwiftUI
 
 struct AuctionBuyerView: View {
     @State private var currentIndex = 0
+    
+    @ObservedObject var auctionViewModel: AuctionViewModel
+    
     var body: some View {
         
         NavigationLink {
             AuctionBuyerDetailView()
         } label: {
             HStack {
-                Text("경매상황 ")
+                
+                Text("\(auctionViewModel.biddingInfos.last?.participants ?? "")")
+                
                 Spacer()
-                Text("123원")
+                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
             }
             .foregroundStyle(.black)
             .padding()
@@ -42,6 +47,6 @@ struct AuctionBuyerView: View {
 
 struct AuctionBuyerView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBuyerView()
+        AuctionBuyerView(auctionViewModel: AuctionViewModel())
     }
 }
