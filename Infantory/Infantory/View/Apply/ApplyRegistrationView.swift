@@ -22,7 +22,6 @@ struct ApplyRegistrationView: View {
     @State private var custumeSelectedImages: [UIImage] = []
     @State private var custumeSelectedImageNames: [String] = []
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
