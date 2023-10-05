@@ -28,9 +28,15 @@ struct ApplyDetailView: View {
                 }
                 .infanHorizontalPadding()
                 
-                ApplyItemImageView()
+                ApplyItemImageView(product: product)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
+                
+                Text(product.description)
+                    .infanHorizontalPadding()
+                    .padding(.top)
+                    .padding(.bottom, 100)
+                    .multilineTextAlignment(.leading)
             }
             
             ApplyFooter()
@@ -77,7 +83,7 @@ struct ApplyFooter: View {
         .sheet(isPresented: $isShowingApplySheet) {
             ApplySheetView(isShowingApplySheet: $isShowingApplySheet)
                 .presentationDragIndicator(.visible)
-                .presentationDetents([.medium])
+                .presentationDetents([.fraction(0.45)])
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
