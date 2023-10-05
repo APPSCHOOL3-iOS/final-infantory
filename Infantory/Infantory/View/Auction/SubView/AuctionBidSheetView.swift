@@ -12,10 +12,48 @@ import SwiftUI
 struct AuctionBidSheetView: View {
     @ObservedObject var auctionViewModel: AuctionViewModel
     
-    @State private var selectedAmount: Int = 0 // 선택된 금액
     @State private var selectedIndex: Int = 1 // 선택된 버튼
+    @State private var selectedAmount: Int = 0// 선택된 금액
     
     var body: some View {
+        VStack {
+            headerView
+            
+            ForEach(1..<4) { index in
+                bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
+                
+            }
+            
+            Button {
+                auctionViewModel.addBid(biddingInfo: BiddingInfo(id: UUID(),
+                                                                 timeStamp: Date(),
+                                                                 participants: "갓희찬",
+                                                                 biddingPrice: selectedAmount))
+            } label: {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.infanMain)
+                    .overlay {
+                        Text("\(selectedAmount) 입찰하기")
+                            .font(.infanHeadlineBold)
+                            .foregroundStyle(.white)
+                        
+                    }
+                    .infanHorizontalPadding()
+                    .frame(width: .infinity, height: 54)
+            }
+        }
+        .onAppear {
+            self.auctionViewModel.onDataUpdate = {
+                self.selectedAmount = auctionViewModel.biddingInfos.last?.biddingPrice ?? 0
+                print("hello")
+            }
+        }
+        
+    }
+}
+
+extension AuctionBidSheetView {
+    var headerView: some View {
         VStack {
             Text("입찰가 선택")
                 .font(.infanTitle2Bold)
@@ -27,32 +65,12 @@ struct AuctionBidSheetView: View {
             HStack {
                 Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
                 Text("•")
-                Label("\(InfanDateFormatter.shared.timeString(from: auctionViewModel.biddingInfos.last?.timeStamp ?? Date()))", systemImage: "timer")
-
+                TimerView(remainingTime: 10000)
+                
             }
             .foregroundColor(.infanMain)
             .font(.infanFootnote)
             .padding(.bottom)
-            
-            ForEach(1..<4) { index in
-                bidSelectButton(bidAmount:  (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
-             
-            }
-            
-            Button {
-//                auctionViewModel.addBid(forAuction: "1", biddingInfo: BiddingInfo(id: UUID(), timeStamp: Date(), participants: "갓희찬", biddingPrice: 50000))
-            } label: {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.infanMain)
-                    .overlay {
-                        Text("\(selectedAmount) 입찰하기")
-                            .font(.infanHeadlineBold)
-                            .foregroundStyle(.white)
-                            
-                    }
-                    .infanHorizontalPadding()
-                    .frame(width: .infinity, height: 54)
-            }
         }
     }
 }
@@ -61,38 +79,23 @@ extension AuctionBidSheetView {
     func bidSelectButton(bidAmount: Int, index: Int) -> some View {
         
         Button {
-            // 입찰 금액 선택 버튼
             selectedAmount = bidAmount
             selectedIndex = index
         } label: {
-            if index == selectedIndex {
-                Rectangle()
-                    .stroke(lineWidth: 1)
-                    .background(Color.infanMain)
-                    .cornerRadius(8)
-//                    .fill(Color.infanMain)
-                    .opacity(0.3)
-                    .overlay {
-                        Text("\(bidAmount)")
-                            .font(.infanHeadline)
-                            .foregroundColor(.infanMain)
-                            .padding()
-                    }
-                
-                    .infanHorizontalPadding()
-                    .frame(width: .infinity, height: 54)
-            } else {
+            
+            ZStack {
+                Text("\(bidAmount)")
+                    .font(.infanHeadline)
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .cornerRadius(8)
-                    .overlay {
-                        Text("\(bidAmount)")
-                            .font(.infanHeadline)
-                            .padding()
-                    }
-                    .infanHorizontalPadding()
+                    .foregroundColor(index == selectedIndex ? Color.infanMain : Color.white)
+                    .opacity(0.3)
+                    .frame(width: .infinity, height: 54)
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(style: StrokeStyle())
+                    .foregroundColor(.gray)
                     .frame(width: .infinity, height: 54)
             }
+            .infanHorizontalPadding()
         }
         .buttonStyle(.plain)
         .padding(.bottom, 8)
