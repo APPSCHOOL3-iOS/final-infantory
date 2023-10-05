@@ -54,9 +54,7 @@ class AuctionRegisterStore: ObservableObject {
             }
         }
     }
-    
-    @MainActor
-    
+
     func makeAuctionModel(title: String,
                           apply: String,
                           itemDescription: String,

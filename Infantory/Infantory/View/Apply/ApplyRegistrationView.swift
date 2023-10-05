@@ -95,7 +95,7 @@ struct ApplyRegistrationView: View {
                                     try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
                                 }
                             }
-                            //                            dismiss()
+                            dismiss()
                         } label: {
                             Text("작성 완료")
                                 .frame(width: 360, height: 40)

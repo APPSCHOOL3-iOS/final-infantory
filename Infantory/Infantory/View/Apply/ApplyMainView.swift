@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ApplyMainView: View {
-    
     @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
     @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     
@@ -83,10 +82,12 @@ struct ApplyFloatingButton: View {
                         .shadow(radius: 10)
                         .offset(x: -25, y: -25)
                 }
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
     }
 }
+
 struct ApplyMainView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyMainView()
