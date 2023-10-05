@@ -14,7 +14,7 @@ import FirebaseFirestoreSwift
 final class ApplyProductViewModel: ObservableObject {
     
     @Published var applyProduct: [ApplyProduct] = []
-    
+
     //현재 유저 패치작업
     @MainActor
     func fetchApplyProducts() async throws {
@@ -48,7 +48,7 @@ final class ApplyProductViewModel: ObservableObject {
     }
     
     @MainActor
-    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String, completion: @escaping (ApplyProduct) -> Void) {
+    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String, userUID: String, completion: @escaping (ApplyProduct) -> Void) {
         
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
         
@@ -69,7 +69,7 @@ final class ApplyProductViewModel: ObservableObject {
                     } else {
                         print("Document successfully updated")
                         Task {
-                            try await self.fetchProduct(db: documentReference) { product in
+                            try await self.fetchProduct(ticketCount: ticketCount, product: product, userUID: userUID, db: documentReference) { product in
                                 completion(product)
                             }
                         }
@@ -79,11 +79,16 @@ final class ApplyProductViewModel: ObservableObject {
                 print("Document does not exist")
             }
         }
+        
+        
     }
     @MainActor
-    func fetchProduct(db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
+    func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
         let ApplyDocument = try await db.getDocument()
         let product = try ApplyDocument.data(as: ApplyProduct.self)
+        let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "\(product.productName) 응모", count: -ticketCount)
+        let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
         completion(product)
     }
+ 
 }

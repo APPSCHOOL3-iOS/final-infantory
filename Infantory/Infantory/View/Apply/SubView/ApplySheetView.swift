@@ -32,8 +32,8 @@ struct ApplySheetView: View {
                 Spacer()
                 
                 Button {
-                    if 1 >= Int(applyTicketCount) ?? 0 {
-                        applyTicketCount = "1"
+                    if 0 >= Int(applyTicketCount) ?? 0 {
+                        applyTicketCount = "0"
                     } else {
                         tempCount = (Int(applyTicketCount) ?? 0) - 1
                         applyTicketCount = String(tempCount)
@@ -52,7 +52,7 @@ struct ApplySheetView: View {
                             if intValue > loginStore.totalApplyTicketCount {
                                 applyTicketCount = String(loginStore.totalApplyTicketCount)
                             } else if intValue < 1 {
-                                applyTicketCount = "1"
+                                applyTicketCount = "0"
                             }
                         } else {
                             // 정수로 변환할 수 없는 경우 기본값 설정
@@ -132,9 +132,13 @@ struct ApplySheetView: View {
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .cancel(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
-                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email) { product in
+                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email , userUID: loginStore.userUid) { product in
                     self.product = product
+                    Task {
+                        try await loginStore.fetchUser(userUID: loginStore.userUid)
+                    }
                 }
+                
                 isShowingApplySheet = false
             })
         }
