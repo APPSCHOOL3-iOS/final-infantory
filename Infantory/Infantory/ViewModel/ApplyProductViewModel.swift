@@ -11,6 +11,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class ApplyProductViewModel: ObservableObject {
+    
     @Published var applyProduct: [ApplyProduct] = []
 
     //현재 유저 패치작업
@@ -43,5 +44,23 @@ final class ApplyProductViewModel: ObservableObject {
         
         let product = ApplyProduct(id: "", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "", influencerNickname: "", startDate: Date(), endDate: Date(), applyUserIDs: [])
         return product
+    }
+    
+    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String) {
+        
+        var tempArray: [String] = []
+        
+        for _ in 1...ticketCount {
+            tempArray.append(userID)
+        }
+        Firestore.firestore().collection("ApplyProducts").document(product.id ?? "(ID 없음)")
+            .setData(["applyUserIDs": tempArray], merge: true)
+//        Task {
+//           try await self.fetchApplyProducts()
+//        }
+    }
+    
+    func reduceApplyTicket() {
+        
     }
 }

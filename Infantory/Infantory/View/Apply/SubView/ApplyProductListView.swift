@@ -38,7 +38,7 @@ struct ApplyProductListView: View {
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-                            ApplyDetailView(product: product)
+                            ApplyDetailView(applyViewModel: applyViewModel, product: product)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
