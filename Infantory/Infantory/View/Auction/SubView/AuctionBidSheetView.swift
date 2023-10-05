@@ -10,6 +10,8 @@ import SwiftUI
 // 헤드라인, 바디, 헤드라인 볼드, 풋노트?
 
 struct AuctionBidSheetView: View {
+    @ObservedObject var auctionViewModel: AuctionViewModel
+    
     @State private var selectedAmount: Int = 0 // 선택된 금액
     @State private var selectedIndex: Int = 1 // 선택된 버튼
     
@@ -23,9 +25,9 @@ struct AuctionBidSheetView: View {
                 .padding(.bottom, 5)
             
             HStack {
-                Text("11000 원")
+                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
                 Text("•")
-                Label("03:22:15", systemImage: "timer")
+                Label("\(InfanDateFormatter.shared.timeString(from: auctionViewModel.biddingInfos.last?.timeStamp ?? Date()))", systemImage: "timer")
 
             }
             .foregroundColor(.infanMain)
@@ -33,12 +35,12 @@ struct AuctionBidSheetView: View {
             .padding(.bottom)
             
             ForEach(1..<4) { index in
-                    bidSelectButton(bidAmount: 10000 * index, index: index)
+                bidSelectButton(bidAmount:  (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
              
             }
             
             Button {
-
+//                auctionViewModel.addBid(forAuction: "1", biddingInfo: BiddingInfo(id: UUID(), timeStamp: Date(), participants: "갓희찬", biddingPrice: 50000))
             } label: {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.infanMain)
@@ -99,7 +101,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView()
+        AuctionBidSheetView(auctionViewModel: AuctionViewModel())
     }
 }
 
