@@ -76,22 +76,6 @@ struct FloatingButton: View {
                 NavigationLink {
                     ApplyRegistrationView()
                 } label: {
-<<<<<<< Updated upstream
-                    Text("임시")
-                }
-                
-                Divider()
-                ApplyProductListView(applyViewModel: applyViewModel)
-                Divider()
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: EmptyView()) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
-                    }
-=======
                     Image(systemName: icon)
                         .font(.system(size: 25))
                         .foregroundColor(.white)
@@ -100,7 +84,6 @@ struct FloatingButton: View {
                         .cornerRadius(30)
                         .shadow(radius: 10)
                         .offset(x: -25, y: -25)
->>>>>>> Stashed changes
                 }
             }
             
