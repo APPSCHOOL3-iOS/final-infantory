@@ -23,101 +23,84 @@ struct AuctionRegistrationView: View {
     @State private var auctionCustumeSelectedImages: [UIImage] = []
     @State private var auctionCustumeSelectedImageNames: [String] = []
     
-    
     var body: some View {
         ScrollView {
-            VStack(spacing: 15) {
-                HStack {
-                    // 네비게이션링크를 사용하면 백버튼이 생성됨
-                    //                    Image(systemName: "xmark")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 20, height: 20)
-                    Spacer()
-                    Text("내 경매 등록")
-                        .font(.title2)
-                        .bold()
-                    Spacer()
-                }
+
+            VStack(spacing: 16) {
                 VStack(alignment: .leading) {
                     Text("상품 사진")
-                        .font(.system(size: 17))
-                        .bold()
+                        .font(.infanHeadlineBold)
+                        
                     ApplyImagePickerView(selectedImages: $auctionProductSelectedImages, selectedImageNames: $auctionProductSelectedImageNames)
                 }
-                .padding(.leading)
                 
                 VStack(alignment: .leading) {
                     Text("착장 사진")
-                        .font(.system(size: 17))
-                        .bold()
+                        .font(.infanHeadlineBold)
+                        
                     ApplyImagePickerView(selectedImages: $auctionCustumeSelectedImages, selectedImageNames: $auctionCustumeSelectedImageNames)
                 }
-                .padding(.leading)
                 
-                VStack(spacing: 20) {
-                    Group {
-                        TextField("제목", text: $title)
-                            .autocapitalization(.none)
-                        Divider()
-                        TextField("응모시작일", text: $apply)
-                            .autocapitalization(.none)
-                        Divider()
-                        ZStack(alignment: .top) {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(lineWidth: 1)
-                                .foregroundColor(.gray)
-                                .frame(width: 360, height: 140)
-                            TextField("애장품 설명", text: $itemDescription)
-                                .autocapitalization(.none)
-                                .padding([.leading, .top])
-                        }
-                        TextField("시작가", text: $startingPrice)
-                            .autocapitalization(.none)
-                        Divider()
-                    }
+                VStack(spacing: 16) {
+                    
+                    InfanTextField(textFieldTitle: "애장품",
+                                   placeholder: "애장품 이름을 입력해주세요.",
+                                   text: $title)
+                    
+                    InfanTextEditor(textFieldTitle: "소개",
+                                    placeHolder: "애장품을 소개해주세요.",
+                                    text: $itemDescription)
+                    
+                    //TODO: 경매시작, 종료일도 받아야함 + 시작일은 TextField가 아닌 Date로 받아야 하고, 시작가는 Int 키보드로 받기.
+                    TextField("경매시작", text: $apply)
+                        .autocapitalization(.none)
+                    
+                    TextField("시작가", text: $startingPrice)
+                        .keyboardType(.numberPad)
+                    
+                    Divider()
+                    
                     Spacer()
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 1)
-                            .foregroundColor(.black)
-                            .frame(width: 360, height: 40)
-                        Button {
-                            if title.isEmpty {
-                                showAlert = true
-                                alertMessage = "제목을 입력해주세요."
-                            } else if itemDescription.isEmpty {
-                                showAlert = true
-                                alertMessage = "상품 설명을 입력해주세요."
-                            } else if startingPrice.isEmpty {
-                                showAlert = true
-                                alertMessage = "시작가를 입력해주세요."
-                            } else {
-                                var product = registViewModel.makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice, imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames, user: loginStore.currentUser)
-                                
-                                Task {
-                                    await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
-                                    })
-                                }
+                    
+                    InfanMainButton(text: "등록하기") {
+                        if title.isEmpty {
+                            showAlert = true
+                            alertMessage = "제목을 입력해주세요."
+                        } else if itemDescription.isEmpty {
+                            showAlert = true
+                            alertMessage = "상품 설명을 입력해주세요."
+                        } else if startingPrice.isEmpty {
+                            showAlert = true
+                            alertMessage = "시작가를 입력해주세요."
+                        } else {
+                            let product = registViewModel.makeAuctionModel(title: title,
+                                                                           apply: apply,
+                                                                           itemDescription: itemDescription,
+                                                                           startingPrice: startingPrice,
+                                                                           imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,
+                                                                           user: loginStore.currentUser)
+                            
+                            Task {
+                                try await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
+                                })
                             }
-                        } label: {
-                            Text("작성 완료")
-                                .frame(width: 360, height: 40)
-                                .foregroundColor(.black)
                         }
                     }
                 }
-                .padding([.leading, .trailing], 20)
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
+            .infanHorizontalPadding()
         }
+        .infanNavigationBar(title: "내 경매 등록")
     }
 }
 
 struct AuctionRegistrationView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionRegistrationView()
+        NavigationStack {
+            AuctionRegistrationView()
+        }
     }
 }

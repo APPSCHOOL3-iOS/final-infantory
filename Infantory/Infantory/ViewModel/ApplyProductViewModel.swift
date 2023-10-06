@@ -10,6 +10,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
+
 final class ApplyProductViewModel: ObservableObject {
     
     @Published var applyProduct: [ApplyProduct] = []
@@ -45,39 +46,44 @@ final class ApplyProductViewModel: ObservableObject {
         let product = ApplyProduct(id: "", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "", influencerNickname: "", startDate: Date(), endDate: Date(), applyUserIDs: [])
         return product
     }
-
-    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String) {
+    
+    @MainActor
+    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String, userUID: String, completion: @escaping (ApplyProduct) -> Void) {
         
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
-
         documentReference.getDocument { (document, error) in
             if let document = document, document.exists {
                 // 문서가 존재하는 경우, 현재 배열 필드 값을 가져옵니다.
                 var currentArray = document.data()?["applyUserIDs"] as? [String] ?? []
-
                 // 새 값을 배열에 추가하고 중복된 값도 허용합니다.
                 for _ in 1 ... ticketCount {
                     currentArray.append(userID)
                 }
-
+                
                 // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
                 documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
                     if let error = error {
-                        print("Error updating document: \(error)")
+                        print("Error updating document: (error)")
                     } else {
                         print("Document successfully updated")
+                        Task {
+                            try await self.fetchProduct(ticketCount: ticketCount, product: product, userUID: userUID, db: documentReference) { product in
+                                completion(product)
+                            }
+                        }
                     }
                 }
             } else {
                 print("Document does not exist")
             }
-        }
-        Task {
-           try await self.fetchApplyProducts()
-        }
+        }     
     }
-    
-    func reduceApplyTicket() {
-        
+    @MainActor
+    func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
+        let ApplyDocument = try await db.getDocument()
+        let product = try ApplyDocument.data(as: ApplyProduct.self)
+        let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "\(product.productName) 응모", count: -ticketCount)
+        let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
+        completion(product)
     }
 }

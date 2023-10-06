@@ -11,7 +11,7 @@ struct ApplyDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
     var applyViewModel: ApplyProductViewModel
-    var product: ApplyProduct
+    @Binding var product: ApplyProduct
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -40,7 +40,7 @@ struct ApplyDetailView: View {
                     .multilineTextAlignment(.leading)
             }
             
-            ApplyFooter(product: product)
+            ApplyFooter(product: $product)
         }
     }
 }
@@ -50,7 +50,8 @@ struct ApplyFooter: View {
     @EnvironmentObject var loginStore: LoginStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
-    var product: ApplyProduct
+    @Binding var product: ApplyProduct
+
     
     var body: some View {
         VStack {
@@ -83,7 +84,8 @@ struct ApplyFooter: View {
         )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingApplySheet) {
-            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: product, viewModel: ApplyProductViewModel())
+
+            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductViewModel())
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
         }
@@ -96,7 +98,8 @@ struct ApplyFooter: View {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(applyViewModel: ApplyProductViewModel(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+        ApplyDetailView(applyViewModel: ApplyProductViewModel(), product:
+                .constant(ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])))
             .environmentObject(LoginStore())
     }
 }
