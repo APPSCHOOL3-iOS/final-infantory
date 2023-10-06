@@ -686,6 +686,7 @@
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				ECCFA1C32ACF015300DEAA5C /* InfanTextField.swift in Sources */,
+				844BB4F72ACFD7BF004891DD /* InfanFetchUser.swift in Sources */,
 				11183A6F2ACD40D30010012C /* AuctionViewModel.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
