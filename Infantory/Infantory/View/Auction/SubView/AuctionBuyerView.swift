@@ -18,7 +18,6 @@ struct AuctionBuyerView: View {
             AuctionBuyerDetailView()
         } label: {
             HStack {
-                
                 Text("👑 \(auctionViewModel.biddingInfos.last?.participants ?? "")")
                 
                 Spacer()
@@ -50,3 +49,6 @@ struct AuctionBuyerView_Previews: PreviewProvider {
         AuctionBuyerView(auctionViewModel: AuctionViewModel())
     }
 }
+//#Preview {
+//    AuctionBuyerView()
+//}

@@ -16,62 +16,57 @@ struct ApplyImagePickerView: View {
     @State private var isGalleryPermissionGranted = false
     
     var body: some View {
-        VStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    if selectedImages.count < 5 {
-                        Button {
-                            requestGalleryPermission()
-                            if isGalleryPermissionGranted {
-                                isImagePickerPresented.toggle()
-                            }
-                            
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.gray, lineWidth: 1)
-                                    .frame(width: 100, height: 150)
-                                VStack {
-                                    Image(systemName: "plus")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                }
-                            }
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                if selectedImages.count < 5 {
+                    Button {
+                        requestGalleryPermission()
+                        if isGalleryPermissionGranted {
+                            isImagePickerPresented.toggle()
                         }
-                    }
-                    ForEach(selectedImages, id: \.self) { image in
-                        Image(uiImage: image)
-                            .resizable()
-                            .cornerRadius(10)
-                            .frame(width: 100, height: 150)
-                            .padding(.leading, 5)
-                            .aspectRatio(contentMode: .fill)
-                            .overlay(alignment: .topTrailing) {
-                                Button {
-                                    guard let index = selectedImages.firstIndex(where: {
-                                        $0 == image
-                                    }) else {
-                                        return
-                                    }
-                                    selectedImages.remove(at: index)
-                                    selectedImageNames.remove(at: index)
-                                } label: {
-                                    Image(systemName: "xmark.square.fill")
-                                        .foregroundColor(.black)
-                                }
-                            }
+                        
+                    } label: {
+                        ZStack {
+                            
+                            Image(systemName: "plus")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.black)
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color.infanGray, lineWidth: 2)
+                                .frame(width: 100, height: 100)                        }
                     }
                 }
-            }
-            .sheet(isPresented: $isImagePickerPresented) {
-                MultiPhotoPickerView(selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
+                ForEach(selectedImages, id: \.self) { image in
+                    Image(uiImage: image)
+                        .resizable()
+                        .cornerRadius(10)
+                        .frame(width: 100, height: 100)
+                        .padding(.leading, 5)
+                        .aspectRatio(contentMode: .fill)
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                guard let index = selectedImages.firstIndex(where: {
+                                    $0 == image
+                                }) else {
+                                    return
+                                }
+                                selectedImages.remove(at: index)
+                                selectedImageNames.remove(at: index)
+                            } label: {
+                                Image(systemName: "xmark.square.fill")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                }
             }
         }
-        .padding()
+        .sheet(isPresented: $isImagePickerPresented) {
+            MultiPhotoPickerView(selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
+        }
     }
-    
+
     func requestGalleryPermission() {
         PHPhotoLibrary.requestAuthorization { status in
             DispatchQueue.main.async {
@@ -112,8 +107,7 @@ struct MultiPhotoPickerView: UIViewControllerRepresentable {
         }
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let imageURL = info[.imageURL] as? URL
-            {
+            if let imageURL = info[.imageURL] as? URL {
                 let selectedImageNames = imageURL.lastPathComponent
                 parent.selectedImageNames.append(selectedImageNames)
             }

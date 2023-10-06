@@ -20,7 +20,7 @@ class PaymentViewModel: ObservableObject {
     init(user: User, product: Productable) {
         paymentInfo = PaymentInfo(
             userId: user.id ?? "",
-            product: product.id,
+            product: product.id ?? "",
             address: user.address,
             deliveryRequest: .door,
             deliveryCost: 3000,

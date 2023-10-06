@@ -20,11 +20,15 @@ struct LoginSheetView: View {
                     .fill(Gradient(colors: [.blue, .purple]))
                     .ignoresSafeArea()
                 VStack {
-                    Text("W E L C O M E").font(.headline.bold())
-                        .foregroundColor(.indigo)
+                    Text("W E L C O M E")
+                        .font(.headline.bold())
+                        .foregroundColor(.infanMain)
+                    
                     Spacer().frame(height: 30)
-                    Text("로그인 후").font(.largeTitle.bold())
-                    Text("이용해주세요.").font(.largeTitle.bold())
+                    Text("로그인 후\n이용해주세요.")
+                        .font(.infanTitle2Bold)
+                        .multilineTextAlignment(.center)
+                    
                     Spacer().frame(height: 30)
                     Group {
                         Button {
@@ -43,7 +47,7 @@ struct LoginSheetView: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 330, height: 50)
+                                    .frame(height: 54)
                                     .foregroundColor(.yellow)
                                 
                                 HStack(alignment: .center) {
@@ -65,7 +69,7 @@ struct LoginSheetView: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .frame(width: 330, height: 50)
+                                    .frame(height: 54)
                                     .foregroundColor(.black)
                                 
                                 HStack(alignment: .center) {
@@ -85,12 +89,13 @@ struct LoginSheetView: View {
                         .buttonStyle(.plain)
                     }
                 }
+                .infanHorizontalPadding()
             }
             .fullScreenCover(isPresented: $isShowingSignUp) {
                 LoginSignUpView()
             }
         }
-        .presentationDetents([.height(UIScreen.main.bounds.height * 0.7)])
+        .presentationDetents([.height(CGFloat.screenHeight * 0.7)])
     }
 }
 

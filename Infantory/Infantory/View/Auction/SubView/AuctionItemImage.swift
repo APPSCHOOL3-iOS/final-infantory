@@ -26,3 +26,7 @@ struct AuctionItemImage_Previews: PreviewProvider {
         AuctionItemImage()
     }
 }
+
+//#Preview {
+//    AuctionItemImage()
+//}

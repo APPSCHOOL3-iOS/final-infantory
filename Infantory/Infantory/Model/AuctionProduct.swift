@@ -6,10 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct AuctionProduct: Productable, Identifiable, Codable {
-    
-    var id: String
+    @DocumentID var id: String?
     var productName: String
     var productImageURLStrings: [String]
     var description: String

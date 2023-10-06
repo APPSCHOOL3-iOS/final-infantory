@@ -22,7 +22,6 @@ struct ApplyRegistrationView: View {
     @State private var custumeSelectedImages: [UIImage] = []
     @State private var custumeSelectedImageNames: [String] = []
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
@@ -96,7 +95,7 @@ struct ApplyRegistrationView: View {
                                     try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
                                 }
                             }
-                            //                            dismiss()
+                            dismiss()
                         } label: {
                             Text("작성 완료")
                                 .frame(width: 360, height: 40)

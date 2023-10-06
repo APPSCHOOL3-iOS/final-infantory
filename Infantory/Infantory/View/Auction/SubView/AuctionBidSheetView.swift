@@ -11,12 +11,10 @@ import SwiftUI
 
 struct AuctionBidSheetView: View {
     @ObservedObject var auctionViewModel: AuctionViewModel
-    
     @Binding var isShowingAuctionBidSheet: Bool
     
     @State private var selectedIndex: Int = 4 // 선택된 버튼
     @State private var selectedAmount: Int = 0 // 선택된 금액
-    
     @State private var showAlert: Bool = false
     
     var isSelected: Bool {
@@ -74,6 +72,36 @@ extension AuctionBidSheetView {
             }
             .padding(.bottom)
         }
+        .onAppear {
+            self.auctionViewModel.onDataUpdate = {
+                self.selectedAmount = auctionViewModel.biddingInfos.last?.biddingPrice ?? 0
+                print("hello")
+            }
+        }
+        
+    }
+}
+
+extension AuctionBidSheetView {
+    var headerView: some View {
+        VStack {
+            Text("입찰가 선택")
+                .font(.infanTitle2Bold)
+                .padding(.bottom, 5)
+            
+            Text("멋쟁이 신발")
+                .padding(.bottom, 5)
+            
+            HStack {
+                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
+                Text("•")
+                TimerView(remainingTime: 10000)
+                
+            }
+            .foregroundColor(.infanMain)
+            .font(.infanFootnote)
+            .padding(.bottom)
+        }
     }
 }
 
@@ -109,3 +137,7 @@ struct AuctionBidSheetView_Previews: PreviewProvider {
         AuctionBidSheetView(auctionViewModel: AuctionViewModel(), isShowingAuctionBidSheet: .constant(true))
     }
 }
+
+//#Preview {
+//    AuctionBidSheetView()
+//}

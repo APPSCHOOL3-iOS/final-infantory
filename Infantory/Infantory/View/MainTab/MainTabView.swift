@@ -9,8 +9,8 @@ import SwiftUI
 import Photos
 
 struct MainTabView: View {
-    
-    @StateObject private var loginStore = LoginStore()
+
+    @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
     
     var body: some View {
@@ -40,6 +40,7 @@ struct MainTabView: View {
                     Text("응모")
                 }
                 .tag(2)
+                .environmentObject(loginStore)
             
         ActivityMainView()
                 .tabItem {
@@ -62,13 +63,7 @@ struct MainTabView: View {
         }
         
         .tint(Color.infanMain)
-        .onAppear {
-            Task {
-                if !loginStore.userUid.isEmpty {
-                    try await loginStore.fetchUser(userUID: loginStore.userUid)
-                }
-            }
-        }
+        .infanFetchUser()
     }
 }
 
