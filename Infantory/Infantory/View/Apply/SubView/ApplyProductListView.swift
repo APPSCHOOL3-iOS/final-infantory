@@ -83,6 +83,7 @@ struct ApplyProductListView: View {
                                             Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
+
                                         }
                                     }
                                     .padding(.vertical, 10)

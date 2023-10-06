@@ -335,7 +335,6 @@
 		A091E5742ABAA487000894FC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5A22ABAAF54000894FC /* CommonView */,
 				A091E5AA2ABC76B6000894FC /* MainTab */,
 				A091E57A2ABAA4C3000894FC /* Splash */,
@@ -455,6 +454,7 @@
 		A091E5872ABAA584000894FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5882ABAA5A0000894FC /* HomeMainView.swift */,
 			);
 			path = Home;

@@ -11,6 +11,7 @@ struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
+
     
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
@@ -68,6 +69,7 @@ struct ApplyMainView: View {
                             .font(.infanHeadlineBold)
                     }
                 }
+                .navigationBarTitleDisplayMode(.inline)
             }
             .infanFetchUser()
         }
