@@ -15,6 +15,7 @@ final class ApplyProductViewModel: ObservableObject {
     @Published var applyProduct: [ApplyProduct] = []
     @Published var selectedFilter: ApplyFilter = .inProgress
 
+
     //현재 유저 패치작업
     @MainActor
     func fetchApplyProducts() async throws {
@@ -86,4 +87,5 @@ final class ApplyProductViewModel: ObservableObject {
         let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
         completion(product)
     }
+ 
 }

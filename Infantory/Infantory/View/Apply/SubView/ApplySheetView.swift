@@ -123,8 +123,8 @@ struct ApplySheetView: View {
                   secondaryButton: .default(Text("응모하기")) {
                 viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid) { product in
                     self.product = product
-                    
                 }
+                
                 isShowingApplySheet = false
             })
         }

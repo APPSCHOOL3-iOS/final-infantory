@@ -19,7 +19,6 @@ struct InfanFetchUser: ViewModifier {
                         try await loginStore.fetchUser(userUID: loginStore.userUid)
                     }
                 }
-                print("♥️♥️♥️♥️♥️♥️♥️♥️fetch♥️♥️♥️♥️♥️♥️♥️")
             }
     }
 }

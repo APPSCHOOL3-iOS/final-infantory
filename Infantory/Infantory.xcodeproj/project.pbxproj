@@ -335,6 +335,7 @@
 		A091E5742ABAA487000894FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5A22ABAAF54000894FC /* CommonView */,
 				A091E5AA2ABC76B6000894FC /* MainTab */,
 				A091E57A2ABAA4C3000894FC /* Splash */,
@@ -454,7 +455,6 @@
 		A091E5872ABAA584000894FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5882ABAA5A0000894FC /* HomeMainView.swift */,
 			);
 			path = Home;
@@ -681,6 +681,9 @@
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				ECCFA1C32ACF015300DEAA5C /* InfanTextField.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* InfanFetchUser.swift in Sources */,
+				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
+				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
+				ECCFA1C32ACF015300DEAA5C /* InfanTextField.swift in Sources */,
 				11183A6F2ACD40D30010012C /* AuctionViewModel.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
