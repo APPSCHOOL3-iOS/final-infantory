@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct ApplyMainView: View {
+    
+    @EnvironmentObject var loginStore: LoginStore
     @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
-    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
-        if userViewModel.user.isInfluencer == UserType.influencer {
+        if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
                 ZStack {
                     VStack {
                         Divider()
-                        ApplyFilterButtonView()
-                        ApplyProductListView(applyViewModel: applyViewModel)
+                        ApplyFilterButtonView(applyViewModel: applyViewModel)
+                        switch applyViewModel.selectedFilter {
+                        case .inProgress:
+                            ApplyProductListView(applyViewModel: applyViewModel)
+                        case .planned:
+                            ApplyProductListView(applyViewModel: applyViewModel)
+                        case .close:
+                            ApplyProductListView(applyViewModel: applyViewModel)
+                        }
                         Divider()
                     }
                     .toolbar {
@@ -38,6 +46,7 @@ struct ApplyMainView: View {
                     }, icon: "plus")
                 }
             }
+            .infanFetchUser()
         } else {
             NavigationStack {
                 VStack {
@@ -60,6 +69,7 @@ struct ApplyMainView: View {
                     }
                 }
             }
+            .infanFetchUser()
         }
     }
 }
@@ -92,5 +102,6 @@ struct ApplyFloatingButton: View {
 struct ApplyMainView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyMainView()
+            .environmentObject(LoginStore())
     }
 }

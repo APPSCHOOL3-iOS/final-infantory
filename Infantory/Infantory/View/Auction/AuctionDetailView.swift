@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AuctionDetailView: View {
-    @ObservedObject var userViewModel: UserViewModel
+    
+    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     @StateObject var auctionViewModel: AuctionViewModel = AuctionViewModel()
     
@@ -95,7 +96,8 @@ struct Footer: View {
 struct AuctionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel())
+                .environmentObject(LoginStore())
         }
     }
 }

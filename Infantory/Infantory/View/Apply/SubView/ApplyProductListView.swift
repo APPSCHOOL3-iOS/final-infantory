@@ -79,11 +79,11 @@ struct ApplyProductListView: View {
                                         
                                         Spacer()
                                         VStack {
-                                            Text("시작일  10/4 8:00")
+                                            Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
                                             
-                                            Text("마감일  10/5 8:00")
+                                            Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
                                         }

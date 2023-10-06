@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ApplyFilterButtonView: View {
-    
-    @State private var selectedFilter = ApplyFilter.inProgress
+
+    var applyViewModel: ApplyProductViewModel
     
     var body: some View {
         HStack {
             ForEach(ApplyFilter.allCases, id: \.rawValue) { filter in
                 Button {
-                    selectedFilter = filter
+                    applyViewModel.selectedFilter = filter
                 } label: {
-                    if selectedFilter == filter {
+                    if applyViewModel.selectedFilter == filter {
                         Text(filter.rawValue)
                             .padding(10)
                             .font(.infanFootnoteBold)
@@ -44,6 +44,6 @@ struct ApplyFilterButtonView: View {
 
 struct ApplyFilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyFilterButtonView()
+        ApplyFilterButtonView(applyViewModel: ApplyProductViewModel())
     }
 }

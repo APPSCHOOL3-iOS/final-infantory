@@ -124,11 +124,9 @@ struct ApplySheetView: View {
                   primaryButton: .cancel(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
 
-                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email , userUID: loginStore.userUid) { product in
+                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid) { product in
                     self.product = product
-                    Task {
-                        try await loginStore.fetchUser(userUID: loginStore.userUid)
-                    }
+                    
                 }
               
                 isShowingApplySheet = false
