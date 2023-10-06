@@ -51,12 +51,10 @@ final class ApplyProductViewModel: ObservableObject {
     func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String, userUID: String, completion: @escaping (ApplyProduct) -> Void) {
         
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
-        
         documentReference.getDocument { (document, error) in
             if let document = document, document.exists {
                 // 문서가 존재하는 경우, 현재 배열 필드 값을 가져옵니다.
                 var currentArray = document.data()?["applyUserIDs"] as? [String] ?? []
-                
                 // 새 값을 배열에 추가하고 중복된 값도 허용합니다.
                 for _ in 1 ... ticketCount {
                     currentArray.append(userID)
@@ -78,9 +76,7 @@ final class ApplyProductViewModel: ObservableObject {
             } else {
                 print("Document does not exist")
             }
-        }
-        
-        
+        }     
     }
     @MainActor
     func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
@@ -90,5 +86,4 @@ final class ApplyProductViewModel: ObservableObject {
         let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
         completion(product)
     }
- 
 }

@@ -19,6 +19,7 @@ struct ApplySheetView: View {
     @Binding var isShowingApplySheet: Bool
     
     @Binding var product: ApplyProduct
+
     var viewModel: ApplyProductViewModel
     
     var body: some View {
@@ -112,17 +113,6 @@ struct ApplySheetView: View {
                 .cornerRadius(8)
             }
             .padding()
-            
-            //            Picker("응모권 갯수", selection: $selection) {
-            //                ForEach(1 ..< loginStore.totalApplyTicketCount + 1, id: \.self) { count in
-            //                    Text("\(count)")
-            //                }
-            //            }
-            //            .pickerStyle(.wheel)
-            // 몇장 응모할건지
-            // 닫기
-            // 응모버튼 -> 응모하면 응모됐다고 알러트
-            // 응모되면 응모하기 버튼 응모취소하기? 아니면 그냥 disable?
         }
         .overlay(
             ToastMessage(content: Text("\(toastMessage)"), isPresented: $isShowingToastMessage)
@@ -132,13 +122,14 @@ struct ApplySheetView: View {
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .cancel(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
+
                 viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email , userUID: loginStore.userUid) { product in
                     self.product = product
                     Task {
                         try await loginStore.fetchUser(userUID: loginStore.userUid)
                     }
                 }
-                
+              
                 isShowingApplySheet = false
             })
         }
@@ -147,6 +138,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
+
         ApplySheetView(isShowingApplySheet: .constant(true), product: .constant( ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])), viewModel: ApplyProductViewModel())
             .environmentObject(LoginStore())
     }
