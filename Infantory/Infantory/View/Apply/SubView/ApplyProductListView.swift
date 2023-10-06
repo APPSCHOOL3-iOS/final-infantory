@@ -11,6 +11,7 @@ struct ApplyProductListView: View {
     
     @StateObject var applyViewModel: ApplyProductViewModel
     @State private var heartButton: Bool = false
+    @State private var remainingTime: Double = 0.0
     
     var body: some View {
         ScrollView {
@@ -28,11 +29,10 @@ struct ApplyProductListView: View {
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
-                            Label("03:22:15", systemImage: "timer")
-                                .foregroundColor(.infanMain)
-                                .font(.infanFootnote)
-                                .frame(height: 24)
-                                .padding(4)
+                            TimerView(remainingTime: remainingTime)
+                                .onAppear {
+                                    remainingTime = applyViewModel.remainingTime(product: product)
+                                }
                         }
                         .infanHorizontalPadding()
                         

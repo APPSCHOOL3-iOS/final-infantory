@@ -91,11 +91,6 @@ struct ApplyFooter: View {
                             .presentationDragIndicator(.visible)
                             .presentationDetents([.fraction(0.45)])
         })
-//        .sheet(isPresented: $isShowingApplySheet) {
-//            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductViewModel())
-//                .presentationDragIndicator(.visible)
-//                .presentationDetents([.fraction(0.45)])
-//        }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
                 .environmentObject(loginStore)
