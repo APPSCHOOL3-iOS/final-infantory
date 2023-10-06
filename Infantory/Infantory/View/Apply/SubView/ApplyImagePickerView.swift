@@ -1,10 +1,3 @@
-//
-//  ApplyImagePokerView.swift
-//  Infantory
-//
-//  Created by 윤경환 on 10/4/23.
-//
-
 import SwiftUI
 import PhotosUI
 import UIKit
@@ -15,6 +8,8 @@ struct ApplyImagePickerView: View {
     @State private var isImagePickerPresented = false
     @State private var isGalleryPermissionGranted = false
     var configuration = PHPickerConfiguration()
+    
+    @State private var selectedAssets: [PHAsset] = []
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -40,6 +35,7 @@ struct ApplyImagePickerView: View {
                         }
                     }
                 }
+                
                 ForEach(selectedImages, id: \.self) { image in
                     Image(uiImage: image)
                         .resizable()
@@ -64,9 +60,7 @@ struct ApplyImagePickerView: View {
             }
         }
         .sheet(isPresented: $isImagePickerPresented) {
-            let configuration = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-            MultiPhotoPickerView(configuration: configuration
-                                 , selectedImages: $selectedImages, isPresented: $isImagePickerPresented)
+            ImagePickerView(selectedAssets: $selectedAssets, selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
         }
     }
     
@@ -83,44 +77,53 @@ struct ApplyImagePickerView: View {
     }
 }
 
-struct MultiPhotoPickerView: UIViewControllerRepresentable {
-    let configuration: PHPickerConfiguration
+struct ImagePickerView: UIViewControllerRepresentable {
+    @Binding var selectedAssets: [PHAsset]
     @Binding var selectedImages: [UIImage]
     @Binding var isPresented: Bool
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
-        let controller = PHPickerViewController(configuration: configuration)
-        controller.delegate = context.coordinator
-        return controller
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 5 - selectedImages.count // 선택 가능한 이미지 수를 제한합니다.
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = context.coordinator
+        return picker
     }
     
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(parent: self)
     }
-    
+
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
-        private let parent: MultiPhotoPickerView
+        let parent: ImagePickerView
         
-        init(_ parent: MultiPhotoPickerView) {
+        init(parent: ImagePickerView) {
             self.parent = parent
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            parent.isPresented = false // Set isPresented to false because picking has finished.
-            
             for result in results {
                 result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async {
                             self.parent.selectedImages.append(image)
+                            self.parent.selectedImageNames.append(result.itemProvider.suggestedName ?? "Unknown")
                         }
                     }
                 }
             }
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+        
+        func pickerDidCancel(_ picker: PHPickerViewController) {
+            parent.presentationMode.wrappedValue.dismiss()
         }
     }
+    
 }
 
 //struct MultiPhotoPickerView: UIViewControllerRepresentable {
