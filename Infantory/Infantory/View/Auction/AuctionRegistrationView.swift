@@ -51,7 +51,7 @@ struct AuctionRegistrationView: View {
                                     placeHolder: "애장품을 소개해주세요.",
                                     text: $itemDescription)
                     
-                    //TODO: 경매시작, 종료일도 받아야함 + 시작일은 TextField가 아닌 Date로 받아야 하고, 시작가는 Int 키보드로 받기.
+                    // 경매시작, 종료일도 받아야함 + 시작일은 TextField가 아닌 Date로 받아야 하고, 시작가는 Int 키보드로 받기.
                     TextField("경매시작", text: $apply)
                         .autocapitalization(.none)
                     

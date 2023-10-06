@@ -51,7 +51,6 @@ struct ApplyFooter: View {
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @Binding var product: ApplyProduct
-
     
     var body: some View {
         VStack {
