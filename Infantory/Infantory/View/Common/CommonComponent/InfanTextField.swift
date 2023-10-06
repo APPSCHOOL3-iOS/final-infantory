@@ -2,6 +2,7 @@
 //  InfanTextField.swift
 //  Infantory
 //
+//  Created by 김성훈 on 2023/10/05.
 //
 
 import SwiftUI
@@ -19,7 +20,6 @@ struct InfanTextField: View {
                 Text("\(textFieldTitle)")
                     .font(.infanHeadlineBold)
             }
-            
             TextField(placeholder, text: $text)
                 .font(.infanBody)
                 .foregroundColor(.black)
@@ -27,7 +27,6 @@ struct InfanTextField: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .padding(.bottom, 4)
-        
             Rectangle()
                 .foregroundColor(isFocused ? Color.black : Color.infanGray)
                 .frame(height: 1)
