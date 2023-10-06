@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct AuctionDetailView: View {
-    @ObservedObject var userViewModel: UserViewModel
+    
+    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     @StateObject var auctionViewModel: AuctionViewModel = AuctionViewModel()
+    
+    @State var timer: String = ""
     
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-
                 Divider()
                 
-                AuctionBuyerView()
+                AuctionBuyerView(auctionViewModel: auctionViewModel)
                 
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
@@ -30,9 +32,7 @@ struct AuctionDetailView: View {
                         .font(.infanTitle2)
                     Spacer()
                     // 남은 시간
-                    Label("03:22:15", systemImage: "timer")
-                        .foregroundColor(.infanMain)
-                        .font(.infanFootnote)
+                    TimerView(remainingTime: auctionViewModel.remainingTime)
                 }
                 .padding(.top)
                 .infanHorizontalPadding()
@@ -47,7 +47,8 @@ struct AuctionDetailView: View {
             
             Footer(auctionViewModel: AuctionViewModel())
             
-        }        
+        }
+        
     }
 }
 
@@ -61,10 +62,9 @@ struct Footer: View {
         VStack {
             Button {
                 isShowingAuctionBidSheet.toggle()
-                print("footer \(auctionViewModel.biddingInfos)")
             } label: {
-                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 123)")
-                    .font(.title2)
+                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) 원")
+                    .font(.infanTitle2)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .background(
@@ -81,11 +81,10 @@ struct Footer: View {
             Rectangle()
                 .stroke(lineWidth: 0.1)
                 .background(.white)
-            
         )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingAuctionBidSheet, content: {
-            AuctionBidSheetView()
+            AuctionBidSheetView(auctionViewModel: auctionViewModel)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         })
@@ -95,7 +94,8 @@ struct Footer: View {
 struct AuctionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel())
+                .environmentObject(LoginStore())
         }
     }
 }

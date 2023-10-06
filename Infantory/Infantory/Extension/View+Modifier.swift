@@ -16,4 +16,8 @@ extension View {
     func infanHorizontalPadding() -> some View {
         modifier(InfanHorizontalPadding())
     }
+    
+    func infanFetchUser() -> some View {
+        modifier(InfanFetchUser())
+    }
 }

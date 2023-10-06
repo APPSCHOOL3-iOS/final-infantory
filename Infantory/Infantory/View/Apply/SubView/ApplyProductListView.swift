@@ -16,7 +16,6 @@ struct ApplyProductListView: View {
         ScrollView {
             LazyVStack {
                 ForEach($applyViewModel.applyProduct) { $product in
-                    
                     VStack {
                         HStack {
                             Image("Influencer1")
@@ -29,16 +28,11 @@ struct ApplyProductListView: View {
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
-                            Label("03:22:15", systemImage: "timer")
-                                .foregroundColor(.infanMain)
-                                .font(.infanFootnote)
-                                .frame(height: 24)
-                                .padding(4)
+                            TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                         }
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-
                             ApplyDetailView(applyViewModel: applyViewModel, product: $product)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
@@ -46,7 +40,6 @@ struct ApplyProductListView: View {
                                     if product.productImageURLStrings.count > 0 {
                                         if let url = URL(string: product.productImageURLStrings[0]) {
                                             AsyncImage(url: url) { image in
-                                                
                                                 ZStack(alignment: .topLeading) {
                                                     image
                                                         .resizable()
@@ -79,13 +72,14 @@ struct ApplyProductListView: View {
                                         
                                         Spacer()
                                         VStack {
-                                            Text("시작일  10/4 8:00")
+                                            Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
                                             
-                                            Text("마감일  10/5 8:00")
+                                            Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
+
                                         }
                                     }
                                     .padding(.vertical, 10)

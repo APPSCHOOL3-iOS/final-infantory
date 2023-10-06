@@ -1,17 +1,24 @@
 import Foundation
 import Firebase
+import Combine
 
 class AuctionViewModel: ObservableObject {
-    private var dbRef: DatabaseReference!
-    
+    @Published var product: AuctionProduct = AuctionProduct.dummyProduct
     @Published var biddingInfos: [BiddingInfo] = []
+    
+    var increment: Int = 0
+    
+    private var dbRef: DatabaseReference!
     
     init() {
         self.dbRef = Database.database().reference()
         fetchData()
     }
     
-    func fetchData() {   dbRef.child("biddingInfos/1").observe(.value, with: { snapshot in
+    var onDataUpdate: (() -> Void)?
+    
+    func fetchData() {
+        dbRef.child("biddingInfos").observe(.value, with: { snapshot in
             var parsedBiddingInfos: [BiddingInfo] = []
             
             for child in snapshot.children {
@@ -31,18 +38,13 @@ class AuctionViewModel: ObservableObject {
                     parsedBiddingInfos.append(biddingInfo)
                     
                 }
-                
             }
-//        print(parsedBiddingInfos)
-            
-            // 파싱된 데이터로 모델 업데이트
             self.biddingInfos = parsedBiddingInfos
-//            print(self.biddingInfos)
-            // 필요하다면 UI 업데이트를 위해 추가적인 로직을 여기에 추가할 수 있습니다.
+            self.onDataUpdate?()
         })
     }
     
-    func addBid(forAuction auctionId: String, biddingInfo: BiddingInfo) {
+    func addBid(biddingInfo: BiddingInfo) {
         // 새로운 bid 참조 생성
         let newBidRef = dbRef.child("biddingInfos").childByAutoId()
         
@@ -56,12 +58,23 @@ class AuctionViewModel: ObservableObject {
         // 데이터 쓰기
         newBidRef.setValue(bidData)
     }
-}
-
-struct Auction {
-    var biddingInfos: [BiddingInfo]
-    var bidIncrement: Int
     
+    var remainingTime: Double {
+        return product.endDate.timeIntervalSince(Date())
+    }
+    
+    var bidIncrement: Int {
+        let standardPrice = (biddingInfos.last?.biddingPrice ?? 1)
+        if standardPrice < 50000 {
+            return 2000
+        } else if standardPrice < 100000 {
+            return 5000
+        } else if standardPrice < 500000 {
+            return 10000
+        } else {
+            return 50000
+        }
+    }
 }
 
 struct BiddingInfo {
@@ -70,5 +83,3 @@ struct BiddingInfo {
     var participants: String
     var biddingPrice: Int
 }
-
-
