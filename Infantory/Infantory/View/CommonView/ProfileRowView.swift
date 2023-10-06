@@ -8,18 +8,25 @@
 import SwiftUI
 
 struct ProfileRowView: View {
-    let imageURLString: String = ""
-    let nickname: String = "희찬 갓갓"
+    let imageURLString: String = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/000401.png"
+    let nickname: String = "상필갓갓"
 
-    @State private var isShowingSheet: Bool = true
+    @State private var isShowingSheet: Bool = false
 
     var body: some View {
         HStack {
 
             Circle()
-                .frame(width: 70)
+                .frame(width: 50)
+                .foregroundColor(.gray).opacity(0.2)
+                .overlay {
+                    AsyncImage(url: URL(string: imageURLString)!) { image in
+                        image.image?
+                            .resizable()
+                    }
+                }
 
-            Text("(nickname)")
+            Text(nickname)
 
             Spacer()
 
