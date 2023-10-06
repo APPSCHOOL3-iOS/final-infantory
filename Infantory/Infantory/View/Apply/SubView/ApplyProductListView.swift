@@ -16,7 +16,6 @@ struct ApplyProductListView: View {
         ScrollView {
             LazyVStack {
                 ForEach($applyViewModel.applyProduct) { $product in
-                    
                     VStack {
                         HStack {
                             Image("Influencer1")
@@ -38,7 +37,6 @@ struct ApplyProductListView: View {
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-
                             ApplyDetailView(applyViewModel: applyViewModel, product: $product)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
@@ -46,7 +44,6 @@ struct ApplyProductListView: View {
                                     if product.productImageURLStrings.count > 0 {
                                         if let url = URL(string: product.productImageURLStrings[0]) {
                                             AsyncImage(url: url) { image in
-                                                
                                                 ZStack(alignment: .topLeading) {
                                                     image
                                                         .resizable()

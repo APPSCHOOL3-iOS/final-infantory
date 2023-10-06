@@ -19,7 +19,6 @@ struct AuctionDetailView: View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
                 // 인플루언서 프로필
-
                 Divider()
                 
                 AuctionBuyerView(auctionViewModel: auctionViewModel)
