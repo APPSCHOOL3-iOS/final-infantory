@@ -11,9 +11,15 @@ import SwiftUI
 
 struct AuctionBidSheetView: View {
     @ObservedObject var auctionViewModel: AuctionViewModel
+    @Binding var isShowingAuctionBidSheet: Bool
     
-    @State private var selectedIndex: Int = 1 // 선택된 버튼
-    @State private var selectedAmount: Int = 0// 선택된 금액
+    @State private var selectedIndex: Int = 4 // 선택된 버튼
+    @State private var selectedAmount: Int = 0 // 선택된 금액
+    @State private var showAlert: Bool = false
+    
+    var isSelected: Bool {
+        return selectedAmount == 0
+    }
     
     var body: some View {
         VStack {
@@ -29,11 +35,17 @@ struct AuctionBidSheetView: View {
                                                                  timeStamp: Date(),
                                                                  participants: "갓희찬",
                                                                  biddingPrice: selectedAmount))
+                isShowingAuctionBidSheet.toggle()
+                showAlert = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    showAlert = false
+                }
             } label: {
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.infanMain)
+                    .fill(isSelected ? .gray.opacity(0.3) : Color.infanMain)
                     .overlay {
-                        Text("\(selectedAmount) 입찰하기")
+                        Text("\(isSelected ? "" : "\(selectedAmount)") 입찰하기")
                             .font(.infanHeadlineBold)
                             .foregroundStyle(.white)
                         
@@ -41,6 +53,24 @@ struct AuctionBidSheetView: View {
                     .infanHorizontalPadding()
                     .frame(width: .infinity, height: 54)
             }
+            .disabled(isSelected)
+        }
+        .alert(isPresented: $showAlert) {
+            // 상필님이 커스텀 얼럿 만들어 주신답니다!!
+            Alert(title: Text(""), message: Text("입찰 성공!!!!"))
+        }
+    }
+}
+
+extension AuctionBidSheetView {
+    var headerView: some View {
+        VStack {
+            VStack {
+                Text("현재 입찰가: \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
+                    .padding()
+                TimerView(remainingTime: auctionViewModel.remainingTime)
+            }
+            .padding(.bottom)
         }
         .onAppear {
             self.auctionViewModel.onDataUpdate = {
@@ -104,7 +134,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionViewModel())
+        AuctionBidSheetView(auctionViewModel: AuctionViewModel(), isShowingAuctionBidSheet: .constant(true))
     }
 }
 

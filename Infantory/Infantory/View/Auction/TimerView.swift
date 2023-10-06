@@ -15,7 +15,7 @@ struct TimerView: View {
         VStack {
             Label("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))",
                   systemImage: "timer")
-            .foregroundColor(.infanMain)
+            .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
             .font(.infanFootnote)
         }
         .onReceive(timer) { _ in
@@ -34,10 +34,3 @@ struct TimerView_Previews: PreviewProvider {
         TimerView(remainingTime: 10000.0)
     }
 }
-
-/*
- 타이머
- 줄어드는 시간을 표시하기
- -> 
- 
- */
