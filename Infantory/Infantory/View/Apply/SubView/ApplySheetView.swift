@@ -112,17 +112,6 @@ struct ApplySheetView: View {
                 .cornerRadius(8)
             }
             .padding()
-            
-            //            Picker("응모권 갯수", selection: $selection) {
-            //                ForEach(1 ..< loginStore.totalApplyTicketCount + 1, id: \.self) { count in
-            //                    Text("\(count)")
-            //                }
-            //            }
-            //            .pickerStyle(.wheel)
-            // 몇장 응모할건지
-            // 닫기
-            // 응모버튼 -> 응모하면 응모됐다고 알러트
-            // 응모되면 응모하기 버튼 응모취소하기? 아니면 그냥 disable?
         }
         .overlay(
             ToastMessage(content: Text("\(toastMessage)"), isPresented: $isShowingToastMessage)
