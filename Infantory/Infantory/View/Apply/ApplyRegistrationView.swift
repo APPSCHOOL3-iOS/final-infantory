@@ -32,6 +32,10 @@ struct ApplyRegistrationView: View {
         formatter.dateFormat = "YYYY년 M월 d일"
         return formatter
     }
+    @State private var selectedDate = Date()
+    @State private var resultText = ""
+    @State private var dateList = ["3", "5", "7", "10"]
+    @State private var selectedDateString: String = "0"
     
     var body: some View {
         ScrollView {
@@ -74,28 +78,21 @@ struct ApplyRegistrationView: View {
                                     text: $itemDescription)
                     
                     Divider()
-                    DatePicker("경매시작일", selection: $applyStartDate, in: Date()..., displayedComponents: [.hourAndMinute, .date])
-                    DatePicker("종료일", selection: $applyEndDate, in: applyStartDate...applyStartDate.addingTimeInterval(7 * 24 * 60 * 60), displayedComponents: [.hourAndMinute, .date])
-                    Text("\(applyStartDate, formatter: dateFormatter) ~ \(applyEndDate, formatter: dateFormatter)")
-                    Divider()
+                    DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                        .padding(.vertical)
+                    HStack {
+                        Text("경매종료일")
+                            .font(.infanHeadlineBold)
+                        Spacer()
+                        Text("\(resultText)")
+                            .font(.infanBody)
+                    }
+                    HStack {
+                        ForEach(dateList, id: \.self) { date in
+                            dateSelectButton(date: date)
+                        }
+                    }
                     
-//                    TextField("시작가", text: $applyStartingPrice)
-//                        .keyboardType(.numberPad)
-//                        .onChange(of: applyStartingPrice, perform: { newValue in
-//                            if let intValue = Int(newValue) {
-//                                applyStartingPriceInt = intValue
-//                                applyisErrorVisible = false
-//                            } else {
-//                                applyisErrorVisible = true
-//                            }
-//                        })
-                    
-//                    if applyisErrorVisible {
-//                        Text("숫자를 입력해 주세요.")
-//                            .foregroundColor(.red)
-//                    } else if let price = applyStartingPriceInt {
-//                        Text("\(price)원")
-//                    }
                     Divider()
                     Spacer()
                     InfanMainButton(text: "등록하기") {
@@ -108,9 +105,9 @@ struct ApplyRegistrationView: View {
                         } else {
                             Task {
                                 try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: applyStartingPrice)
+                                dismiss()
                             }
                         }
-//                        dismiss()
                     }
                 }
                 .padding([.leading, .trailing], 20)
@@ -122,7 +119,51 @@ struct ApplyRegistrationView: View {
         }
         .infanNavigationBar(title: "내 응모 등록")
     }
+    func calculateDateOffset(days: Int) {
+        if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
+            let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
+            resultText = newDateText
+        }
+    }
 }
+extension ApplyRegistrationView {
+    func dateSelectButton(date: String) -> some View {
+        
+        Button {
+            self.calculateDateOffset(days: Int(date) ?? 3)
+            selectedDateString = date
+        } label: {
+            if date == selectedDateString {
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .background(Color.infanMain)
+                    .cornerRadius(8)
+                //                    .fill(Color.infanMain)
+                    .opacity(0.3)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .foregroundColor(.infanMain)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            } else {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .cornerRadius(8)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            }
+        }
+        .buttonStyle(.plain)
+        .padding(.bottom, 8)
+    }
+}
+
 
 struct ApplyRegistrationView_Previews: PreviewProvider {
     static var previews: some View {

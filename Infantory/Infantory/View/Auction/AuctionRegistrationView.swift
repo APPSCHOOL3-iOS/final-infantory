@@ -32,9 +32,10 @@ struct AuctionRegistrationView: View {
         formatter.dateFormat = "YYYY년 M월 d일"
         return formatter
     }
-    @State private var pushButtonColor: Bool = false
     @State private var selectedDate = Date()
     @State private var resultText = ""
+    @State private var dateList = ["3", "5", "7", "10"]
+    @State private var selectedDateString: String = "0"
     
     var body: some View {
         ScrollView {
@@ -62,8 +63,7 @@ struct AuctionRegistrationView: View {
                     InfanTextEditor(textFieldTitle: "소개",
                                     placeHolder: "애장품을 소개해주세요.",
                                     text: $itemDescription)
-                    
-                    // TODO: 경매시작, 종료일도 받아야함 + 시작일은 TextField가 아닌 Date로 받아야 하고, 시작가는 Int 키보드로 받기.
+                
                     TextField("시작가", text: $auctionStartingPrice)
                         .keyboardType(.numberPad)
                         .onChange(of: auctionStartingPrice, perform: { newValue in
@@ -86,47 +86,17 @@ struct AuctionRegistrationView: View {
                     DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
                         .padding(.vertical)
                     HStack {
-                        Button(action: {
-                                self.calculateDateOffset(days: 3)
-                        }) {
-                            Text("3일")
-                                .frame(width: 50)
-                                .padding()
-                                .foregroundColor(.infanDarkGray)
-                                .background(pushButtonColor ? .purple : .gray)
-                                .buttonStyle(.borderedProminent)
-                        }
-                        
-                        Button(action: {
-                            self.calculateDateOffset(days: 5)
-                        }) {
-                            Text("5일")
-                                .frame(width: 50)
-                                .padding()
-                                .foregroundColor(.infanDarkGray)
-                                .background(Capsule().strokeBorder())
-                        }
-                        
-                        Button(action: {
-                            self.calculateDateOffset(days: 7)
-                        }) {
-                            Text("7일")
-                                .frame(width: 50)
-                                .padding()
-                                .foregroundColor(.infanDarkGray)
-                                .background(Capsule().strokeBorder())
-                        }
-                        Button(action: {
-                            self.calculateDateOffset(days: 10)
-                        }) {
-                            Text("10일")
-                                .frame(width: 50)
-                                .padding()
-                                .foregroundColor(.infanDarkGray)
-                                .background(Capsule().strokeBorder())
+                        Text("경매종료일")
+                            .font(.infanHeadlineBold)
+                        Spacer()
+                        Text("\(resultText)")
+                            .font(.infanBody)
+                    }
+                    HStack {
+                        ForEach(dateList, id: \.self) { date in
+                            dateSelectButton(date: date)
                         }
                     }
-                    Text(resultText)
                     
                     Divider()
                     
@@ -167,13 +137,46 @@ struct AuctionRegistrationView: View {
     }
     func calculateDateOffset(days: Int) {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .medium
-            formatter.timeStyle = .none
-            formatter.dateFormat = "YYYY년 M월 d일 a hh시 mm분"
-            formatter.locale = Locale(identifier:"ko_KR")
-            resultText = "\(days)일 후: \(formatter.string(from: newDate))"
+            let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
+            resultText = newDateText
         }
+    }
+}
+extension AuctionRegistrationView {
+    func dateSelectButton(date: String) -> some View {
+        
+        Button {
+            self.calculateDateOffset(days: Int(date) ?? 3)
+            selectedDateString = date
+        } label: {
+            if date == selectedDateString {
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .background(Color.infanMain)
+                    .cornerRadius(8)
+                //                    .fill(Color.infanMain)
+                    .opacity(0.3)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .foregroundColor(.infanMain)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            } else {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .cornerRadius(8)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            }
+        }
+        .buttonStyle(.plain)
+        .padding(.bottom, 8)
     }
 }
 
