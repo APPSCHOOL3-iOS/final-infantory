@@ -21,6 +21,21 @@ struct ApplyRegistrationView: View {
     @State private var productSelectedImageNames: [String] = []
     @State private var custumeSelectedImages: [UIImage] = []
     @State private var custumeSelectedImageNames: [String] = []
+    @State private var applyStartingPrice: String = ""
+    @State private var applyEndDate = Date().addingTimeInterval(7 * 24 * 60 * 60)
+    @State private var applyStartingPriceInt: Int? = nil
+    @State private var applyisErrorVisible = false
+    @State private var applyStartDate = Date()
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "YYYY년 M월 d일"
+        return formatter
+    }
+    @State private var selectedDate = Date()
+    @State private var resultText = ""
+    @State private var dateList = ["3", "5", "7", "10"]
+    @State private var selectedDateString: String = "0"
     
     var body: some View {
         ScrollView {
@@ -53,53 +68,45 @@ struct ApplyRegistrationView: View {
                 }
                 .padding(.leading)
                 
-                VStack(spacing: 20) {
-                    Group {
-                        TextField("제목", text: $title)
-                            .autocapitalization(.none)
-                        Divider()
-                        TextField("응모시작일", text: $apply)
-                            .autocapitalization(.none)
-                        Divider()
-                        ZStack(alignment: .top) {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(lineWidth: 1)
-                                .foregroundColor(.gray)
-                                .frame(width: 360, height: 140)
-                            TextField("애장품 설명", text: $itemDescription)
-                                .autocapitalization(.none)
-                                .padding([.leading, .top])
-                        }
-                        TextField("시작가", text: $winningPrice)
-                            .autocapitalization(.none)
-                        Divider()
+                VStack(spacing: 16) {
+                    InfanTextField(textFieldTitle: "애장품",
+                                   placeholder: "애장품 이름을 입력해주세요.",
+                                   text: $title)
+                    
+                    InfanTextEditor(textFieldTitle: "소개",
+                                    placeHolder: "애장품을 소개해주세요.",
+                                    text: $itemDescription)
+                    
+                    Divider()
+                    DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                        .padding(.vertical)
+                    HStack {
+                        Text("경매종료일")
+                            .font(.infanHeadlineBold)
+                        Spacer()
+                        Text("\(resultText)")
+                            .font(.infanBody)
                     }
+                    HStack {
+                        ForEach(dateList, id: \.self) { date in
+                            dateSelectButton(date: date)
+                        }
+                    }
+                    
+                    Divider()
                     Spacer()
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 1)
-                            .foregroundColor(.black)
-                            .frame(width: 360, height: 40)
-                        Button {
-                            if title.isEmpty {
-                                showAlert = true
-                                alertMessage = "제목을 입력해주세요."
-                            } else if itemDescription.isEmpty {
-                                showAlert = true
-                                alertMessage = "상품 설명을 입력해주세요."
-                            } else if winningPrice.isEmpty {
-                                showAlert = true
-                                alertMessage = "시작가를 입력해주세요."
-                            } else {
-                                Task {
-                                    try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
-                                }
+                    InfanMainButton(text: "등록하기") {
+                        if title.isEmpty {
+                            showAlert = true
+                            alertMessage = "제목을 입력해주세요."
+                        } else if itemDescription.isEmpty {
+                            showAlert = true
+                            alertMessage = "소개를 입력해주세요."
+                        } else {
+                            Task {
+                                try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: applyStartingPrice)
+                                dismiss()
                             }
-                            dismiss()
-                        } label: {
-                            Text("작성 완료")
-                                .frame(width: 360, height: 40)
-                                .foregroundColor(.black)
                         }
                     }
                 }
@@ -108,9 +115,55 @@ struct ApplyRegistrationView: View {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
+            .infanHorizontalPadding()
+        }
+        .infanNavigationBar(title: "내 응모 등록")
+    }
+    func calculateDateOffset(days: Int) {
+        if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
+            let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
+            resultText = newDateText
         }
     }
 }
+extension ApplyRegistrationView {
+    func dateSelectButton(date: String) -> some View {
+        
+        Button {
+            self.calculateDateOffset(days: Int(date) ?? 3)
+            selectedDateString = date
+        } label: {
+            if date == selectedDateString {
+                Rectangle()
+                    .stroke(lineWidth: 1)
+                    .background(Color.infanMain)
+                    .cornerRadius(8)
+                //                    .fill(Color.infanMain)
+                    .opacity(0.3)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .foregroundColor(.infanMain)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            } else {
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(lineWidth: 1)
+                    .cornerRadius(8)
+                    .overlay {
+                        Text("\(date)일")
+                            .font(.infanHeadline)
+                            .padding()
+                    }
+                    .frame(width: (.screenWidth-70)/4, height: 54)
+            }
+        }
+        .buttonStyle(.plain)
+        .padding(.bottom, 8)
+    }
+}
+
 
 struct ApplyRegistrationView_Previews: PreviewProvider {
     static var previews: some View {

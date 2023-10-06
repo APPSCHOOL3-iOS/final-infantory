@@ -30,7 +30,7 @@ struct AuctionDetailView: View {
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
                 
-                productInfo             
+                productInfo            
             }
             Footer(auctionViewModel: AuctionViewModel())
         }
