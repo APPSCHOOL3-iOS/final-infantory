@@ -79,13 +79,11 @@ final class ApplyProductViewModel: ObservableObject {
                 print("Document does not exist")
             }
         }
-        
-        
     }
     @MainActor
     func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
-        let ApplyDocument = try await db.getDocument()
-        let product = try ApplyDocument.data(as: ApplyProduct.self)
+        let applyDocument = try await db.getDocument()
+        let product = try applyDocument.data(as: ApplyProduct.self)
         let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "\(product.productName) 응모", count: -ticketCount)
         let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
         completion(product)

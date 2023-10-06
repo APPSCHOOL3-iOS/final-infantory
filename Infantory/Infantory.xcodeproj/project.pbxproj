@@ -659,7 +659,6 @@
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */,
-				0C82A33C2AC2AD3A009F6D97 /* AuctionScrollImageView.swift in Sources */,
 				A00EE0A12ACE447200E03146 /* InfanTextField.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,

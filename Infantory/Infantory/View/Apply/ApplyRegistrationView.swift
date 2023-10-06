@@ -21,6 +21,17 @@ struct ApplyRegistrationView: View {
     @State private var productSelectedImageNames: [String] = []
     @State private var custumeSelectedImages: [UIImage] = []
     @State private var custumeSelectedImageNames: [String] = []
+    @State private var applyStartingPrice: String = ""
+    @State private var applyEndDate = Date().addingTimeInterval(7 * 24 * 60 * 60)
+    @State private var applyStartingPriceInt: Int? = nil
+    @State private var applyisErrorVisible = false
+    @State private var applyStartDate = Date()
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.dateFormat = "YYYY년 M월 d일"
+        return formatter
+    }
     
     var body: some View {
         ScrollView {
@@ -53,54 +64,53 @@ struct ApplyRegistrationView: View {
                 }
                 .padding(.leading)
                 
-                VStack(spacing: 20) {
-                    Group {
-                        TextField("제목", text: $title)
-                            .autocapitalization(.none)
-                        Divider()
-                        TextField("응모시작일", text: $apply)
-                            .autocapitalization(.none)
-                        Divider()
-                        ZStack(alignment: .top) {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(lineWidth: 1)
-                                .foregroundColor(.gray)
-                                .frame(width: 360, height: 140)
-                            TextField("애장품 설명", text: $itemDescription)
-                                .autocapitalization(.none)
-                                .padding([.leading, .top])
-                        }
-                        TextField("시작가", text: $winningPrice)
-                            .autocapitalization(.none)
-                        Divider()
-                    }
+                VStack(spacing: 16) {
+                    InfanTextField(textFieldTitle: "애장품",
+                                   placeholder: "애장품 이름을 입력해주세요.",
+                                   text: $title)
+                    
+                    InfanTextEditor(textFieldTitle: "소개",
+                                    placeHolder: "애장품을 소개해주세요.",
+                                    text: $itemDescription)
+                    
+                    Divider()
+                    DatePicker("경매시작일", selection: $applyStartDate, in: Date()..., displayedComponents: [.hourAndMinute, .date])
+                    DatePicker("종료일", selection: $applyEndDate, in: applyStartDate...applyStartDate.addingTimeInterval(7 * 24 * 60 * 60), displayedComponents: [.hourAndMinute, .date])
+                    Text("\(applyStartDate, formatter: dateFormatter) ~ \(applyEndDate, formatter: dateFormatter)")
+                    Divider()
+                    
+//                    TextField("시작가", text: $applyStartingPrice)
+//                        .keyboardType(.numberPad)
+//                        .onChange(of: applyStartingPrice, perform: { newValue in
+//                            if let intValue = Int(newValue) {
+//                                applyStartingPriceInt = intValue
+//                                applyisErrorVisible = false
+//                            } else {
+//                                applyisErrorVisible = true
+//                            }
+//                        })
+                    
+//                    if applyisErrorVisible {
+//                        Text("숫자를 입력해 주세요.")
+//                            .foregroundColor(.red)
+//                    } else if let price = applyStartingPriceInt {
+//                        Text("\(price)원")
+//                    }
+                    Divider()
                     Spacer()
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(lineWidth: 1)
-                            .foregroundColor(.black)
-                            .frame(width: 360, height: 40)
-                        Button {
-                            if title.isEmpty {
-                                showAlert = true
-                                alertMessage = "제목을 입력해주세요."
-                            } else if itemDescription.isEmpty {
-                                showAlert = true
-                                alertMessage = "상품 설명을 입력해주세요."
-                            } else if winningPrice.isEmpty {
-                                showAlert = true
-                                alertMessage = "시작가를 입력해주세요."
-                            } else {
-                                Task {
-                                    try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
-                                }
+                    InfanMainButton(text: "등록하기") {
+                        if title.isEmpty {
+                            showAlert = true
+                            alertMessage = "제목을 입력해주세요."
+                        } else if itemDescription.isEmpty {
+                            showAlert = true
+                            alertMessage = "소개를 입력해주세요."
+                        } else {
+                            Task {
+                                try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: applyStartingPrice)
                             }
-                            dismiss()
-                        } label: {
-                            Text("작성 완료")
-                                .frame(width: 360, height: 40)
-                                .foregroundColor(.black)
                         }
+//                        dismiss()
                     }
                 }
                 .padding([.leading, .trailing], 20)
@@ -108,7 +118,9 @@ struct ApplyRegistrationView: View {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
+            .infanHorizontalPadding()
         }
+        .infanNavigationBar(title: "내 응모 등록")
     }
 }
 
