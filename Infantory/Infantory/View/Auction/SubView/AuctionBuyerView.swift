@@ -9,16 +9,14 @@ import SwiftUI
 
 struct AuctionBuyerView: View {
     @State private var currentIndex = 0
-    
     @ObservedObject var auctionViewModel: AuctionViewModel
-    
+  
     var body: some View {
         
         NavigationLink {
             AuctionBuyerDetailView()
         } label: {
             HStack {
-                
                 Text("👑 \(auctionViewModel.biddingInfos.last?.participants ?? "")")
                 
                 Spacer()
@@ -50,6 +48,3 @@ struct AuctionBuyerView_Previews: PreviewProvider {
         AuctionBuyerView(auctionViewModel: AuctionViewModel())
     }
 }
-//#Preview {
-//    AuctionBuyerView()
-//}

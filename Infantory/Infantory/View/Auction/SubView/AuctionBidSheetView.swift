@@ -50,7 +50,6 @@ struct AuctionBidSheetView: View {
                         Text("\(isSelected ? "" : "\(selectedAmount)") 입찰하기")
                             .font(.infanHeadlineBold)
                             .foregroundStyle(.white)
-                        
                     }
                     .infanHorizontalPadding()
                     .frame(width: .infinity, height: 54)
@@ -109,7 +108,3 @@ struct AuctionBidSheetView_Previews: PreviewProvider {
         AuctionBidSheetView(auctionViewModel: AuctionViewModel(), isShowingAuctionBidSheet: .constant(true))
     }
 }
-
-//#Preview {
-//    AuctionBidSheetView()
-//}

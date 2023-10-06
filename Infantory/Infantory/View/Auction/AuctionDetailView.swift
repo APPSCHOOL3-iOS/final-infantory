@@ -27,12 +27,55 @@ struct AuctionDetailView: View {
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(8)
-                
+       
                 productInfo
                 
             }
             Footer(auctionViewModel: AuctionViewModel())
         }
+        
+    }
+}
+
+// MARK: - 경매하기 버튼 Footer
+struct Footer: View {
+    
+    @State private var isShowingAuctionBidSheet: Bool = false
+    
+    var body: some View {
+        VStack {
+            Button {
+                isShowingAuctionBidSheet.toggle()
+            } label: {
+                Text("입찰 10000원")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .fill(Color.infanMain)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
+                    )
+            }
+            .offset(y: -20)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity)
+        .frame(height: 110)
+        .background(
+            Rectangle()
+                .stroke(lineWidth: 0.1)
+                .background(.white)
+            
+        )
+        .offset(x: 0, y: 40)
+        .sheet(isPresented: $isShowingAuctionBidSheet, content: {
+            AuctionBidSheetView()
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium])
+                
+                
+                
+        })
     }
 }
 
