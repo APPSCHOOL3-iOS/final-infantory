@@ -29,14 +29,19 @@ struct InfantoryApp: App {
         KakaoSDK.initSDK(appKey: "45ce2063d86a5a5c18e38528aae46993")
     }
     
+    @StateObject private var loginStore = LoginStore()
+    
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .onOpenURL { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) {
-                        _ = AuthController.handleOpenUrl(url: url)
+            VStack {
+                MainTabView()
+                    .onOpenURL { url in
+                        if AuthApi.isKakaoTalkLoginUrl(url) {
+                            _ = AuthController.handleOpenUrl(url: url)
+                        }
                     }
-                }
+            }
+            .environmentObject(loginStore)
         }
     }
 }

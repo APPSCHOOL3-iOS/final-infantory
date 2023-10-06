@@ -30,4 +30,3 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     // 지불 가격
     var winningPrice: Int?
 }
-

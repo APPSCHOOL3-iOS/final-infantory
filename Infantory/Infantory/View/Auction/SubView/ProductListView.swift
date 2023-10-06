@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProductListView: View {
-    @ObservedObject var userViewModel: UserViewModel
+    
+    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     @State private var heartButton: Bool = false
     
@@ -25,7 +26,7 @@ struct ProductListView: View {
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
                             
-                            Text("\(userViewModel.user.name)")
+                            Text(loginStore.currentUser.name)
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
@@ -39,7 +40,7 @@ struct ProductListView: View {
                         .infanHorizontalPadding()
                         
                         NavigationLink {
-                            AuctionDetailView(userViewModel: userViewModel, auctionProductViewModel: auctionViewModel)
+                            AuctionDetailView(auctionProductViewModel: auctionViewModel)
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
@@ -133,7 +134,8 @@ struct ProductListView: View {
 struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ProductListView(userViewModel: UserViewModel(), auctionViewModel: AuctionProductViewModel())
+            ProductListView(auctionViewModel: AuctionProductViewModel())
+                .environmentObject(LoginStore())
         }
     }
 }

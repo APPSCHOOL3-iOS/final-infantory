@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct AuctionMainView: View {
+    
+    @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
-    @ObservedObject var userViewModel: UserViewModel = UserViewModel()
+    
     var body: some View {
-        if userViewModel.user.isInfluencer == UserType.influencer {
+        if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
                 ZStack {
                     VStack {
                         Divider()
                         AuctionButtonCell()
-                        ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                        ProductListView(auctionViewModel: auctionViewModel)
                         Divider()
                     }
                     .navigationBarTitleDisplayMode(.inline)
@@ -43,7 +45,7 @@ struct AuctionMainView: View {
                 VStack {
                     Divider()
                     AuctionButtonCell()
-                    ProductListView(userViewModel: UserViewModel(), auctionViewModel: auctionViewModel)
+                    ProductListView(auctionViewModel: auctionViewModel)
                     Divider()
                 }
                 .navigationBarTitleDisplayMode(.inline)
@@ -94,5 +96,6 @@ struct AuctionFloatingButton: View {
 struct AuctionMainView_Previews: PreviewProvider {
     static var previews: some View {
         AuctionMainView()
+            .environmentObject(LoginStore())
     }
 }

@@ -47,7 +47,7 @@ struct ApplyFooter: View {
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @Binding var product: ApplyProduct
-    
+
     var body: some View {
         VStack {
             Button {
@@ -78,11 +78,15 @@ struct ApplyFooter: View {
             
         )
         .offset(x: 0, y: 40)
-        .sheet(isPresented: $isShowingApplySheet) {
+        .sheet(isPresented: $isShowingApplySheet, onDismiss: {
+            Task {
+                try await loginStore.fetchUser(userUID: loginStore.userUid)
+            }
+        }, content: {
             ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductViewModel())
-                .presentationDragIndicator(.visible)
-                .presentationDetents([.fraction(0.45)])
-        }
+                            .presentationDragIndicator(.visible)
+                            .presentationDetents([.fraction(0.45)])
+        })
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
                 .environmentObject(loginStore)
