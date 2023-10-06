@@ -7,7 +7,6 @@ struct ApplyImagePickerView: View {
     @Binding var selectedImageNames: [String]
     @State private var isImagePickerPresented = false
     @State private var isGalleryPermissionGranted = false
-    var configuration = PHPickerConfiguration()
     
     @State private var selectedAssets: [PHAsset] = []
     
@@ -51,6 +50,7 @@ struct ApplyImagePickerView: View {
                                     return
                                 }
                                 selectedImages.remove(at: index)
+                                selectedImageNames.remove(at: index)
                             } label: {
                                 Image(systemName: "xmark.square.fill")
                                     .foregroundColor(.black)
@@ -80,7 +80,8 @@ struct ApplyImagePickerView: View {
 struct ImagePickerView: UIViewControllerRepresentable {
     @Binding var selectedAssets: [PHAsset]
     @Binding var selectedImages: [UIImage]
-    @Binding var isPresented: Bool
+    @Binding var selectedImageNames: [String]
+    @Environment(\.presentationMode) private var presentationMode
     
     func makeUIViewController(context: Context) -> PHPickerViewController {
         var configuration = PHPickerConfiguration()
@@ -97,7 +98,8 @@ struct ImagePickerView: UIViewControllerRepresentable {
     func makeCoordinator() -> Coordinator {
         Coordinator(parent: self)
     }
-
+    
+    
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         let parent: ImagePickerView
         
@@ -125,50 +127,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
     }
     
 }
-
-//struct MultiPhotoPickerView: UIViewControllerRepresentable {
-//    @Binding var selectedImages: [UIImage]
-//    @Binding var selectedImageNames: [String]
-//    @Environment(\.presentationMode)
-//
-//    func makeUIViewController(context: UIViewControllerRepresentableContext<MultiPhotoPickerView>) -> UIImagePickerController {
-//        let picker = UIImagePickerController()
-//        picker.delegate = context.coordinator
-//        picker.allowsEditing = false
-//        picker.sourceType = .photoLibrary
-//        return picker
-//    }
-//
-//    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<MultiPhotoPickerView>) {}
-//
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//
-//    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-//        let parent: MultiPhotoPickerView
-//
-//        init(_ parent: MultiPhotoPickerView) {
-//            self.parent = parent
-//        }
-//
-//        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-//            if let imageURL = info[.imageURL] as? URL {
-//                let selectedImageNames = imageURL.lastPathComponent
-//                parent.selectedImageNames.append(selectedImageNames)
-//            }
-//            if let selectedImage = info[.originalImage] as? UIImage {
-//                parent.selectedImages.append(selectedImage)
-//                //                print(parent.selectedImages)
-//            }
-//            parent.presentationMode.wrappedValue.dismiss()
-//        }
-//
-//        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//            parent.presentationMode.wrappedValue.dismiss()
-//        }
-//    }
-//}
 
 struct ApplyImagePickerView_Previews: PreviewProvider {
     static var previews: some View {
