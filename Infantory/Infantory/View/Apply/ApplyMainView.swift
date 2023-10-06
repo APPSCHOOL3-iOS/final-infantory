@@ -17,6 +17,7 @@ struct ApplyMainView: View {
                 ZStack {
                     VStack {
                         Divider()
+                        ApplyFilterButtonView()
                         ApplyProductListView(applyViewModel: applyViewModel)
                         Divider()
                     }

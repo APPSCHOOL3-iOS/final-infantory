@@ -48,6 +48,7 @@ struct ApplySheetView: View {
                     .font(.infanTitle2)
                     .frame(width: 50)
                     .multilineTextAlignment(.center)
+                    .keyboardType(.numberPad)
                     .onChange(of: applyTicketCount) { newValue in
                         if let intValue = Int(newValue) {
                             if intValue > loginStore.totalApplyTicketCount {
