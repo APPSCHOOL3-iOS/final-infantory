@@ -44,6 +44,7 @@
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
 		11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */; };
 		648689132ACE751800423321 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648689122ACE751800423321 /* TimerView.swift */; };
+		64A043FE2ACFE49A0010D547 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 64A043FD2ACFE49A0010D547 /* ExpandableText */; };
 		64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */; };
 		64A6826F2AC2C55E007BF628 /* PaymentAddressWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A6826E2AC2C55E007BF628 /* PaymentAddressWebView.swift */; };
 		64E105C12ABD2A8C00BFD3DF /* PaymentReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E105C02ABD2A8C00BFD3DF /* PaymentReceiptView.swift */; };
@@ -90,7 +91,6 @@
 		A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */; };
 		A0A6628F2ACD8074000F2EF6 /* InfanDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6628E2ACD8074000F2EF6 /* InfanDateFormatter.swift */; };
 		A0B5AFCF2AC1D4C80055E714 /* emptyfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFCE2AC1D4C80055E714 /* emptyfile.swift */; };
-		A0B5AFD12AC1D4D30055E714 /* emptyfile2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */; };
 		A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */; };
 		A0B5AFDB2AC2C3830055E714 /* InfanHorizontalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDA2AC2C3830055E714 /* InfanHorizontalPadding.swift */; };
 		A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */; };
@@ -176,7 +176,6 @@
 		A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMainView.swift; sourceTree = "<group>"; };
 		A0A6628E2ACD8074000F2EF6 /* InfanDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanDateFormatter.swift; sourceTree = "<group>"; };
 		A0B5AFCE2AC1D4C80055E714 /* emptyfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyfile.swift; sourceTree = "<group>"; };
-		A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyfile2.swift; sourceTree = "<group>"; };
 		A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionFilter.swift; sourceTree = "<group>"; };
 		A0B5AFDA2AC2C3830055E714 /* InfanHorizontalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanHorizontalPadding.swift; sourceTree = "<group>"; };
 		A0B5AFDC2AC3E2BE0055E714 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -196,6 +195,7 @@
 				849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */,
 				A086C7B22ABD278200F0BF9B /* FirebaseMessaging in Frameworks */,
 				A086C7AC2ABD278200F0BF9B /* FirebaseDatabaseSwift in Frameworks */,
+				64A043FE2ACFE49A0010D547 /* ExpandableText in Frameworks */,
 				A086C7B62ABD278200F0BF9B /* FirebaseStorageCombine-Community in Frameworks */,
 				A086C7B42ABD278200F0BF9B /* FirebaseStorage in Frameworks */,
 				A086C7A42ABD278200F0BF9B /* FirebaseAppCheck in Frameworks */,
@@ -487,7 +487,6 @@
 			children = (
 				11183A722ACF8BC50010012C /* ProfileRowView.swift */,
 				11183A742ACF9C670010012C /* ProfileSheetView.swift */,
-				A0B5AFD02AC1D4D30055E714 /* emptyfile2.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -553,6 +552,7 @@
 				A086C7B12ABD278200F0BF9B /* FirebaseMessaging */,
 				A086C7B32ABD278200F0BF9B /* FirebaseStorage */,
 				A086C7B52ABD278200F0BF9B /* FirebaseStorageCombine-Community */,
+				64A043FD2ACFE49A0010D547 /* ExpandableText */,
 			);
 			productName = Infantory;
 			productReference = A091E5602AB9FB65000894FC /* Infantory.app */;
@@ -585,6 +585,7 @@
 			packageReferences = (
 				849B64AE2ABD595B00C4AC8D /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A086C7A22ABD278200F0BF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */,
 			);
 			productRefGroup = A091E5612AB9FB65000894FC /* Products */;
 			projectDirPath = "";
@@ -702,7 +703,6 @@
 				0C82A3382AC29A0B009F6D97 /* ApplyLogoCell.swift in Sources */,
 				0CD2F6FF2ABD4D8400FCF88E /* AuctionButtonCell.swift in Sources */,
 				A091E5B02ABC7917000894FC /* ApplyMainView.swift in Sources */,
-				A0B5AFD12AC1D4D30055E714 /* emptyfile2.swift in Sources */,
 				0C82A33A2AC29AAE009F6D97 /* ApplyScrollImageCell.swift in Sources */,
 				0C82A33A2AC29AAE009F6D97 /* ApplyScrollImageCell.swift in Sources */,
 				0CED22542ACD40E100CD1456 /* AuctionRegisterStore.swift in Sources */,
@@ -928,6 +928,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NuPlay/ExpandableText";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		849B64AE2ABD595B00C4AC8D /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
@@ -947,6 +955,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		64A043FD2ACFE49A0010D547 /* ExpandableText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */;
+			productName = ExpandableText;
+		};
 		849B64AF2ABD595B00C4AC8D /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 849B64AE2ABD595B00C4AC8D /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;

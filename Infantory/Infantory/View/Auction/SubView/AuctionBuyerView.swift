@@ -19,7 +19,7 @@ struct AuctionBuyerView: View {
         } label: {
             HStack {
                 
-                Text("\(auctionViewModel.biddingInfos.last?.participants ?? "")")
+                Text("👑 \(auctionViewModel.biddingInfos.last?.participants ?? "")")
                 
                 Spacer()
                 Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")

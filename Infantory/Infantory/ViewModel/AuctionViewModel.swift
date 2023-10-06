@@ -15,8 +15,6 @@ class AuctionViewModel: ObservableObject {
         fetchData()
     }
     
-    var onDataUpdate: (() -> Void)?
-    
     func fetchData() {
         dbRef.child("biddingInfos").observe(.value, with: { snapshot in
             var parsedBiddingInfos: [BiddingInfo] = []
@@ -40,7 +38,6 @@ class AuctionViewModel: ObservableObject {
                 }
             }
             self.biddingInfos = parsedBiddingInfos
-            self.onDataUpdate?()
         })
     }
     

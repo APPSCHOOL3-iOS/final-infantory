@@ -23,7 +23,6 @@ struct AuctionRegistrationView: View {
     @State private var auctionCustumeSelectedImages: [UIImage] = []
     @State private var auctionCustumeSelectedImageNames: [String] = []
     
-    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
