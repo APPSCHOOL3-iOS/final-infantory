@@ -79,8 +79,6 @@ final class ApplyProductViewModel: ObservableObject {
                 print("Document does not exist")
             }
         }
-        
-        
     }
     @MainActor
     func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference , completion: @escaping (ApplyProduct) -> Void) async throws {
