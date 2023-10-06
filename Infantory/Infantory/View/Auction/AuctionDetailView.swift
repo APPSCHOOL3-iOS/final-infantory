@@ -40,7 +40,7 @@ struct AuctionDetailView: View {
 struct AuctionDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            AuctionDetailView(userViewModel: UserViewModel(), auctionProductViewModel: AuctionProductViewModel())
+            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel())
         }
     }
 }

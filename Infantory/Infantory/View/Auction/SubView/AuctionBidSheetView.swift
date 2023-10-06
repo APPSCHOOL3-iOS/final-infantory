@@ -72,36 +72,6 @@ extension AuctionBidSheetView {
             }
             .padding(.bottom)
         }
-        .onAppear {
-            self.auctionViewModel.onDataUpdate = {
-                self.selectedAmount = auctionViewModel.biddingInfos.last?.biddingPrice ?? 0
-                print("hello")
-            }
-        }
-        
-    }
-}
-
-extension AuctionBidSheetView {
-    var headerView: some View {
-        VStack {
-            Text("입찰가 선택")
-                .font(.infanTitle2Bold)
-                .padding(.bottom, 5)
-            
-            Text("멋쟁이 신발")
-                .padding(.bottom, 5)
-            
-            HStack {
-                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
-                Text("•")
-                TimerView(remainingTime: 10000)
-                
-            }
-            .foregroundColor(.infanMain)
-            .font(.infanFootnote)
-            .padding(.bottom)
-        }
     }
 }
 
