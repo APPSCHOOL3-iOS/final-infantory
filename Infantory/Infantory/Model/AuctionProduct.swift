@@ -16,6 +16,7 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     
     // 인플루언서 누구인지, 낙찰자
     var influencerID: String
+    var influencerNickname: String
     var winningUserID: String?
     
     // 응모 시작일, 마감일
@@ -25,6 +26,7 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     // 시작가, 최고가, 낙찰가
     var minPrice: Int
     var winningPrice: Int?
+    
 }
 
 #if DEBUG
@@ -35,6 +37,7 @@ extension AuctionProduct {
         productImageURLStrings: ["https://dimg.donga.com/wps/NEWS/IMAGE/2021/12/11/110733453.1.jpg"],
         description: "This is an example product for auction.",
         influencerID: "상필갓",
+        influencerNickname: "상필임당",
         winningUserID: nil, // 낙찰자가 아직 없는 경우 nil로 설정
         startDate: Date(), // 현재 날짜로 설정
         endDate: Date().addingTimeInterval(24 * 60 * 60), // 현재 날짜로부터 7일 후로 설정

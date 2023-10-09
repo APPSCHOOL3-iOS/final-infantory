@@ -22,6 +22,9 @@ struct User: Identifiable, Codable {
     var follower: [String]? = nil
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
+    
+    var auctionProductsIDs: [String] = []
+    var applyProductsIDs: [String] = []
 }
 
 // 주소
