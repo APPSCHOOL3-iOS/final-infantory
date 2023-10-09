@@ -48,12 +48,13 @@ extension PaymentView {
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.gray, lineWidth: 1)
-                    .frame(height: 50)
-                    .background(.white)
+                    .foregroundColor(.infanMain)
+                    .frame(height: 54)
+                
+                
                 Text("결제하기")
-                    .foregroundColor(.black)
-                    .font(.headline)
+                    .foregroundColor(.white)
+                    .font(.infanHeadlineBold)
             }
         }
         .padding()

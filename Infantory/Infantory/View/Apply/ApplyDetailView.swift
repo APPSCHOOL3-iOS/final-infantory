@@ -62,7 +62,7 @@ struct ApplyFooter: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
                     .background(
-                        RoundedRectangle(cornerRadius: 5)
+                        RoundedRectangle(cornerRadius: 10)
                             .fill(Color.infanMain)
                             .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )

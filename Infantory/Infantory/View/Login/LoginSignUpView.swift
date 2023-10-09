@@ -57,7 +57,7 @@ struct LoginSignUpView: View {
                                     .padding(6)
                                     .foregroundColor(.white)
                                     .background(Color.infanMain)
-                                    .cornerRadius(5)
+                                    .cornerRadius(10)
                             }
                         }
                     }
@@ -89,7 +89,7 @@ struct LoginSignUpView: View {
                                     .padding(6)
                                     .foregroundColor(.white)
                                     .background(Color.infanMain)
-                                    .cornerRadius(5)
+                                    .cornerRadius(10)
                             }
                         }
                     }
@@ -110,7 +110,7 @@ struct LoginSignUpView: View {
                             .frame(width: .screenWidth * 0.9, height: .screenHeight * 0.06)
                             .foregroundColor(.white)
                             .background(Color.infanMain)
-                            .cornerRadius(5)
+                            .cornerRadius(10)
                     }
                     Spacer()
                 }

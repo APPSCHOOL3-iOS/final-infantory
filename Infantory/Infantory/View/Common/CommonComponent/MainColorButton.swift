@@ -15,7 +15,7 @@ struct MainColorButton: View {
         Button {
             action()
         } label: {
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 10)
                 .fill(Color.infanMain)
                 .cornerRadius(8)
                 .overlay {

@@ -29,7 +29,7 @@ struct ApplyImagePickerView: View {
                                 .foregroundColor(.black)
                             
                             RoundedRectangle(cornerRadius: 10)
-                                .stroke(Color.infanGray, lineWidth: 2)
+                                .strokeBorder(Color.infanGray, lineWidth: 1)
                                 .frame(width: 100, height: 100)
                         }
                     }
@@ -99,7 +99,6 @@ struct ImagePickerView: UIViewControllerRepresentable {
         Coordinator(parent: self)
     }
     
-    
     class Coordinator: NSObject, PHPickerViewControllerDelegate {
         let parent: ImagePickerView
         
@@ -109,7 +108,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
             for result in results {
-                result.itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
+                result.itemProvider.loadObject(ofClass: UIImage.self) { (object, _) in
                     if let image = object as? UIImage {
                         DispatchQueue.main.async {
                             self.parent.selectedImages.append(image)

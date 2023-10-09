@@ -37,6 +37,7 @@ struct ProductListView: View {
                                 .padding(4)
 
                         }
+                        .padding(.vertical)
                         .horizontalPadding()
                         
                         NavigationLink {
@@ -53,7 +54,6 @@ struct ProductListView: View {
                                                         .resizable()
                                                         .scaledToFill()
                                                         .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
-                                                        .cornerRadius(4)
                                                         .clipped()
                                                     
                                                 }
@@ -61,7 +61,6 @@ struct ProductListView: View {
                                                 ProgressView()
                                                     .scaledToFill()
                                                     .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
-                                                    .cornerRadius(4)
                                                     .clipped()
                                             }
                                         }
@@ -72,7 +71,6 @@ struct ProductListView: View {
                                                 .resizable()
                                                 .scaledToFill()
                                                 .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
-                                                .cornerRadius(4)
                                                 .clipped()
                                             
                                             Label("03:22:15", systemImage: "timer")
@@ -80,8 +78,7 @@ struct ProductListView: View {
                                                 .font(.infanFootnote)
                                                 .frame(height: 24)
                                                 .padding(4)
-//                                                .background(Color.black.opacity(0.1))
-//                                                .cornerRadius(4)
+
                                         }
                                     }
                                     

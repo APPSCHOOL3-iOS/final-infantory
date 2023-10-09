@@ -23,14 +23,14 @@ struct AuctionButtonCell: View {
                             .font(.infanFootnoteBold)
                             .foregroundColor(.white)
                             .background(Color.infanDarkGray)
-                            .cornerRadius(20)
+                            .cornerRadius(10)
                     } else {
                         Text(filter.rawValue)
                             .padding(10)
                             .font(.infanFootnote)
                             .foregroundColor(.infanDarkGray)
                             .overlay(
-                            RoundedRectangle(cornerRadius: 20)
+                            RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.infanLightGray, lineWidth: 1)
                             )
                     }

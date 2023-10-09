@@ -75,7 +75,7 @@ struct ApplySheetView: View {
             }
             .padding()
             .background(
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
                     .fill(Color.infanDarkGray))
             .horizontalPadding()
@@ -92,7 +92,7 @@ struct ApplySheetView: View {
                 }
                 .frame(width: .screenWidth / 2 - 20)
                 .background(Color.infanLightGray)
-                .cornerRadius(8)
+                .cornerRadius(10)
                 
                 Button {
                     if applyTicketCount == "0" {
@@ -109,7 +109,7 @@ struct ApplySheetView: View {
                 }
                 .frame(width: .screenWidth / 2 - 20)
                 .background(Color.infanMain)
-                .cornerRadius(8)
+                .cornerRadius(10)
             }
             .padding()
         }

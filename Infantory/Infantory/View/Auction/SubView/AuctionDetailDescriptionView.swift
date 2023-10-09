@@ -24,7 +24,7 @@ struct AuctionDetailDescriptionView: View {
                     .padding()
                     .foregroundColor(.infanDarkGray)
                     .background(Color.infanYellow)
-                    .cornerRadius(15)
+                    .cornerRadius(10)
             })
         }
     }

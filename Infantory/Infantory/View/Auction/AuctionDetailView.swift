@@ -28,7 +28,7 @@ struct AuctionDetailView: View {
                 
                 AuctionItemImage()
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
-                    .cornerRadius(8)
+                    .cornerRadius(10)
                 
                 productInfo            
             }
@@ -56,11 +56,10 @@ struct Footer: View {
                 isShowingAuctionBidSheet.toggle()
             } label: {
                 Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) 원")
-                    .font(.infanHeadline)
-                    .fontWeight(.bold)
+                    .font(.infanHeadlineBold)
                     .foregroundColor(.white)
                     .background(
-                        RoundedRectangle(cornerRadius: 5)
+                        RoundedRectangle(cornerRadius: 10)
                             .fill(Color.infanMain)
                             .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )

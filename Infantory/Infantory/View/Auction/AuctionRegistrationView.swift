@@ -39,7 +39,7 @@ struct AuctionRegistrationView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 15) {
+            VStack(spacing: 16) {
                 VStack(alignment: .leading) {
                     Text("상품 사진")
                         .font(.infanHeadlineBold)
@@ -153,7 +153,7 @@ extension AuctionRegistrationView {
                 Rectangle()
                     .stroke(lineWidth: 1)
                     .background(Color.infanMain)
-                    .cornerRadius(8)
+                    .cornerRadius(10)
                 //                    .fill(Color.infanMain)
                     .opacity(0.3)
                     .overlay {
@@ -164,9 +164,9 @@ extension AuctionRegistrationView {
                     }
                     .frame(width: (.screenWidth-70)/4, height: 54)
             } else {
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
-                    .cornerRadius(8)
+                    .cornerRadius(10)
                     .overlay {
                         Text("\(date)일")
                             .font(.infanHeadline)

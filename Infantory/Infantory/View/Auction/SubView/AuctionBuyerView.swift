@@ -18,16 +18,18 @@ struct AuctionBuyerView: View {
             AuctionBuyerDetailView()
         } label: {
             HStack {
-                Text("👑 \(auctionViewModel.biddingInfos.last?.participants ?? "")")
-                
+                HStack {
+                    Image("crown")
+                    Text("\(auctionViewModel.biddingInfos.last?.participants ?? "")")
+                }
                 Spacer()
-                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
+                Text("\(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)원")
             }
             .foregroundStyle(.black)
             .padding()
         }
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 10)
                 .stroke(lineWidth: 1)
                 .fill(Color.infanMain))
         .horizontalPadding()

@@ -56,7 +56,7 @@ extension PaymentChoiceView {
             ForEach(0..<5) { item in
                 Text("\(item)")
                     .overlay {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 10)
                             .stroke(
                                 .gray,
                                 style: StrokeStyle(

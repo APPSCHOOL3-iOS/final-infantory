@@ -26,7 +26,7 @@ struct ApplyMyTicketView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 10)
                 .stroke(lineWidth: 1)
                 .fill(Color.infanDarkGray))
         .horizontalPadding()

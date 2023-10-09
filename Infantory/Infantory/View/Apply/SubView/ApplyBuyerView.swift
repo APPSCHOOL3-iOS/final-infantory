@@ -19,7 +19,7 @@ struct ApplyBuyerView: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 8)
+            RoundedRectangle(cornerRadius: 10)
                 .stroke(lineWidth: 1)
                 .fill(Color.infanMain))
         .horizontalPadding()

@@ -22,7 +22,7 @@ struct RoundedTextEditor: View {
                 Text("\(textFieldTitle)")
                     .font(.infanHeadlineBold)
             }
-            RoundedRectangle(cornerRadius: 5)
+            RoundedRectangle(cornerRadius: 10)
                 .stroke(isFocused == true ? Color.black : Color.infanGray)
                 .overlay {
                     ZStack(alignment: .topLeading) {

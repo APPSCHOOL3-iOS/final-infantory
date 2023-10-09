@@ -42,8 +42,8 @@ struct AuctionBidSheetView: View {
                     showAlert = false
                 }
             } label: {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(isSelected ? .gray.opacity(0.3) : Color.infanMain)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(isSelected ? .infanGray : Color.infanMain)
                     .overlay {
                         if isSelected {
                             Text("입찰하기")
@@ -97,11 +97,11 @@ extension AuctionBidSheetView {
             ZStack {
                 Text("\(bidAmount)원")
                     .font(.infanHeadline)
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(index == selectedIndex ? Color.infanMain : Color.white)
                     .opacity(0.3)
                     .frame(width: .infinity, height: 54)
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(style: StrokeStyle())
                     .foregroundColor(.gray)
                     .frame(width: .screenWidth - 40, height: 54)

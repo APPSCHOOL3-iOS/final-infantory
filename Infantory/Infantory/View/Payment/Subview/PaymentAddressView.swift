@@ -49,8 +49,8 @@ extension PaymentAddressView {
                     ProgressView()
                 }
                 .background(
-                    RoundedRectangle(cornerRadius: 25)
-                        .stroke(lineWidth: 0.5)
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(lineWidth: 1)
                         .frame(width: 100, height: 100)
                 )
                 .padding(.trailing)
@@ -85,7 +85,7 @@ extension PaymentAddressView {
                     Text("주소 변경")
                         .font(.footnote)
                         .background(
-                            RoundedRectangle(cornerRadius: 25)
+                            RoundedRectangle(cornerRadius: 10)
                                 .stroke(Color.gray, lineWidth: 1)
                                 .frame(width: 70, height: 25)
                         )
@@ -129,9 +129,9 @@ extension PaymentAddressView {
             }
             
             .background(
-                RoundedRectangle(cornerRadius: 7)
-                    .stroke(lineWidth: 0.5)
-                    .foregroundColor(.gray)
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(lineWidth: 1)
+                    .foregroundColor(.infanLightGray)
                     .frame(height: 43)
             )
             .padding(.top)

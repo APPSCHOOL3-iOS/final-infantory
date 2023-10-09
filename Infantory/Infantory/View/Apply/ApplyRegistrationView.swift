@@ -137,7 +137,7 @@ extension ApplyRegistrationView {
                 Rectangle()
                     .stroke(lineWidth: 1)
                     .background(Color.infanMain)
-                    .cornerRadius(8)
+                    .cornerRadius(10)
                 //                    .fill(Color.infanMain)
                     .opacity(0.3)
                     .overlay {
@@ -148,7 +148,7 @@ extension ApplyRegistrationView {
                     }
                     .frame(width: (.screenWidth-70)/4, height: 54)
             } else {
-                RoundedRectangle(cornerRadius: 8)
+                RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
                     .cornerRadius(8)
                     .overlay {

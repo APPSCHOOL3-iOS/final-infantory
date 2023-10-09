@@ -45,14 +45,12 @@ struct ApplyProductListView: View {
                                                         .resizable()
                                                         .scaledToFill()
                                                         .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
-                                                        .cornerRadius(4)
                                                         .clipped()
                                                 }
                                             } placeholder: {
                                                 ProgressView()
                                                     .scaledToFill()
                                                     .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
-                                                    .cornerRadius(4)
                                                     .clipped()
                                             }
                                         }
@@ -61,7 +59,6 @@ struct ApplyProductListView: View {
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
-                                            .cornerRadius(4)
                                             .clipped()
                                     }
                                     VStack(alignment: .leading, spacing: 8) {
