@@ -85,6 +85,7 @@ struct AuctionRegistrationView: View {
                     }
                     DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
                         .padding(.vertical)
+                    
                     HStack {
                         Text("경매종료일")
                             .font(.infanHeadlineBold)
@@ -92,16 +93,15 @@ struct AuctionRegistrationView: View {
                         Text("\(resultText)")
                             .font(.infanBody)
                     }
+                    
                     HStack {
                         ForEach(dateList, id: \.self) { date in
                             dateSelectButton(date: date)
                         }
                     }
                     
-                    Divider()
-                    
                     Spacer()
-                    
+                
                     InfanMainButton(text: "등록하기") {
                         if title.isEmpty {
                             showAlert = true
@@ -116,10 +116,10 @@ struct AuctionRegistrationView: View {
                             let product = registViewModel.makeAuctionModel(title: title,
                                                                            apply: apply,
                                                                            itemDescription: itemDescription, startingPrice: auctionStartingPrice,
-                                                                           
+
                                                                            imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,
                                                                            user: loginStore.currentUser)
-                            
+
                             Task {
                                 try await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
                                 })
