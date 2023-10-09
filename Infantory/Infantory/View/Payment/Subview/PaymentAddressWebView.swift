@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct PaymentAddressWebView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     
     var body: some View {
         WebView(
@@ -22,7 +22,7 @@ struct PaymentAddressWebView: View {
 
 struct PaymentAddressWebView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentAddressWebView(viewModel: PaymentViewModel(user: User.dummyUser,
+        PaymentAddressWebView(viewModel: PaymentStore(user: User.dummyUser,
                                                           product: AuctionProduct.dummyProduct))
     }
 }
@@ -30,7 +30,7 @@ struct PaymentAddressWebView_Previews: PreviewProvider {
 struct WebView: UIViewRepresentable {
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     
     let url: URL
     let contentController = WKUserContentController()

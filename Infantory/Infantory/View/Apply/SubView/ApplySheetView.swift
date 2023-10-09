@@ -19,7 +19,7 @@ struct ApplySheetView: View {
     @Binding var isShowingApplySheet: Bool
     @Binding var product: ApplyProduct
 
-    var viewModel: ApplyProductViewModel
+    var viewModel: ApplyProductStore
     var body: some View {
         VStack {
             ApplyMyTicketView()
@@ -78,7 +78,7 @@ struct ApplySheetView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(lineWidth: 1)
                     .fill(Color.infanDarkGray))
-            .infanHorizontalPadding()
+            .horizontalPadding()
             .frame(width: CGFloat.screenWidth, height: 80)
             
             HStack {
@@ -133,7 +133,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(isShowingApplySheet: .constant(true), product: .constant( ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])), viewModel: ApplyProductViewModel())
+        ApplySheetView(isShowingApplySheet: .constant(true), product: .constant( ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])), viewModel: ApplyProductStore())
             .environmentObject(LoginStore())
     }
 }

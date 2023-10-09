@@ -38,7 +38,7 @@ struct ProfileRowView: View {
             .buttonStyle(.plain)
 
         }
-        .infanHorizontalPadding()
+        .horizontalPadding()
         .sheet(isPresented: $isShowingSheet, content: {
             ProfileSheetView()
         })

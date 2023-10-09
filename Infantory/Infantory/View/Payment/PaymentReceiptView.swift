@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentReceiptView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     
     var body: some View {
         VStack {
@@ -52,7 +52,7 @@ struct PaymentReceiptView: View {
                 
             }
         }
-        .infanNavigationBar(title: "구매완료")
+        .navigationBar(title: "구매완료")
         .onAppear {
             viewModel.uploadPaymentInfo()
         }
@@ -62,7 +62,7 @@ struct PaymentReceiptView: View {
 struct ReceiptView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentReceiptView(viewModel: PaymentViewModel(user: User.dummyUser,
+            PaymentReceiptView(viewModel: PaymentStore(user: User.dummyUser,
                                                            product: AuctionProduct.dummyProduct))
         }
     }

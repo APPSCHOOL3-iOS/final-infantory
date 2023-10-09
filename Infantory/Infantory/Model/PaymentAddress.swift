@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PaymentAddressViewModel: Int, CaseIterable {
+enum PaymentAddress: Int, CaseIterable {
     case prizeWinner
     case phoneNumber
     case address
@@ -20,7 +20,7 @@ enum PaymentAddressViewModel: Int, CaseIterable {
         }
     }
     
-    func content(viewModel: PaymentViewModel) -> String {
+    func content(viewModel: PaymentStore) -> String {
         switch self {
         case .prizeWinner: return viewModel.user.name
         case .phoneNumber: return viewModel.user.phoneNumber

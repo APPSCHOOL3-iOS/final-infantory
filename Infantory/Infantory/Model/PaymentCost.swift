@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PaymentInfoViewModel: Int, CaseIterable {
+enum PaymentCost: Int, CaseIterable {
     case totalPrice
     case price
     case commission
@@ -32,7 +32,6 @@ enum PaymentInfoViewModel: Int, CaseIterable {
         case .commission: return commission
         case .deliveryCost: return deliveryCost
         }
-        
     }
-    
 }
+

@@ -10,7 +10,7 @@ import SwiftUI
 struct AuctionBuyerView: View {
     @State private var currentIndex = 0
     
-    @ObservedObject var auctionViewModel: AuctionViewModel
+    @ObservedObject var auctionViewModel: AuctionStore
     
     var body: some View {
         
@@ -30,10 +30,10 @@ struct AuctionBuyerView: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 1)
                 .fill(Color.infanMain))
-        .infanHorizontalPadding()
+        .horizontalPadding()
         .frame(width: CGFloat.screenWidth, height: 80)   
         .onAppear {
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if currentIndex < 5 {
                     currentIndex += 1
                 } else {
@@ -46,7 +46,7 @@ struct AuctionBuyerView: View {
 
 struct AuctionBuyerView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBuyerView(auctionViewModel: AuctionViewModel())
+        AuctionBuyerView(auctionViewModel: AuctionStore())
     }
 }
 //#Preview {

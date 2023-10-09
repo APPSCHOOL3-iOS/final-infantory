@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PayButtonView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     var payName: PaymentMethod
     
     var body: some View {
@@ -40,7 +40,7 @@ struct PayButtonView: View {
 struct PayButtonView_Previews: PreviewProvider {
     static var previews: some View {
         PayButtonView(
-            viewModel: PaymentViewModel(user: User.dummyUser,
+            viewModel: PaymentStore(user: User.dummyUser,
                                         product: AuctionProduct.dummyProduct),
             payName: PaymentMethod.naverPay
         )

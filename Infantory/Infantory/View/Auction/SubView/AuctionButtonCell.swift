@@ -38,7 +38,7 @@ struct AuctionButtonCell: View {
             }
             Spacer()
         }
-        .infanHorizontalPadding()
+        .horizontalPadding()
     }
 }
 

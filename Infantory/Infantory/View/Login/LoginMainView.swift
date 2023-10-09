@@ -5,7 +5,6 @@
 //  Created by 김성훈 on 2023/09/20.
 //
 
-import Foundation
 import SwiftUI
 
 struct LoginMainView: View {
@@ -29,7 +28,7 @@ struct LoginMainView: View {
     }
 }
 
-struct Empty7_Previews: PreviewProvider {
+struct LoginMainView_Previews: PreviewProvider {
     static var previews: some View {
         LoginMainView()
             .environmentObject(LoginStore())

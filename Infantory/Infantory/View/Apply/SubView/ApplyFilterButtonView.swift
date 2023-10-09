@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyFilterButtonView: View {
 
-    var applyViewModel: ApplyProductViewModel
+    var applyViewModel: ApplyProductStore
     
     var body: some View {
         HStack {
@@ -38,12 +38,12 @@ struct ApplyFilterButtonView: View {
             }
             Spacer()
         }
-        .infanHorizontalPadding()
+        .horizontalPadding()
     }
 }
 
 struct ApplyFilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyFilterButtonView(applyViewModel: ApplyProductViewModel())
+        ApplyFilterButtonView(applyViewModel: ApplyProductStore())
     }
 }

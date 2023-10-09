@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final class ApplyProductViewModel: ObservableObject {
+final class ApplyProductStore: ObservableObject {
     
     @Published var applyProduct: [ApplyProduct] = []
     @Published var selectedFilter: ApplyFilter = .inProgress
@@ -23,7 +23,6 @@ final class ApplyProductViewModel: ObservableObject {
     @MainActor
     func fetchApplyProducts() async throws {
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
-        print("\(snapshot)")
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
         self.applyProduct = products
@@ -36,10 +35,15 @@ final class ApplyProductViewModel: ObservableObject {
                               winningPrice: String)
     async throws {
         do {
-            let product = makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, winningPrice: winningPrice)
+            let product = makeAuctionModel(title: title,
+                                           apply: apply,
+                                           itemDescription: itemDescription,
+                                           winningPrice: winningPrice)
             try Firestore.firestore().collection("ApplyProducts").addDocument(from: product)
-        } catch {print(String(describing: error))
+        } catch {
+            #if DEBUG
             print("debug : Failed to Create User with \(error.localizedDescription)")
+            #endif
         }
     }
     private func makeAuctionModel(title: String,
@@ -47,12 +51,24 @@ final class ApplyProductViewModel: ObservableObject {
                                   itemDescription: String,
                                   winningPrice: String) -> ApplyProduct {
         
-        let product = ApplyProduct(id: "", productName: title, productImageURLStrings: [], description: itemDescription, influencerID: "", influencerNickname: "", startDate: Date(), endDate: Date(), applyUserIDs: [])
+        let product = ApplyProduct(id: "",
+                                   productName: title,
+                                   productImageURLStrings: [],
+                                   description: itemDescription,
+                                   influencerID: "",
+                                   influencerNickname: "",
+                                   startDate: Date(),
+                                   endDate: Date(),
+                                   applyUserIDs: [])
         return product
     }
     
     @MainActor
-    func addApplyTicketUserId(ticketCount: Int, product: ApplyProduct, userID: String, userUID: String, completion: @escaping (ApplyProduct) -> Void) {
+    func addApplyTicketUserId(ticketCount: Int,
+                              product: ApplyProduct,
+                              userID: String,
+                              userUID: String,
+                              completion: @escaping (ApplyProduct) -> Void) {
         
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
         documentReference.getDocument { (document, error) in
@@ -67,27 +83,47 @@ final class ApplyProductViewModel: ObservableObject {
                 // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
                 documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
                     if let error = error {
+                        #if DEBUG
                         print("Error updating document: (error)")
+                        #endif
                     } else {
+                        #if DEBUG
                         print("Document successfully updated")
+                        #endif
                         Task {
-                            try await self.fetchProduct(ticketCount: ticketCount, product: product, userUID: userUID, db: documentReference) { product in
+                            try await self.fetchProduct(ticketCount: ticketCount,
+                                                        product: product,
+                                                        userUID: userUID,
+                                                        database: documentReference) { product in
                                 completion(product)
                             }
                         }
                     }
                 }
             } else {
+                #if DEBUG
                 print("Document does not exist")
+                #endif
             }
         }     
     }
     @MainActor
-    func fetchProduct(ticketCount: Int, product: ApplyProduct, userUID: String, db: DocumentReference, completion: @escaping (ApplyProduct) -> Void) async throws {
-        let applyDocument = try await db.getDocument()
+    func fetchProduct(ticketCount: Int,
+                      product: ApplyProduct,
+                      userUID: String,
+                      database: DocumentReference,
+                      completion: @escaping (ApplyProduct) -> Void) async throws {
+        let applyDocument = try await database.getDocument()
         let product = try applyDocument.data(as: ApplyProduct.self)
-        let applyTicket = ApplyTicket(date: Date(), ticketGetAndUse: "\(product.productName) 응모", count: -ticketCount)
-        let documentReference = try Firestore.firestore().collection("Users").document(userUID).collection("ApplyTickets").addDocument(from: applyTicket)
+        let applyTicket = ApplyTicket(date: Date(),
+                                      ticketGetAndUse: "\(product.productName) 응모",
+                                      count: -ticketCount)
+        _ = try Firestore
+            .firestore()
+            .collection("Users")
+            .document(userUID)
+            .collection("ApplyTickets")
+            .addDocument(from: applyTicket)
         completion(product)
     }
  

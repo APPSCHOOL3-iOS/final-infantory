@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var applyViewModel: ApplyProductViewModel = ApplyProductViewModel()
+    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
 
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
@@ -46,7 +46,7 @@ struct ApplyMainView: View {
                     }, icon: "plus")
                 }
             }
-            .infanFetchUser()
+            .onAppearFetchUser()
         } else {
             NavigationStack {
                 VStack {
@@ -70,7 +70,7 @@ struct ApplyMainView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
             }
-            .infanFetchUser()
+            .onAppearFetchUser()
         }
     }
 }

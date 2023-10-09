@@ -58,7 +58,7 @@ struct PaymentCardAddView: View {
             
             Spacer()
         }
-        .infanNavigationBar(title: "결제 정보")
+        .navigationBar(title: "결제 정보")
         .padding()
         
     }

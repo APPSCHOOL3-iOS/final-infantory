@@ -21,7 +21,7 @@ struct PaymentPriceView: View {
             
             VStack(alignment: .leading, spacing: 22) {
                 
-                ForEach(PaymentInfoViewModel.allCases, id: \.rawValue) { item in
+                ForEach(PaymentCost.allCases, id: \.rawValue) { item in
                     if item == .totalPrice {
                         TotalPriceRow(item: item, price: price)
                     } else {
@@ -42,14 +42,14 @@ struct PaymentPriceView_Previews: PreviewProvider {
 }
 
 struct TotalPriceRow: View {
-    let item: PaymentInfoViewModel
+    let item: PaymentCost
     let price: Int
     
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
             Divider()
             HStack {
-                Text(PaymentInfoViewModel.totalPrice.title)
+                Text(PaymentCost.totalPrice.title)
                     .padding(.horizontal)
             }
             HStack {
@@ -66,7 +66,7 @@ struct TotalPriceRow: View {
 }
 
 struct PriceDetailRow: View {
-    let item: PaymentInfoViewModel
+    let item: PaymentCost
     let price: Int
     
     var body: some View {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfanFetchUser: ViewModifier {
+struct FetchUser: ViewModifier {
     
     @EnvironmentObject var loginStore: LoginStore
     

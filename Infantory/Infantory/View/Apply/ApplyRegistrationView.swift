@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyRegistrationView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject var applyViewModel = ApplyProductViewModel()
+    @StateObject var applyViewModel = ApplyProductStore()
     @State private var title: String = ""
     @State private var apply: String = ""
     @State private var itemDescription: String = ""
@@ -69,11 +69,11 @@ struct ApplyRegistrationView: View {
                 .padding(.leading)
                 
                 VStack(spacing: 16) {
-                    InfanTextField(textFieldTitle: "애장품",
+                    UnderlineTextField(textFieldTitle: "애장품",
                                    placeholder: "애장품 이름을 입력해주세요.",
                                    text: $title)
                     
-                    InfanTextEditor(textFieldTitle: "소개",
+                    RoundedTextEditor(textFieldTitle: "소개",
                                     placeHolder: "애장품을 소개해주세요.",
                                     text: $itemDescription)
                     
@@ -95,7 +95,7 @@ struct ApplyRegistrationView: View {
                     
                     Divider()
                     Spacer()
-                    InfanMainButton(text: "등록하기") {
+                    MainColorButton(text: "등록하기") {
                         if title.isEmpty {
                             showAlert = true
                             alertMessage = "제목을 입력해주세요."
@@ -115,9 +115,9 @@ struct ApplyRegistrationView: View {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
                 }
             }
-            .infanHorizontalPadding()
+            .horizontalPadding()
         }
-        .infanNavigationBar(title: "내 응모 등록")
+        .navigationBar(title: "내 응모 등록")
     }
     func calculateDateOffset(days: Int) {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {

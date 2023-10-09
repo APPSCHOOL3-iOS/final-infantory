@@ -26,7 +26,7 @@ struct InfantoryApp: App {
     
     init() {
         // Kakao SDK 초기화
-        KakaoSDK.initSDK(appKey: "45ce2063d86a5a5c18e38528aae46993")
+        KakaoSDK.initSDK(appKey: AppKey.kakaoAppKey)
     }
     
     @StateObject private var loginStore = LoginStore()

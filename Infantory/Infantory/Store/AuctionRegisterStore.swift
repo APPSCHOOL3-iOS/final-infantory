@@ -22,7 +22,7 @@ class AuctionRegisterStore: ObservableObject {
     
     func addAuctionProduct(auctionProduct: AuctionProduct,
                            images: [UIImage],
-                           completion: @escaping (Bool) -> ()) async throws {
+                           completion: @escaping (Bool) -> Void) async throws {
         var auctionProduct = auctionProduct
         await uploadImages(images, auctionProduct: auctionProduct) { urls in
             auctionProduct.productImageURLStrings = urls
@@ -48,18 +48,24 @@ class AuctionRegisterStore: ObservableObject {
             
             _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
                 if let error = error {
+                    #if DEBUG
                     print("Error uploading image \(index): \(error.localizedDescription)")
+                    #endif
                 } else {
                     imageRef.downloadURL { url, error in
                         if let error = error {
+                            #if DEBUG
                             print(error.localizedDescription)
+                            #endif
                         } else {
                             urlStringList.append(url?.absoluteString ?? "")
                             if urlStringList.count == images.count {
                                 completion(urlStringList)
                             }
                         }
+                        #if DEBUG
                         print("Image \(index) uploaded successfully")
+                        #endif
                     }
                 }
             }

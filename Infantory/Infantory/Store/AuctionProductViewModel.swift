@@ -14,17 +14,16 @@ final class AuctionProductViewModel: ObservableObject {
     @Published var auctionProduct: [AuctionProduct] = []
     
     //현재 유저 패치작업
-    @MainActor
+    
     func fetchAuctionProducts() async throws {
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
-        print("\(snapshot)")
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
-        
-        self.auctionProduct = products
-        
+    
+        DispatchQueue.main.async {
+            self.auctionProduct = products
+        }
     }
     
-    @MainActor
     func createAuctionProduct(title: String,
                               apply: String,
                               itemDescription: String,
@@ -32,10 +31,13 @@ final class AuctionProductViewModel: ObservableObject {
         do {
             let product = makeAuctionModel(title: title, apply: apply, itemDescription: itemDescription, startingPrice: startingPrice)
             try Firestore.firestore().collection("AuctionProducts").addDocument(from: product)
-        } catch {print(String(describing: error))
+        } catch {
+            #if DEBUG
             print("debug : Failed to Create User with \(error.localizedDescription)")
+            #endif
         }
     }
+    
     private func makeAuctionModel(title: String,
                                   apply: String,
                                   itemDescription: String,

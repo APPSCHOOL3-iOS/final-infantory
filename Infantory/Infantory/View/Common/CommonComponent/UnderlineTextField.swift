@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct InfanTextField: View {
+struct UnderlineTextField: View {
     
     var textFieldTitle: String? = nil
     let placeholder: String

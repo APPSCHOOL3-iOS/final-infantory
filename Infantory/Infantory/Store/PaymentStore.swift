@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class PaymentViewModel: ObservableObject {
+class PaymentStore: ObservableObject {
     //받아오고
     @Published var user: User = User.dummyUser
     @Published var product: Productable = AuctionProduct.dummyProduct
@@ -39,15 +39,21 @@ class PaymentViewModel: ObservableObject {
                             "paymentInfos": FieldValue.arrayUnion([paymentInfoId])
                         ]) { updateError in
                             if let updateError = updateError {
+                                #if DEBUG
                                 print("DEBUG: Error updating: \(updateError)")
+                                #endif
                             } else {
+                                #if DEBUG
                                 print("DEBUG: successfully updated!")
+                                #endif
                             }
                         }
                 }
             }
         } catch let error {
+            #if DEBUG
             print("DEBUG: Error adding paymentInfo: \(error)")
+            #endif
         }
         
     }

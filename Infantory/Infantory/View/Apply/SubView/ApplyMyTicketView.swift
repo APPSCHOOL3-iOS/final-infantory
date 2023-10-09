@@ -29,7 +29,7 @@ struct ApplyMyTicketView: View {
             RoundedRectangle(cornerRadius: 8)
                 .stroke(lineWidth: 1)
                 .fill(Color.infanDarkGray))
-        .infanHorizontalPadding()
+        .horizontalPadding()
         .frame(width: CGFloat.screenWidth, height: 80)
     }
 }

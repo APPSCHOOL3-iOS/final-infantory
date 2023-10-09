@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    var applyViewModel: ApplyProductViewModel
+    var applyViewModel: ApplyProductStore
     @Binding var product: ApplyProduct
     
     var body: some View {
@@ -27,10 +27,10 @@ struct ApplyDetailView: View {
                         .font(.infanTitle2)
                     Spacer()
                 }
-                .infanHorizontalPadding()
+                .horizontalPadding()
                 
                 Text(product.description)
-                    .infanHorizontalPadding()
+                    .horizontalPadding()
                     .padding(.top)
                     .padding(.bottom, 100)
                     .multilineTextAlignment(.leading)
@@ -83,7 +83,7 @@ struct ApplyFooter: View {
                 try await loginStore.fetchUser(userUID: loginStore.userUid)
             }
         }, content: {
-            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductViewModel())
+            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductStore())
                             .presentationDragIndicator(.visible)
                             .presentationDetents([.fraction(0.45)])
         })
@@ -96,7 +96,7 @@ struct ApplyFooter: View {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(applyViewModel: ApplyProductViewModel(), product:
+        ApplyDetailView(applyViewModel: ApplyProductStore(), product:
                 .constant(ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])))
             .environmentObject(LoginStore())
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentAddressView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     @State var directMessage: String = ""
     
     var body: some View {
@@ -29,7 +29,7 @@ struct PaymentAddressView: View {
 struct PaymentAddressView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentAddressView(viewModel: PaymentViewModel(user: User.dummyUser,
+            PaymentAddressView(viewModel: PaymentStore(user: User.dummyUser,
                                                            product: AuctionProduct.dummyProduct))
         }
     }
@@ -93,7 +93,7 @@ extension PaymentAddressView {
                 .buttonStyle(.plain)
             }
             
-            ForEach(PaymentAddressViewModel.allCases, id: \.rawValue) { item in
+            ForEach(PaymentAddress.allCases, id: \.rawValue) { item in
                 HStack {
                     Text(item.title)
                         .frame(width: 50, alignment: .leading)

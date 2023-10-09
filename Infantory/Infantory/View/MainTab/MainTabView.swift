@@ -42,7 +42,7 @@ struct MainTabView: View {
                 .tag(2)
                 .environmentObject(loginStore)
             
-        ActivityMainView()
+            ActivityMainView()
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
                         .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
@@ -63,7 +63,7 @@ struct MainTabView: View {
         }
         
         .tint(Color.infanMain)
-        .infanFetchUser()
+        .onAppearFetchUser()
     }
 }
 

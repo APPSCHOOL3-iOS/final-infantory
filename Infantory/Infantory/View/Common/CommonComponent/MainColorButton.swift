@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct InfanMainButton: View {
+struct MainColorButton: View {
     
     let text: String
     let action: () -> Void

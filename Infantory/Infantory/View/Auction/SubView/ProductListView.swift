@@ -37,7 +37,7 @@ struct ProductListView: View {
                                 .padding(4)
 
                         }
-                        .infanHorizontalPadding()
+                        .horizontalPadding()
                         
                         NavigationLink {
                             AuctionDetailView(auctionProductViewModel: auctionViewModel)
@@ -113,7 +113,7 @@ struct ProductListView: View {
                                 }
                                 Divider()
                             }
-                            .infanHorizontalPadding()
+                            .horizontalPadding()
                         }
                     }
                     .padding(.top)

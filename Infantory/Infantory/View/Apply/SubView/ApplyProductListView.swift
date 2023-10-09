@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyProductListView: View {
     
-    @StateObject var applyViewModel: ApplyProductViewModel
+    @StateObject var applyViewModel: ApplyProductStore
     @State private var heartButton: Bool = false
     
     var body: some View {
@@ -30,7 +30,7 @@ struct ApplyProductListView: View {
                             Spacer()
                             TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                         }
-                        .infanHorizontalPadding()
+                        .horizontalPadding()
                         
                         NavigationLink {
                             ApplyDetailView(applyViewModel: applyViewModel, product: $product)
@@ -86,7 +86,7 @@ struct ApplyProductListView: View {
                                 }
                                 Divider()
                             }
-                            .infanHorizontalPadding()
+                            .horizontalPadding()
                         }
                     }
                     .padding(.top)
@@ -107,7 +107,7 @@ struct ApplyProductListView: View {
 struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ApplyProductListView(applyViewModel: ApplyProductViewModel())
+            ApplyProductListView(applyViewModel: ApplyProductStore())
         }
     }
 }

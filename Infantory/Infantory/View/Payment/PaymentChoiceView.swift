@@ -26,7 +26,7 @@ struct PaymentChoiceView: View {
                 saveAccountView
                     .padding(.trailing)
             }
-            .infanNavigationBar(title: "계좌선택")
+            .navigationBar(title: "계좌선택")
             .navigationBarTitleDisplayMode(.inline)
         
     }

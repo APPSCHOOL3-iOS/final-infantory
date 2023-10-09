@@ -10,7 +10,7 @@ import SwiftUI
 // 헤드라인, 바디, 헤드라인 볼드, 풋노트?
 
 struct AuctionBidSheetView: View {
-    @ObservedObject var auctionViewModel: AuctionViewModel
+    @ObservedObject var auctionViewModel: AuctionStore
     @Binding var isShowingAuctionBidSheet: Bool
     
     @State private var selectedIndex: Int = 4 // 선택된 버튼
@@ -106,7 +106,7 @@ extension AuctionBidSheetView {
                     .foregroundColor(.gray)
                     .frame(width: .screenWidth - 40, height: 54)
             }
-            .infanHorizontalPadding()
+            .horizontalPadding()
         }
         .buttonStyle(.plain)
         .padding(.bottom, 8)
@@ -115,7 +115,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionViewModel(), isShowingAuctionBidSheet: .constant(true))
+        AuctionBidSheetView(auctionViewModel: AuctionStore(), isShowingAuctionBidSheet: .constant(true))
     }
 }
 

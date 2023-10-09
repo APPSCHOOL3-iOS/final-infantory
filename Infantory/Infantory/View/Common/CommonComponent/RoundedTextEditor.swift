@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfanTextEditor: View {
+struct RoundedTextEditor: View {
     
     var textFieldTitle: String? = nil
     var width: CGFloat = .screenWidth - 40

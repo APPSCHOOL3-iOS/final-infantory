@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentMethodView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @ObservedObject var viewModel: PaymentStore
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,7 +28,7 @@ struct PaymentMethodView: View {
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentMethodView(viewModel: PaymentViewModel(user: User.dummyUser,
+            PaymentMethodView(viewModel: PaymentStore(user: User.dummyUser,
                                                           product: AuctionProduct.dummyProduct))
         }
     }

@@ -10,19 +10,18 @@ import FirebaseFirestoreSwift
 
 struct User: Identifiable, Codable {
     @DocumentID var id: String?
-    var isInfluencer: UserType // influencer인지 일반 User인지?
+    var isInfluencer: UserType = .user
     var profileImageURLString: String? = nil
-    var name: String
-    var phoneNumber: String
-    var email: String
+    var name: String = ""
+    var phoneNumber: String = ""
+    var email: String = ""
     
-    var loginType: LoginType
-    var address: Address
+    var loginType: LoginType = .kakao
+    var address: Address = Address(address: "", zonecode: "", addressDetail: "")
     
     var follower: [String]? = nil
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
-    // address 바꿈, 페이먼트인포랑 벌쓰데이 뺌
 }
 
 // 주소

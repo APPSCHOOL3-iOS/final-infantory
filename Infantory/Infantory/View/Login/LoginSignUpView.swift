@@ -28,13 +28,13 @@ struct LoginSignUpView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: 20) {
     
-                InfanTextField(textFieldTitle: "이메일", placeholder: loginStore.userName, text: $email)
-                    .disabled(true)
+                UnderlineTextField(textFieldTitle: "이메일", placeholder: loginStore.userName, text: $email)
+                    .disabled(false)
                 
                 VStack(alignment: .leading) {
                     HStack {
                         
-                        InfanTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
+                        UnderlineTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
                         Button {
                             loginStore.duplicateNickName(nickName: nickName) { result in
                                 if nickName == "" {
@@ -67,14 +67,14 @@ struct LoginSignUpView: View {
                         .padding(.bottom)
                 }
             
-                InfanTextField(textFieldTitle: "휴대폰 번호",
+                UnderlineTextField(textFieldTitle: "휴대폰 번호",
                                placeholder: "- 없이 입력",
                                text: $phoneNumber)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     HStack {
                         
-                        InfanTextField(textFieldTitle: "우편 번호", placeholder: "우편 번호를 검색하세요", text: $zipCode)
+                        UnderlineTextField(textFieldTitle: "우편 번호", placeholder: "우편 번호를 검색하세요", text: $zipCode)
                             .disabled(true)
                         
                         NavigationLink {
@@ -93,10 +93,10 @@ struct LoginSignUpView: View {
                             }
                         }
                     }
-                    InfanTextField(textFieldTitle: "주소", placeholder: "우편 번호 검색 후, 자동 입력 됩니다", text: $address)
+                    UnderlineTextField(textFieldTitle: "주소", placeholder: "우편 번호 검색 후, 자동 입력 됩니다", text: $address)
                         .disabled(true)
                     
-                    InfanTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $detailAddress)
+                    UnderlineTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $detailAddress)
                 }
                 .padding(.bottom, 30)
                 
@@ -116,7 +116,8 @@ struct LoginSignUpView: View {
                 }
             }
             .padding()
-            .infanNavigationBar(title: "회원가입")
+            .navigationBar(title: "회원가입")
+            
             .overlay(
                 ToastMessage(content: Text("\(toastMessageText)"), isPresented: $showToastMessage)
             )
@@ -159,15 +160,6 @@ struct LoginSignUpView: View {
     }
 }
 
-struct UnderLineOverlay: View {
-    
-    var body: some View {
-        VStack {
-            Divider()
-                .offset(x: 0, y: 15)
-        }
-    }
-}
 
 struct LoginSignUpView_Previews: PreviewProvider {
     static var previews: some View {

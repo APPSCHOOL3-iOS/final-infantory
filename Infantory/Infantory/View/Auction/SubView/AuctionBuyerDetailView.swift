@@ -18,6 +18,4 @@ struct AuctionBuyerDetailView_Previews: PreviewProvider {
         AuctionBuyerDetailView()
     }
 }
-//#Preview {
-//    AuctionBuyerDetailView()
-//}
+

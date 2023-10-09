@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @ObservedObject var viewmodel = PaymentViewModel(user: User.dummyUser, product: AuctionProduct.dummyProduct)
+    @StateObject var viewmodel = PaymentStore(user: User.dummyUser, product: AuctionProduct.dummyProduct)
     
     var body: some View {
         VStack {
@@ -27,7 +27,7 @@ struct PaymentView: View {
                 }
             }
         }
-        .infanNavigationBar(title: "배송 / 결재")
+        .navigationBar(title: "배송 / 결재")
         .navigationBarTitleDisplayMode(.inline)
     }
 }

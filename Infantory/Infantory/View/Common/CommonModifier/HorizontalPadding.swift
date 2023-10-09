@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InfanHorizontalPadding: ViewModifier {
+struct HorizontalPadding: ViewModifier {
 
     func body(content: Content) -> some View {
         content

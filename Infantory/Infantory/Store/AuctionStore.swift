@@ -2,7 +2,7 @@ import Foundation
 import Firebase
 import Combine
 
-class AuctionViewModel: ObservableObject {
+class AuctionStore: ObservableObject {
     @Published var product: AuctionProduct = AuctionProduct.dummyProduct
     @Published var biddingInfos: [BiddingInfo] = []
     
@@ -74,9 +74,4 @@ class AuctionViewModel: ObservableObject {
     }
 }
 
-struct BiddingInfo {
-    var id: UUID
-    var timeStamp: Date
-    var participants: String
-    var biddingPrice: Int
-}
+
