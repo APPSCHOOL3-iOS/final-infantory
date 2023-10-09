@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyProductListView: View {
     
-    @StateObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyViewModel: ApplyProductStore
     @State private var heartButton: Bool = false
     
     var body: some View {
