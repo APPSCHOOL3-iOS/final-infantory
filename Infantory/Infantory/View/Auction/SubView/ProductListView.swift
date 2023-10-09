@@ -17,7 +17,6 @@ struct ProductListView: View {
         ScrollView {
             LazyVStack {
                 ForEach(auctionViewModel.auctionProduct) { product in
-                    
                     VStack {
                         HStack {
                             Image("Influencer1")
@@ -26,18 +25,18 @@ struct ProductListView: View {
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
                             
-                            Text(loginStore.currentUser.name)
+                            Text(product.influencerNickname)
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
+                            //TODO: 타이머뷰로 교체 해야함
                             Label("03:22:15", systemImage: "timer")
                                 .foregroundColor(.infanMain)
                                 .font(.infanFootnote)
                                 .frame(height: 24)
-                                .padding(4)
-
                         }
-                        .padding(.vertical)
+                        .padding(.top, 10)
+                        .padding(.bottom, 6)
                         .horizontalPadding()
                         
                         NavigationLink {
@@ -53,14 +52,14 @@ struct ProductListView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFill()
-                                                        .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                         .clipped()
                                                     
                                                 }
                                             } placeholder: {
                                                 ProgressView()
                                                     .scaledToFill()
-                                                    .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                    .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                     .clipped()
                                             }
                                         }
@@ -70,29 +69,22 @@ struct ProductListView: View {
                                             Image("appleLogo")
                                                 .resizable()
                                                 .scaledToFill()
-                                                .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
+                                                .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                 .clipped()
                                             
-                                            Label("03:22:15", systemImage: "timer")
-                                                .foregroundColor(.infanMain)
-                                                .font(.infanFootnote)
-                                                .frame(height: 24)
-                                                .padding(4)
-
                                         }
                                     }
-                                    
                                     VStack(alignment: .leading, spacing: 8) {
-                           
+                                        
                                         Text("\(product.productName)")
                                             .font(.infanBody)
                                             .foregroundColor(.infanDarkGray)
                                             .multilineTextAlignment(.leading)
-                                                               
+                                        
                                         Text("\(product.winningPrice ?? 0)원")
                                             .font(.infanHeadlineBold)
                                             .foregroundColor(.infanDarkGray)
-
+                                        
                                         Spacer()
                                         VStack {
                                             Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
@@ -103,18 +95,16 @@ struct ProductListView: View {
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
                                         }
-                                        
                                     }
-                                    .padding(.vertical, 10)
-                                    
                                 }
+                                
                                 Divider()
                             }
                             .horizontalPadding()
                         }
                     }
-                    .padding(.top)
                 }
+                
             }
         }
         .onAppear {

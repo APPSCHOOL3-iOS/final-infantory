@@ -44,13 +44,13 @@ struct ApplyProductListView: View {
                                                     image
                                                         .resizable()
                                                         .scaledToFill()
-                                                        .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                         .clipped()
                                                 }
                                             } placeholder: {
                                                 ProgressView()
                                                     .scaledToFill()
-                                                    .frame(width: (.screenWidth - 60) / 2, height: (.screenWidth - 60) / 2)
+                                                    .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                     .clipped()
                                             }
                                         }
@@ -58,7 +58,7 @@ struct ApplyProductListView: View {
                                         Image("appleLogo")
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: (.screenWidth - 40) / 2, height: (.screenWidth - 40) / 2)
+                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
                                     }
                                     VStack(alignment: .leading, spacing: 8) {
@@ -79,7 +79,6 @@ struct ApplyProductListView: View {
 
                                         }
                                     }
-                                    .padding(.vertical, 10)
                                 }
                                 Divider()
                             }
