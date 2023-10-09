@@ -45,13 +45,15 @@ struct AuctionBidSheetView: View {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(isSelected ? .gray.opacity(0.3) : Color.infanMain)
                     .overlay {
-                        Text("\(isSelected ? "" : "\(selectedAmount)") 입찰하기")
-                            .font(.infanHeadlineBold)
-                            .foregroundStyle(.white)
-                        
+                        if isSelected {
+                            Text("입찰하기")
+                        } else {
+                            Text("\(selectedAmount)원 입찰하기")
+                        }
                     }
-                    .infanHorizontalPadding()
-                    .frame(width: .infinity, height: 54)
+                    .foregroundColor(.white)
+                    .font(.infanHeadlineBold)
+                    .frame(width: .screenWidth - 40, height: 54)
             }
             .disabled(isSelected)
         }
@@ -65,10 +67,19 @@ struct AuctionBidSheetView: View {
 extension AuctionBidSheetView {
     var headerView: some View {
         VStack {
-            VStack {
-                Text("현재 입찰가: \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)")
-                    .padding()
-                TimerView(remainingTime: auctionViewModel.remainingTime)
+            VStack(spacing: 8) {
+                Text("입찰가 선택")
+                    .font(.infanHeadlineBold)
+                
+                Text("\(auctionViewModel.product.productName)")
+                
+                HStack {
+                    Text(" \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)원")
+                        .foregroundColor(.infanMain)
+                    
+                    TimerView(remainingTime: auctionViewModel.remainingTime)
+                }
+                
             }
             .padding(.bottom)
         }
@@ -84,7 +95,7 @@ extension AuctionBidSheetView {
         } label: {
             
             ZStack {
-                Text("\(bidAmount)")
+                Text("\(bidAmount)원")
                     .font(.infanHeadline)
                 RoundedRectangle(cornerRadius: 8)
                     .foregroundColor(index == selectedIndex ? Color.infanMain : Color.white)
@@ -93,7 +104,7 @@ extension AuctionBidSheetView {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(style: StrokeStyle())
                     .foregroundColor(.gray)
-                    .frame(width: .infinity, height: 54)
+                    .frame(width: .screenWidth - 40, height: 54)
             }
             .infanHorizontalPadding()
         }
