@@ -33,7 +33,8 @@ struct AuctionBidSheetView: View {
             Button {
                 auctionViewModel.addBid(biddingInfo: BiddingInfo(id: UUID(),
                                                                  timeStamp: Date(),
-                                                                 participants: "갓희찬",
+                                                                 userID: "VAVAVVAVAVA",
+                                                                 userNickname: "갓희찬",
                                                                  biddingPrice: selectedAmount))
                 isShowingAuctionBidSheet.toggle()
                 showAlert = true

@@ -31,6 +31,15 @@ final class LoginStore: ObservableObject {
     @Published var currentUser: User = User()
     @Published var signUpUser: SignUpUser = SignUpUser()
     
+    init() {
+        print("=====================userUid\(userUid)===========")
+        if !userUid.isEmpty {
+            Task {
+                try await fetchUser(userUID: userUid)
+            }
+        }
+    }
+    
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {
         if AuthApi.hasToken() { // 발급된 토큰이 있는지
             validateKakaoToken { isValid in // 토큰 유효성확인
@@ -220,6 +229,8 @@ final class LoginStore: ObservableObject {
     func fetchUser(userUID: String) async throws {
         let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
         let user = try userDocument.data(as: User.self)
+        
+        print("ㅎㅇ")
         try await fetchApplyTicket(getUser: user, userUID: userUID)
     }
     

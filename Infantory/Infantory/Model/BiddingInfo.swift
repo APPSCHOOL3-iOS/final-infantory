@@ -12,7 +12,7 @@ struct BiddingInfo: Codable {
     var id: UUID
     var timeStamp: Date
     var userID: String
-    var userNickName: String
+    var userNickname: String
     var biddingPrice: Int
 }
 

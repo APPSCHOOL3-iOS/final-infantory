@@ -23,8 +23,8 @@ struct User: Identifiable, Codable {
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
     
-    var auctionProductsIDs: [String] = []
-    var applyProductsIDs: [String] = []
+    var auctionProductsIDs: [String]? = nil
+    var applyProductsIDs: [String]? = nil
 }
 
 // 주소

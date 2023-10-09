@@ -22,22 +22,26 @@ class AuctionStore: ObservableObject {
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                    let bidData = childSnapshot.value as? [String: Any],
-                   let participants = bidData["participants"] as? String,
+                   let userID = bidData["userID"] as? String,
+                   let userNickname = bidData["userNickname"] as? String,
                    let biddingPrice = bidData["biddingPrice"] as? Int,
                    let timeStamp = (bidData["timeStamp"] as? Double).map({ Date(timeIntervalSince1970: $0) }) {
                     
                     let biddingInfo = BiddingInfo(
                         id: UUID(uuidString: childSnapshot.key) ?? UUID(),
                         timeStamp: timeStamp,
-                        participants: participants,
+                        userID: userID,
+                        userNickname: userNickname,
                         biddingPrice: biddingPrice
                     )
                     
                     parsedBiddingInfos.append(biddingInfo)
-                    
+            
+                    print(self.biddingInfos)
                 }
             }
             self.biddingInfos = parsedBiddingInfos
+            
         })
     }
     
@@ -48,10 +52,10 @@ class AuctionStore: ObservableObject {
         // BiddingInfo를 [String: Any] 형태로 변환
         let bidData: [String: Any] = [
             "timeStamp": biddingInfo.timeStamp.timeIntervalSince1970,
-            "participants": biddingInfo.participants,
+            "userID": biddingInfo.userID,
+            "userNickname": biddingInfo.userNickname,
             "biddingPrice": biddingInfo.biddingPrice
         ]
-        
         // 데이터 쓰기
         newBidRef.setValue(bidData)
     }
@@ -73,5 +77,3 @@ class AuctionStore: ObservableObject {
         }
     }
 }
-
-

@@ -9,7 +9,8 @@ import Foundation
 import FirebaseFirestoreSwift
 
 // 응모
-struct ApplyProduct: Productable, Identifiable, Codable {    
+struct ApplyProduct: Productable, Identifiable, Codable {
+
     @DocumentID var id: String?
     var productName: String
     var productImageURLStrings: [String]
@@ -29,7 +30,6 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     
     // 지불 가격
     var winningPrice: Int?
-    
     var applyInfoIDs: [String] = []
 }
 
