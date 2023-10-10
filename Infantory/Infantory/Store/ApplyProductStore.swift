@@ -15,28 +15,7 @@ final class ApplyProductStore: ObservableObject {
     @Published var applyProduct: [ApplyProduct] = []
     @Published var selectedFilter: ApplyFilter = .inProgress
     @Published var filteredProduct: [ApplyProduct] = []
-    
     @Published var progressSelectedFilter: ApplyInprogressFilter = .deadline
-    
-    func updateFilter(filter: ApplyFilter) {
-        switch filter {
-        case .inProgress:
-            selectedFilter = .inProgress
-            filteredProduct = applyProduct.filter {
-                $0.applyFilter == .inProgress
-            }
-        case .planned:
-            selectedFilter = .planned
-            filteredProduct = applyProduct.filter {
-                $0.applyFilter == .planned
-            }
-        case .close:
-            selectedFilter = .close
-            filteredProduct = applyProduct.filter {
-                $0.applyFilter == .close
-            }
-        }
-    }
     func remainingTime(product: ApplyProduct) -> Double {
         return product.endDate.timeIntervalSince(Date())
     }
@@ -44,7 +23,6 @@ final class ApplyProductStore: ObservableObject {
     func startTime(product: ApplyProduct) -> Double {
         return product.startDate.timeIntervalSince(Date())
     }
-
     //현재 유저 패치작업
     @MainActor
     func fetchApplyProducts() async throws {
@@ -52,43 +30,50 @@ final class ApplyProductStore: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
         self.applyProduct = products
+        fetchInfluencerProfile(products: products)
     }
     
-//    @MainActor
-//    func createApplyProduct(title: String,
-//                              apply: String,
-//                              itemDescription: String,
-//                              winningPrice: String)
-//    async throws {
-//        do {
-//            let product = makeAuctionModel(title: title,
-//                                           apply: apply,
-//                                           itemDescription: itemDescription,
-//                                           winningPrice: winningPrice)
-//            try Firestore.firestore().collection("ApplyProducts").addDocument(from: product)
-//        } catch {
-//            #if DEBUG
-//            print("debug : Failed to Create User with \(error.localizedDescription)")
-//            #endif
-//        }
-//    }
-//    private func makeApplyModel(title: String,
-//                                  apply: String,
-//                                  itemDescription: String,
-//                                  winningPrice: String) -> ApplyProduct {
-//        
-//        let product = ApplyProduct(id: "",
-//                                   productName: title,
-//                                   productImageURLStrings: [],
-//                                   description: itemDescription,
-//                                   influencerID: "",
-//                                   influencerNickname: "",
-//                                   startDate: Date(),
-//                                   endDate: Date(),
-//                                   applyUserIDs: [])
-//        return product
-//    }
-    
+    @MainActor
+    func fetchInfluencerProfile(products: [ApplyProduct]) {
+        for product in products {
+            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
+            documentReference.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    if let index = self.applyProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.applyProduct[index].influencerProfile = influencerProfile
+                        self.updateFilter(filter: .inProgress)
+                    }
+                } else {
+                    #if DEBUG
+                    print("인플루언서 프로필이 없습니다")
+                    #endif
+                }
+                
+            }
+        }
+        
+    }
+    @MainActor
+    func updateFilter(filter: ApplyFilter) {
+        switch filter {
+        case .inProgress:
+            selectedFilter = .inProgress
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .inProgress
+            }
+        case .planned:
+            selectedFilter = .planned
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .planned
+            }
+        case .close:
+            selectedFilter = .close
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .close
+            }
+        }
+    }
     @MainActor
     func addApplyTicketUserId(ticketCount: Int,
                               product: ApplyProduct,
@@ -117,10 +102,10 @@ final class ApplyProductStore: ObservableObject {
                         print("Document successfully updated")
                         #endif
                         Task {
-                            try await self.fetchProduct(ticketCount: ticketCount,
-                                                        product: product,
-                                                        userUID: userUID,
-                                                        database: documentReference) { product in
+                            try await self.addApplyofUser(ticketCount: ticketCount,
+                                                          product: product,
+                                                          userUID: userUID,
+                                                          database: documentReference) { product in
                                 completion(product)
                             }
                         }
@@ -131,14 +116,14 @@ final class ApplyProductStore: ObservableObject {
                 print("Document does not exist")
                 #endif
             }
-        }     
+        }
     }
     @MainActor
-    func fetchProduct(ticketCount: Int,
-                      product: ApplyProduct,
-                      userUID: String,
-                      database: DocumentReference,
-                      completion: @escaping (ApplyProduct) -> Void) async throws {
+    func addApplyofUser(ticketCount: Int,
+                        product: ApplyProduct,
+                        userUID: String,
+                        database: DocumentReference,
+                        completion: @escaping (ApplyProduct) -> Void) async throws {
         let applyDocument = try await database.getDocument()
         let product = try applyDocument.data(as: ApplyProduct.self)
         let applyTicket = ApplyTicket(date: Date(),
@@ -152,5 +137,5 @@ final class ApplyProductStore: ObservableObject {
             .addDocument(from: applyTicket)
         completion(product)
     }
- 
+    
 }
