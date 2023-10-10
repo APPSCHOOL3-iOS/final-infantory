@@ -48,12 +48,14 @@ struct AuctionDetailView_Previews: PreviewProvider {
 struct Footer: View {
     @ObservedObject var auctionViewModel: AuctionStore
     
+    @State private var isShowingAuctionNoticeSheet: Bool = false
+    
     @State private var isShowingAuctionBidSheet: Bool = false
     
     var body: some View {
         VStack {
             Button {
-                isShowingAuctionBidSheet.toggle()
+                isShowingAuctionNoticeSheet.toggle()
             } label: {
                 Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) 원")
                     .font(.infanHeadlineBold)
@@ -74,11 +76,21 @@ struct Footer: View {
                 .background(.white)
         )
         .offset(x: 0, y: 40)
+        .sheet(isPresented: $isShowingAuctionNoticeSheet, onDismiss: {
+            isShowingAuctionBidSheet.toggle()
+        }, content: {
+            AuctionNoticeSheetView(auctionViewModel: auctionViewModel,
+                                   isShowingAuctionNoticeSheet: $isShowingAuctionNoticeSheet)
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.height(300)])
+            
+        })
         .sheet(isPresented: $isShowingAuctionBidSheet, content: {
             AuctionBidSheetView(auctionViewModel: auctionViewModel, isShowingAuctionBidSheet: $isShowingAuctionBidSheet)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         })
+        
     }
 }
 
