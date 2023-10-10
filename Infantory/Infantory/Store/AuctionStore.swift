@@ -3,22 +3,30 @@ import Firebase
 import Combine
 
 class AuctionStore: ObservableObject {
-    @Published var product: AuctionProduct = AuctionProduct.dummyProduct
+    @Published var product: AuctionProduct
     @Published var biddingInfos: [BiddingInfo] = []
     
     var increment: Int = 0
     
     private var dbRef: DatabaseReference!
     
-    init() {
+    private let firestore = Firestore.firestore().collection("AuctionProducts")
+    
+    init(product: AuctionProduct) {
+        self.product = product
         self.dbRef = Database.database().reference()
         fetchData()
     }
     
     func fetchData() {
-        dbRef.child("biddingInfos").observe(.value, with: { snapshot in
+        guard let productId = product.id else { return }
+        
+        dbRef.child("biddingInfos/\(productId)")
+            .queryOrdered(byChild: "timeStamp")
+            .queryLimited(toLast: 10)
+            .observe(.value, with: { snapshot in
             var parsedBiddingInfos: [BiddingInfo] = []
-            
+                
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                    let bidData = childSnapshot.value as? [String: Any],
@@ -36,18 +44,18 @@ class AuctionStore: ObservableObject {
                     )
                     
                     parsedBiddingInfos.append(biddingInfo)
-            
-                    print(self.biddingInfos)
+                    
                 }
             }
             self.biddingInfos = parsedBiddingInfos
-            
         })
     }
     
     func addBid(biddingInfo: BiddingInfo) {
         // 새로운 bid 참조 생성
-        let newBidRef = dbRef.child("biddingInfos").childByAutoId()
+        guard let productId = product.id else { return }
+        
+        let newBidRef = dbRef.child("biddingInfos/\(productId)").childByAutoId()
         
         // BiddingInfo를 [String: Any] 형태로 변환
         let bidData: [String: Any] = [
@@ -58,6 +66,21 @@ class AuctionStore: ObservableObject {
         ]
         // 데이터 쓰기
         newBidRef.setValue(bidData)
+        updateWinningPrice(winningPrice: biddingInfo.biddingPrice)
+    }
+    
+    func updateWinningPrice(winningPrice: Int) {
+        guard let productId = product.id else { return }
+        
+        firestore.document(productId).updateData([
+            "winningPrice": winningPrice
+        ]) { error in
+            if let error = error {
+                print("updating Error: \(error)")
+            } else {
+                print("successfully updated!")
+            }
+        }
     }
     
     var remainingTime: Double {
