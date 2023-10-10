@@ -57,14 +57,16 @@ struct AuctionRegistrationView: View {
                 VStack(spacing: 16) {
                     
                     UnderlineTextField(textFieldTitle: "애장품",
-                                   placeholder: "애장품 이름을 입력해주세요.",
-                                   text: $title)
+                                       placeholder: "애장품 이름을 입력해주세요.",
+                                       text: $title)
                     
                     RoundedTextEditor(textFieldTitle: "소개",
-                                    placeHolder: "애장품을 소개해주세요.",
-                                    text: $itemDescription)
-                
-                    TextField("시작가", text: $auctionStartingPrice)
+                                      placeHolder: "애장품을 소개해주세요.",
+                                      text: $itemDescription)
+                    VStack(alignment: .leading) {
+                        UnderlineTextField(textFieldTitle: "시작가",
+                                           placeholder: "시작가를 입력해주세요.",
+                                           text: $auctionStartingPrice)
                         .keyboardType(.numberPad)
                         .onChange(of: auctionStartingPrice, perform: { newValue in
                             if let intValue = Int(newValue) {
@@ -74,16 +76,17 @@ struct AuctionRegistrationView: View {
                                 auctionisErrorVisible = true
                             }
                         })
-                    Divider()
-                    
-                    if auctionisErrorVisible {
-                        Text("숫자를 입력해 주세요.")
-                            .foregroundColor(.red)
-                    } else if let price = auctionStartingPriceInt {
-                        Text("\(price)원")
                         
+                        if auctionisErrorVisible {
+                            Text("숫자를 입력해 주세요.")
+                                .foregroundColor(.red)
+                        } else if let price = auctionStartingPriceInt {
+                            Text("시작가: \(price)원 입니다.")
+                                .font(.infanHeadlineBold)
+                        }
                     }
                     DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                        .font(.infanHeadlineBold)
                         .padding(.vertical)
                     
                     HStack {
@@ -101,7 +104,7 @@ struct AuctionRegistrationView: View {
                     }
                     
                     Spacer()
-                
+                    
                     MainColorButton(text: "등록하기") {
                         if title.isEmpty {
                             showAlert = true
@@ -116,10 +119,10 @@ struct AuctionRegistrationView: View {
                             let product = registViewModel.makeAuctionModel(title: title,
                                                                            apply: apply,
                                                                            itemDescription: itemDescription, startingPrice: auctionStartingPrice,
-
+                                                                           
                                                                            imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,
                                                                            user: loginStore.currentUser)
-
+                            
                             Task {
                                 try await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
                                 })

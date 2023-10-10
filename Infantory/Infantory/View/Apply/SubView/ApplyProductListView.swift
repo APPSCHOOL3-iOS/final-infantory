@@ -24,7 +24,7 @@ struct ApplyProductListView: View {
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
                             
-                            Text(product.influencerNickname)
+                            Text("\(product.influencerNickname)")
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
@@ -104,6 +104,7 @@ struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             ApplyProductListView(applyViewModel: ApplyProductStore())
+                .environmentObject(LoginStore())
         }
     }
 }

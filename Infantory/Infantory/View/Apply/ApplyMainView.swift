@@ -13,7 +13,7 @@ struct ApplyMainView: View {
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
 
     var body: some View {
-        if loginStore.currentUser.isInfluencer == UserType.user {
+        if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
                 ZStack {
                     VStack {

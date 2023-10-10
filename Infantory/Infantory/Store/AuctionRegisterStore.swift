@@ -45,7 +45,6 @@ class AuctionRegisterStore: ObservableObject {
                 continue
             }
             let imageRef = storage.child("auctionProduct/\(auctionProduct.id)/\(auctionProduct.productImageURLStrings[index])") //경로
-            
             _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
                 if let error = error {
                     #if DEBUG
