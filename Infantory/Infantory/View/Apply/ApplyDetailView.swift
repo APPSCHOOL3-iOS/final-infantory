@@ -25,8 +25,8 @@ struct ApplyDetailView: View {
                             .frame(width: 40, height: 40)
                             .cornerRadius(20)
                     } else {
-                        AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { Image in
-                            Image.resizable()
+                        AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { image in
+                            image.resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)

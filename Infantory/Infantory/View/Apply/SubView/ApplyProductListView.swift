@@ -19,27 +19,26 @@ struct ApplyProductListView: View {
                     VStack {
                         HStack {
                             if product.influencerProfile == nil {
-                                    Image("Influencer1")
-                                        .resizable()
+                                Image("Influencer1")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                            } else {
+                                AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { image in
+                                    image.resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
                                         .cornerRadius(20)
-                                } else {
-                                    AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { Image in
-                                        Image.resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 40, height: 40)
-                                            .cornerRadius(20)
-                                    }, placeholder: {
-                                        ProgressView()
-                                    })
-                                }
+                                }, placeholder: {
+                                    ProgressView()
+                                })
+                            }
                             
                             Text(product.influencerNickname)
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
-                            
                             if product.applyFilter == .planned {
                                 Text("\(Image(systemName: "timer")) \(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
                                     .font(.infanFootnote)
@@ -98,15 +97,22 @@ struct ApplyProductListView: View {
                                                         .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                         .clipped()
                                                 }
+                                                
+                                            } placeholder: {
+                                                ProgressView()
+                                                    .scaledToFill()
+                                                    .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                    .clipped()
                                             }
-                                        } else {
-                                            Image("AppIcon")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
-                                                .clipped()
                                         }
-                                 
+                                    } else {
+                                        Image("AppIcon")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                            .clipped()
+                                    }
+                                    
                                     VStack(alignment: .leading, spacing: 8) {
                                         Text("\(product.productName)")
                                             .font(.infanBody)
@@ -129,30 +135,31 @@ struct ApplyProductListView: View {
                                                 .foregroundColor(.infanGray)
                                         }
                                     }
-                                    Divider()
                                 }
-                                .horizontalPadding()
+                                Divider()
                             }
+                            .horizontalPadding()
                         }
-                        .padding(.top)
                     }
+                    .padding(.top)
+                }
             }
             .onAppear {
                 Task {
                     do {
-                        try await applyViewModel.fetchApplyProducts()            
+                        try await applyViewModel.fetchApplyProducts()
                     } catch {
                     }
                 }
             }
         }
     }
-    
-    struct ApplyProductListView_Previews: PreviewProvider {
-        static var previews: some View {
-            NavigationStack {
-                ApplyProductListView(applyViewModel: ApplyProductStore())
-            }
+}
+
+struct ApplyProductListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            ApplyProductListView(applyViewModel: ApplyProductStore())
         }
     }
 }
