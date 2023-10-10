@@ -29,8 +29,7 @@ struct ProductListView: View {
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
-                            //TODO: 타이머뷰로 교체 해야함
-                            TimerView(remainingTime: Date().timeIntervalSince1970)
+                            TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
                         }
                         .padding(.top, 10)
                         .padding(.bottom, 6)

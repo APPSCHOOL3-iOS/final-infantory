@@ -26,7 +26,7 @@ class AuctionStore: ObservableObject {
             .queryLimited(toLast: 10)
             .observe(.value, with: { snapshot in
             var parsedBiddingInfos: [BiddingInfo] = []
-            
+                
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                    let bidData = childSnapshot.value as? [String: Any],

@@ -22,9 +22,9 @@ struct AuctionDetailView: View {
             ScrollView(showsIndicators: false) {
                 Divider()
                 
-                AuctionBuyerView(auctionViewModel: auctionStore)
+                AuctionBuyerView(auctionStore: auctionStore)
                 
-                ProfileRowView()
+                ProfileRowView(nickname: auctionStore.product.influencerNickname)
                 
                 AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
@@ -32,7 +32,7 @@ struct AuctionDetailView: View {
                 
                 productInfo            
             }
-            Footer(auctionViewModel: auctionStore)
+            Footer(auctionStore: auctionStore)
         }
     }
 }
@@ -46,7 +46,7 @@ struct AuctionDetailView_Previews: PreviewProvider {
 }
 
 struct Footer: View {
-    @ObservedObject var auctionViewModel: AuctionStore
+    @ObservedObject var auctionStore: AuctionStore
     
     @State private var isShowingAuctionNoticeSheet: Bool = false
     
@@ -60,7 +60,7 @@ struct Footer: View {
             Button {
                 isShowingAuctionNoticeSheet.toggle()
             } label: {
-                Text("입찰 \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) 원")
+                Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? 0) 원")
                     .font(.infanHeadlineBold)
                     .foregroundColor(.white)
                     .background(
@@ -82,14 +82,14 @@ struct Footer: View {
         .sheet(isPresented: $isShowingAuctionNoticeSheet, onDismiss: {
             isShowingAuctionBidSheet.toggle()
         }, content: {
-            AuctionNoticeSheetView(auctionViewModel: auctionViewModel,
+            AuctionNoticeSheetView(auctionViewModel: auctionStore,
                                    isShowingAuctionNoticeSheet: $isShowingAuctionNoticeSheet)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.height(300)])
             
         })
         .sheet(isPresented: $isShowingAuctionBidSheet, content: {
-            AuctionBidSheetView(auctionViewModel: auctionViewModel, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
+            AuctionBidSheetView(auctionViewModel: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         })

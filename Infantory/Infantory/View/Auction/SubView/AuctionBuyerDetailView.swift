@@ -12,7 +12,7 @@ struct AuctionBuyerDetailView: View {
     
     var body: some View {
         List {
-            ForEach(receivedBiddingData, id: \.self) { index in
+            ForEach(receivedBiddingData.reversed(), id: \.self) { index in
                 Text("\(index.userNickname) - \(index.biddingPrice)")
             }
         }
