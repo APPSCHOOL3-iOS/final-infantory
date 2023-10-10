@@ -16,9 +16,9 @@ struct ApplyProductListView: View {
         ScrollView {
             LazyVStack {
                 ForEach($applyViewModel.filteredProduct) { $product in
-                        VStack {
-                            HStack {
-                                if product.influencerProfile == nil {
+                    VStack {
+                        HStack {
+                            if product.influencerProfile == nil {
                                     Image("Influencer1")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
@@ -34,35 +34,66 @@ struct ApplyProductListView: View {
                                         ProgressView()
                                     })
                                 }
-                               
-                                    
-                                
-                                Text(product.influencerNickname)
-                                    .font(.infanFootnoteBold)
-                                
-                                Spacer()
+                            
+                            Text(product.influencerNickname)
+                                .font(.infanFootnoteBold)
+                            
+                            Spacer()
+                            
+                            if product.applyFilter == .planned {
+                                Text("\(Image(systemName: "timer")) \(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
+                                    .font(.infanFootnote)
+                                    .foregroundColor(.infanOrange)
+                            } else {
                                 TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                             }
-                            .horizontalPadding()
+                        }
+                        .horizontalPadding()
+                        
+                        NavigationLink {
+                            ApplyDetailView(applyViewModel: applyViewModel, product: $product)
                             
-                            NavigationLink {
-                                ApplyDetailView(applyViewModel: applyViewModel, product: $product)
-                                
-                            } label: {
-                                VStack(alignment: .leading, spacing: 20) {
-                                    HStack(spacing: 16) {
-                                        if product.productImageURLStrings.count > 0 {
-                                            if let url = URL(string: product.productImageURLStrings[0]) {
-                                                AsyncImage(url: url) { image in
-                                                    ZStack(alignment: .topLeading) {
+                        } label: {
+                            VStack(alignment: .leading, spacing: 20) {
+                                HStack(spacing: 16) {
+                                    if product.productImageURLStrings.count > 0 {
+                                        if let url = URL(string: product.productImageURLStrings[0]) {
+                                            AsyncImage(url: url) { image in
+                                                if product.applyFilter == .close {
+                                                    ZStack {
                                                         image
                                                             .resizable()
                                                             .scaledToFill()
+                                                            .blur(radius: 5)
                                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                             .clipped()
+                                                        
+                                                        Text("응모 종료")
+                                                            .padding(10)
+                                                            .bold()
+                                                            .foregroundColor(.white)
+                                                            .background(Color.infanDarkGray)
+                                                            .cornerRadius(20)
                                                     }
-                                                } placeholder: {
-                                                    ProgressView()
+                                                } else if product.applyFilter == .planned {
+                                                    ZStack {
+                                                        image
+                                                            .resizable()
+                                                            .scaledToFill()
+                                                            .blur(radius: 5)
+                                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                            .clipped()
+                                                        
+                                                        Text("응모 예정")
+                                                            .padding(10)
+                                                            .bold()
+                                                            .foregroundColor(.white)
+                                                            .background(Color.infanOrange)
+                                                            .cornerRadius(20)
+                                                    }
+                                                } else {
+                                                    image
+                                                        .resizable()
                                                         .scaledToFill()
                                                         .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                         .clipped()
@@ -75,23 +106,27 @@ struct ApplyProductListView: View {
                                                 .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                                 .clipped()
                                         }
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            Text("\(product.productName)")
-                                                .font(.infanBody)
-                                                .foregroundColor(.infanDarkGray)
-                                                .multilineTextAlignment(.leading)
+                                 
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text("\(product.productName)")
+                                            .font(.infanBody)
+                                            .foregroundColor(.infanDarkGray)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                            .font(.infanHeadlineBold)
+                                            .foregroundColor(.infanDarkGray)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        Spacer()
+                                        VStack {
+                                            Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
+                                                .font(.infanFootnote)
+                                                .foregroundColor(.infanGray)
                                             
-                                            Spacer()
-                                            VStack {
-                                                Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
-                                                    .font(.infanFootnote)
-                                                    .foregroundColor(.infanGray)
-                                                
-                                                Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
-                                                    .font(.infanFootnote)
-                                                    .foregroundColor(.infanGray)
-                                                
-                                            }
+                                            Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
+                                                .font(.infanFootnote)
+                                                .foregroundColor(.infanGray)
                                         }
                                     }
                                     Divider()

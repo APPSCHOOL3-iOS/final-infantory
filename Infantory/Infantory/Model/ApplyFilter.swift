@@ -17,4 +17,3 @@ enum ApplyInprogressFilter: String , CaseIterable {
     case deadline = "마감순"
     case popular = "인기순"
 }
-

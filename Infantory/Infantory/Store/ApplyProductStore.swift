@@ -16,7 +16,6 @@ final class ApplyProductStore: ObservableObject {
     @Published var selectedFilter: ApplyFilter = .inProgress
     @Published var filteredProduct: [ApplyProduct] = []
     @Published var progressSelectedFilter: ApplyInprogressFilter = .deadline
-    
     func remainingTime(product: ApplyProduct) -> Double {
         return product.endDate.timeIntervalSince(Date())
     }
@@ -24,7 +23,6 @@ final class ApplyProductStore: ObservableObject {
     func startTime(product: ApplyProduct) -> Double {
         return product.startDate.timeIntervalSince(Date())
     }
-    
     //현재 유저 패치작업
     @MainActor
     func fetchApplyProducts() async throws {
@@ -76,42 +74,6 @@ final class ApplyProductStore: ObservableObject {
             }
         }
     }
-    
-    //    @MainActor
-    //    func createApplyProduct(title: String,
-    //                              apply: String,
-    //                              itemDescription: String,
-    //                              winningPrice: String)
-    //    async throws {
-    //        do {
-    //            let product = makeAuctionModel(title: title,
-    //                                           apply: apply,
-    //                                           itemDescription: itemDescription,
-    //                                           winningPrice: winningPrice)
-    //            try Firestore.firestore().collection("ApplyProducts").addDocument(from: product)
-    //        } catch {
-    //            #if DEBUG
-    //            print("debug : Failed to Create User with \(error.localizedDescription)")
-    //            #endif
-    //        }
-    //    }
-    //    private func makeApplyModel(title: String,
-    //                                  apply: String,
-    //                                  itemDescription: String,
-    //                                  winningPrice: String) -> ApplyProduct {
-    //
-    //        let product = ApplyProduct(id: "",
-    //                                   productName: title,
-    //                                   productImageURLStrings: [],
-    //                                   description: itemDescription,
-    //                                   influencerID: "",
-    //                                   influencerNickname: "",
-    //                                   startDate: Date(),
-    //                                   endDate: Date(),
-    //                                   applyUserIDs: [])
-    //        return product
-    //    }
-    
     @MainActor
     func addApplyTicketUserId(ticketCount: Int,
                               product: ApplyProduct,
@@ -132,13 +94,13 @@ final class ApplyProductStore: ObservableObject {
                 // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
                 documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
                     if error != nil {
-#if DEBUG
+                        #if DEBUG
                         print("Error updating document: (error)")
-#endif
+                        #endif
                     } else {
-#if DEBUG
+                        #if DEBUG
                         print("Document successfully updated")
-#endif
+                        #endif
                         Task {
                             try await self.addApplyofUser(ticketCount: ticketCount,
                                                           product: product,
@@ -150,9 +112,9 @@ final class ApplyProductStore: ObservableObject {
                     }
                 }
             } else {
-#if DEBUG
+                #if DEBUG
                 print("Document does not exist")
-#endif
+                #endif
             }
         }
     }
