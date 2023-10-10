@@ -26,7 +26,7 @@ struct AuctionDetailView: View {
                 
                 ProfileRowView()
                 
-                AuctionItemImage()
+                AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(10)
                 
