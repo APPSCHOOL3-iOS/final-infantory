@@ -88,7 +88,6 @@ struct ApplyProductListView: View {
                         }
                         .padding(.top)
                     }
-                
             }
             .onAppear {
                 print("onAppear")

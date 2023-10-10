@@ -15,52 +15,53 @@ struct AuctionBidSheetView: View {
     
     @State private var selectedIndex: Int = 4 // 선택된 버튼
     @State private var selectedAmount: Int = 0 // 선택된 금액
-    @State private var showAlert: Bool = false
     
+    @Binding var showAlert: Bool
+
     var isSelected: Bool {
         return selectedAmount == 0
     }
     
     var body: some View {
-        VStack {
-            headerView
-            
-            ForEach(1..<4) { index in
-                bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
+        ZStack {
+            VStack {
+                headerView
                 
-            }
-            
-            Button {
-                auctionViewModel.addBid(biddingInfo: BiddingInfo(id: UUID(),
-                                                                 timeStamp: Date(),
-                                                                 userID: "VAVAVVAVAVA",
-                                                                 userNickname: "갓희찬",
-                                                                 biddingPrice: selectedAmount))
-                isShowingAuctionBidSheet.toggle()
-                showAlert = true
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    showAlert = false
+                ForEach(1..<4) { index in
+                    bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
+                    
                 }
-            } label: {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(isSelected ? .infanGray : Color.infanMain)
-                    .overlay {
-                        if isSelected {
-                            Text("입찰하기")
-                        } else {
-                            Text("\(selectedAmount)원 입찰하기")
-                        }
+                
+                Button {
+                    auctionViewModel.addBid(biddingInfo: BiddingInfo(id: UUID(),
+                                                                     timeStamp: Date(),
+                                                                     userID: "VAVAVVAVAVA",
+                                                                     userNickname: "갓희찬",
+                                                                     biddingPrice: selectedAmount))
+                    isShowingAuctionBidSheet.toggle()
+                    showAlert = true
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        showAlert = false
                     }
-                    .foregroundColor(.white)
-                    .font(.infanHeadlineBold)
-                    .frame(width: .screenWidth - 40, height: 54)
+                } label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(isSelected ? .infanGray : Color.infanMain)
+                        .overlay {
+                            if isSelected {
+                                Text("입찰하기")
+                            } else {
+                                Text("\(selectedAmount)원 입찰하기")
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .font(.infanHeadlineBold)
+                        .frame(width: .screenWidth - 40, height: 54)
+                }
+                .disabled(isSelected)
+                
             }
-            .disabled(isSelected)
-        }
-        .alert(isPresented: $showAlert) {
-            // 상필님이 커스텀 얼럿 만들어 주신답니다!!
-            Alert(title: Text(""), message: Text("입찰 성공!!!!"))
+            
         }
     }
 }
@@ -116,7 +117,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionStore(), isShowingAuctionBidSheet: .constant(true))
+        AuctionBidSheetView(auctionViewModel: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
     }
 }
 

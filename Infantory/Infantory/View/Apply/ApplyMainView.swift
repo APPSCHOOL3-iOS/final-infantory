@@ -22,6 +22,7 @@ struct ApplyMainView: View {
                         ApplyProductListView(applyViewModel: applyViewModel)
                         Divider()
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: EmptyView()) {

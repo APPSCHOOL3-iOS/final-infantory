@@ -11,6 +11,8 @@
 		0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833B2AC11790001FEC98 /* AuctionDetailView.swift */; };
 		0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */; };
 		015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */; };
+		016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */; };
+		016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */; };
 		0C25176E2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */; };
 		0C82A32D2AC278A6009F6D97 /* ApplyRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */; };
 		0C82A32F2AC279BB009F6D97 /* ApplyProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */; };
@@ -26,6 +28,7 @@
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
 		0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */; };
 		0CED22542ACD40E100CD1456 /* AuctionRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */; };
+		110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */; };
 		11183A6F2ACD40D30010012C /* AuctionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A6E2ACD40D30010012C /* AuctionStore.swift */; };
 		11183A732ACF8BC50010012C /* ProfileRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A722ACF8BC50010012C /* ProfileRowView.swift */; };
 		11183A752ACF9C670010012C /* ProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A742ACF9C670010012C /* ProfileSheetView.swift */; };
@@ -110,6 +113,8 @@
 		0157833B2AC11790001FEC98 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
 		0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailImageView.swift; sourceTree = "<group>"; };
 		0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductListView.swift; sourceTree = "<group>"; };
+		016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegisterStore.swift; sourceTree = "<group>"; };
+		016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMainView.swift; sourceTree = "<group>"; };
 		0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailDescriptionView.swift; sourceTree = "<group>"; };
 		0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegistrationView.swift; sourceTree = "<group>"; };
 		0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductStore.swift; sourceTree = "<group>"; };
@@ -125,6 +130,7 @@
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
 		0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyImagePickerView.swift; sourceTree = "<group>"; };
 		0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegisterStore.swift; sourceTree = "<group>"; };
+		110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionNoticeSheetView.swift; sourceTree = "<group>"; };
 		11183A6E2ACD40D30010012C /* AuctionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionStore.swift; sourceTree = "<group>"; };
 		11183A722ACF8BC50010012C /* ProfileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRowView.swift; sourceTree = "<group>"; };
 		11183A742ACF9C670010012C /* ProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSheetView.swift; sourceTree = "<group>"; };
@@ -218,6 +224,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016AAEDC2AD5316D000B69E4 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
 		0C82A3322AC295FC009F6D97 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,9 +251,6 @@
 		0CE4021A2ABACA1000F69B7E /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-				0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */,
-				0CD2F6FE2ABD4D8400FCF88E /* AuctionButtonCell.swift */,
-				0CD2F7022ABD4F6A00FCF88E /* AuctionLogoCell.swift */,
 				0CD2F7002ABD4EE100FCF88E /* ProductListView.swift */,
 				0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */,
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
@@ -247,6 +258,10 @@
 				112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */,
 				11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */,
 				A05C94F42ACFFF06003243B7 /* AuctionItemImage.swift */,
+				110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */,
+				0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */,
+				0CD2F6FE2ABD4D8400FCF88E /* AuctionButtonCell.swift */,
+				0CD2F7022ABD4F6A00FCF88E /* AuctionLogoCell.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -337,6 +352,7 @@
 				849B64C22ABD600D00C4AC8D /* LoginStore.swift */,
 				015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */,
 				0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */,
+				016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */,
 				0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */,
 				11183A6E2ACD40D30010012C /* AuctionStore.swift */,
 				A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */,
@@ -423,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				A091E5B12ABC7A20000894FC /* MyMainView.swift */,
+				016AAEDC2AD5316D000B69E4 /* SubView */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -661,6 +678,7 @@
 				A00EE0A12ACE447200E03146 /* UnderlineTextField.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
+				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
@@ -691,6 +709,7 @@
 				0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */,
 				0CD2F7052ABD50F500FCF88E /* User.swift in Sources */,
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
+				016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */,
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
@@ -719,6 +738,7 @@
 				0CD2F7012ABD4EE100FCF88E /* ProductListView.swift in Sources */,
 				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
 				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
+				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,

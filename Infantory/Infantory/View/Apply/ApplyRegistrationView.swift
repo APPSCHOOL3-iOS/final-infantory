@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ApplyRegistrationView: View {
+    @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
-    @StateObject var applyViewModel = ApplyProductStore()
+    @StateObject var applyRegisterStore = ApplyRegisterStore()
     @State private var title: String = ""
     @State private var apply: String = ""
     @State private var itemDescription: String = ""
@@ -40,18 +41,6 @@ struct ApplyRegistrationView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
-                HStack {
-                    // 네비게이션링크를 사용하면 백버튼이 생성됨
-                    //                    Image(systemName: "xmark")
-                    //                        .resizable()
-                    //                        .aspectRatio(contentMode: .fill)
-                    //                        .frame(width: 20, height: 20)
-                    Spacer()
-                    Text("내 응모 등록")
-                        .font(.title2)
-                        .bold()
-                    Spacer()
-                }
                 VStack(alignment: .leading) {
                     Text("상품 사진")
                         .font(.system(size: 17))
@@ -70,18 +59,19 @@ struct ApplyRegistrationView: View {
                 
                 VStack(spacing: 16) {
                     UnderlineTextField(textFieldTitle: "애장품",
-                                   placeholder: "애장품 이름을 입력해주세요.",
-                                   text: $title)
+                                       placeholder: "애장품 이름을 입력해주세요.",
+                                       text: $title)
                     
                     RoundedTextEditor(textFieldTitle: "소개",
-                                    placeHolder: "애장품을 소개해주세요.",
-                                    text: $itemDescription)
+                                      placeHolder: "애장품을 소개해주세요.",
+                                      text: $itemDescription)
                     
                     Divider()
-                    DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                    DatePicker("응모시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                        .font(.infanHeadlineBold)
                         .padding(.vertical)
                     HStack {
-                        Text("경매종료일")
+                        Text("응모종료일")
                             .font(.infanHeadlineBold)
                         Spacer()
                         Text("\(resultText)")
@@ -103,9 +93,15 @@ struct ApplyRegistrationView: View {
                             showAlert = true
                             alertMessage = "소개를 입력해주세요."
                         } else {
+                            let product = applyRegisterStore.makeApplyModel(title: title,
+                                                                            apply: apply, itemDescription: itemDescription,
+                                                                            imageStrings: productSelectedImageNames + custumeSelectedImageNames,
+                                                                            startDate: applyStartDate,
+                                                                            endDate: applyEndDate,
+                                                                            user: loginStore.currentUser)
                             Task {
-                                try await applyViewModel.createAuctionProduct(title: title, apply: apply, itemDescription: itemDescription, winningPrice: applyStartingPrice)
-                                dismiss()
+                                try await applyRegisterStore.addApplyProduct(applyProduct: product, images: productSelectedImages + custumeSelectedImages, completion: {_ in dismiss()
+                                })
                             }
                         }
                     }
@@ -123,6 +119,7 @@ struct ApplyRegistrationView: View {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
             let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
             resultText = newDateText
+            self.applyEndDate = newDate
         }
     }
 }

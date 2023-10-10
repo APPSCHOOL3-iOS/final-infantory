@@ -45,7 +45,6 @@ class AuctionRegisterStore: ObservableObject {
                 continue
             }
             let imageRef = storage.child("auctionProduct/\(auctionProduct.id)/\(auctionProduct.productImageURLStrings[index])") //경로
-            
             _ = imageRef.putData(imageData, metadata: nil) { (_, error) in
                 if let error = error {
                     #if DEBUG
@@ -77,6 +76,8 @@ class AuctionRegisterStore: ObservableObject {
                           itemDescription: String,
                           startingPrice: String,
                           imageStrings: [String],
+                          startDate: Date,
+                          endDate: Date,
                           user: User
     ) -> AuctionProduct {
         let product: AuctionProduct = AuctionProduct(id: UUID().uuidString,
@@ -85,8 +86,8 @@ class AuctionRegisterStore: ObservableObject {
                                                      description: itemDescription,
                                                      influencerID: user.id ?? UUID().uuidString,
                                                      influencerNickname: user.name,
-                                                     startDate: Date(),
-                                                     endDate: Date(),
+                                                     startDate: startDate,
+                                                     endDate: endDate,
                                                      minPrice: Int(startingPrice) ?? 0,
                                                      winningPrice: Int(startingPrice))
         

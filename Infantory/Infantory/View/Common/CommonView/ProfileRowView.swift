@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileRowView: View {
     let imageURLString: String = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/000401.png"
-    let nickname: String = "상필갓갓"
+    let nickname: String
 
     @State private var isShowingSheet: Bool = false
 
@@ -47,6 +47,6 @@ struct ProfileRowView: View {
 
 struct ProfileRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileRowView()
+        ProfileRowView(nickname: "상필갓")
     }
 }
