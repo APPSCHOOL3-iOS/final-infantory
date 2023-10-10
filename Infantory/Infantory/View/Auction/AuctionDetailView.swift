@@ -119,8 +119,7 @@ extension AuctionDetailView {
                 .padding(.bottom, 100)
                 
                 Spacer()
-        }
-            
+            }
         }
     }
 }

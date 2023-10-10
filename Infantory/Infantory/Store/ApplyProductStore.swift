@@ -28,40 +28,40 @@ final class ApplyProductStore: ObservableObject {
         self.applyProduct = products
     }
     
-    @MainActor
-    func createAuctionProduct(title: String,
-                              apply: String,
-                              itemDescription: String,
-                              winningPrice: String)
-    async throws {
-        do {
-            let product = makeAuctionModel(title: title,
-                                           apply: apply,
-                                           itemDescription: itemDescription,
-                                           winningPrice: winningPrice)
-            try Firestore.firestore().collection("ApplyProducts").addDocument(from: product)
-        } catch {
-            #if DEBUG
-            print("debug : Failed to Create User with \(error.localizedDescription)")
-            #endif
-        }
-    }
-    private func makeAuctionModel(title: String,
-                                  apply: String,
-                                  itemDescription: String,
-                                  winningPrice: String) -> ApplyProduct {
-        
-        let product = ApplyProduct(id: "",
-                                   productName: title,
-                                   productImageURLStrings: [],
-                                   description: itemDescription,
-                                   influencerID: "",
-                                   influencerNickname: "",
-                                   startDate: Date(),
-                                   endDate: Date(),
-                                   applyUserIDs: [])
-        return product
-    }
+//    @MainActor
+//    func createApplyProduct(title: String,
+//                              apply: String,
+//                              itemDescription: String,
+//                              winningPrice: String)
+//    async throws {
+//        do {
+//            let product = makeAuctionModel(title: title,
+//                                           apply: apply,
+//                                           itemDescription: itemDescription,
+//                                           winningPrice: winningPrice)
+//            try Firestore.firestore().collection("ApplyProducts").addDocument(from: product)
+//        } catch {
+//            #if DEBUG
+//            print("debug : Failed to Create User with \(error.localizedDescription)")
+//            #endif
+//        }
+//    }
+//    private func makeApplyModel(title: String,
+//                                  apply: String,
+//                                  itemDescription: String,
+//                                  winningPrice: String) -> ApplyProduct {
+//        
+//        let product = ApplyProduct(id: "",
+//                                   productName: title,
+//                                   productImageURLStrings: [],
+//                                   description: itemDescription,
+//                                   influencerID: "",
+//                                   influencerNickname: "",
+//                                   startDate: Date(),
+//                                   endDate: Date(),
+//                                   applyUserIDs: [])
+//        return product
+//    }
     
     @MainActor
     func addApplyTicketUserId(ticketCount: Int,

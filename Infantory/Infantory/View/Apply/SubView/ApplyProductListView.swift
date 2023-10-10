@@ -24,12 +24,14 @@ struct ApplyProductListView: View {
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
                             
-                            Text(product.influencerNickname)
+                            Text("\(product.influencerNickname)")
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
                             TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                         }
+                        .padding(.top, 10)
+                        .padding(.bottom, 6)
                         .horizontalPadding()
                         
                         NavigationLink {
@@ -76,7 +78,6 @@ struct ApplyProductListView: View {
                                             Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
-
                                         }
                                     }
                                 }
@@ -85,7 +86,6 @@ struct ApplyProductListView: View {
                             .horizontalPadding()
                         }
                     }
-                    .padding(.top)
                 }
             }
         }
@@ -104,6 +104,7 @@ struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             ApplyProductListView(applyViewModel: ApplyProductStore())
+                .environmentObject(LoginStore())
         }
     }
 }
