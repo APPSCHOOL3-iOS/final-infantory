@@ -21,7 +21,10 @@ class AuctionStore: ObservableObject {
     func fetchData() {
         guard let productId = product.id else { return }
         
-        dbRef.child("biddingInfos/\(productId)").observe(.value, with: { snapshot in
+        dbRef.child("biddingInfos/\(productId)")
+            .queryOrdered(byChild: "timeStamp")
+            .queryLimited(toLast: 10)
+            .observe(.value, with: { snapshot in
             var parsedBiddingInfos: [BiddingInfo] = []
             
             for child in snapshot.children {

@@ -15,7 +15,7 @@ struct AuctionBuyerView: View {
     var body: some View {
         
         NavigationLink {
-            AuctionBuyerDetailView()
+            AuctionBuyerDetailView(receivedBiddingData: $auctionViewModel.biddingInfos)
         } label: {
             HStack {
                 HStack {

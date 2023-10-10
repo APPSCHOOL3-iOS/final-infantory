@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
  
-struct BiddingInfo: Codable {
+struct BiddingInfo: Codable, Hashable {
     var id: UUID
     var timeStamp: Date
     var userID: String

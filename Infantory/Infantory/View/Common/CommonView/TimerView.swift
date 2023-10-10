@@ -13,14 +13,22 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
-            Label("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))",
-                  systemImage: "timer")
-            .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
-            .font(.infanFootnote)
+            if remainingTime == 0 {
+                Text("\(Image(systemName: "timer")) 입찰 마감")
+                    .font(.infanFootnote)
+                    .foregroundColor(.gray)
+            } else {
+                Label("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))",
+                      systemImage: "timer")
+                .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
+                .font(.infanFootnote)
+            }
         }
         .onReceive(timer) { _ in
             if remainingTime > 0 {
                 remainingTime -= 1
+            } else if remainingTime < 0 {
+                remainingTime = 0
             }
         }
         .onDisappear {
@@ -31,6 +39,6 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(remainingTime: 10000.0)
+        TimerView(remainingTime: 0)
     }
 }

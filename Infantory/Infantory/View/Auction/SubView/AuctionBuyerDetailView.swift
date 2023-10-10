@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct AuctionBuyerDetailView: View {
+    @Binding var receivedBiddingData: [BiddingInfo]
+    
     var body: some View {
-        Text("Hello, World!")
+        List {
+            ForEach(receivedBiddingData, id: \.self) { index in
+                Text("\(index.userNickname) - \(index.biddingPrice)")
+            }
+        }
     }
 }
 
-struct AuctionBuyerDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuctionBuyerDetailView()
-    }
-}
-
+//struct AuctionBuyerDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AuctionBuyerDetailView()
+//    }
+//}
