@@ -20,7 +20,7 @@ struct AuctionBuyerView: View {
             HStack {
                 HStack {
                     Image("crown")
-                    Text("\(auctionStore.biddingInfos.last?.userNickname ?? "")")
+                    Text("\(auctionStore.biddingInfos.last?.userNickname ?? "시작가")")
                 }
                 Spacer()
                 Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice)원")
