@@ -12,23 +12,57 @@ struct ApplyDetailView: View {
     @EnvironmentObject var loginStore: LoginStore
     var applyViewModel: ApplyProductStore
     @Binding var product: ApplyProduct
-    
+    @State private var isShowingActionSheet: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
                 ApplyBuyerView(product: product)
                 HStack {
-                    Image("Influencer1")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(20)
+                    if product.influencerProfile == nil {
+                        Image("Influencer1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(20)
+                    } else {
+                        AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { Image in
+                            Image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
+                        }, placeholder: {
+                            ProgressView()
+                        })
+                    }
+                   
                     Text(product.influencerNickname)
                         .font(.infanTitle2)
                     Spacer()
+                    
+                    Button(action: {
+                        isShowingActionSheet = true
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                    })
+                    .buttonStyle(.plain)
                 }
                 .horizontalPadding()
                 
+                TabView {
+                    ForEach(product.productImageURLStrings, id: \.self) { item in
+                        AsyncImage(url: URL(string: item)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle())
+                .frame(width: .screenWidth - 40, height: .screenWidth - 40)
+                .cornerRadius(10)
                 Text(product.description)
                     .horizontalPadding()
                     .padding(.top)
@@ -37,6 +71,18 @@ struct ApplyDetailView: View {
             }
             
             ApplyFooter(product: $product)
+        }
+        .confirmationDialog("", isPresented: $isShowingActionSheet) {
+            
+            Button("차단하기", role: .destructive) {
+                
+            }
+            
+            Button("저장하기", role: .none) {
+                
+            }
+            Button("취소", role: .cancel) {}
+            
         }
     }
 }

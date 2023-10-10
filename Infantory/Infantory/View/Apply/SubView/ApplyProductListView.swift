@@ -18,11 +18,24 @@ struct ApplyProductListView: View {
                 ForEach($applyViewModel.filteredProduct) { $product in
                         VStack {
                             HStack {
-                                Image("Influencer1")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
+                                if product.influencerProfile == nil {
+                                    Image("Influencer1")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
+                                        .cornerRadius(20)
+                                } else {
+                                    AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { Image in
+                                        Image.resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                    }, placeholder: {
+                                        ProgressView()
+                                    })
+                                }
+                               
+                                    
                                 
                                 Text(product.influencerNickname)
                                     .font(.infanFootnoteBold)
@@ -56,7 +69,7 @@ struct ApplyProductListView: View {
                                                 }
                                             }
                                         } else {
-                                            Image("appleLogo")
+                                            Image("AppIcon")
                                                 .resizable()
                                                 .scaledToFill()
                                                 .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
@@ -90,11 +103,9 @@ struct ApplyProductListView: View {
                     }
             }
             .onAppear {
-                print("onAppear")
                 Task {
                     do {
-                        try await applyViewModel.fetchApplyProducts()
-                        applyViewModel.updateFilter(filter: .inProgress)
+                        try await applyViewModel.fetchApplyProducts()            
                     } catch {
                     }
                 }
