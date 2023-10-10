@@ -15,7 +15,8 @@ struct AuctionBidSheetView: View {
     
     @State private var selectedIndex: Int = 4 // 선택된 버튼
     @State private var selectedAmount: Int = 0 // 선택된 금액
-    @State private var showAlert: Bool = false
+    
+    @Binding var showAlert: Bool
 
     var isSelected: Bool {
         return selectedAmount == 0
@@ -60,7 +61,7 @@ struct AuctionBidSheetView: View {
                 .disabled(isSelected)
                 
             }
-            ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
+            
         }
     }
 }
@@ -116,7 +117,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionStore(), isShowingAuctionBidSheet: .constant(true))
+        AuctionBidSheetView(auctionViewModel: AuctionStore(), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
     }
 }
 
