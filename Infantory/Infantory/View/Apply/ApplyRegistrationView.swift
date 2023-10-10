@@ -93,7 +93,12 @@ struct ApplyRegistrationView: View {
                             showAlert = true
                             alertMessage = "소개를 입력해주세요."
                         } else {
-                            let product = applyRegisterStore.makeApplyModel(title: title, apply: apply, itemDescription: itemDescription, imageStrings: productSelectedImageNames + custumeSelectedImageNames, user: loginStore.currentUser)
+                            let product = applyRegisterStore.makeApplyModel(title: title,
+                                                                            apply: apply, itemDescription: itemDescription,
+                                                                            imageStrings: productSelectedImageNames + custumeSelectedImageNames,
+                                                                            startDate: applyStartDate,
+                                                                            endDate: applyEndDate,
+                                                                            user: loginStore.currentUser)
                             Task {
                                 try await applyRegisterStore.addApplyProduct(applyProduct: product, images: productSelectedImages + custumeSelectedImages, completion: {_ in dismiss()
                                 })
@@ -114,6 +119,7 @@ struct ApplyRegistrationView: View {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
             let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
             resultText = newDateText
+            self.applyEndDate = newDate
         }
     }
 }

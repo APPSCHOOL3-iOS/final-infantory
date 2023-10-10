@@ -11,6 +11,7 @@ struct AuctionRegistrationView: View {
     @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
     @StateObject var registViewModel = AuctionRegisterStore()
+    @StateObject var auctionProductViewModel = AuctionProductViewModel()
     @State private var title: String = ""
     @State private var apply: String = ""
     @State private var itemDescription: String = ""
@@ -117,12 +118,13 @@ struct AuctionRegistrationView: View {
                             alertMessage = "시작가를 입력해주세요."
                         } else {
                             let product = registViewModel.makeAuctionModel(title: title,
-                                                                           apply: apply,
-                                                                           itemDescription: itemDescription, startingPrice: auctionStartingPrice,
-                                                                           
+                                                                           apply: apply, 
+                                                                           itemDescription: itemDescription,
+                                                                           startingPrice: auctionStartingPrice,
                                                                            imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,
+                                                                           startDate: auctionStartDate,
+                                                                           endDate: auctionEndDate,
                                                                            user: loginStore.currentUser)
-                            
                             Task {
                                 try await registViewModel.addAuctionProduct(auctionProduct: product, images: auctionProductSelectedImages + auctionCustumeSelectedImages, completion: {_ in dismiss()
                                 })
@@ -142,6 +144,7 @@ struct AuctionRegistrationView: View {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
             let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
             resultText = newDateText
+            self.auctionEndDate = newDate
         }
     }
 }

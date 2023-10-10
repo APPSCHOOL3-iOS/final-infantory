@@ -75,6 +75,8 @@ class ApplyRegisterStore: ObservableObject {
                         apply: String,
                         itemDescription: String,
                         imageStrings: [String],
+                        startDate: Date,
+                        endDate: Date,
                         user: User
     ) -> ApplyProduct {
         let product: ApplyProduct = ApplyProduct(productName: title,
@@ -82,8 +84,8 @@ class ApplyRegisterStore: ObservableObject {
                                                  description: itemDescription,
                                                  influencerID: user.id ?? UUID().uuidString,
                                                  influencerNickname: user.name,
-                                                 startDate: Date(),
-                                                 endDate: Date(),
+                                                 startDate: startDate,
+                                                 endDate: endDate,
                                                  applyUserIDs: [])
         
         return product
