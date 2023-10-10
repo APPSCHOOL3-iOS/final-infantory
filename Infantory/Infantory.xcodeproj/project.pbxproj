@@ -237,9 +237,6 @@
 		0CE4021A2ABACA1000F69B7E /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-				0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */,
-				0CD2F6FE2ABD4D8400FCF88E /* AuctionButtonCell.swift */,
-				0CD2F7022ABD4F6A00FCF88E /* AuctionLogoCell.swift */,
 				0CD2F7002ABD4EE100FCF88E /* ProductListView.swift */,
 				0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */,
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
@@ -247,6 +244,9 @@
 				112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */,
 				11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */,
 				A05C94F42ACFFF06003243B7 /* AuctionItemImage.swift */,
+				0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */,
+				0CD2F6FE2ABD4D8400FCF88E /* AuctionButtonCell.swift */,
+				0CD2F7022ABD4F6A00FCF88E /* AuctionLogoCell.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";

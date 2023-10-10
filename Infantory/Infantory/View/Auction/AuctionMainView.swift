@@ -43,8 +43,10 @@ struct AuctionMainView: View {
         } else {
             NavigationStack {
                 VStack {
+                    Divider()
                     AuctionButtonCell()
                     ProductListView(auctionViewModel: auctionViewModel)
+                    Divider()
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

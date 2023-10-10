@@ -30,6 +30,8 @@ struct ApplyProductListView: View {
                             Spacer()
                             TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                         }
+                        .padding(.top, 10)
+                        .padding(.bottom, 6)
                         .horizontalPadding()
                         
                         NavigationLink {
@@ -76,7 +78,6 @@ struct ApplyProductListView: View {
                                             Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                                 .font(.infanFootnote)
                                                 .foregroundColor(.infanGray)
-
                                         }
                                     }
                                 }
@@ -85,7 +86,6 @@ struct ApplyProductListView: View {
                             .horizontalPadding()
                         }
                     }
-                    .padding(.top)
                 }
             }
         }

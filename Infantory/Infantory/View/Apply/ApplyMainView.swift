@@ -13,7 +13,7 @@ struct ApplyMainView: View {
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
 
     var body: some View {
-        if loginStore.currentUser.isInfluencer == UserType.influencer {
+        if loginStore.currentUser.isInfluencer == UserType.user {
             NavigationStack {
                 ZStack {
                     VStack {
@@ -29,6 +29,7 @@ struct ApplyMainView: View {
                         }
                         Divider()
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: EmptyView()) {
