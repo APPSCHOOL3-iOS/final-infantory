@@ -24,6 +24,25 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     // 응모 시작일, 마감일
     var startDate: Date
     var endDate: Date
+    var startRemainingTime: Double {
+        return startDate.timeIntervalSince(Date())
+    }
+    var endRemainingTime: Double {
+        return endDate.timeIntervalSince(Date())
+    }
+    var applyFilter: ApplyFilter {
+        get {
+            if startRemainingTime > 0.0 {
+                return .planned
+            } else if startRemainingTime < 0.0 && endRemainingTime > 0.0 {
+                return .inProgress
+            } else if endRemainingTime < 0.0 {
+                return .close
+            }
+            
+            return .planned
+        }
+    }
     
     // 응모한 유저
     var applyUserIDs: [String]

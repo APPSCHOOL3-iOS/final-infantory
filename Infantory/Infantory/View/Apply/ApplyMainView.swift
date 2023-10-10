@@ -19,14 +19,7 @@ struct ApplyMainView: View {
                     VStack {
                         Divider()
                         ApplyFilterButtonView(applyViewModel: applyViewModel)
-                        switch applyViewModel.selectedFilter {
-                        case .inProgress:
-                            ApplyProductListView(applyViewModel: applyViewModel)
-                        case .planned:
-                            ApplyProductListView(applyViewModel: applyViewModel)
-                        case .close:
-                            ApplyProductListView(applyViewModel: applyViewModel)
-                        }
+                        ApplyProductListView(applyViewModel: applyViewModel)
                         Divider()
                     }
                     .navigationBarTitleDisplayMode(.inline)
@@ -51,7 +44,8 @@ struct ApplyMainView: View {
         } else {
             NavigationStack {
                 VStack {
-                    Divider()
+                   
+                    ApplyFilterButtonView(applyViewModel: applyViewModel)
                     ApplyProductListView(applyViewModel: applyViewModel)
                     Divider()
                 }
