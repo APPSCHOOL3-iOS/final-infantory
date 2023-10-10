@@ -66,13 +66,11 @@ struct LoginSignUpView: View {
                         .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
                         .padding(.bottom)
                 }
-                
-               
+            
                 UnderlineTextField(textFieldTitle: "이름",
                                    placeholder: "이름을 입력해주세요.",
                                    text: $name)
-                
-                
+               
                 UnderlineTextField(textFieldTitle: "휴대폰 번호",
                                placeholder: "- 없이 입력",
                                text: $phoneNumber)
@@ -165,7 +163,6 @@ struct LoginSignUpView: View {
         }
     }
 }
-
 
 struct LoginSignUpView_Previews: PreviewProvider {
     static var previews: some View {

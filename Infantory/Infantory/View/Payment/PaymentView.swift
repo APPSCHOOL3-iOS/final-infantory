@@ -50,8 +50,7 @@ extension PaymentView {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.infanMain)
                     .frame(height: 54)
-                
-                
+            
                 Text("결제하기")
                     .foregroundColor(.white)
                     .font(.infanHeadlineBold)

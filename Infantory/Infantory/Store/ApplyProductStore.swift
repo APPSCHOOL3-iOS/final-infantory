@@ -22,17 +22,17 @@ final class ApplyProductStore: ObservableObject {
         switch filter {
         case .inProgress:
             selectedFilter = .inProgress
-            filteredProduct = applyProduct.filter{
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .inProgress
             }
         case .planned:
             selectedFilter = .planned
-            filteredProduct = applyProduct.filter{
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .planned
             }
         case .close:
             selectedFilter = .close
-            filteredProduct = applyProduct.filter{
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .close
             }
         }

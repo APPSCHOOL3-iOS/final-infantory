@@ -108,6 +108,11 @@ struct ApplyProductListView: View {
                                             .foregroundColor(.infanDarkGray)
                                             .multilineTextAlignment(.leading)
                                         
+                                        Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                            .font(.infanHeadlineBold)
+                                            .foregroundColor(.infanDarkGray)
+                                            .multilineTextAlignment(.leading)
+                                        
                                         Spacer()
                                         VStack {
                                             Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
@@ -130,12 +135,12 @@ struct ApplyProductListView: View {
                 }
             }
             .onAppear {
-                print("onAppear")
                 Task {
                     do {
                         try await applyViewModel.fetchApplyProducts()
                         applyViewModel.updateFilter(filter: .inProgress)
                     } catch {
+                        //
                     }
                 }
             }
