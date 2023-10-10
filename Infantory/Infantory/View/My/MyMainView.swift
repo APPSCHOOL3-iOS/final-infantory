@@ -21,14 +21,10 @@ struct MyMainView: View {
                     Text("로그인")
                 })
             } else {
-                Button(action: {
-                    loginStore.kakaoLogout()
-                }, label: {
-                    Text("로그아웃")
-                })
+                MyInfoMainView()
             }
-            Text(loginStore.currentUser.email)
-            Text(loginStore.currentUser.address.address)
+//            Text(loginStore.currentUser.email)
+//            Text(loginStore.currentUser.address.address)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
