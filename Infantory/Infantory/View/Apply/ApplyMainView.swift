@@ -29,6 +29,7 @@ struct ApplyMainView: View {
                         }
                         Divider()
                     }
+                    .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: EmptyView()) {

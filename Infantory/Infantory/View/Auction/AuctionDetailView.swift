@@ -101,7 +101,7 @@ extension AuctionDetailView {
                 .foregroundColor(.primary)//optional
                 .padding(.horizontal, 24)//optional
                 .padding(.bottom, 100)
-            
+    
         }
     }
 }
