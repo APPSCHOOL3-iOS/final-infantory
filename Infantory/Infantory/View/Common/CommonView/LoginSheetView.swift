@@ -68,7 +68,7 @@ struct LoginSheetView: View {
                         try await loginStore.fetchUser(userUID: loginStore.userUid)
                     }
                 }
-                dismiss()
+               dismiss()
             } else {
                 isShowingSignUp = true
             }

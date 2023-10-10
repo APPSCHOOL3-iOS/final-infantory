@@ -55,7 +55,7 @@ final class LoginStore: ObservableObject {
     private func validateKakaoToken(completion: @escaping (Bool) -> Void) {
         UserApi.shared.accessTokenInfo { _, error in
             if error != nil {
-                completion(false)
+               
             } else {
                 self.loadingInfoDidKakaoAuth(completion: completion)
             }
@@ -75,7 +75,6 @@ final class LoginStore: ObservableObject {
         UserApi.shared.loginWithKakaoTalk { _, error in
             if error != nil {
                 print("Kakao SignIn Error: 카카오앱 실행에 실패했습니다.")
-                completion(false)
                 return
             }
             self.loadingInfoDidKakaoAuth(completion: completion)
@@ -86,7 +85,6 @@ final class LoginStore: ObservableObject {
         UserApi.shared.loginWithKakaoAccount { _, error in
             if error != nil {
                 print("Kakao SignIn Error: 카카오 계정 로그인에 실패했습니다.")
-                completion(false)
                 return
             }
             self.loadingInfoDidKakaoAuth(completion: completion)
@@ -98,13 +96,11 @@ final class LoginStore: ObservableObject {
             guard let self = self else { return }
             if let error = error {
                 print("카카오톡 사용자 정보 불러오는데 실패했습니다: \(error.localizedDescription)")
-                completion(false)
                 return
             }
             guard let email = kakaoUser?.kakaoAccount?.email,
                   let password = kakaoUser?.id else {
                 print("Error: email과 kakaoUser Id가 잘못되었습니다.")
-                completion(false)
                 return
             }
             self.email = email
@@ -130,7 +126,7 @@ final class LoginStore: ObservableObject {
                 print("Kakao Logout Error: \(error.localizedDescription)")
             } else {
                 self.userUid = ""
-                self.currentUser = User.dummyUser
+                self.currentUser = User()
             }
         }
     }
@@ -141,7 +137,6 @@ final class LoginStore: ObservableObject {
             if let error = error {
                 print("Error: 로그인에 실패했습니다. \(error.localizedDescription)")
                 completion(false)
-                return
             }
             
             if let userUid = result?.user.uid {
@@ -150,7 +145,6 @@ final class LoginStore: ObservableObject {
                 completion(true)
             } else {
                 print("Error: UID를 가져오는데 실패했습니다.")
-                completion(false)
             }
         }
     }
@@ -230,7 +224,7 @@ final class LoginStore: ObservableObject {
         let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
         let user = try userDocument.data(as: User.self)
         
-        print("ㅎㅇ")
+        print("user fetch되")
         try await fetchApplyTicket(getUser: user, userUID: userUID)
     }
     

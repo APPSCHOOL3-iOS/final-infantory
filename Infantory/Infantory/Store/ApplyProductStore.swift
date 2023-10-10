@@ -14,9 +14,35 @@ final class ApplyProductStore: ObservableObject {
     
     @Published var applyProduct: [ApplyProduct] = []
     @Published var selectedFilter: ApplyFilter = .inProgress
+    @Published var filteredProduct: [ApplyProduct] = []
     
+    @Published var progressSelectedFilter: ApplyInprogressFilter = .deadline
+    
+    func updateFilter(filter: ApplyFilter) {
+        switch filter {
+        case .inProgress:
+            selectedFilter = .inProgress
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .inProgress
+            }
+        case .planned:
+            selectedFilter = .planned
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .planned
+            }
+        case .close:
+            selectedFilter = .close
+            filteredProduct = applyProduct.filter{
+                $0.applyFilter == .close
+            }
+        }
+    }
     func remainingTime(product: ApplyProduct) -> Double {
         return product.endDate.timeIntervalSince(Date())
+    }
+    
+    func startTime(product: ApplyProduct) -> Double {
+        return product.startDate.timeIntervalSince(Date())
     }
 
     //현재 유저 패치작업
@@ -82,7 +108,7 @@ final class ApplyProductStore: ObservableObject {
                 
                 // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
                 documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
-                    if let error = error {
+                    if error != nil {
                         #if DEBUG
                         print("Error updating document: (error)")
                         #endif
