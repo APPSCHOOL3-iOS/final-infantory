@@ -60,7 +60,7 @@ struct Footer: View {
             Button {
                 isShowingAuctionNoticeSheet.toggle()
             } label: {
-                Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? 0) 원")
+                Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
                     .font(.infanHeadlineBold)
                     .foregroundColor(.white)
                     .background(

@@ -28,7 +28,7 @@ struct AuctionBidSheetView: View {
                 headerView
                 
                 ForEach(1..<4) { index in
-                    bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? 0) + auctionViewModel.bidIncrement * index, index: index)
+                    bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? auctionViewModel.product.minPrice) + auctionViewModel.bidIncrement * index, index: index)
                     
                 }
                 

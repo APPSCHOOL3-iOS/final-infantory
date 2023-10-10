@@ -23,7 +23,7 @@ struct AuctionBuyerView: View {
                     Text("\(auctionStore.biddingInfos.last?.userNickname ?? "")")
                 }
                 Spacer()
-                Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? 0)원")
+                Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice)원")
             }
             .foregroundStyle(.black)
             .padding()
