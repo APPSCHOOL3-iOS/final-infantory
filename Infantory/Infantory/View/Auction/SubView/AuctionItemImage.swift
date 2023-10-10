@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct AuctionItemImage: View {
+    @ObservedObject var auctionStore: AuctionStore
     var body: some View {
         TabView {
             ForEach(0..<5) { _ in
-                Image("Influencer1")
+                Image("\(auctionStore.product.productImageURLStrings)")
                     .resizable()
                     .scaledToFill()
                     .clipped()
@@ -23,6 +24,6 @@ struct AuctionItemImage: View {
 
 struct AuctionItemImage_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionItemImage()
+        AuctionItemImage(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
     }
 }

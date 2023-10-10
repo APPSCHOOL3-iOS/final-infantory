@@ -117,7 +117,7 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionStore(), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
+        AuctionBidSheetView(auctionViewModel: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
     }
 }
 

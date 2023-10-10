@@ -65,6 +65,6 @@ struct AuctionNoticeSheetView: View {
 
 struct AuctionNoticeSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionNoticeSheetView(auctionViewModel: AuctionStore(), isShowingAuctionNoticeSheet: .constant(true))
+        AuctionNoticeSheetView(auctionViewModel: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionNoticeSheet: .constant(true))
     }
 }
