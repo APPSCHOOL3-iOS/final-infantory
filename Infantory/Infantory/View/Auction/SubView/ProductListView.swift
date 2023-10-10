@@ -29,18 +29,14 @@ struct ProductListView: View {
                                 .font(.infanFootnoteBold)
                             
                             Spacer()
-                            //TODO: 타이머뷰로 교체 해야함
-                            Label("03:22:15", systemImage: "timer")
-                                .foregroundColor(.infanMain)
-                                .font(.infanFootnote)
-                                .frame(height: 24)
+                            TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
                         }
                         .padding(.top, 10)
                         .padding(.bottom, 6)
                         .horizontalPadding()
                         
                         NavigationLink {
-                            AuctionDetailView(auctionProductViewModel: auctionViewModel)
+                            AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
                         } label: {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
