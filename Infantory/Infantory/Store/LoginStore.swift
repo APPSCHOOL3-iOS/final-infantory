@@ -32,7 +32,6 @@ final class LoginStore: ObservableObject {
     @Published var signUpUser: SignUpUser = SignUpUser()
     
     init() {
-        print("=====================userUid\(userUid)===========")
         if !userUid.isEmpty {
             Task {
                 try await fetchUser(userUID: userUid)
@@ -224,7 +223,6 @@ final class LoginStore: ObservableObject {
         let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
         let user = try userDocument.data(as: User.self)
         
-        print("user fetch되")
         try await fetchApplyTicket(getUser: user, userUID: userUID)
     }
     

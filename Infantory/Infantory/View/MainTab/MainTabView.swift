@@ -42,14 +42,14 @@ struct MainTabView: View {
                 .tag(2)
                 .environmentObject(loginStore)
             
-            ActivityMainView()
-                .tabItem {
-                    Image(systemName: "clock.arrow.circlepath")
-                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
-                    Text("활동")
-                }
-                .tag(3)
-            
+//            ActivityMainView()
+//                .tabItem {
+//                    Image(systemName: "clock.arrow.circlepath")
+//                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
+//                    Text("활동")
+//                }
+//                .tag(3)
+//            
             MyMainView()
                 .tabItem {
                     Image(systemName: "person")

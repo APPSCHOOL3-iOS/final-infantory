@@ -90,7 +90,7 @@ struct Footer: View {
             
         })
         .sheet(isPresented: $isShowingAuctionBidSheet, content: {
-            AuctionBidSheetView(auctionViewModel: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
+            AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         })

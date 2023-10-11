@@ -46,6 +46,8 @@
 		114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114F305A2ABD1A79008497A8 /* AuctionMainView.swift */; };
 		11BAE3752ACCE82400F887C7 /* AuctionBidSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */; };
 		11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */; };
+		11F0E0622AD62F9E00B49420 /* ActivityOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0E0612AD62F9E00B49420 /* ActivityOption.swift */; };
+		11F0E0642AD6302300B49420 /* ActivityOptionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F0E0632AD6302300B49420 /* ActivityOptionBar.swift */; };
 		11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */; };
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
 		11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */; };
@@ -162,6 +164,8 @@
 		114F305A2ABD1A79008497A8 /* AuctionMainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionMainView.swift; sourceTree = "<group>"; };
 		11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionBidSheetView.swift; sourceTree = "<group>"; };
 		11E4DA5E2ABACBBC00EC84D9 /* PaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressView.swift; sourceTree = "<group>"; };
+		11F0E0612AD62F9E00B49420 /* ActivityOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityOption.swift; sourceTree = "<group>"; };
+		11F0E0632AD6302300B49420 /* ActivityOptionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityOptionBar.swift; sourceTree = "<group>"; };
 		11F7EEB72ABBD515003E3A8C /* PaymentInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInfo.swift; sourceTree = "<group>"; };
 		11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
@@ -489,6 +493,8 @@
 			isa = PBXGroup;
 			children = (
 				A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */,
+				11F0E0632AD6302300B49420 /* ActivityOptionBar.swift */,
+				11F0E0612AD62F9E00B49420 /* ActivityOption.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C82A3312AC2934E009F6D97 /* ApplyDetailView.swift in Sources */,
+				11F0E0622AD62F9E00B49420 /* ActivityOption.swift in Sources */,
 				844BB4E92ACBE8A3004891DD /* LoginAddressWebView.swift in Sources */,
 				0C82A3342AC29625009F6D97 /* ApplyDetailDescriptionView.swift in Sources */,
 				0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */,
@@ -748,6 +755,7 @@
 				A08EECBA2ACEF842009DFCDE /* RoundedTextEditor.swift in Sources */,
 				64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */,
 				A091E5912ABAA61C000894FC /* LoginMainView.swift in Sources */,
+				11F0E0642AD6302300B49420 /* ActivityOptionBar.swift in Sources */,
 				64A6826F2AC2C55E007BF628 /* PaymentAddressWebView.swift in Sources */,
 				648689132ACE751800423321 /* TimerView.swift in Sources */,
 				11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */,

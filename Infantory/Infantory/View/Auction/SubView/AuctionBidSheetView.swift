@@ -10,7 +10,10 @@ import SwiftUI
 // 헤드라인, 바디, 헤드라인 볼드, 풋노트?
 
 struct AuctionBidSheetView: View {
-    @ObservedObject var auctionViewModel: AuctionStore
+    @ObservedObject var auctionStore: AuctionStore
+    
+    @EnvironmentObject var loginStore: LoginStore
+    
     @Binding var isShowingAuctionBidSheet: Bool
     
     @State private var selectedIndex: Int = 4 // 선택된 버튼
@@ -28,15 +31,16 @@ struct AuctionBidSheetView: View {
                 headerView
                 
                 ForEach(1..<4) { index in
-                    bidSelectButton(bidAmount: (auctionViewModel.biddingInfos.last?.biddingPrice ?? auctionViewModel.product.minPrice) + auctionViewModel.bidIncrement * index, index: index)
-                    
+
+                    bidSelectButton(bidAmount: (auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) + auctionStore.bidIncrement * index, index: index)
+                                
                 }
                 
                 Button {
-                    auctionViewModel.addBid(biddingInfo: BiddingInfo(id: UUID(),
+                    auctionStore.addBid(biddingInfo: BiddingInfo(id: UUID(),
                                                                      timeStamp: Date(),
-                                                                     userID: "VAVAVVAVAVA",
-                                                                     userNickname: "갓희찬",
+                                                                 userID: "\(loginStore.userUid)",
+                                                                 userNickname: "\(loginStore.currentUser.name)",
                                                                      biddingPrice: selectedAmount))
                     isShowingAuctionBidSheet.toggle()
                     showAlert = true
@@ -73,13 +77,13 @@ extension AuctionBidSheetView {
                 Text("입찰가 선택")
                     .font(.infanHeadlineBold)
                 
-                Text("\(auctionViewModel.product.productName)")
+                Text("\(auctionStore.product.productName)")
                 
                 HStack {
-                    Text(" \(auctionViewModel.biddingInfos.last?.biddingPrice ?? 0)원")
+                    Text(" \(auctionStore.biddingInfos.last?.biddingPrice ?? 0)원")
                         .foregroundColor(.infanMain)
                     
-                    TimerView(remainingTime: auctionViewModel.remainingTime)
+                    TimerView(remainingTime: auctionStore.remainingTime)
                 }
                 
             }
@@ -102,7 +106,7 @@ extension AuctionBidSheetView {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(index == selectedIndex ? Color.infanMain : Color.white)
                     .opacity(0.3)
-                    .frame(width: .infinity, height: 54)
+                    .frame(width: .screenWidth - 40, height: 54)
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(style: StrokeStyle())
                     .foregroundColor(.gray)
@@ -117,10 +121,6 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionViewModel: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
+        AuctionBidSheetView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
     }
 }
-
-//#Preview {
-//    AuctionBidSheetView()
-//}
