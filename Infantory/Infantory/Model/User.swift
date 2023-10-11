@@ -23,8 +23,8 @@ struct User: Identifiable, Codable {
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
     
-    var auctionActivityInfos: [AuctionActivityInfo]? = nil
-    var applyActivityInfos: [ApplyActivityInfo]? = nil
+    var auctionActivityInfos: [AuctionActivityInfo] = []
+    var applyActivityInfos: [ApplyActivityInfo] = []
 }
 
 struct AuctionActivityInfo: Codable {
