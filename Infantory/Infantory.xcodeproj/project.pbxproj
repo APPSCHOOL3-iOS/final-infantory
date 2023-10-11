@@ -28,6 +28,12 @@
 		0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */; };
 		0CED22502ACCFB4300CD1456 /* ApplyImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */; };
 		0CED22542ACD40E100CD1456 /* AuctionRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */; };
+		0CF546732AD6209F0075C3FD /* PhotosSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF546722AD6209F0075C3FD /* PhotosSelector.swift */; };
+		0CF546752AD622650075C3FD /* PhotoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF546742AD622650075C3FD /* PhotoStore.swift */; };
+		0CF546772AD624940075C3FD /* PhotoStoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF546762AD624940075C3FD /* PhotoStoreModel.swift */; };
+		0CF5467A2AD626540075C3FD /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0CF546792AD626540075C3FD /* Kingfisher */; };
+		0CF5467C2AD626BA0075C3FD /* UseCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */; };
+		0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF5467F2AD633610075C3FD /* ProfileEditView.swift */; };
 		110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */; };
 		11183A6F2ACD40D30010012C /* AuctionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A6E2ACD40D30010012C /* AuctionStore.swift */; };
 		11183A732ACF8BC50010012C /* ProfileRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11183A722ACF8BC50010012C /* ProfileRowView.swift */; };
@@ -130,6 +136,11 @@
 		0CE4021B2ABACA3400F69B7E /* InfluencerImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageCell.swift; sourceTree = "<group>"; };
 		0CED224F2ACCFB4300CD1456 /* ApplyImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyImagePickerView.swift; sourceTree = "<group>"; };
 		0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionRegisterStore.swift; sourceTree = "<group>"; };
+		0CF546722AD6209F0075C3FD /* PhotosSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosSelector.swift; sourceTree = "<group>"; };
+		0CF546742AD622650075C3FD /* PhotoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStore.swift; sourceTree = "<group>"; };
+		0CF546762AD624940075C3FD /* PhotoStoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoStoreModel.swift; sourceTree = "<group>"; };
+		0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCameraView.swift; sourceTree = "<group>"; };
+		0CF5467F2AD633610075C3FD /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionNoticeSheetView.swift; sourceTree = "<group>"; };
 		11183A6E2ACD40D30010012C /* AuctionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionStore.swift; sourceTree = "<group>"; };
 		11183A722ACF8BC50010012C /* ProfileRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRowView.swift; sourceTree = "<group>"; };
@@ -214,6 +225,7 @@
 				A086C7B42ABD278200F0BF9B /* FirebaseStorage in Frameworks */,
 				A086C7A42ABD278200F0BF9B /* FirebaseAppCheck in Frameworks */,
 				A086C7A82ABD278200F0BF9B /* FirebaseAuthCombine-Community in Frameworks */,
+				0CF5467A2AD626540075C3FD /* Kingfisher in Frameworks */,
 				A086C7B02ABD278200F0BF9B /* FirebaseFirestoreSwift in Frameworks */,
 				A086C7AA2ABD278200F0BF9B /* FirebaseDatabase in Frameworks */,
 				A086C7A62ABD278200F0BF9B /* FirebaseAuth in Frameworks */,
@@ -228,6 +240,9 @@
 			isa = PBXGroup;
 			children = (
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
+				0CF5467F2AD633610075C3FD /* ProfileEditView.swift */,
+				0CF546722AD6209F0075C3FD /* PhotosSelector.swift */,
+				0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -356,6 +371,7 @@
 				0CED22532ACD40E100CD1456 /* AuctionRegisterStore.swift */,
 				11183A6E2ACD40D30010012C /* AuctionStore.swift */,
 				A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */,
+				0CF546742AD622650075C3FD /* PhotoStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -392,6 +408,7 @@
 				64E105C52ABD4C2700BFD3DF /* PaymentAddress.swift */,
 				A080771D2AD3F04F00D9F2CE /* BiddingInfo.swift */,
 				A031F3AA2AD40E2500F67988 /* ApplyInfo.swift */,
+				0CF546762AD624940075C3FD /* PhotoStoreModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +591,7 @@
 				A086C7B32ABD278200F0BF9B /* FirebaseStorage */,
 				A086C7B52ABD278200F0BF9B /* FirebaseStorageCombine-Community */,
 				64A043FD2ACFE49A0010D547 /* ExpandableText */,
+				0CF546792AD626540075C3FD /* Kingfisher */,
 			);
 			productName = Infantory;
 			productReference = A091E5602AB9FB65000894FC /* Infantory.app */;
@@ -607,6 +625,7 @@
 				849B64AE2ABD595B00C4AC8D /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				A086C7A22ABD278200F0BF9B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */,
+				0CF546782AD626540075C3FD /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = A091E5612AB9FB65000894FC /* Products */;
 			projectDirPath = "";
@@ -680,6 +699,7 @@
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
+				0CF546732AD6209F0075C3FD /* PhotosSelector.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
@@ -691,6 +711,7 @@
 				A0A6628F2ACD8074000F2EF6 /* InfanDateFormatter.swift in Sources */,
 				113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */,
 				A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */,
+				0CF5467C2AD626BA0075C3FD /* UseCameraView.swift in Sources */,
 				A091E5A72ABC740D000894FC /* Font+Extension.swift in Sources */,
 				A08EECBA2ACEF842009DFCDE /* RoundedTextEditor.swift in Sources */,
 				64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */,
@@ -713,6 +734,7 @@
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
 				A091E5642AB9FB65000894FC /* InfantoryApp.swift in Sources */,
+				0CF546752AD622650075C3FD /* PhotoStore.swift in Sources */,
 				0C82A3362AC29640009F6D97 /* ApplyDetailImageView.swift in Sources */,
 				64E105C62ABD4C2700BFD3DF /* PaymentAddress.swift in Sources */,
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
@@ -729,6 +751,7 @@
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
 				A080771E2AD3F04F00D9F2CE /* BiddingInfo.swift in Sources */,
 				A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */,
+				0CF546772AD624940075C3FD /* PhotoStoreModel.swift in Sources */,
 				EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */,
 				A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */,
 				0C82A3382AC29A0B009F6D97 /* ApplyLogoCell.swift in Sources */,
@@ -740,6 +763,7 @@
 				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
 				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
+				0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,
 				9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */,
@@ -958,6 +982,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0CF546782AD626540075C3FD /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.9.1;
+			};
+		};
 		64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/NuPlay/ExpandableText";
@@ -985,6 +1017,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0CF546792AD626540075C3FD /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CF546782AD626540075C3FD /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		64A043FD2ACFE49A0010D547 /* ExpandableText */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 64A043FC2ACFE49A0010D547 /* XCRemoteSwiftPackageReference "ExpandableText" */;
