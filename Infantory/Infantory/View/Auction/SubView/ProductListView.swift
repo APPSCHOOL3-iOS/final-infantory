@@ -41,31 +41,41 @@ struct ProductListView: View {
                             VStack(alignment: .leading, spacing: 20) {
                                 HStack(spacing: 16) {
                                     if product.productImageURLStrings.count > 0 {
-                                        if let url = URL(string: product.productImageURLStrings[0]) {
-                                            AsyncImage(url: url) { image in
-                                                
-                                                ZStack(alignment: .topLeading) {
-                                                    image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
-                                                        .clipped()
-                                                    
-                                                }
-                                            } placeholder: {
+                        
+                                        CachedImage(url: product.productImageURLStrings[0]) { phase in
+                                            switch phase {
+                                            case .empty:
                                                 ProgressView()
+                                                        .scaledToFill()
+                                                        .frame(width: (.screenWidth - 100) / 2,
+                                                               height: (.screenWidth - 100) / 2)
+                                                        .clipped()
+                                            case .success(let image):
+                                                image
+                                                    .resizable()
                                                     .scaledToFill()
-                                                    .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                    .frame(width: (.screenWidth - 100) / 2,
+                                                           height: (.screenWidth - 100) / 2)
                                                     .clipped()
+//
+                                            case .failure(_):
+                                                Image(systemName: "xmark")
+                                                    .frame(width: (.screenWidth - 100) / 2,
+                                                           height: (.screenWidth - 100) / 2)
+                                                
+                                            @unknown default:
+                                                EmptyView()
                                             }
                                         }
+                                        
                                     } else {
                                         ZStack(alignment: .topLeading) {
                                             
                                             Image("appleLogo")
                                                 .resizable()
                                                 .scaledToFill()
-                                                .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                .frame(width: (.screenWidth - 100) / 2,
+                                                       height: (.screenWidth - 100) / 2)
                                                 .clipped()
                                             
                                         }

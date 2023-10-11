@@ -13,14 +13,29 @@ struct AuctionItemImage: View {
     var body: some View {
         TabView {
             ForEach(imageString, id: \.self) { item in
-                AsyncImage(url: URL(string: item)) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .clipped()
-                } placeholder: {
-                    ProgressView()
+                CachedImage(url: item) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                        
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                        
+                    case .failure(_):
+                        Image(systemName: "xmark")
+                            .symbolVariant(.circle.fill)
+                            .foregroundColor(.white)
+                            .frame(width: 100, height: 100)
+                            .background(Color.infanGray,
+                                        in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
+                
             }
         }
         .tabViewStyle(PageTabViewStyle())
