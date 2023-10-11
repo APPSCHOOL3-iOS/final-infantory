@@ -7,17 +7,66 @@
 
 import SwiftUI
 
+enum SearchResultCategory: String, CaseIterable {
+    case total = "통합검색"
+    case influencer = "인플루언서"
+    case auction = "경매"
+    case apply = "응모"
+}
+
 struct SearchResultView: View {
     
-    var searchText: String
+    @ObservedObject var searchStore: SearchStore
+    @Namespace private var animation
+    
+    @State var isAnimating: Bool = false
+    @Binding var searchText: String
     
     var body: some View {
-        Text(searchText)
+        
+        VStack {
+            TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
+                .padding(10)
+                .background(Color.infanLightGray.opacity(0.3))
+                .cornerRadius(5)
+                .onSubmit {
+                    searchStore.addSearchHistory(keyword: searchText)
+                }
+                .submitLabel(.search)
+            
+            HStack {
+                ForEach(SearchResultCategory.allCases, id: \.self) { category in
+                    VStack {
+                        
+                        Text("\(category.rawValue)")
+                            .font(.infanHeadline)
+                            .foregroundColor(searchStore.selectedCategory == category ? .black: .gray)
+                            .frame(maxWidth: .infinity)
+                        
+                        if searchStore.selectedCategory == category {
+                            Capsule()
+                                .foregroundColor(.infanDarkGray)
+                                .frame(height: 2)
+                                .matchedGeometryEffect(id: "info", in: animation)
+                                .frame(maxWidth: .infinity)
+                            
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation(.easeIn) {
+                            searchStore.selectedCategory = category
+                        }
+                    }
+                }
+            }
+            .padding(.top)
+        }
+        .horizontalPadding()
     }
 }
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(searchText: "서치텍스트")
+        SearchResultView(searchStore: SearchStore(), searchText: .constant("서치텍스트"))
     }
 }

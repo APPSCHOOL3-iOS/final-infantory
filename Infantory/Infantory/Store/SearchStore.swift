@@ -10,6 +10,7 @@ import SwiftUI
 class SearchStore: ObservableObject {
     
     @Published var searchArray: Set<String> = []
+    @Published var selectedCategory: SearchResultCategory = .total
     
     init() {
         fetchSearchHistory()

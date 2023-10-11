@@ -42,7 +42,7 @@ struct SearchMainView: View {
             }
             .horizontalPadding()
             .navigationDestination(isPresented: $isShowingSearchResult) {
-                SearchResultView(searchText: searchText)
+                SearchResultView(searchStore: searchStore, searchText: $searchText)
             }
             
             List {
