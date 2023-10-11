@@ -60,6 +60,7 @@ final class ApplyProductStore: ObservableObject {
         switch filter {
         case .inProgress:
             selectedFilter = .inProgress
+            progressSelectedFilter = .deadline
             filteredProduct = applyProduct.filter {
                 $0.applyFilter == .inProgress
             }.sorted { $0.endRemainingTime < $1.endRemainingTime }
