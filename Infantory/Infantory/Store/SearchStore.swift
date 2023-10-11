@@ -62,7 +62,7 @@ class SearchStore: ObservableObject {
         Task {
             try await fetchInfluencer(keyword: keyword)
             influencer = influencer.filter { influencer in
-                influencer.name.localizedCaseInsensitiveContains(keyword)
+                influencer.nickName.localizedCaseInsensitiveContains(keyword)
             }
         }
     }

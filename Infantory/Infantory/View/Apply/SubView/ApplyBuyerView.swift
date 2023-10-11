@@ -13,9 +13,15 @@ struct ApplyBuyerView: View {
     
     var body: some View {
         HStack {
-            Text("전체응모횟수")
-            Spacer()
-            Text("\(product.applyUserIDs.count) 회")
+            if product.applyFilter != .planned {
+                Text("전체응모횟수")
+                Spacer()
+                Text("\(product.applyUserIDs.count) 회")
+            } else {
+                Spacer()
+                Text("\(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
+                Spacer()
+            }
         }
         .padding()
         .background(
@@ -23,7 +29,7 @@ struct ApplyBuyerView: View {
                 .stroke(lineWidth: 1)
                 .fill(Color.infanMain))
         .horizontalPadding()
-        .frame(width: CGFloat.screenWidth, height: 80)
+        .frame(width: .screenWidth, height: 80)
     }
 }
 

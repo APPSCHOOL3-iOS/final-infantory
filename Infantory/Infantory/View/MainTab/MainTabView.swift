@@ -10,7 +10,6 @@ import Photos
 
 struct MainTabView: View {
 
-    @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
     
     var body: some View {
@@ -31,7 +30,6 @@ struct MainTabView: View {
                     Text("경매")
                 }
                 .tag(1)
-                .environmentObject(loginStore)
             
             ApplyMainView()
                 .tabItem {
@@ -40,7 +38,6 @@ struct MainTabView: View {
                     Text("응모")
                 }
                 .tag(2)
-                .environmentObject(loginStore)
             
 //            ActivityMainView()
 //                .tabItem {
@@ -53,13 +50,10 @@ struct MainTabView: View {
             MyMainView()
                 .tabItem {
                     Image(systemName: "person")
-                    
                         .environment(\.symbolVariants, .none)
                     Text("마이")
                 }
                 .tag(4)
-                .environmentObject(loginStore)
-            
         }
         
         .tint(Color.infanMain)
