@@ -41,9 +41,6 @@ struct SearchMainView: View {
                 .padding(.top)
             }
             .horizontalPadding()
-            .navigationDestination(isPresented: $isShowingSearchResult) {
-                SearchResultView(searchStore: searchStore, searchText: $searchText)
-            }
             
             List {
                 ForEach(Array(searchStore.searchArray.reversed()), id: \.self) { keyword in
@@ -62,12 +59,19 @@ struct SearchMainView: View {
                         .buttonStyle(.plain)
 
                     }
+                    .onTapGesture {
+                        searchText = keyword
+                        isShowingSearchResult = true
+                    }
                 }
                 .foregroundColor(.infanDarkGray)
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             
+        }
+        .navigationDestination(isPresented: $isShowingSearchResult) {
+            SearchResultView(searchStore: searchStore, searchText: $searchText)
         }
     }
 }
