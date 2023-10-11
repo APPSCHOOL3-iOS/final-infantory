@@ -12,15 +12,11 @@ struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     
-    private var followWidth : CGFloat {
-        UIScreen.main.bounds.width - 30
-    }
-    
     var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    ZStack{
+                    ZStack {
                         Circle()
                             .foregroundColor(.gray)
                             .frame(width: 65, height: 65)
@@ -56,7 +52,7 @@ struct MyInfoMainView: View {
                     .padding(.leading)
                     Spacer()
                 }
-                .padding(.trailing)
+                .padding(.leading, 23)
                 HStack(spacing: 20) {
                     NavigationLink {
                         // 프로필 관리 버튼 액션
@@ -207,7 +203,7 @@ struct MyInfoMainView: View {
             .padding()
             .navigationTitle("")
         }
-        .onAppear{
+        .onAppear {
             photosSelectorStore.getProfileImageDownloadURL()
         }
     }

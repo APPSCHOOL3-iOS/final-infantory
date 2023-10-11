@@ -14,53 +14,62 @@ struct PhotosSelector: View {
     @StateObject var photoStore = PhotosSelectorStore.shared // 프로필사진 싱글톤 메서드
     @State private var cameraSheetShowing = false
     @State var showActionSheet: Bool = false
+    @State private var isSheetPresented = false
     
     var body: some View {
-        ZStack {
-            VStack {
-                Button {
-                    showActionSheet.toggle()
-                } label: {
-                    Image("ProfileEdit")
-                        .frame(width: 100, height: 100)
-                        .opacity(0.5)
-                }
-                .actionSheet(isPresented: $showActionSheet, content: getActionSheet)
-            }
-        
-            if let image = photoStore.profileImage {
+        VStack {
+            if let image = photoStore.profileImage, !image.isEmpty {
                 KFImage(URL(string: image))
                     .onFailure({ error in
-                        print("Error : \(error)")
+                        print("Error: \(error)")
                     })
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 250, height: 250)
+                    .frame(width: 100, height: 100)
                     .clipShape(Circle())
                     .clipped()
-                
+            } else {
+                Image(systemName: "person.circle.fill")
+                    .resizable()
+                    .frame(width: 100, height: 100)
             }
             VStack {
-                Spacer()
-                HStack {
-                    Button {
-                        cameraSheetShowing = true
-                    } label: {
-                        Image(systemName: "camera.circle.fill")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(.gray)
+                HStack(alignment: .top) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .frame(width: 160, height: 30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color.infanDarkGray, lineWidth: 1)
+                            )
+                            .foregroundColor(.white)
+                            .padding(2)
+                        Button {
+                            cameraSheetShowing = true
+                        } label: {
+                            Text("사진촬영")
+                                .font(.infanHeadlineBold)
+                                .foregroundColor(.infanDarkGray)
+                        }
                     }
                     
-                    Spacer()
                     PhotosPicker(
                         selection: $photoStore.selectedItem,
                         matching: .any(of: [.images]),
                         photoLibrary: .shared()) {
-                            Image(systemName: "photo.circle.fill")
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .foregroundColor(.gray)
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .frame(width: 160, height: 30)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.infanDarkGray, lineWidth: 1)
+                                    )
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                Text("앨범에서 선택")
+                                    .font(.infanHeadlineBold)
+                                    .foregroundColor(.infanDarkGray)
+                            }
                         }
                         .onChange(of: photoStore.selectedItem) { newItem in
                             Task {
@@ -72,19 +81,22 @@ struct PhotosSelector: View {
                             }
                         }
                 }
+                .padding()
+            }
+            .sheet(isPresented: $cameraSheetShowing) {
+                UseCameraView()
             }
         }
-        .frame(width: 250,height: 250)
-        .sheet(isPresented: $cameraSheetShowing) {
-            UseCameraView()
-        }
     }
-    
     // actionSheet 함수
     func getActionSheet() -> ActionSheet {
         
-        let button1: ActionSheet.Button = .default(Text("앨범에서 선택"))
-        let button2: ActionSheet.Button = .default(Text("사진 찍기"))
+        let button1: ActionSheet.Button = .default(Text("앨범에서 선택")) {
+            isSheetPresented = true
+        }
+        let button2: ActionSheet.Button = .default(Text("사진 찍기")) {
+            cameraSheetShowing = true
+        }
         let button3: ActionSheet.Button = .destructive(Text("프로필 사진 삭제"))
         let button4: ActionSheet.Button = .cancel(Text("닫기"))
         let title = Text("원하는 옵션을 선택하세요")
@@ -94,14 +106,8 @@ struct PhotosSelector: View {
                            buttons: [button1, button2, button3, button4])
     }
 }
-
-
-
-
-
 struct PhotosSelector_Previews: PreviewProvider {
     static var previews: some View {
         PhotosSelector(photoStore: PhotosSelectorStore())
     }
 }
-

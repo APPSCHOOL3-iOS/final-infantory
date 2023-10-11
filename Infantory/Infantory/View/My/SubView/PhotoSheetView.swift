@@ -6,33 +6,33 @@
 //
 
 import SwiftUI
+import PhotosUI
+import Photos
+import Kingfisher
 
 struct PhotoSheetView: View {
-    @State var showActionSheet: Bool = false
-    var body: some View {
-        
-        Button(action: {
-            showActionSheet.toggle()
-        }) {
-            Text("서근개발노트")
-        }
-        .actionSheet(isPresented: $showActionSheet, content: getActionSheet)
-    }
+    @StateObject var photoStore = PhotosSelectorStore.shared // 프로필 사진 싱글톤 메서드
+    @State private var isImagePickerPresented = true // 갤러리 화면을 보이게 하려면 true로 설정
     
-    // actionSheet 함수
-    func getActionSheet() -> ActionSheet {
-        
-        let button1: ActionSheet.Button = .default(Text("default".uppercased()))
-        let button2: ActionSheet.Button = .destructive(Text("destructive".uppercased()))
-        let button3: ActionSheet.Button = .cancel()
-        
-        let title = Text("action Sheet")
-        
-        return ActionSheet(title: title,
-                           message: nil,
-                           buttons: [button1, button2, button3])
+    var body: some View {
+        PhotosPicker(
+            selection: $photoStore.selectedItem,
+            matching: .any(of: [.images]),
+            photoLibrary: .shared()) {
+                // 여기에 아무 내용도 표시하지 않음
+            }
+            .onChange(of: photoStore.selectedItem) { newItem in
+                Task {
+                    if let data = try? await newItem?.loadTransferable(type: Data.self) {
+                        photoStore.selectedImageData = data
+                        photoStore.uploadImageToFirebase(imageData: data)
+                    }
+                    photoStore.showAlert.toggle()
+                }
+            }
     }
 }
+
 struct PhotoSheetView_Previews: PreviewProvider {
     static var previews: some View {
         PhotoSheetView()
