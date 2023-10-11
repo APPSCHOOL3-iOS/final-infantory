@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActivityOptionBar: View {
-    @State private var selectedFilter: ActivityOption = .auction
+    @Binding var selectedFilter: ActivityOption
     
     @Namespace var animation
     
@@ -33,9 +33,10 @@ struct ActivityOptionBar: View {
                     }
                 }
                 .onTapGesture {
-                    withAnimation(.easeInOut) {
-                        self.selectedFilter = item
-                    }
+                    self.selectedFilter = item
+//                    withAnimation(.easeInOut) {
+//                        
+//                    }
                 }
             }
         }
@@ -45,6 +46,6 @@ struct ActivityOptionBar: View {
 
 struct ActivityOptionBar_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityOptionBar()
+        ActivityOptionBar(selectedFilter: .constant(ActivityOption.auction))
     }
 }
