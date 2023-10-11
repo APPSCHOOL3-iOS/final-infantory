@@ -10,6 +10,7 @@ import SwiftUI
 struct ActivityMainView: View {
     
     @ObservedObject var auctionStore: AuctionStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @EnvironmentObject var loginStore: LoginStore
     
     let imageURLString: String = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/000401.png"
@@ -33,7 +34,7 @@ struct ActivityMainView: View {
 
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityMainView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
+        ActivityMainView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct), applyProductStore: ApplyProductStore())
             .environmentObject(LoginStore())
     }
 }
@@ -52,7 +53,7 @@ extension ActivityMainView {
             
             VStack {
                 Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? 0)")
-                Text("")
+                Text("gggggggg")
             }
             Spacer()
             TimerView(remainingTime: auctionStore.remainingTime)

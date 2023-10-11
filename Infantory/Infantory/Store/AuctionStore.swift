@@ -70,34 +70,36 @@ class AuctionStore: ObservableObject {
         
         let productInfo = AuctionActivityInfo(productId: productId,
                                               price: biddingInfo.biddingPrice,
-                                              timestamp: biddingInfo.timeStamp)
+                                              timestamp: biddingInfo.timeStamp.timeIntervalSince1970)
         
         updateAuctionActivityInfo(productInfo: productInfo)
+        print(biddingInfo)
     }
     
     func updateAuctionActivityInfo(productInfo: AuctionActivityInfo) {
-        firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-            .getDocument { document, _ in
-                guard var user = try? document?.data(as: User.self) else {
-                    print("DEBUG: Failed to decode User not exist")
-                    return
+            firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+                .getDocument { document, _ in
+                    guard var user = try? document?.data(as: User.self) else {
+                        print("DEBUG: Failed to decode User not exist")
+                        return
+                    }
+                    
+                    // 만약 같은 productId가 이미 존재한다면, 해당 정보를 업데이트합니다.
+                    if let index = user.auctionActivityInfos.firstIndex(where: { $0.productId == productInfo.productId }) {
+                        user.auctionActivityInfos[index] = productInfo
+                    } else {
+                        // 존재하지 않으면 추가합니다.
+                        user.auctionActivityInfos.append(productInfo)
+                    }
+                    
+                    // Firestore에 업데이트하기 위해 Codable 배열을 딕셔너리 배열로 변환합니다.
+                    let auctionActivityInfosData = try? user.auctionActivityInfos.map { try $0.asDictionary() }
+                    
+                    self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+                        .updateData(["auctionActivityInfos": auctionActivityInfosData ?? []])
                 }
-                
-                // 만약 같은 productId가 이미 존재한다면, 해당 정보를 업데이트합니다.
-                if let index = user.auctionActivityInfos.firstIndex(where: { $0.productId == productInfo.productId }) {
-                    user.auctionActivityInfos[index] = productInfo
-                } else {
-                    // 존재하지 않으면 추가합니다.
-                    user.auctionActivityInfos.append(productInfo)
-                }
-                
-                // Firestore에 업데이트하기 위해 Codable 배열을 딕셔너리 배열로 변환합니다.
-                let auctionActivityInfosData = try? user.auctionActivityInfos.map { try $0.asDictionary() }
-                
-                self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-                    .updateData(["auctionActivityInfos": auctionActivityInfosData ?? []])
-            }
-    }
+        }
+    
     // 같은 상품 -> 여러번 저장
     func updateWinningPrice(winningPrice: Int) {
         guard let productId = product.id else { return }

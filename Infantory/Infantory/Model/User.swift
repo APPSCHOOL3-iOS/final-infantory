@@ -13,9 +13,9 @@ struct User: Identifiable, Codable {
     var isInfluencer: UserType = .user
     var profileImageURLString: String? = nil
     var name: String = ""
+    var nickName: String = ""
     var phoneNumber: String = ""
     var email: String = ""
-    
     var loginType: LoginType = .kakao
     var address: Address = Address(address: "", zonecode: "", addressDetail: "")
     
@@ -30,13 +30,13 @@ struct User: Identifiable, Codable {
 struct AuctionActivityInfo: Codable {
     var productId: String
     var price: Int
-    var timestamp: Date
+    var timestamp: Double
 }
 
 struct ApplyActivityInfo: Codable {
     var productId: String
     var ticketCount: Int
-    var timestamp: Date
+    var timestamp: Double
 }
 
 // 주소
