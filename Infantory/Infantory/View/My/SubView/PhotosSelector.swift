@@ -13,14 +13,21 @@ import Kingfisher
 struct PhotosSelector: View {
     @StateObject var photoStore = PhotosSelectorStore.shared // 프로필사진 싱글톤 메서드
     @State private var cameraSheetShowing = false
+    @State var showActionSheet: Bool = false
     
     var body: some View {
         ZStack {
-            Circle()
-                .foregroundColor(.gray)
-                .frame(width: 260, height: 260)
-                .opacity(0.5)
-                .shadow(radius: 10)
+            VStack {
+                Button {
+                    showActionSheet.toggle()
+                } label: {
+                    Image("ProfileEdit")
+                        .frame(width: 100, height: 100)
+                        .opacity(0.5)
+                }
+                .actionSheet(isPresented: $showActionSheet, content: getActionSheet)
+            }
+        
             if let image = photoStore.profileImage {
                 KFImage(URL(string: image))
                     .onFailure({ error in
@@ -72,7 +79,22 @@ struct PhotosSelector: View {
             UseCameraView()
         }
     }
+    
+    // actionSheet 함수
+    func getActionSheet() -> ActionSheet {
+        
+        let button1: ActionSheet.Button = .default(Text("앨범에서 선택"))
+        let button2: ActionSheet.Button = .default(Text("사진 찍기"))
+        let button3: ActionSheet.Button = .destructive(Text("프로필 사진 삭제"))
+        let button4: ActionSheet.Button = .cancel(Text("닫기"))
+        let title = Text("원하는 옵션을 선택하세요")
+        
+        return ActionSheet(title: title,
+                           message: nil,
+                           buttons: [button1, button2, button3, button4])
+    }
 }
+
 
 
 
