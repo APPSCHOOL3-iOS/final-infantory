@@ -20,6 +20,7 @@ struct PhotoSheetView: View {
             matching: .any(of: [.images]),
             photoLibrary: .shared()) {
                 // 여기에 아무 내용도 표시하지 않음
+                Text("사진")
             }
             .onChange(of: photoStore.selectedItem) { newItem in
                 Task {
