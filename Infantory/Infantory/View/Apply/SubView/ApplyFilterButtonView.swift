@@ -44,6 +44,7 @@ struct ApplyFilterButtonView: View {
                     ForEach(ApplyInprogressFilter.allCases, id: \.rawValue) { filter in
                         Button {
                             applyViewModel.progressSelectedFilter = filter
+                            applyViewModel.sortInProgressProduct(filter: filter)
                         } label: {
                             if applyViewModel.progressSelectedFilter == filter {
                                 Text(filter.rawValue)

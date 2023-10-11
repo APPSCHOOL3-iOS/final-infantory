@@ -161,7 +161,6 @@ extension ApplyRegistrationView {
     }
 }
 
-
 struct ApplyRegistrationView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyRegistrationView()
