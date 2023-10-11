@@ -19,6 +19,7 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     // 인플루언서 누구인지, 낙찰자
     var influencerID: String
     var influencerNickname: String
+    var influencerProfile: String? = nil
     var winningUserID: String?
     
     // 응모 시작일, 마감일

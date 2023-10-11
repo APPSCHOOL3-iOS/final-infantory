@@ -34,4 +34,3 @@ enum PaymentCost: Int, CaseIterable {
         }
     }
 }
-

@@ -60,15 +60,16 @@ struct Footer: View {
             Button {
                 isShowingAuctionNoticeSheet.toggle()
             } label: {
-                Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? 0) 원")
+                Text(auctionStore.remainingTime <= 0 ? "이미 종료된 경매입니다." : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
                     .font(.infanHeadlineBold)
                     .foregroundColor(.white)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.infanMain)
+                            .fill(auctionStore.remainingTime <= 0 ? Color.infanGray : Color.infanMain)
                             .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )
             }
+            .disabled(auctionStore.remainingTime <= 0)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
