@@ -85,11 +85,11 @@ class AuctionStore: ObservableObject {
                     }
                     
                     // 만약 같은 productId가 이미 존재한다면, 해당 정보를 업데이트합니다.
-                    if let index = user.auctionActivityInfos.firstIndex(where: { $0.productId == productInfo.productId }) {
-                        user.auctionActivityInfos[index] = productInfo
+                    if let index = user.auctionActivityInfos?.firstIndex(where: { $0.productId == productInfo.productId }) {
+                        user.auctionActivityInfos?[index] = productInfo
                     } else {
                         // 존재하지 않으면 추가합니다.
-                        user.auctionActivityInfos.append(productInfo)
+                        user.auctionActivityInfos?.append(productInfo)
                     }
                     
                     // Firestore에 업데이트하기 위해 Codable 배열을 딕셔너리 배열로 변환합니다.

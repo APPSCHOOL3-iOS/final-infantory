@@ -16,7 +16,7 @@ struct ApplyDetailView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
-                ApplyBuyerView(product: product)
+                    ApplyBuyerView(product: product)
                 HStack {
                     if product.influencerProfile == nil {
                         Image("Influencer1")
@@ -36,7 +36,6 @@ struct ApplyDetailView: View {
                     }
                    
                     Text(product.influencerNickname)
-                        .font(.infanTitle2)
                     Spacer()
                     
                     Button(action: {

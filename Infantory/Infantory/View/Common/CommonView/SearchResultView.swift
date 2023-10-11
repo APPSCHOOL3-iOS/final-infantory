@@ -81,7 +81,7 @@ struct SearchResultView: View {
                                     ProgressView()
                                 })
                             }
-                            Text(influencer.name) // 닉네임으로 바꾸기
+                            Text(influencer.nickName)
                             Spacer()
                         }
                     }

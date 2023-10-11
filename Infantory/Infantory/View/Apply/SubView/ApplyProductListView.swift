@@ -14,7 +14,7 @@ struct ApplyProductListView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack {
+            VStack {
                 ForEach($applyViewModel.filteredProduct) { $product in
                     VStack {
                         HStack {
@@ -109,11 +109,6 @@ struct ApplyProductListView: View {
                                     
                                     HStack {
                                         
-                                        Text("전체 응모")
-                                            .font(.infanHeadline)
-                                            .foregroundColor(.infanDarkGray)
-                                            .multilineTextAlignment(.leading)
-                                        
                                         if product.applyFilter != .planned {
                                             Text("전체 응모: \(product.applyUserIDs.count) 회")
                                                 .font(.infanHeadlineBold)
@@ -152,7 +147,6 @@ struct ApplyProductListView: View {
         }
     }
 }
-
 
 struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {

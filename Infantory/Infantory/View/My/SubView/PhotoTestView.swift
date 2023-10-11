@@ -88,7 +88,3 @@ struct PhotoTestView_Previews: PreviewProvider {
         PhotoTestView(photoStore: PhotosSelectorStore())
     }
 }
-
-#Preview {
-    PhotoTestView()
-}
