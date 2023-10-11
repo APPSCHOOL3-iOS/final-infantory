@@ -119,10 +119,12 @@ struct ApplyProductListView: View {
                                             .foregroundColor(.infanDarkGray)
                                             .multilineTextAlignment(.leading)
                                         
-                                        Text("전체 응모: \(product.applyUserIDs.count) 회")
-                                            .font(.infanHeadlineBold)
-                                            .foregroundColor(.infanDarkGray)
-                                            .multilineTextAlignment(.leading)
+                                        if product.applyFilter != .planned {
+                                            Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                                .font(.infanHeadlineBold)
+                                                .foregroundColor(.infanDarkGray)
+                                                .multilineTextAlignment(.leading)
+                                        }
                                         
                                         Spacer()
                                         VStack {
