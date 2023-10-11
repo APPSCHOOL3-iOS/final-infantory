@@ -6,20 +6,39 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
+    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    
+    private var followWidth : CGFloat {
+        UIScreen.main.bounds.width - 30
+    }
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 60, height: 60)
-                        .cornerRadius(50)
-                        .padding(.leading, 25)
+                    ZStack{
+                        Circle()
+                            .foregroundColor(.gray)
+                            .frame(width: 65, height: 65)
+                            .opacity(0.5)
+                            .shadow(radius: 10)
+                        if let image = photosSelectorStore.profileImage {
+                            KFImage(URL(string: image))
+                                .onFailure({ error in
+                                    print("Error : \(error)")
+                                })
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .clipped()
+                        }
+                    }
+                    
                     VStack(alignment: .leading) {
                         Text("봉주헌\(loginStore.currentUser.name)")// 내 이름
                             .font(.infanTitle2)
@@ -41,7 +60,7 @@ struct MyInfoMainView: View {
                 HStack(spacing: 20) {
                     NavigationLink {
                         // 프로필 관리 버튼 액션
-                        
+                        ProfileEditView()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -187,6 +206,9 @@ struct MyInfoMainView: View {
             }
             .padding()
             .navigationTitle("")
+        }
+        .onAppear{
+            photosSelectorStore.getProfileImageDownloadURL()
         }
     }
 }
