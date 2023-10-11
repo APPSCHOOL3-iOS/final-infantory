@@ -69,6 +69,7 @@ class SearchStore: ObservableObject {
     
     @MainActor
     func fetchInfluencer(keyword: String) async throws {
+        influencer = []
         let query = Firestore.firestore().collection("Users").whereField("isInfluencer", isEqualTo: "influencer")
         let snapshot = try await query.getDocuments()
         let documents = snapshot.documents

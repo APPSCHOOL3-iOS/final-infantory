@@ -26,13 +26,28 @@ struct ApplyProductListView: View {
                                     .cornerRadius(20)
                                 
                             } else {
-                                AsyncImage(url: URL(string: product.influencerProfile ?? "")) { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .cornerRadius(20)
-                                } placeholder: {
-                                    ProgressView()
+                                CachedImage(url: product.influencerProfile ?? "") { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                    case .success(let image):
+                                        image
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                        //
+                                    case .failure:
+                                        Image(systemName: "xmark")
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                        
+                                    @unknown default:
+                                        EmptyView()
+                                    }
                                 }
                             }
                             
@@ -61,7 +76,6 @@ struct ApplyProductListView: View {
                         VStack(alignment: .leading, spacing: 20) {
                             HStack(spacing: 16) {
                                 if product.productImageURLStrings.count > 0 {
-                                    
                                     CachedImage(url: product.productImageURLStrings[0]) { phase in
                                         switch phase {
                                         case .empty:
@@ -71,13 +85,45 @@ struct ApplyProductListView: View {
                                                        height: (.screenWidth - 100) / 2)
                                                 .clipped()
                                         case .success(let image):
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: (.screenWidth - 100) / 2,
-                                                       height: (.screenWidth - 100) / 2)
-                                                .clipped()
-                                            //
+                                            if product.applyFilter == .close {
+                                                ZStack {
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .blur(radius: 5)
+                                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                        .clipped()
+                                                    
+                                                    Text("응모 종료")
+                                                        .padding(10)
+                                                        .bold()
+                                                        .foregroundColor(.white)
+                                                        .background(Color.infanDarkGray)
+                                                        .cornerRadius(20)
+                                                }
+                                            } else if product.applyFilter == .planned {
+                                                ZStack {
+                                                    image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .blur(radius: 5)
+                                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                        .clipped()
+                                                    
+                                                    Text("응모 예정")
+                                                        .padding(10)
+                                                        .bold()
+                                                        .foregroundColor(.white)
+                                                        .background(Color.infanOrange)
+                                                        .cornerRadius(20)
+                                                }
+                                            } else {
+                                                image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                                    .clipped()
+                                            }
                                         case .failure:
                                             Image(systemName: "xmark")
                                                 .frame(width: (.screenWidth - 100) / 2,
@@ -89,16 +135,12 @@ struct ApplyProductListView: View {
                                     }
                                     
                                 } else {
-                                    ZStack(alignment: .topLeading) {
-                                        
-                                        Image("appleLogo")
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: (.screenWidth - 100) / 2,
-                                                   height: (.screenWidth - 100) / 2)
-                                            .clipped()
-                                        
-                                    }
+                                    Image("appleLogo")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: (.screenWidth - 100) / 2,
+                                               height: (.screenWidth - 100) / 2)
+                                        .clipped()
                                 }
                                 VStack(alignment: .leading, spacing: 8) {
                                     
@@ -122,7 +164,7 @@ struct ApplyProductListView: View {
                                         Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
                                             .font(.infanFootnote)
                                             .foregroundColor(.infanGray)
-                
+                                        
                                         Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                             .font(.infanFootnote)
                                             .foregroundColor(.infanGray)
