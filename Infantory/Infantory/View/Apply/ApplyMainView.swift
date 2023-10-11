@@ -17,7 +17,6 @@ struct ApplyMainView: View {
             NavigationStack {
                 ZStack {
                     VStack {
-                        Divider()
                         ApplyFilterButtonView(applyViewModel: applyViewModel)
                         ApplyProductListView(applyViewModel: applyViewModel)
                         Divider()
@@ -44,7 +43,6 @@ struct ApplyMainView: View {
         } else {
             NavigationStack {
                 VStack {
-                   
                     ApplyFilterButtonView(applyViewModel: applyViewModel)
                     ApplyProductListView(applyViewModel: applyViewModel)
                     Divider()

@@ -18,4 +18,3 @@ extension Color {
     static let infanGreen = Color("Green")
     static let infanGray = Color("Gray")
 }
-
