@@ -12,23 +12,57 @@ struct ApplyDetailView: View {
     @EnvironmentObject var loginStore: LoginStore
     var applyViewModel: ApplyProductStore
     @Binding var product: ApplyProduct
-    
+    @State private var isShowingActionSheet: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
                 ApplyBuyerView(product: product)
                 HStack {
-                    Image("Influencer1")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(20)
+                    if product.influencerProfile == nil {
+                        Image("Influencer1")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(20)
+                    } else {
+                        AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
+                        }, placeholder: {
+                            ProgressView()
+                        })
+                    }
+                   
                     Text(product.influencerNickname)
                         .font(.infanTitle2)
                     Spacer()
+                    
+                    Button(action: {
+                        isShowingActionSheet = true
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                    })
+                    .buttonStyle(.plain)
                 }
                 .horizontalPadding()
                 
+                TabView {
+                    ForEach(product.productImageURLStrings, id: \.self) { item in
+                        AsyncImage(url: URL(string: item)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle())
+                .frame(width: .screenWidth - 40, height: .screenWidth - 40)
+                .cornerRadius(10)
                 Text(product.description)
                     .horizontalPadding()
                     .padding(.top)
@@ -37,6 +71,18 @@ struct ApplyDetailView: View {
             }
             
             ApplyFooter(product: $product)
+        }
+        .confirmationDialog("", isPresented: $isShowingActionSheet) {
+            
+            Button("차단하기", role: .destructive) {
+                
+            }
+            
+            Button("저장하기", role: .none) {
+                
+            }
+            Button("취소", role: .cancel) {}
+            
         }
     }
 }
@@ -47,27 +93,10 @@ struct ApplyFooter: View {
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @Binding var product: ApplyProduct
-
+    
     var body: some View {
         VStack {
-            Button {
-                if loginStore.userUid.isEmpty {
-                    isShowingLoginSheet = true
-                } else {
-                    isShowingApplySheet.toggle()
-                }
-            } label: {
-                Text("응모하기")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.infanMain)
-                            .frame(width: CGFloat.screenWidth - 40, height: 54)
-                    )
-            }
-            .offset(y: -20)
+            ApplyAddButtonView(isShowingApplySheet: $isShowingApplySheet, isShowingLoginSheet: $isShowingLoginSheet, product: product)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 110)
@@ -84,8 +113,8 @@ struct ApplyFooter: View {
             }
         }, content: {
             ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductStore())
-                            .presentationDragIndicator(.visible)
-                            .presentationDetents([.fraction(0.45)])
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.fraction(0.45)])
         })
         
         .sheet(isPresented: $isShowingLoginSheet, content: {
@@ -99,6 +128,6 @@ struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyDetailView(applyViewModel: ApplyProductStore(), product:
                 .constant(ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])))
-            .environmentObject(LoginStore())
+        .environmentObject(LoginStore())
     }
 }

@@ -13,7 +13,7 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
-            if remainingTime == 0 {
+            if remainingTime <= 0 {
                 Text("\(Image(systemName: "timer")) 입찰 마감")
                     .font(.infanFootnote)
                     .foregroundColor(.gray)
