@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Firebase
 
 class SearchStore: ObservableObject {
     
     @Published var searchArray: Set<String> = []
     @Published var selectedCategory: SearchResultCategory = .total
+    @Published var influencer: [User] = []
     
     init() {
         fetchSearchHistory()
@@ -52,6 +54,31 @@ class SearchStore: ObservableObject {
             UserDefaults.standard.set(data, forKey: "searchArray")
         } catch {
             print("JSON 생성 후 UserDefaults 실패")
+        }
+    }
+    
+    @MainActor
+    func findSearchKeyword(keyword: String) {
+        Task {
+            try await fetchInfluencer(keyword: keyword)
+            influencer = influencer.filter { influencer in
+                influencer.name.localizedCaseInsensitiveContains(keyword)
+            }
+        }
+    }
+    
+    @MainActor
+    func fetchInfluencer(keyword: String) async throws {
+        let query = Firestore.firestore().collection("Users").whereField("isInfluencer", isEqualTo: "influencer")
+        let snapshot = try await query.getDocuments()
+        let documents = snapshot.documents
+        for document in documents {
+            do {
+                let influencerUser = try document.data(as: User.self)
+                influencer.append(influencerUser)
+            } catch {
+                print("error: 인플루언서를 불러오지 못했습니다.")
+            }
         }
     }
 }

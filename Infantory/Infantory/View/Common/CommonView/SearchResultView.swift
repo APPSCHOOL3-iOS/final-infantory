@@ -60,8 +60,41 @@ struct SearchResultView: View {
                 }
             }
             .padding(.top)
+            
+            List {
+                Section("인플루언서") {
+                    ForEach(searchStore.influencer) { influencer in
+                        HStack {
+                            if influencer.profileImageURLString == nil {
+                                Image("Influencer1")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                            } else {
+                                AsyncImage(url: URL(string: influencer.profileImageURLString ?? ""), content: { image in
+                                    image.resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
+                                        .cornerRadius(20)
+                                }, placeholder: {
+                                    ProgressView()
+                                })
+                            }
+                            Text(influencer.name) // 닉네임으로 바꾸기
+                            Spacer()
+                        }
+                    }
+                }
+                .listRowSeparator(.hidden)
+                .offset(x: -20, y: -20)
+            }
+            .listStyle(.plain)
         }
         .horizontalPadding()
+        .onAppear {
+            searchStore.findSearchKeyword(keyword: searchText)
+        }
     }
 }
 
