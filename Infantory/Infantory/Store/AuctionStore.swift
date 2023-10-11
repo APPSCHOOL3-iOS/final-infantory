@@ -10,7 +10,7 @@ class AuctionStore: ObservableObject {
     
     private var dbRef: DatabaseReference!
     
-    private let firestore = Firestore.firestore().collection("AuctionProducts")
+    private let firestore = Firestore.firestore()
     
     init(product: AuctionProduct) {
         self.product = product
@@ -67,12 +67,24 @@ class AuctionStore: ObservableObject {
         // 데이터 쓰기
         newBidRef.setValue(bidData)
         updateWinningPrice(winningPrice: biddingInfo.biddingPrice)
+        
+        let productInfo = AuctionActivityInfo(productId: productId,
+                                              price: biddingInfo.biddingPrice,
+                                              timestamp: biddingInfo.timeStamp)
+        
+        updateAuctionActivityInfo(userId: <#T##String#> )
+    }
+    
+    func updateAuctionActivityInfo(userId: String ) {
+        
+        
+        firestore.collection("Users").document(userId).updateData(["auctionActivityInfos" : productInfo])
     }
     
     func updateWinningPrice(winningPrice: Int) {
         guard let productId = product.id else { return }
         
-        firestore.document(productId).updateData([
+        firestore.collection("AuctionProducts").document(productId).updateData([
             "winningPrice": winningPrice
         ]) { error in
             if let error = error {
@@ -82,6 +94,13 @@ class AuctionStore: ObservableObject {
             }
         }
     }
+    
+//    func fetchAuctionProduct(userId: String, auctionProductsIds: [String] ) {
+//        guard let productId = product.id else { return }
+//        
+//        dbRef.child("biddingInfos/\(productId)")
+//            .queryEqual(toValue: <#T##Any?#>)
+//    }
     
     var remainingTime: Double {
         return product.endDate.timeIntervalSince(Date())

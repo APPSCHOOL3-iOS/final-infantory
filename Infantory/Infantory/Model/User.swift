@@ -23,8 +23,20 @@ struct User: Identifiable, Codable {
     var applyTicket: [ApplyTicket]? = nil
     var influencerIntroduce: String? = nil
     
-    var auctionProductsIDs: [String]? = nil
-    var applyProductsIDs: [String]? = nil
+    var auctionActivityInfos: [AuctionActivityInfo]? = nil
+    var applyActivityInfos: [ApplyActivityInfo]? = nil
+}
+
+struct AuctionActivityInfo: Codable {
+    var productId: String
+    var price: Int
+    var timestamp: Date
+}
+
+struct ApplyActivityInfo: Codable {
+    var productId: String
+    var ticketCount: Int
+    var timestamp: Date
 }
 
 // 주소
