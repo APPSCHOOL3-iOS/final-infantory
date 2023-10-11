@@ -16,6 +16,7 @@ final class ApplyProductStore: ObservableObject {
     @Published var selectedFilter: ApplyFilter = .inProgress
     @Published var filteredProduct: [ApplyProduct] = []
     @Published var progressSelectedFilter: ApplyInprogressFilter = .deadline
+    
     func remainingTime(product: ApplyProduct) -> Double {
         return product.endDate.timeIntervalSince(Date())
     }
@@ -37,12 +38,12 @@ final class ApplyProductStore: ObservableObject {
     func fetchInfluencerProfile(products: [ApplyProduct]) {
         for product in products {
             let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
-            documentReference.getDocument { (document, error) in
+            documentReference.getDocument { (document, _ ) in
                 if let document = document, document.exists {
                     let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
                     if let index = self.applyProduct.firstIndex(where: { $0.id == product.id}) {
                         self.applyProduct[index].influencerProfile = influencerProfile
-                        self.updateFilter(filter: .inProgress)
+                        self.updateFilter(filter: self.selectedFilter)
                     }
                 } else {
                     #if DEBUG
@@ -52,28 +53,43 @@ final class ApplyProductStore: ObservableObject {
                 
             }
         }
-        
     }
+    
     @MainActor
     func updateFilter(filter: ApplyFilter) {
         switch filter {
         case .inProgress:
             selectedFilter = .inProgress
-            filteredProduct = applyProduct.filter{
+            progressSelectedFilter = .deadline
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .inProgress
-            }
+            }.sorted { $0.endRemainingTime < $1.endRemainingTime }
         case .planned:
             selectedFilter = .planned
-            filteredProduct = applyProduct.filter{
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .planned
             }
         case .close:
             selectedFilter = .close
-            filteredProduct = applyProduct.filter{
+            filteredProduct = applyProduct.filter {
                 $0.applyFilter == .close
             }
         }
     }
+    
+    func sortInProgressProduct(filter: ApplyInprogressFilter) {
+        switch filter {
+        case .popular:
+            filteredProduct.sort {
+                $0.applyUserIDs.count > $1.applyUserIDs.count
+            }
+        case .deadline:
+            filteredProduct.sort {
+                $0.endRemainingTime < $1.endRemainingTime
+            }
+        }
+    }
+    
     @MainActor
     func addApplyTicketUserId(ticketCount: Int,
                               product: ApplyProduct,

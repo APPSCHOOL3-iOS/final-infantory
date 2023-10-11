@@ -24,7 +24,7 @@ struct ApplyMainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: SearchMainView()) {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.black)
                             }
@@ -50,7 +50,7 @@ struct ApplyMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: SearchMainView()) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.black)
                         }

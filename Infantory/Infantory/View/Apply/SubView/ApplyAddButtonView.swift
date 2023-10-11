@@ -36,22 +36,22 @@ struct ApplyAddButtonView: View {
                 }
             } else if product.applyFilter == .planned {
                     Text("응모 시작 전입니다.")
-                        .font(.title2)
+                        .font(.infanHeadlineBold)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanLightGray)
+                                .fill(Color.infanGray)
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
             } else {
-                    Text("종료된 응모입니다.")
-                        .font(.title2)
+                    Text("이미 종료된 응모입니다.")
+                        .font(.infanHeadlineBold)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanLightGray)
+                                .fill(Color.infanGray)
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
             }

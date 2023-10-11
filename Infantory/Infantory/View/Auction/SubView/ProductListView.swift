@@ -42,7 +42,6 @@ struct ProductListView: View {
                             Spacer()
                             TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
                         }
-                        
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 6)

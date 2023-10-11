@@ -114,10 +114,12 @@ struct ApplyProductListView: View {
                                             .foregroundColor(.infanDarkGray)
                                             .multilineTextAlignment(.leading)
                                         
-                                        Text("\(product.applyUserIDs.count) 회")
-                                            .font(.infanHeadlineBold)
-                                            .foregroundColor(.infanDarkGray)
-                                            .multilineTextAlignment(.leading)
+                                        if product.applyFilter != .planned {
+                                            Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                                .font(.infanHeadlineBold)
+                                                .foregroundColor(.infanDarkGray)
+                                                .multilineTextAlignment(.leading)
+                                        }
                                     }
                                     
                                     Spacer()
@@ -125,7 +127,7 @@ struct ApplyProductListView: View {
                                         Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
                                             .font(.infanFootnote)
                                             .foregroundColor(.infanGray)
-                                        
+                
                                         Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                             .font(.infanFootnote)
                                             .foregroundColor(.infanGray)
