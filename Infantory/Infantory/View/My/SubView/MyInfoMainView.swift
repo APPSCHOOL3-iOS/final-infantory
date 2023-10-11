@@ -36,7 +36,7 @@ struct MyInfoMainView: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("봉주헌\(loginStore.currentUser.name)")// 내 이름
+                        Text("\(loginStore.currentUser.name)")// 내 이름
                             .font(.infanTitle2)
                             .padding(.bottom, 1)
                         //                            Text("\(loginStore.currentUser.email)")// 내 이메일
@@ -73,7 +73,8 @@ struct MyInfoMainView: View {
                         }
                     }
                     NavigationLink {
-                        // 배송지 관리 버튼 액션
+                        // 배송지 관리
+                        Text("배송지 관련 뷰가 보여질 예정입니다.")
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -150,13 +151,16 @@ struct MyInfoMainView: View {
                 }
                 Divider()
                 
-                LazyVStack {
-                    Button {
-                        
+                LazyVStack(alignment: .leading) {
+                    NavigationLink {
+                        Text("입찰 내역이 보여질 화면입니다.")
                     } label: {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.portrait")
-                                .imageScale(.large)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 5, height: 25)
+                                .horizontalPadding()
                             Text("입찰내역")
                                 .frame(height: 50)
                             Spacer()
@@ -164,24 +168,33 @@ struct MyInfoMainView: View {
                     }
                     Divider()
                     NavigationLink {
-                        
+                        Text("응모 내역이 보여질 화면입니다.")
                     } label: {
                         HStack {
-                            Image(systemName: "heart")
-                                .imageScale(.large)
-                            Text("고객센터") // 관심상품이 있는데 굳이?
+                            Image(systemName: "ticket")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 5, height: 20)
+                                .horizontalPadding()
+                            Text("응모내역")
                                 .frame(height: 50)
                             Spacer()
                         }
                     }
                     Divider()
-                    
-                    HStack {
-                        Image(systemName: "tag")
-                            .imageScale(.large)
-                        Text("결제정보")
-                            .frame(height: 50)
-                        Spacer()
+                    NavigationLink {
+                        Text("결제정보가 보여질 화면입니다.")
+                    } label: {
+                        HStack {
+                            Image(systemName: "tag")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 5, height: 25)
+                                .horizontalPadding()
+                            Text("결제정보")
+                                .frame(height: 50)
+                            Spacer()
+                        }
                     }
                     Divider()
                     HStack {
