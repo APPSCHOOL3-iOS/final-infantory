@@ -11,7 +11,7 @@ struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var applyViewModel: ApplyProductStore = ApplyProductStore()
-
+    var searchCategory: SearchResultCategory = .apply
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
@@ -24,7 +24,7 @@ struct ApplyMainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: SearchMainView()) {
+                            NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.black)
                             }
@@ -50,7 +50,7 @@ struct ApplyMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: SearchMainView()) {
+                        NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.black)
                         }

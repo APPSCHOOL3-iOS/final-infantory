@@ -84,3 +84,10 @@ class SearchStore: ObservableObject {
         }
     }
 }
+
+enum SearchResultCategory: String, CaseIterable {
+    case total = "통합검색"
+    case influencer = "인플루언서"
+    case auction = "경매"
+    case apply = "응모"
+}

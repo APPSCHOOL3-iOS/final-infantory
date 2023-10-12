@@ -128,6 +128,9 @@
 		EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */; };
 		EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B11682ABAC984001303D1 /* LoginSheetView.swift */; };
 		EC98B6322AD7D789001B7102 /* AuctionProductListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */; };
+		EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */; };
+		EC98B6362AD80225001B7102 /* SearchAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6352AD80225001B7102 /* SearchAuctionView.swift */; };
+		EC98B6382AD802B9001B7102 /* SearchApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6372AD802B9001B7102 /* SearchApplyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -242,6 +245,9 @@
 		EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceView.swift; sourceTree = "<group>"; };
 		EC7B11682ABAC984001303D1 /* LoginSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheetView.swift; sourceTree = "<group>"; };
 		EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductListCellView.swift; sourceTree = "<group>"; };
+		EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfluencerView.swift; sourceTree = "<group>"; };
+		EC98B6352AD80225001B7102 /* SearchAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAuctionView.swift; sourceTree = "<group>"; };
+		EC98B6372AD802B9001B7102 /* SearchApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApplyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -582,6 +588,9 @@
 				648689122ACE751800423321 /* TimerView.swift */,
 				843BE81B2AD6404E00C54943 /* SearchMainView.swift */,
 				843BE81F2AD667D200C54943 /* SearchResultView.swift */,
+				EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */,
+				EC98B6352AD80225001B7102 /* SearchAuctionView.swift */,
+				EC98B6372AD802B9001B7102 /* SearchApplyView.swift */,
 			);
 			path = CommonView;
 			sourceTree = "<group>";
@@ -816,6 +825,7 @@
 				A05A60FB2AD62C35004F24FA /* CachedImageManager.swift in Sources */,
 				A05A60F92AD62707004F24FA /* ImageCache.swift in Sources */,
 				11183A732ACF8BC50010012C /* ProfileRowView.swift in Sources */,
+				EC98B6382AD802B9001B7102 /* SearchApplyView.swift in Sources */,
 				0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */,
 				843BE81E2AD65AA100C54943 /* SearchStore.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
@@ -824,6 +834,7 @@
 				A031F3AF2AD5829F00F67988 /* CachedImage.swift in Sources */,
 				A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */,
 				0CF546772AD624940075C3FD /* PhotoStoreModel.swift in Sources */,
+				EC98B6362AD80225001B7102 /* SearchAuctionView.swift in Sources */,
 				EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */,
 				A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */,
 				0C82A3382AC29A0B009F6D97 /* ApplyLogoCell.swift in Sources */,
@@ -834,6 +845,7 @@
 				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
 				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
 				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,
+				EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
 				0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,

@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-enum SearchResultCategory: String, CaseIterable {
-    case total = "통합검색"
-    case influencer = "인플루언서"
-    case auction = "경매"
-    case apply = "응모"
-}
-
 struct SearchResultView: View {
     
     @ObservedObject var applyViewModel: ApplyProductStore
@@ -23,9 +16,9 @@ struct SearchResultView: View {
     
     @State var isAnimating: Bool = false
     @Binding var searchText: String
+    @State var searchCategory: SearchResultCategory
     
     var body: some View {
-        
         VStack {
             TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
                 .padding(10)
@@ -41,6 +34,7 @@ struct SearchResultView: View {
                     VStack {
                         Button {
                             searchStore.selectedCategory = category
+                            searchCategory = category
                         } label: {
                             Text("\(category.rawValue)")
                                 .frame(width: UIScreen.main.bounds.width / 4.5)
@@ -64,79 +58,72 @@ struct SearchResultView: View {
             }
             .padding([.top])
             .horizontalPadding()
-       
+            
             ScrollView {
-                VStack(alignment: .leading) {
-                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding(.bottom)
-                    ForEach(searchStore.influencer) { influencer in
-                        HStack {
-                            if influencer.profileImageURLString == nil {
-                                Image("Influencer1")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
-                            } else {
-                                CachedImage(url: influencer.profileImageURLString ?? "") { phase in
-                                    switch phase {
-                                    case .empty:
-                                        ProgressView()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 40, height: 40)
-                                            .cornerRadius(20)
-                                    case .success(let image):
-                                        image
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 40, height: 40)
-                                            .cornerRadius(20)
-                                    case .failure:
-                                        Image(systemName: "xmark")
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 40, height: 40)
-                                            .cornerRadius(20)
-                                        
-                                    @unknown default:
-                                        EmptyView()
-                                    }
-                                }
+                switch searchStore.selectedCategory {
+                case .total:
+                    if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyViewModel.applyProduct.count == 0 {
+                        Spacer().frame(height: .screenHeight * 0.03)
+                        Text("검색된 결과가 없습니다.")
+                    } else {
+                        if searchStore.influencer.count != 0 {
+                            VStack(alignment: .leading) {
+                                Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                SearchInfluencerView(searchStore: searchStore)
                             }
-                            Text(influencer.nickName)
-                            Spacer()
+                            Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                .overlay {
+                                    Divider().offset(y: 2.5)
+                                    Divider().offset(y: -2.5)
+                                }
+                        }
+                        
+                        if auctionViewModel.auctionProduct.count != 0 {
+                            VStack(alignment: .leading) {
+                                Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                SearchAuctionView(auctionViewModel: auctionViewModel)
+                            }
+                            Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                .overlay {
+                                    Divider().offset(y: 2.5)
+                                    Divider().offset(y: -2.5)
+                                }.offset(y: -10)
+                        }
+                        
+                        if applyViewModel.applyProduct.count != 0 {
+                            VStack(alignment: .leading) {
+                                Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                SearchApplyView(applyViewModel: applyViewModel)
+                            }
                         }
                     }
-                    .padding(.top)
-                    Divider()
-                }
-                .padding(.top)
-                .horizontalPadding()
-                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                    .overlay {
-                        Divider().offset(y: 2.5)
-                        Divider().offset(y: -2.5)
+                case .influencer:
+                    if searchStore.influencer.count == 0 {
+                        Spacer().frame(height: .screenHeight * 0.03)
+                        Text("검색된 결과가 없습니다.")
+                    } else {
+                        Spacer().frame(height: .screenHeight * 0.01)
+                        SearchInfluencerView(searchStore: searchStore)
                     }
-                VStack(alignment: .leading) {
-                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                    ForEach(auctionViewModel.auctionProduct) { product in
-                        AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
+                case .auction:
+                    if auctionViewModel.auctionProduct.count == 0 {
+                        Spacer().frame(height: .screenHeight * 0.03)
+                        Text("검색된 결과가 없습니다.")
+                    } else {
+                        SearchAuctionView(auctionViewModel: auctionViewModel)
                     }
-                }
-            
-                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                    .overlay {
-                        Divider().offset(y: 2.5)
-                        Divider().offset(y: -2.5)
-                    }.offset(y: -10)
-                VStack(alignment: .leading) {
-                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                    ForEach(applyViewModel.applyProduct) { product in
-                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                case .apply:
+                    if applyViewModel.applyProduct.count == 0 {
+                        Spacer().frame(height: .screenHeight * 0.03)
+                        Text("검색된 결과가 없습니다.")
+                    } else {
+                        SearchApplyView(applyViewModel: applyViewModel)
                     }
-                    
                 }
             }
-            .listStyle(.plain)
         }
         .onAppear {
+            searchStore.selectedCategory = searchCategory
             searchStore.findSearchKeyword(keyword: searchText)
             applyViewModel.findSearchKeyword(keyword: searchText)
             auctionViewModel.findSearchKeyword(keyword: searchText)
@@ -146,8 +133,6 @@ struct SearchResultView: View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"))
-            .environmentObject(ApplyProductStore())
-            .environmentObject(AuctionProductViewModel())
+        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"),searchCategory: .total)
     }
 }
