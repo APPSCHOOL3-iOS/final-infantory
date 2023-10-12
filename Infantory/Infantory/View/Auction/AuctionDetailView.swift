@@ -30,7 +30,7 @@ struct AuctionDetailView: View {
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(10)
                 
-                productInfo            
+                productInfo
             }
             Footer(auctionStore: auctionStore)
         }
@@ -69,14 +69,37 @@ struct Footer: View {
                     isShowingAuctionBidSheet = true
                 }
             } label: {
-                Text(auctionStore.remainingTime <= 0 ? "이미 종료된 경매입니다." : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
-                    .font(.infanHeadlineBold)
-                    .foregroundColor(.white)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(auctionStore.remainingTime <= 0 ? Color.infanGray : Color.infanMain)
-                            .frame(width: CGFloat.screenWidth - 40, height: 54)
-                    )
+                if auctionStore.product.auctionFilter == .inProgress {
+                    Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
+                        .font(.infanHeadlineBold)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanMain)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        )
+                } else if auctionStore.product.auctionFilter == .planned {
+                    Text("경매 시작 전입니다.")
+                        .font(.infanHeadlineBold)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanGray)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        )
+                } else {
+                    Text("이미 종료된 경매입니다.")
+                    
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanGray)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        )
+                }
             }
             .disabled(auctionStore.remainingTime <= 0)
             .offset(y: -20)
@@ -94,8 +117,8 @@ struct Footer: View {
         }, content: {
             AuctionNoticeSheetView(auctionViewModel: auctionStore,
                                    isShowingAuctionNoticeSheet: $isShowingAuctionNoticeSheet)
-                .presentationDragIndicator(.visible)
-                .presentationDetents([.height(300)])
+            .presentationDragIndicator(.visible)
+            .presentationDetents([.height(300)])
             
         })
         .sheet(isPresented: $isShowingAuctionBidSheet) {
@@ -126,11 +149,11 @@ extension AuctionDetailView {
             
             // 제품 설명
             HStack {
-            Text("\(auctionStore.product.description)")
-                .font(.body)//optional
-                .foregroundColor(.primary)//optional
-                .padding(.horizontal, 24)//optional
-                .padding(.bottom, 100)
+                Text("\(auctionStore.product.description)")
+                    .font(.body)//optional
+                    .foregroundColor(.primary)//optional
+                    .padding(.horizontal, 24)//optional
+                    .padding(.bottom, 100)
                 
                 Spacer()
             }
