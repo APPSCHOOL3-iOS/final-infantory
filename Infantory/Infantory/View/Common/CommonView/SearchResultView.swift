@@ -37,29 +37,30 @@ struct SearchResultView: View {
             HStack {
                 ForEach(SearchResultCategory.allCases, id: \.self) { category in
                     VStack {
-                        
-                        Text("\(category.rawValue)")
-                            .font(.infanHeadline)
-                            .foregroundColor(searchStore.selectedCategory == category ? .black: .gray)
-                            .frame(maxWidth: .infinity)
+                        Button {
+                            searchStore.selectedCategory = category
+                        } label: {
+                            Text("\(category.rawValue)")
+                                .frame(width: UIScreen.main.bounds.width / 4.5)
+                        }
+                        .font(.infanHeadline)
+                        .fontWeight(searchStore.selectedCategory == category ? .bold : .thin)
+                        .foregroundColor(.primary)
                         
                         if searchStore.selectedCategory == category {
                             Capsule()
-                                .foregroundColor(.infanDarkGray)
+                                .foregroundColor(.black)
                                 .frame(height: 2)
-                                .matchedGeometryEffect(id: "info", in: animation)
-                                .frame(maxWidth: .infinity)
                             
-                        }
-                    }
-                    .onTapGesture {
-                        withAnimation(.easeIn) {
-                            searchStore.selectedCategory = category
+                        } else {
+                            Capsule()
+                                .foregroundColor(.clear)
+                                .frame(height: 2)
                         }
                     }
                 }
             }
-            .padding(.top)
+            .padding([.top])
             
             List {
                 Section("인플루언서") {
@@ -72,22 +73,50 @@ struct SearchResultView: View {
                                     .frame(width: 40, height: 40)
                                     .cornerRadius(20)
                             } else {
-                                AsyncImage(url: URL(string: influencer.profileImageURLString ?? ""), content: { image in
-                                    image.resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .cornerRadius(20)
-                                }, placeholder: {
-                                    ProgressView()
-                                })
+                                CachedImage(url: influencer.profileImageURLString ?? "") { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                    case .success(let image):
+                                        image
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                    case .failure:
+                                        Image(systemName: "xmark")
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                        
+                                    @unknown default:
+                                        EmptyView()
+                                    }
+                                }
                             }
                             Text(influencer.nickName)
                             Spacer()
                         }
                     }
+                    .padding(.top)
+                    Divider()
                 }
                 .listRowSeparator(.hidden)
-                .offset(x: -20, y: -20)
+                .listRowInsets(EdgeInsets())
+                
+                Section("경매") {
+                    //
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
+                
+                Section("응모") {
+                    //
+                }
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
             }
             .listStyle(.plain)
         }

@@ -25,14 +25,30 @@ struct ApplyDetailView: View {
                             .frame(width: 40, height: 40)
                             .cornerRadius(20)
                     } else {
-                        AsyncImage(url: URL(string: product.influencerProfile ?? ""), content: { image in
-                            image.resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                        }, placeholder: {
-                            ProgressView()
-                        })
+                        CachedImage(url: product.influencerProfile ?? "") { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .scaledToFill()
+                                    .frame(width: (.screenWidth - 100) / 2,
+                                           height: (.screenWidth - 100) / 2)
+                                    .clipped()
+                            case .success(let image):
+                                image
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                                //
+                            case .failure:
+                                Image(systemName: "xmark")
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                                
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
                     }
                    
                     Text(product.influencerNickname)
@@ -49,13 +65,26 @@ struct ApplyDetailView: View {
                 
                 TabView {
                     ForEach(product.productImageURLStrings, id: \.self) { item in
-                        AsyncImage(url: URL(string: item)) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .clipped()
-                        } placeholder: {
-                            ProgressView()
+                        CachedImage(url: item) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .scaledToFill()
+                                    .clipped()
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipped()
+                            case .failure:
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipped()
+                                
+                            @unknown default:
+                                EmptyView()
+                            }
                         }
                     }
                 }

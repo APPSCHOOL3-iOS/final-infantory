@@ -15,7 +15,7 @@ struct ProductListView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack {
+            VStack {
                 ForEach(auctionViewModel.auctionProduct) { product in
                     VStack {
                         HStack {
