@@ -17,6 +17,8 @@ enum SearchResultCategory: String, CaseIterable {
 struct SearchResultView: View {
     
     @ObservedObject var searchStore: SearchStore
+    @EnvironmentObject var applyViewModel: ApplyProductStore
+    @EnvironmentObject var auctionViewModel: AuctionProductViewModel
     @Namespace private var animation
     
     @State var isAnimating: Bool = false
@@ -117,6 +119,7 @@ struct SearchResultView: View {
                 Section("응모") {
                     ForEach(searchStore.searchApplyProduct) { product in
                         Text(product.productName)
+//                        ApplyProductListCellView(product: product)
                     }
                 }
                 .listRowSeparator(.hidden)
@@ -134,5 +137,7 @@ struct SearchResultView: View {
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
         SearchResultView(searchStore: SearchStore(), searchText: .constant("서치텍스트"))
+            .environmentObject(ApplyProductStore())
+            .environmentObject(AuctionProductViewModel())
     }
 }

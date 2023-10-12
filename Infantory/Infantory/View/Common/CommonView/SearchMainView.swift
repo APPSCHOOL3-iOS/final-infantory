@@ -10,6 +10,9 @@ import SwiftUI
 struct SearchMainView: View {
         
     @StateObject var searchStore: SearchStore = SearchStore()
+    @EnvironmentObject var applyViewModel: ApplyProductStore
+    @EnvironmentObject var auctionViewModel: AuctionProductViewModel
+    
     @State private var searchText: String = ""
     @State private var isShowingSearchResult: Bool = false
     
@@ -79,5 +82,7 @@ struct SearchMainView: View {
 struct SearchMainView_Previews: PreviewProvider {
     static var previews: some View {
         SearchMainView()
+            .environmentObject(ApplyProductStore())
+            .environmentObject(AuctionProductViewModel())
     }
 }
