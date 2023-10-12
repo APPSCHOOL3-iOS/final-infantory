@@ -91,6 +91,9 @@ struct PhotosSelector: View {
             .sheet(isPresented: $cameraSheetShowing) {
                 UseCameraView()
             }
+            .onAppear {
+                photoStore.getProfileImageDownloadURL()
+            }
         }
     }
     // actionSheet 함수

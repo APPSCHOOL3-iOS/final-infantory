@@ -46,14 +46,14 @@ class PhotosSelectorStore: ObservableObject {
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
         
-        imagesRef.putData(imageData, metadata: metadata) { metadata, error in
+        imagesRef.putData(imageData, metadata: metadata) {metadata, error in
             if let error = error {
                 print("이미지 업로드 에러 : \(error)")
             } else {
                 print("프로필 이미지 업로드 성공")
                 
                 // 저장된 이미지의 다운로드 URL 가져오기
-                imagesRef.downloadURL { url, error in
+                imagesRef.downloadURL {url, error in
                     if let downloadURL = url {
                         print("이미지 다운로드 URL: \(downloadURL)")
                         self.profileImage = "\(downloadURL)"

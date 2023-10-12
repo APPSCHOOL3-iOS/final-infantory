@@ -57,6 +57,4 @@ extension CachedImageManager.CurrentState: Equatable {
             return false
         }
     }
-    
-    
 }

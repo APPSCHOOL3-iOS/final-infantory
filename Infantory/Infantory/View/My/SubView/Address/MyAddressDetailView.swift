@@ -15,7 +15,7 @@ struct MyAddressDetailView: View {
             Text("\(loginStore.currentUser.name)")
                 .font(.infanHeadlineBold)
                 .padding(.vertical, 3)
-            Text("(\(loginStore.currentUser.address.address))")
+            Text("\(loginStore.currentUser.address.address)")
             Text("\(loginStore.currentUser.address.zonecode)")
             Text("\(loginStore.currentUser.address.addressDetail)")
         }

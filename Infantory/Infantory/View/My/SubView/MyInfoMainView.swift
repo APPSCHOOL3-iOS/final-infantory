@@ -6,30 +6,35 @@
 //
 
 import SwiftUI
-import Kingfisher
+import PhotosUI
+import Photos
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @StateObject var photoStore: PhotosSelectorStore = PhotosSelectorStore.shared
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.white)
-                            .frame(width: 65, height: 65)
-                        if let image = photosSelectorStore.profileImage {
-                            KFImage(URL(string: image))
-                                .onFailure({ error in
-                                    print("Error : \(error)")
-                                })
+                    CachedImage(url: photoStore.profileImage ?? "") { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .frame(width: 60, height: 60)
+                        case .success(let image):
+                            image
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 60, height: 60)
                                 .clipShape(Circle())
                                 .clipped()
+                        case .failure:
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                        @unknown default:
+                            EmptyView()
                         }
                     }
                     
@@ -199,10 +204,14 @@ struct MyInfoMainView: View {
                         Button(action: {
                             loginStore.kakaoLogout()
                         }, label: {
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 5, height: 25)
                             Text("로그아웃")
                                 .frame(height: 50)
-                                .foregroundColor(.infanRed)
                         })
+                        .foregroundColor(.infanRed)
                         Spacer()
                     }
                     .padding(.horizontal)
@@ -213,9 +222,9 @@ struct MyInfoMainView: View {
             }
             .padding()
             .navigationTitle("")
-        }
-        .onAppear {
-            photosSelectorStore.getProfileImageDownloadURL()
+            .onAppear {
+                photoStore.getProfileImageDownloadURL()
+            }
         }
     }
 }

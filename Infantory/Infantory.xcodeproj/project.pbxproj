@@ -264,20 +264,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		010B8A8F2AD7AE6800973E6A /* Map */ = {
+		010B8A8F2AD7AE6800973E6A /* Address */ = {
 			isa = PBXGroup;
 			children = (
-				010B8A892AD7AB9D00973E6A /* MyAddressMainView.swift */,
 				010B8A922AD7B17E00973E6A /* MyAddressDetailView.swift */,
 			);
-			path = Map;
+			path = Address;
 			sourceTree = "<group>";
 		};
 		016AAEDC2AD5316D000B69E4 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
-				010B8A8F2AD7AE6800973E6A /* Map */,
+				010B8A892AD7AB9D00973E6A /* MyAddressMainView.swift */,
+				010B8A8F2AD7AE6800973E6A /* Address */,
 				0CF5467F2AD633610075C3FD /* ProfileEditView.swift */,
 				0CF546722AD6209F0075C3FD /* PhotosSelector.swift */,
 				0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */,

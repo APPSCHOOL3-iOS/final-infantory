@@ -16,7 +16,7 @@ struct MyAddressMainView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
-                            .frame(width: 360, height: 90)
+                            .frame(width: 330, height: 60)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.infanDarkGray, lineWidth: 1)
@@ -25,15 +25,16 @@ struct MyAddressMainView: View {
                             .padding(2)
                         Text("+ 새 주소 추가하기")
                             .font(.infanHeadline)
-                            .frame(width: 360, height: 90)
+                            .frame(width: 300, height: 60)
                             .foregroundColor(.infanDarkGray)
                     }
                 }
                 HStack {
                     MyAddressDetailView()
+                        .horizontalPadding()
                     Spacer()
                 }
-                .horizontalPadding()
+                .padding()
             }
         }
     }
