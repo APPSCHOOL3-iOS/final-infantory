@@ -23,13 +23,12 @@ struct MyMainView: View {
             } else {
                 MyInfoMainView()
             }
-//            Text(loginStore.currentUser.email)
-//            Text(loginStore.currentUser.address.address)
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
                 .environmentObject(loginStore)
         })
+        
     }
 }
 

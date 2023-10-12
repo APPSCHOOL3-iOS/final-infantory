@@ -73,7 +73,6 @@ class AuctionStore: ObservableObject {
                                               timestamp: biddingInfo.timeStamp.timeIntervalSince1970)
         
         updateAuctionActivityInfo(productInfo: productInfo)
-        print(biddingInfo)
     }
     
     func updateAuctionActivityInfo(productInfo: AuctionActivityInfo) {
@@ -93,10 +92,11 @@ class AuctionStore: ObservableObject {
                     }
                     
                     // Firestore에 업데이트하기 위해 Codable 배열을 딕셔너리 배열로 변환합니다.
-                    let auctionActivityInfosData = try? user.auctionActivityInfos.map { try $0.asDictionary() }
-                    
-                    self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
-                        .updateData(["auctionActivityInfos": auctionActivityInfosData ?? []])
+                    if let infos = user.auctionActivityInfos {
+                        let auctionActivityInfosData = try? infos.map { try $0.asDictionary() }
+                        self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+                            .updateData(["auctionActivityInfos": auctionActivityInfosData ?? []])
+                    }
                 }
         }
     

@@ -64,7 +64,7 @@ struct SearchResultView: View {
             }
             .padding([.top])
             .horizontalPadding()
-            
+       
             ScrollView {
                 VStack(alignment: .leading) {
                     Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding(.bottom)
@@ -104,6 +104,8 @@ struct SearchResultView: View {
                             Spacer()
                         }
                     }
+                    .padding(.top)
+                    Divider()
                 }
                 .padding(.top)
                 .horizontalPadding()
