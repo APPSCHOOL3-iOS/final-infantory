@@ -18,10 +18,8 @@ struct MyInfoMainView: View {
                 HStack {
                     ZStack {
                         Circle()
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
                             .frame(width: 65, height: 65)
-                            .opacity(0.5)
-                            .shadow(radius: 10)
                         if let image = photosSelectorStore.profileImage {
                             KFImage(URL(string: image))
                                 .onFailure({ error in
