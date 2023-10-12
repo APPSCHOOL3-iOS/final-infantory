@@ -46,6 +46,7 @@ struct AuctionDetailView_Previews: PreviewProvider {
 }
 
 struct Footer: View {
+    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionStore: AuctionStore
     
     @State private var isShowingAuctionNoticeSheet: Bool = false
@@ -53,12 +54,19 @@ struct Footer: View {
     @State private var isShowingAuctionBidSheet: Bool = false
     
     @State private var showAlert: Bool = false
+    
+    @State private var isShowingLoginSheet: Bool = false
+    
     var body: some View {
         VStack {
             ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
                 .offset(y: -350)
             Button {
-                isShowingAuctionNoticeSheet.toggle()
+                if !loginStore.userUid.isEmpty {
+                    isShowingAuctionNoticeSheet.toggle()
+                } else {
+                    isShowingLoginSheet = true
+                }
             } label: {
                 Text(auctionStore.remainingTime <= 0 ? "이미 종료된 경매입니다." : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
                     .font(.infanHeadlineBold)
@@ -89,11 +97,15 @@ struct Footer: View {
                 .presentationDetents([.height(300)])
             
         })
-        .sheet(isPresented: $isShowingAuctionBidSheet, content: {
+        .sheet(isPresented: $isShowingAuctionBidSheet) {
             AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
-        })
+        }
+        .sheet(isPresented: $isShowingLoginSheet) {
+            LoginSheetView()
+                .environmentObject(loginStore)
+        }
         
     }
 }
