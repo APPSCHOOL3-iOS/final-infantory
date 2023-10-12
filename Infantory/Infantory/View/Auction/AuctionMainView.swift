@@ -18,7 +18,7 @@ struct AuctionMainView: View {
                 ZStack {
                     VStack {
                         Divider()
-                        AuctionButtonCell()
+                        AuctionFilterButtonView(auctionViewmodel: auctionViewModel)
                         ProductListView(auctionViewModel: auctionViewModel)
                         Divider()
                     }
@@ -44,7 +44,7 @@ struct AuctionMainView: View {
             NavigationStack {
                 VStack {
                     Divider()
-                    AuctionButtonCell()
+                    AuctionFilterButtonView(auctionViewmodel: auctionViewModel)
                     ProductListView(auctionViewModel: auctionViewModel)
                     Divider()
                 }

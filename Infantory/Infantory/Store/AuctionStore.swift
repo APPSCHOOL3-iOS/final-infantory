@@ -99,8 +99,7 @@ class AuctionStore: ObservableObject {
                     }
                 }
         }
-    
-    // 같은 상품 -> 여러번 저장
+
     func updateWinningPrice(winningPrice: Int) {
         guard let productId = product.id else { return }
         

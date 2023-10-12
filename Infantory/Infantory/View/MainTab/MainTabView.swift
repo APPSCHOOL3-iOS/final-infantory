@@ -9,7 +9,9 @@ import SwiftUI
 import Photos
 
 struct MainTabView: View {
-
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
+    @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
     
@@ -40,14 +42,15 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-//            ActivityMainView()
-//                .tabItem {
-//                    Image(systemName: "clock.arrow.circlepath")
-//                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
-//                    Text("활동")
-//                }
-//                .tag(3)
-//            
+            ActivityMainView(auctionProducts: auctionViewModel.auctionProduct,
+                             auctionActivityInfos: loginStore.currentUser.auctionActivityInfos ?? [])
+                .tabItem {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
+                    Text("활동")
+                }
+                .tag(3)
+            
             MyMainView()
                 .tabItem {
                     Image(systemName: "person")
@@ -59,6 +62,11 @@ struct MainTabView: View {
         
         .tint(Color.infanMain)
         .onAppearFetchUser()
+        .onAppear {
+            Task {
+                try await auctionViewModel.fetchAuctionProducts()
+            }
+        }
     }
 }
 

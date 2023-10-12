@@ -24,9 +24,30 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     var startDate: Date
     var endDate: Date
     
+    var startRemainingTime: Double {
+        return startDate.timeIntervalSince(Date())
+    }
+    var endRemainingTime: Double {
+        return endDate.timeIntervalSince(Date())
+    }
+    
     // 시작가, 최고가, 낙찰가
     var minPrice: Int
     var winningPrice: Int?
+    
+    var auctionFilter: AuctionFilter {
+        get {
+            if startRemainingTime > 0.0 {
+                return .planned
+            } else if startRemainingTime < 0.0 && endRemainingTime > 0.0 {
+                return .inProgress
+            } else if endRemainingTime < 0.0 {
+                return .close
+            }
+            
+            return .planned
+        }
+    }
     
 }
 

@@ -12,7 +12,7 @@ struct AuctionNoticeSheetView: View {
     
     @Binding var isShowingAuctionNoticeSheet: Bool
 
-    @State private var isShowingNotice = false // 다시보지않기
+    @EnvironmentObject var loginStore: LoginStore
     
     var body: some View {
         VStack {
@@ -22,10 +22,10 @@ struct AuctionNoticeSheetView: View {
                     .opacity(0.3)
                     .frame(height: 150)
                 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 5) {
                     Text("유의사항")
                         .font(.infanHeadlineBold)
-                        .padding(.bottom, 10)
+                        .padding(.bottom, 7)
                     
                     Text("- 최고 입찰자는 중복 입찰이 불가합니다.")
                     Text("- 최고 입찰자는 입찰을 취소 할 수 없습니다.")
@@ -36,11 +36,10 @@ struct AuctionNoticeSheetView: View {
             }
             HStack {
                 Button(action: {
-                    isShowingNotice = !isShowingNotice
-                    
+                    loginStore.warning = false
                 }, label: {
                     HStack {
-                        if isShowingNotice == false {
+                        if loginStore.warning == true {
                             Text("\(Image(systemName: "square"))")
                         } else {
                             Text("\(Image(systemName: "checkmark.square.fill"))")
@@ -50,13 +49,12 @@ struct AuctionNoticeSheetView: View {
                 })
                 Spacer()
             }
-            .foregroundColor(isShowingNotice == false ? .infanGray : .infanMain)
+            .foregroundColor(loginStore.warning == true ? .infanGray : .infanMain)
             .font(.infanFootnoteBold)
             .padding(.bottom)
             
             MainColorButton(text: "확인") {
-                isShowingAuctionNoticeSheet.toggle()
-                
+                isShowingAuctionNoticeSheet = false
             }
         }
         .horizontalPadding()
