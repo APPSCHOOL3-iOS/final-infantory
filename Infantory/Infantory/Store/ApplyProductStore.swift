@@ -5,7 +5,7 @@
 //  Created by 봉주헌 on 2023/09/22.
 //
 
-import Foundation
+import SwiftUI
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -94,8 +94,7 @@ final class ApplyProductStore: ObservableObject {
     func addApplyTicketUserId(ticketCount: Int,
                               product: ApplyProduct,
                               userID: String,
-                              userUID: String,
-                              completion: @escaping (ApplyProduct) -> Void) {
+                              userUID: String) {
         
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "id 없음")
         documentReference.getDocument { (document, error) in
@@ -121,9 +120,7 @@ final class ApplyProductStore: ObservableObject {
                             try await self.addApplyofUser(ticketCount: ticketCount,
                                                           product: product,
                                                           userUID: userUID,
-                                                          database: documentReference) { product in
-                                completion(product)
-                            }
+                                                          database: documentReference)
                         }
                     }
                 }
@@ -138,8 +135,7 @@ final class ApplyProductStore: ObservableObject {
     func addApplyofUser(ticketCount: Int,
                         product: ApplyProduct,
                         userUID: String,
-                        database: DocumentReference,
-                        completion: @escaping (ApplyProduct) -> Void) async throws {
+                        database: DocumentReference) async throws {
         let applyDocument = try await database.getDocument()
         let product = try applyDocument.data(as: ApplyProduct.self)
         let applyTicket = ApplyTicket(date: Date(),
@@ -151,7 +147,21 @@ final class ApplyProductStore: ObservableObject {
             .document(userUID)
             .collection("ApplyTickets")
             .addDocument(from: applyTicket)
-        completion(product)
+    }
+    @MainActor
+    func fetchSearchApplyProduct(keyword: String) async throws {
+        let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
+        let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
+        
+        applyProduct = products.filter { product in
+            product.productName.localizedCaseInsensitiveContains(keyword)
+        }
     }
     
+    @MainActor
+    func findSearchKeyword(keyword: String) {
+        Task {
+            try await fetchSearchApplyProduct(keyword: keyword)
+        }
+    }
 }

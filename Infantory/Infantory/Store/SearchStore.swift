@@ -13,6 +13,7 @@ class SearchStore: ObservableObject {
     @Published var searchArray: Set<String> = []
     @Published var selectedCategory: SearchResultCategory = .total
     @Published var influencer: [User] = []
+
     
     init() {
         fetchSearchHistory()
