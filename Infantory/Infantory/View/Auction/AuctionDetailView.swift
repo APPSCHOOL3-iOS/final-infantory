@@ -62,10 +62,11 @@ struct Footer: View {
             ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
                 .offset(y: -350)
             Button {
-                if !loginStore.userUid.isEmpty {
-                    isShowingAuctionNoticeSheet.toggle()
-                } else {
+                if loginStore.userUid.isEmpty {
                     isShowingLoginSheet = true
+                }
+                if loginStore.warning == false {
+                    isShowingAuctionBidSheet = true
                 }
             } label: {
                 Text(auctionStore.remainingTime <= 0 ? "이미 종료된 경매입니다." : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
@@ -88,7 +89,7 @@ struct Footer: View {
                 .background(.white)
         )
         .offset(x: 0, y: 40)
-        .sheet(isPresented: $isShowingAuctionNoticeSheet, onDismiss: {
+        .sheet(isPresented: loginStore.warning ? $isShowingAuctionNoticeSheet : loginStore.$warning, onDismiss: {
             isShowingAuctionBidSheet.toggle()
         }, content: {
             AuctionNoticeSheetView(auctionViewModel: auctionStore,

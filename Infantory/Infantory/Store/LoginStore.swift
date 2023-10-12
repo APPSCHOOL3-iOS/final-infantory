@@ -21,6 +21,7 @@ enum LoginStatus {
 final class LoginStore: ObservableObject {
     
     @AppStorage("userId") var userUid: String = ""
+    @AppStorage("warning") var warning: Bool = true
     
     @Published var isShowingSignUp = false
     @Published var isShowingMainView = false
