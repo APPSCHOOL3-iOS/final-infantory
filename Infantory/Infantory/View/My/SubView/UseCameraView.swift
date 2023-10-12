@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UseCameraView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var photoStore = PhotosSelectorStore.shared
+    @StateObject var photosSelectorStore = PhotosSelectorStore.shared
     @State var cameraAlertShowing: Bool = true
     @State var isShowingImagePicker: Bool = false
     @State var selectedImage: UIImage?
@@ -36,8 +36,8 @@ struct UseCameraView: View {
     func loadImage() {
         let image = selectedImage
         if let data = image?.jpegData(compressionQuality: 0.9) {
-                    photoStore.selectedImageData = data
-                    photoStore.uploadImageToFirebase(imageData: data)
+            photosSelectorStore.selectedImageData = data
+            photosSelectorStore.uploadImageToFirebase(imageData: data)
             }
     }
 }

@@ -10,29 +10,33 @@ import PhotosUI
 import Photos
 
 struct PhotosSelector: View {
-    @StateObject var photoStore = PhotosSelectorStore.shared // 프로필사진 싱글톤 메서드
+    @StateObject var photosSelectorStore = PhotosSelectorStore.shared // 프로필사진 싱글톤 메서드
     @State private var cameraSheetShowing = false
     @State var showActionSheet: Bool = false
     @State private var isSheetPresented = false
+    @State var profileImage: String = ""
+    @State var selectedItem: PhotosPickerItem? = nil
+    @State var selectedImageData: Data? = nil
+    
     
     var body: some View {
         VStack {
-            CachedImage(url: photoStore.profileImage ?? "") { phase in
+            CachedImage(url: photosSelectorStore.profileImage ?? "") { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 65, height: 65)
                 case .success(let image):
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 65, height: 65)
                         .clipShape(Circle())
                         .clipped()
                 case .failure:
                     Image(systemName: "person.circle.fill")
                         .resizable()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 65, height: 65)
                 @unknown default:
                     EmptyView()
                 }
@@ -59,7 +63,7 @@ struct PhotosSelector: View {
                     }
                     
                     PhotosPicker(
-                        selection: $photoStore.selectedItem,
+                        selection: $photosSelectorStore.selectedItem,
                         matching: .any(of: [.images]),
                         photoLibrary: .shared()) {
                             ZStack {
@@ -76,13 +80,13 @@ struct PhotosSelector: View {
                                     .foregroundColor(.infanDarkGray)
                             }
                         }
-                        .onChange(of: photoStore.selectedItem) { newItem in
+                        .onChange(of: photosSelectorStore.selectedItem) { newItem in
                             Task {
                                 if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                    photoStore.selectedImageData = data
-                                    photoStore.uploadImageToFirebase(imageData: data)
+                                    photosSelectorStore.selectedImageData = data
+                                    photosSelectorStore.uploadImageToFirebase(imageData: data)
                                 }
-                                photoStore.showAlert.toggle()
+                                photosSelectorStore.showAlert.toggle()
                             }
                         }
                 }
@@ -93,26 +97,10 @@ struct PhotosSelector: View {
             }
         }
     }
-    // actionSheet 함수
-    func getActionSheet() -> ActionSheet {
-        
-        let button1: ActionSheet.Button = .default(Text("앨범에서 선택")) {
-            isSheetPresented = true
-        }
-        let button2: ActionSheet.Button = .default(Text("사진 찍기")) {
-            cameraSheetShowing = true
-        }
-        let button3: ActionSheet.Button = .destructive(Text("프로필 사진 삭제"))
-        let button4: ActionSheet.Button = .cancel(Text("닫기"))
-        let title = Text("원하는 옵션을 선택하세요")
-        
-        return ActionSheet(title: title,
-                           message: nil,
-                           buttons: [button1, button2, button3, button4])
-    }
 }
+
 struct PhotosSelector_Previews: PreviewProvider {
     static var previews: some View {
-        PhotosSelector(photoStore: PhotosSelectorStore())
+        PhotosSelector(photosSelectorStore: PhotosSelectorStore())
     }
 }

@@ -11,7 +11,7 @@ import Photos
 import Kingfisher
 
 struct PhotoTestView: View {
-    @StateObject var photoStore = PhotosSelectorStore.shared
+    @StateObject var photosSelectorStore = PhotosSelectorStore.shared
     @State private var cameraSheetShowing = false
     @State private var photoPickerShowing = false
     @State var showActionSheet: Bool = false
@@ -29,7 +29,7 @@ struct PhotoTestView: View {
                 .actionSheet(isPresented: $showActionSheet, content: getActionSheet)
             }
             
-            if let image = photoStore.profileImage {
+            if let image = photosSelectorStore.profileImage {
                 KFImage(URL(string: image))
                     .onFailure({ error in
                         print("Error : \(error)")
@@ -43,18 +43,18 @@ struct PhotoTestView: View {
             
             if photoPickerShowing {
                 PhotosPicker(
-                    selection: $photoStore.selectedItem,
+                    selection: $photosSelectorStore.selectedItem,
                     matching: .any(of: [.images]),
                     photoLibrary: .shared()) {
                         
                     }
-                    .onChange(of: photoStore.selectedItem) { newItem in
+                    .onChange(of: photosSelectorStore.selectedItem) { newItem in
                         Task {
                             if let data = try? await newItem?.loadTransferable(type: Data.self) {
-                                photoStore.selectedImageData = data
-                                photoStore.uploadImageToFirebase(imageData: data)
+                                photosSelectorStore.selectedImageData = data
+                                photosSelectorStore.uploadImageToFirebase(imageData: data)
                             }
-                            photoStore.showAlert.toggle()
+                            photosSelectorStore.showAlert.toggle()
                         }
                     }
             }
@@ -85,6 +85,6 @@ struct PhotoTestView: View {
 
 struct PhotoTestView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoTestView(photoStore: PhotosSelectorStore())
+        PhotoTestView(photosSelectorStore: PhotosSelectorStore())
     }
 }

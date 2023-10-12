@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
@@ -16,35 +15,39 @@ struct MyInfoMainView: View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    ZStack {
-                        Circle()
-                            .foregroundColor(.white)
-                            .frame(width: 65, height: 65)
-                        if let image = photosSelectorStore.profileImage {
-                            KFImage(URL(string: image))
-                                .onFailure({ error in
-                                    print("Error : \(error)")
-                                })
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 60, height: 60)
-                                .clipShape(Circle())
-                                .clipped()
+                        CachedImage(url: photosSelectorStore.profileImage ?? "") { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(width: 65, height: 65)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 65, height: 65)
+                                    .clipShape(Circle())
+                                    .clipped()
+                            case .failure:
+                                Image(systemName: "person.circle.fill")
+                                    .resizable()
+                                    .frame(width: 65, height: 65)
+                            @unknown default:
+                                EmptyView()
+                            }
                         }
-                    }
-                    
+    
                     VStack(alignment: .leading) {
-                        Text("\(loginStore.currentUser.name)")// 내 이름
-                            .font(.infanTitle2)
+                        Text("\(loginStore.currentUser.name)윤경환")// 내 이름
+                            .font(.infanHeadline)
                             .padding(.bottom, 1)
                         //                            Text("\(loginStore.currentUser.email)")// 내 이메일
                         HStack {
                             Text("응모권")
                             Text("\(loginStore.totalApplyTicketCount)")
-                                .font(.infanHeadlineBold)
+                                .font(.infanHeadline)
                             Text("관심상품")
                             Text("0")
-                                .font(.infanHeadlineBold)
+                                .font(.infanHeadline)
                         }
                     }
                     .padding(.leading)
@@ -53,7 +56,6 @@ struct MyInfoMainView: View {
                 .padding(.leading, 23)
                 HStack(spacing: 20) {
                     NavigationLink {
-                        // 프로필 관리 버튼 액션
                         ProfileEditView()
                     } label: {
                         ZStack {
@@ -108,8 +110,6 @@ struct MyInfoMainView: View {
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
                         .cornerRadius(10)
                         VStack(spacing: 5) {
                             Text("0")
@@ -119,8 +119,6 @@ struct MyInfoMainView: View {
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
                         .cornerRadius(10)
                         VStack(spacing: 5) {
                             Text("0")
@@ -130,8 +128,6 @@ struct MyInfoMainView: View {
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
                         .cornerRadius(10)
                         VStack(spacing: 5) {
                             Text("0")
@@ -141,11 +137,11 @@ struct MyInfoMainView: View {
                         }
                         .frame(width: 50, height: 50)
                         .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
                         .cornerRadius(10)
                     }
                     .padding(.horizontal)
+                    .foregroundColor(.black)
+                    
                 }
                 Divider()
                 

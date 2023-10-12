@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import PhotosUI
 import FirebaseStorage
+import FirebaseFirestore
 import Combine
 
 class PhotosSelectorStore: ObservableObject {
@@ -30,6 +31,8 @@ class PhotosSelectorStore: ObservableObject {
                 self?.loginUserID = id
             }
     }
+    
+    let dbRef = Firestore.firestore().collection("Users")
     
     @MainActor
     func uploadImageToFirebase(imageData: Data) {

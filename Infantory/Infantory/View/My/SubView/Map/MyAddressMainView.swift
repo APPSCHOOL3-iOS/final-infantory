@@ -11,15 +11,17 @@ struct MyAddressMainView: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text("주소록")
                 NavigationLink {
                     
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 5)
-                            .frame(width: 360, height: 90)
+                            .frame(width: 360, height: 50)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 5)
                                     .stroke(Color.infanDarkGray, lineWidth: 1)
+                                    .opacity(0.3)
                             )
                             .foregroundColor(.white)
                             .padding(2)

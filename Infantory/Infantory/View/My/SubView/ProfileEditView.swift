@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileEditView: View {
-    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @StateObject var photosSelectorStore = PhotosSelectorStore.shared
     @State var profileName: String = ""
     @State var name: String = ""
     @State var phoneNumber: String = ""
