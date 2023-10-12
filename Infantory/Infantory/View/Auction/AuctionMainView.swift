@@ -11,7 +11,7 @@ struct AuctionMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
-    
+    var searchCategory: SearchResultCategory = .auction
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
@@ -25,7 +25,7 @@ struct AuctionMainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: SearchMainView()) {
+                            NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.black)
                             }
@@ -51,7 +51,7 @@ struct AuctionMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: SearchMainView()) {
+                        NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.black)
                         }

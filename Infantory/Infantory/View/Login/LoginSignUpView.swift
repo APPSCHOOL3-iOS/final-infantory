@@ -101,7 +101,9 @@ struct LoginSignUpView: View {
                     UnderlineTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $detailAddress)
                 }
                 .padding(.bottom, 30)
-                
+                .overlay(
+                    ToastMessage(content: Text("\(toastMessageText)"), isPresented: $showToastMessage)
+                )
                 HStack {
                     Spacer()
                     Button {
@@ -119,10 +121,6 @@ struct LoginSignUpView: View {
             }
             .padding()
             .navigationBar(title: "회원가입")
-            
-            .overlay(
-                ToastMessage(content: Text("\(toastMessageText)"), isPresented: $showToastMessage)
-            )
             .alert(isPresented: $showAlert) {
                 Alert(title: Text("회원가입 성공"), message: Text("회원가입에 성공했습니다. 로그인을 다시 해주세요."), dismissButton: .default(Text("확인")) {
                     dismiss()

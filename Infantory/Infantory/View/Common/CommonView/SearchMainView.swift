@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct SearchMainView: View {
-        
+    @Environment(\.dismiss) private var dismiss
     @StateObject var searchStore: SearchStore = SearchStore()
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @State private var searchText: String = ""
     @State private var isShowingSearchResult: Bool = false
-    
+    @State private var isShowingToastMessage: Bool = false
+    var searchCategory: SearchResultCategory
     var body: some View {
         VStack {
             VStack {
@@ -23,11 +24,14 @@ struct SearchMainView: View {
                     .background(Color.infanLightGray.opacity(0.3))
                     .cornerRadius(5)
                     .onSubmit {
+                        if searchText.isEmpty {
+                            isShowingToastMessage = true
+                            return
+                        }
                         searchStore.addSearchHistory(keyword: searchText)
                         isShowingSearchResult = true
                     }
                     .submitLabel(.search)
-                
                 HStack {
                     Text("최근검색어")
                         .bold()
@@ -70,17 +74,20 @@ struct SearchMainView: View {
                 .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
+            .overlay {
+                ToastMessage(content: Text("키워드를 입력해주세요."), isPresented: $isShowingToastMessage)
+            }
             
         }
         .navigationDestination(isPresented: $isShowingSearchResult) {
-            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText)
+            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText , searchCategory: searchCategory)
         }
     }
 }
 
 struct SearchMainView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMainView(applyViewModel: ApplyProductStore())
+        SearchMainView(applyViewModel: ApplyProductStore(),searchCategory: .total)
     
     }
 }

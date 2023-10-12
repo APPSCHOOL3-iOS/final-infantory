@@ -8,18 +8,26 @@
 import SwiftUI
 
 struct HomeMainView: View {
-    @State var text: String = ""
+    var searchCategory: SearchResultCategory = .total
+    @State private var isShowingDetail = false
     var body: some View {
+        NavigationStack {
             VStack {
-                Text("Home")
-                TextField("asd", text: $text)
+                NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
+                    Text("인플루언서 or 경매/응모 키워드 검색")
+                        .padding(10)
+                        .background(Color.infanLightGray.opacity(0.3))
+                        .cornerRadius(5)
+                }
+                Spacer()
             }
             .padding()
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-            HomeMainView()
+        HomeMainView()
     }
 }
