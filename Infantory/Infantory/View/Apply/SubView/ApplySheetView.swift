@@ -119,12 +119,11 @@ struct ApplySheetView: View {
         .alert(isPresented: $isShowingAlert) {
             Alert(title: Text("응모하기"),
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
-                  primaryButton: .cancel(Text("취소")),
+                  primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
                 viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid) { product in
                     self.product = product
                 }
-                
                 isShowingApplySheet = false
             })
         }

@@ -14,7 +14,7 @@ class InfanDateFormatter {
     
     private let dateAndTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M/dd a h:MM"
+        formatter.dateFormat = "M/dd E a h:MM"
         formatter.locale = Locale.current
         
         return formatter

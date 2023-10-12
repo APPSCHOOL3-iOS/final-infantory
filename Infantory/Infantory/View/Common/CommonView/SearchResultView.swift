@@ -49,7 +49,7 @@ struct SearchResultView: View {
                         
                         if searchStore.selectedCategory == category {
                             Capsule()
-                                .foregroundColor(.black)
+                                .foregroundColor(.infanMain)
                                 .frame(height: 2)
                             
                         } else {
@@ -107,13 +107,17 @@ struct SearchResultView: View {
                 .listRowInsets(EdgeInsets())
                 
                 Section("경매") {
-                    //
+                    ForEach(searchStore.searchAuctionProduct) { product in
+                        Text(product.productName)
+                    }
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())
                 
                 Section("응모") {
-                    //
+                    ForEach(searchStore.searchApplyProduct) { product in
+                        Text(product.productName)
+                    }
                 }
                 .listRowSeparator(.hidden)
                 .listRowInsets(EdgeInsets())

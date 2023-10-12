@@ -172,9 +172,19 @@ struct ApplyProductListView: View {
                                 }
                                 Spacer()
                             }
+                            Divider()
                         }
                         .horizontalPadding()
                     }
+                }
+            }
+        }
+        .refreshable {
+            Task {
+                do {
+                    try await applyViewModel.fetchApplyProducts()
+                } catch {
+                    
                 }
             }
         }

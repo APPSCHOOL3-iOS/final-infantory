@@ -116,6 +116,7 @@ struct ProductListView: View {
                                 }
                                 Spacer()
                             }
+                            Divider()
                         }
                         .horizontalPadding()
                     }
