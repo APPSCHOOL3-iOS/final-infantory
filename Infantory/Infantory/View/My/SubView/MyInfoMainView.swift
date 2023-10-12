@@ -74,7 +74,7 @@ struct MyInfoMainView: View {
                     }
                     NavigationLink {
                         // 배송지 관리
-                        MyMapMainView(isOpenMapSheet: .constant(false))
+                        MyAddressMainView()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)

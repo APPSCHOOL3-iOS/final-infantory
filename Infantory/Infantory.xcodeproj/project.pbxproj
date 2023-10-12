@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		010B8A862AD7907600973E6A /* DressedUpImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A852AD7907600973E6A /* DressedUpImageView.swift */; };
-		010B8A8A2AD7AB9D00973E6A /* MyMapMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A892AD7AB9D00973E6A /* MyMapMainView.swift */; };
+		010B8A8A2AD7AB9D00973E6A /* MyAddressMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A892AD7AB9D00973E6A /* MyAddressMainView.swift */; };
+		010B8A932AD7B17E00973E6A /* MyAddressDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A922AD7B17E00973E6A /* MyAddressDetailView.swift */; };
 		0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */; };
 		0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833B2AC11790001FEC98 /* AuctionDetailView.swift */; };
 		0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */; };
@@ -129,7 +130,8 @@
 
 /* Begin PBXFileReference section */
 		010B8A852AD7907600973E6A /* DressedUpImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressedUpImageView.swift; sourceTree = "<group>"; };
-		010B8A892AD7AB9D00973E6A /* MyMapMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMapMainView.swift; sourceTree = "<group>"; };
+		010B8A892AD7AB9D00973E6A /* MyAddressMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressMainView.swift; sourceTree = "<group>"; };
+		010B8A922AD7B17E00973E6A /* MyAddressDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAddressDetailView.swift; sourceTree = "<group>"; };
 		015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductViewModel.swift; sourceTree = "<group>"; };
 		0157833B2AC11790001FEC98 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
 		0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailImageView.swift; sourceTree = "<group>"; };
@@ -265,7 +267,8 @@
 		010B8A8F2AD7AE6800973E6A /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				010B8A892AD7AB9D00973E6A /* MyMapMainView.swift */,
+				010B8A892AD7AB9D00973E6A /* MyAddressMainView.swift */,
+				010B8A922AD7B17E00973E6A /* MyAddressDetailView.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 				A0B5AFE32AC3FE130055E714 /* PaymentStore.swift in Sources */,
 				844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
+				010B8A932AD7B17E00973E6A /* MyAddressDetailView.swift in Sources */,
 				844BB4F32ACF9D7F004891DD /* ApplyFilter.swift in Sources */,
 				844BB4F52ACF9E4F004891DD /* ApplyFilterButtonView.swift in Sources */,
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
@@ -807,7 +811,7 @@
 				0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */,
 				843BE81E2AD65AA100C54943 /* SearchStore.swift in Sources */,
 				A091E57E2ABAA553000894FC /* Empty1.swift in Sources */,
-				010B8A8A2AD7AB9D00973E6A /* MyMapMainView.swift in Sources */,
+				010B8A8A2AD7AB9D00973E6A /* MyAddressMainView.swift in Sources */,
 				A080771E2AD3F04F00D9F2CE /* BiddingInfo.swift in Sources */,
 				A031F3AF2AD5829F00F67988 /* CachedImage.swift in Sources */,
 				A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */,
