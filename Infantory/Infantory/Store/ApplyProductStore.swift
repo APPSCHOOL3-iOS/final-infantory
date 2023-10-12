@@ -134,6 +134,7 @@ final class ApplyProductStore: ObservableObject {
             }
         }
     }
+    
     @MainActor
     func addApplyofUser(ticketCount: Int,
                         product: ApplyProduct,

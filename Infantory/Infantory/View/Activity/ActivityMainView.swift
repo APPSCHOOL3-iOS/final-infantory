@@ -8,102 +8,90 @@
 import SwiftUI
 
 struct ActivityMainView: View {
+    @ObservedObject var activityStore: ActivityStore = ActivityStore()
+    //    @ObservedObject var auctionStore: AuctionStore
     
-    @ObservedObject var auctionStore: AuctionStore
-    @ObservedObject var applyProductStore: ApplyProductStore
     @EnvironmentObject var loginStore: LoginStore
     
     @State private var selectedFilter: ActivityOption = .auction
     
-    let imageURLString: String = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/000401.png"
-    let productName: String = "신발"
+    let auctionProducts: [AuctionProduct]
+    let auctionActivityInfos: [AuctionActivityInfo]
     
     var body: some View {
         VStack {
             Section {
-                if selectedFilter.title == "경매" {
-                    ScrollView {
-                        ForEach(0..<10) { _ in
-                            activityRowView
-                                .padding()
+                ScrollView {
+                    if selectedFilter.title == "경매" {
+                        Text("\(activityStore.auctionActivityDatas.count)")
+                        ForEach(activityStore.auctionActivityDatas, id: \.productId ) { activityData in
+                            ActivityRow(imageURLString: activityData.imageURLString,
+                                        text1: activityData.winningPrice,
+                                        text2: activityData.price,
+                                        productName: activityData.productName,
+                                        remainingTime: activityData.remainingTime)
+                            .padding()
                             Divider()
                         }
-                    }
-                } else {
-                    ScrollView {
-                        ForEach(0..<10) { _ in
-                            applyRowView
-                                .padding()
+                    } else {
+                        ForEach(activityStore.applyActivityDatas, id: \.productId) { activityData in
+                            ActivityRow(imageURLString: activityData.imageURLString,
+                                        text1: activityData.totalApplyCount,
+                                        text2: activityData.myApplyCount,
+                                        productName: activityData.productName,
+                                        remainingTime: activityData.remainingTime)
+                            .padding()
                             Divider()
                         }
+                        
                     }
-                    
                 }
             } header: {
                 ActivityOptionBar(selectedFilter: $selectedFilter)
             }
+        }
+        .onAppear {
+            activityStore.fetchMyAuctionProducts(auctionProducts: auctionProducts, auctionActivityInfos: auctionActivityInfos)
         }
     }
 }
 
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityMainView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct), applyProductStore: ApplyProductStore())
+        ActivityMainView(auctionProducts: [], auctionActivityInfos: [])
             .environmentObject(LoginStore())
     }
 }
 
-extension ActivityMainView {
-    var activityRowView: some View {
-        
-        HStack {
-            AsyncImage(url: URL(string: imageURLString)!) { image in
-                image.image?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50)
-            }
-            Text("\(auctionStore.product.productName)")
-                .frame(width: 80)
-                   
-            VStack {
-                Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? 0)원")
-                    .font(.infanFootnoteBold)
-                    .padding()
-                Text("36800원")
-                    .foregroundColor(.infanGray)
-                    .font(.infanFootnote)
-            }
-            
-            Spacer()
-            TimerView(remainingTime: auctionStore.remainingTime)
-                .frame(width: 100)
-        }
-    }
+struct ActivityRow: View {
+    let imageURLString: [String]
+    let text1: Int
+    let text2: Int
+    let productName: String
+    let remainingTime: Double
     
-    var applyRowView: some View {
-        
+    var body: some View {
         HStack {
-            AsyncImage(url: URL(string: imageURLString)!) { image in
-                image.image?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50)
-            }
-            Text("\(auctionStore.product.productName)")
+//            AsyncImage(url: URL(string: imageURLString[0])!) { image in
+//                image.image?
+//                    .resizable()
+//                    .scaledToFit()
+//                    .frame(width: 50)
+//            }
+            Text("\(productName)")
                 .frame(width: 80)
-                   
+            
             VStack {
-                Text("현재 응모된 티켓")
+                Text("\(text1)")
                     .font(.infanFootnoteBold)
                     .padding()
-                Text("내가 쓴 티켓")
+                Text("\(text2)")
                     .foregroundColor(.infanGray)
                     .font(.infanFootnote)
             }
             
             Spacer()
-            TimerView(remainingTime: auctionStore.remainingTime)
+            TimerView(remainingTime: remainingTime)
                 .frame(width: 100)
         }
     }

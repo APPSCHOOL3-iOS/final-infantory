@@ -125,11 +125,7 @@ struct ProductListView: View {
         }
         .onAppear {
             Task {
-                do {
-                    try await auctionViewModel.fetchAuctionProducts()
-                } catch {
-                    
-                }
+                try await auctionViewModel.fetchAuctionProducts()
             }
         }
     }
