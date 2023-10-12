@@ -177,6 +177,16 @@ struct ProductListView: View {
             }
             
         }
+        
+        .refreshable {
+            Task {
+                do {
+                    try await auctionViewModel.fetchAuctionProducts()
+                } catch {
+                    
+                }
+            }
+        }
         .onAppear {
             Task {
                 do {
