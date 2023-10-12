@@ -60,6 +60,19 @@ final class AuctionProductViewModel: ObservableObject {
             filteredProduct.sort {
                 $0.endRemainingTime < $1.endRemainingTime
             }
+    func fetchSearchActionProduct(keyword: String) async throws {
+        let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
+        let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
+        
+        auctionProduct = products.filter { product in
+            product.productName.localizedCaseInsensitiveContains(keyword)
+        }
+    }
+    
+    @MainActor
+    func findSearchKeyword(keyword: String) {
+        Task {
+            try await fetchSearchActionProduct(keyword: keyword)
         }
     }
 }

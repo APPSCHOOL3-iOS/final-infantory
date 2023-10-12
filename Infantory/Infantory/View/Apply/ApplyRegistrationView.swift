@@ -41,21 +41,13 @@ struct ApplyRegistrationView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
-                VStack(alignment: .leading) {
-                    Text("상품 사진")
-                        .font(.system(size: 17))
-                        .bold()
-                    ApplyImagePickerView(selectedImages: $productSelectedImages, selectedImageNames: $productSelectedImageNames)
+                VStack {
+                    ProductImagePickerView(selectedImages: $productSelectedImages, selectedImageNames: $productSelectedImageNames)
+                    HStack(alignment: .top) {
+                        DressedUpImageView(selectedImages: $custumeSelectedImages, selectedImageNames: $custumeSelectedImageNames)
+                    }
                 }
-                .padding(.leading)
-                
-                VStack(alignment: .leading) {
-                    Text("착장 사진")
-                        .font(.system(size: 17))
-                        .bold()
-                    ApplyImagePickerView(selectedImages: $custumeSelectedImages, selectedImageNames: $custumeSelectedImageNames)
-                }
-                .padding(.leading)
+                .horizontalPadding()
                 
                 VStack(spacing: 16) {
                     UnderlineTextField(textFieldTitle: "애장품",
@@ -147,7 +139,7 @@ extension ApplyRegistrationView {
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
-                    .cornerRadius(8)
+                    .cornerRadius(10)
                     .overlay {
                         Text("\(date)일")
                             .font(.infanHeadline)

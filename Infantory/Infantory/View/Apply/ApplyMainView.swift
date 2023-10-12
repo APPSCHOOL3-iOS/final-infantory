@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @ObservedObject var applyViewModel: ApplyProductStore = ApplyProductStore()
 
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {

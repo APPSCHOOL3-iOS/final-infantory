@@ -2,7 +2,7 @@ import SwiftUI
 import PhotosUI
 import UIKit
 
-struct ApplyImagePickerView: View {
+struct ProductImagePickerView: View {
     @Binding var selectedImages: [UIImage]
     @Binding var selectedImageNames: [String]
     @State private var isImagePickerPresented = false
@@ -11,8 +11,12 @@ struct ApplyImagePickerView: View {
     @State private var selectedAssets: [PHAsset] = []
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
+        VStack {
             HStack {
+                Text("상품 사진")
+                    .font(.system(size: 17))
+                    .bold()
+                Spacer()
                 if selectedImages.count < 5 {
                     Button {
                         requestGalleryPermission()
@@ -21,49 +25,50 @@ struct ApplyImagePickerView: View {
                         }
                         
                     } label: {
-                        ZStack {
-                            
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.black)
-                            
-                            RoundedRectangle(cornerRadius: 10)
-                                .strokeBorder(Color.infanGray, lineWidth: 1)
-                                .frame(width: 100, height: 100)
-                        }
+                        Image(systemName: "plus")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.black)
                     }
                 }
-                
-                ForEach(selectedImages, id: \.self) { image in
-                    Image(uiImage: image)
-                        .resizable()
-                        .cornerRadius(10)
-                        .frame(width: 100, height: 100)
-                        .padding(.leading, 5)
-                        .aspectRatio(contentMode: .fill)
-                        .overlay(alignment: .topTrailing) {
-                            Button {
-                                guard let index = selectedImages.firstIndex(where: {
-                                    $0 == image
-                                }) else {
-                                    return
+            }
+            if selectedImages.count == 0 {
+                Text("사진을 추가해주세요")
+                    .font(.infanHeadline)
+                    .padding()
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(selectedImages, id: \.self) { image in
+                        Image(uiImage: image)
+                            .resizable()
+                            .cornerRadius(10)
+                            .frame(width: 100, height: 100)
+                            .padding(.leading, 5)
+                            .aspectRatio(contentMode: .fill)
+                            .overlay(alignment: .topTrailing) {
+                                Button {
+                                    guard let index = selectedImages.firstIndex(where: {
+                                        $0 == image
+                                    }) else {
+                                        return
+                                    }
+                                    selectedImages.remove(at: index)
+                                    selectedImageNames.remove(at: index)
+                                } label: {
+                                    Image(systemName: "xmark.square.fill")
+                                        .foregroundColor(.black)
                                 }
-                                selectedImages.remove(at: index)
-                                selectedImageNames.remove(at: index)
-                            } label: {
-                                Image(systemName: "xmark.square.fill")
-                                    .foregroundColor(.black)
                             }
-                        }
+                    }
                 }
+                Spacer()
             }
         }
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePickerView(selectedAssets: $selectedAssets, selectedImages: $selectedImages, selectedImageNames: $selectedImageNames)
         }
     }
-    
     func requestGalleryPermission() {
         PHPhotoLibrary.requestAuthorization { status in
             DispatchQueue.main.async {
@@ -127,8 +132,8 @@ struct ImagePickerView: UIViewControllerRepresentable {
     
 }
 
-struct ApplyImagePickerView_Previews: PreviewProvider {
+struct ProductImagePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyImagePickerView(selectedImages: .constant([]), selectedImageNames: .constant([""]))
+        ProductImagePickerView(selectedImages: .constant([]), selectedImageNames: .constant([""]))
     }
 }

@@ -41,18 +41,11 @@ struct AuctionRegistrationView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                VStack(alignment: .leading) {
-                    Text("상품 사진")
-                        .font(.infanHeadlineBold)
-                    
-                    ApplyImagePickerView(selectedImages: $auctionProductSelectedImages, selectedImageNames: $auctionProductSelectedImageNames)
-                }
-                
-                VStack(alignment: .leading) {
-                    Text("착장 사진")
-                        .font(.infanHeadlineBold)
-                    
-                    ApplyImagePickerView(selectedImages: $auctionCustumeSelectedImages, selectedImageNames: $auctionCustumeSelectedImageNames)
+                VStack {
+                    ProductImagePickerView(selectedImages: $auctionProductSelectedImages, selectedImageNames: $auctionProductSelectedImageNames)
+                    HStack(alignment: .top) {
+                        DressedUpImageView(selectedImages: $auctionCustumeSelectedImages, selectedImageNames: $auctionCustumeSelectedImageNames)
+                    }
                 }
                 
                 VStack(spacing: 16) {
@@ -118,7 +111,7 @@ struct AuctionRegistrationView: View {
                             alertMessage = "시작가를 입력해주세요."
                         } else {
                             let product = registViewModel.makeAuctionModel(title: title,
-                                                                           apply: apply, 
+                                                                           apply: apply,
                                                                            itemDescription: itemDescription,
                                                                            startingPrice: auctionStartingPrice,
                                                                            imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,

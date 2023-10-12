@@ -8,7 +8,6 @@
 import SwiftUI
 import PhotosUI
 import Photos
-import Kingfisher
 
 struct PhotosSelector: View {
     @StateObject var photoStore = PhotosSelectorStore.shared // 프로필사진 싱글톤 메서드
@@ -18,21 +17,27 @@ struct PhotosSelector: View {
     
     var body: some View {
         VStack {
-            if let image = photoStore.profileImage, !image.isEmpty {
-                KFImage(URL(string: image))
-                    .onFailure({ error in
-                        print("Error: \(error)")
-                    })
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 100, height: 100)
-                    .clipShape(Circle())
-                    .clipped()
-            } else {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .frame(width: 100, height: 100)
+            CachedImage(url: photoStore.profileImage ?? "") { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: 100, height: 100)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .clipped()
+                case .failure:
+                    Image(systemName: "person.circle.fill")
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                @unknown default:
+                    EmptyView()
+                }
             }
+            
             VStack {
                 HStack(alignment: .top) {
                     ZStack {
@@ -85,6 +90,9 @@ struct PhotosSelector: View {
             }
             .sheet(isPresented: $cameraSheetShowing) {
                 UseCameraView()
+            }
+            .onAppear {
+                photoStore.getProfileImageDownloadURL()
             }
         }
     }

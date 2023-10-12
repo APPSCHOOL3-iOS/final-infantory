@@ -10,8 +10,8 @@ import SwiftUI
 struct ApplyDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    var applyViewModel: ApplyProductStore
-    @Binding var product: ApplyProduct
+    @ObservedObject var applyViewModel: ApplyProductStore
+    var product: ApplyProduct
     @State private var isShowingActionSheet: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -98,7 +98,7 @@ struct ApplyDetailView: View {
                     .multilineTextAlignment(.leading)
             }
             
-            ApplyFooter(product: $product)
+            ApplyFooter(applyViewModel: applyViewModel, product: product)
         }
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
             
@@ -118,9 +118,10 @@ struct ApplyDetailView: View {
 struct ApplyFooter: View {
     
     @EnvironmentObject var loginStore: LoginStore
+    @ObservedObject var applyViewModel: ApplyProductStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
-    @Binding var product: ApplyProduct
+    var product: ApplyProduct
     
     var body: some View {
         VStack {
@@ -138,11 +139,13 @@ struct ApplyFooter: View {
         .sheet(isPresented: $isShowingApplySheet, onDismiss: {
             Task {
                 try await loginStore.fetchUser(userUID: loginStore.userUid)
+                try await applyViewModel.fetchApplyProducts()
             }
         }, content: {
-            ApplySheetView(isShowingApplySheet: $isShowingApplySheet, product: $product, viewModel: ApplyProductStore())
+            ApplySheetView(applyViewModel: applyViewModel,isShowingApplySheet: $isShowingApplySheet, product: product)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
+
         })
         
         .sheet(isPresented: $isShowingLoginSheet, content: {
@@ -154,8 +157,8 @@ struct ApplyFooter: View {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(applyViewModel: ApplyProductStore(), product:
-                .constant(ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])))
+        ApplyDetailView(applyViewModel: ApplyProductStore(),product:
+                            ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
         .environmentObject(LoginStore())
     }
 }
