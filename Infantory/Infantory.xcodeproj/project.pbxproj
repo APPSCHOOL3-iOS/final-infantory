@@ -76,7 +76,6 @@
 		844BB4F92AD5AB00004891DD /* ApplyAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */; };
 		8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */; };
 		849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 849B64AF2ABD595B00C4AC8D /* KakaoSDK */; };
-		849B64B22ABD5ABC00C4AC8D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */; };
 		849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B64C22ABD600D00C4AC8D /* LoginStore.swift */; };
 		849B64C52ABD691600C4AC8D /* SignUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B64C42ABD691600C4AC8D /* SignUpUser.swift */; };
 		849B64C72ABD742F00C4AC8D /* ApplyTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B64C62ABD742F00C4AC8D /* ApplyTicket.swift */; };
@@ -120,6 +119,7 @@
 		A091E5B02ABC7917000894FC /* ApplyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5AF2ABC7917000894FC /* ApplyMainView.swift */; };
 		A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5B12ABC7A20000894FC /* MyMainView.swift */; };
 		A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */; };
+		A0A042872AD8376700598274 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0A042862AD8376700598274 /* GoogleService-Info.plist */; };
 		A0A6628F2ACD8074000F2EF6 /* InfanDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A6628E2ACD8074000F2EF6 /* InfanDateFormatter.swift */; };
 		A0B5AFD32AC2ACF40055E714 /* AuctionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */; };
 		A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDA2AC2C3830055E714 /* HorizontalPadding.swift */; };
@@ -202,7 +202,6 @@
 		844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAddButtonView.swift; sourceTree = "<group>"; };
 		8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		849B64C22ABD600D00C4AC8D /* LoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
 		849B64C42ABD691600C4AC8D /* SignUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUser.swift; sourceTree = "<group>"; };
 		849B64C62ABD742F00C4AC8D /* ApplyTicket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTicket.swift; sourceTree = "<group>"; };
@@ -237,6 +236,8 @@
 		A091E5AF2ABC7917000894FC /* ApplyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMainView.swift; sourceTree = "<group>"; };
 		A091E5B12ABC7A20000894FC /* MyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMainView.swift; sourceTree = "<group>"; };
 		A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMainView.swift; sourceTree = "<group>"; };
+		A0A042852AD8326B00598274 /* Infantory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Infantory.entitlements; sourceTree = "<group>"; };
+		A0A042862AD8376700598274 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0A6628E2ACD8074000F2EF6 /* InfanDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfanDateFormatter.swift; sourceTree = "<group>"; };
 		A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionFilter.swift; sourceTree = "<group>"; };
 		A0B5AFDA2AC2C3830055E714 /* HorizontalPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalPadding.swift; sourceTree = "<group>"; };
@@ -377,7 +378,8 @@
 		A091E5622AB9FB65000894FC /* Infantory */ = {
 			isa = PBXGroup;
 			children = (
-				849B64B12ABD5ABC00C4AC8D /* GoogleService-Info.plist */,
+				A0A042852AD8326B00598274 /* Infantory.entitlements */,
+				A0A042862AD8376700598274 /* GoogleService-Info.plist */,
 				849B64AD2ABD526B00C4AC8D /* Info.plist */,
 				A0B5AFCD2AC1D42D0055E714 /* Resource */,
 				A091E5772ABAA4A0000894FC /* Service */,
@@ -709,9 +711,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849B64B22ABD5ABC00C4AC8D /* GoogleService-Info.plist in Resources */,
 				A091E5732AB9FC5C000894FC /* .swiftlint.yml in Resources */,
 				A091E5A52ABC1E9B000894FC /* Colors.xcassets in Resources */,
+				A0A042872AD8376700598274 /* GoogleService-Info.plist in Resources */,
 				A091E56B2AB9FB68000894FC /* Preview Assets.xcassets in Resources */,
 				A091E5682AB9FB68000894FC /* Assets.xcassets in Resources */,
 			);
@@ -984,6 +986,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Infantory/Infantory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Infantory/Preview Content\"";
@@ -1004,7 +1007,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.techit.Infantory;
+				PRODUCT_BUNDLE_IDENTIFIER = education.techit.infantory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1018,6 +1021,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Infantory/Infantory.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Infantory/Preview Content\"";
@@ -1038,7 +1042,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.techit.Infantory;
+				PRODUCT_BUNDLE_IDENTIFIER = education.techit.infantory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
     var searchCategory: SearchResultCategory = .apply
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
