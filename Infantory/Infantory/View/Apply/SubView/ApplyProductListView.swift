@@ -15,8 +15,8 @@ struct ApplyProductListView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach($applyViewModel.filteredProduct) { $product in
-                    ApplyProductListCellView(applyViewModel: applyViewModel, product: $product)
+                ForEach(applyViewModel.filteredProduct) { product in
+                    ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
                 }
             }
         }

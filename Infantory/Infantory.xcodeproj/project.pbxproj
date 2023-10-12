@@ -124,6 +124,7 @@
 		A0B5AFE42AC3FE130055E714 /* PaymentCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFE12AC3FE130055E714 /* PaymentCost.swift */; };
 		EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */; };
 		EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B11682ABAC984001303D1 /* LoginSheetView.swift */; };
+		EC98B6322AD7D789001B7102 /* AuctionProductListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -234,6 +235,7 @@
 		A0B5AFE12AC3FE130055E714 /* PaymentCost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCost.swift; sourceTree = "<group>"; };
 		EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceView.swift; sourceTree = "<group>"; };
 		EC7B11682ABAC984001303D1 /* LoginSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheetView.swift; sourceTree = "<group>"; };
+		EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductListCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				0CD2F7002ABD4EE100FCF88E /* ProductListView.swift */,
+				EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */,
 				0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */,
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
 				112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */,
@@ -790,6 +793,7 @@
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
 				112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */,
 				11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */,
+				EC98B6322AD7D789001B7102 /* AuctionProductListCellView.swift in Sources */,
 				A05A60FB2AD62C35004F24FA /* CachedImageManager.swift in Sources */,
 				A05A60F92AD62707004F24FA /* ImageCache.swift in Sources */,
 				11183A732ACF8BC50010012C /* ProfileRowView.swift in Sources */,

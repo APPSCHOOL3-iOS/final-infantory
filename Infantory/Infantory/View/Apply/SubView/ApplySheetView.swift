@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ApplySheetView: View {
-    
     @EnvironmentObject var loginStore: LoginStore
     @State private var tempCount: Int = 0
     @State private var applyTicketCount: String = "0"
@@ -16,10 +15,9 @@ struct ApplySheetView: View {
     @State private var toastMessage: String = ""
     @State private var isShowingToastMessage: Bool = false
     
+    @ObservedObject var applyViewModel: ApplyProductStore
     @Binding var isShowingApplySheet: Bool
-    @Binding var product: ApplyProduct
-
-    var viewModel: ApplyProductStore
+    var product: ApplyProduct
     var body: some View {
         VStack {
             ApplyMyTicketView()
@@ -121,9 +119,7 @@ struct ApplySheetView: View {
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
-                viewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid) { product in
-                    self.product = product
-                }
+                applyViewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid)
                 isShowingApplySheet = false
             })
         }
@@ -132,7 +128,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(isShowingApplySheet: .constant(true), product: .constant( ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""])), viewModel: ApplyProductStore())
+        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product:  ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
             .environmentObject(LoginStore())
     }
 }

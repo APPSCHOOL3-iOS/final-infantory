@@ -16,9 +16,9 @@ enum SearchResultCategory: String, CaseIterable {
 
 struct SearchResultView: View {
     
+    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var auctionViewModel: AuctionProductViewModel
     @ObservedObject var searchStore: SearchStore
-    @EnvironmentObject var applyViewModel: ApplyProductStore
-    @EnvironmentObject var auctionViewModel: AuctionProductViewModel
     @Namespace private var animation
     
     @State var isAnimating: Bool = false
@@ -35,7 +35,7 @@ struct SearchResultView: View {
                     searchStore.addSearchHistory(keyword: searchText)
                 }
                 .submitLabel(.search)
-            
+                .horizontalPadding()
             HStack {
                 ForEach(SearchResultCategory.allCases, id: \.self) { category in
                     VStack {
@@ -63,9 +63,11 @@ struct SearchResultView: View {
                 }
             }
             .padding([.top])
+            .horizontalPadding()
             
-            List {
-                Section("인플루언서") {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding(.bottom)
                     ForEach(searchStore.influencer) { influencer in
                         HStack {
                             if influencer.profileImageURLString == nil {
@@ -102,41 +104,47 @@ struct SearchResultView: View {
                             Spacer()
                         }
                     }
-                    .padding(.top)
-                    Divider()
                 }
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets())
-                
-                Section("경매") {
-                    ForEach(searchStore.searchAuctionProduct) { product in
-                        Text(product.productName)
+                .padding(.top)
+                .horizontalPadding()
+                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                    .overlay {
+                        Divider().offset(y: 2.5)
+                        Divider().offset(y: -2.5)
+                    }
+                VStack(alignment: .leading) {
+                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                    ForEach(auctionViewModel.auctionProduct) { product in
+                        AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                     }
                 }
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets())
-                
-                Section("응모") {
-                    ForEach(searchStore.searchApplyProduct) { product in
-                        Text(product.productName)
-//                        ApplyProductListCellView(product: product)
+            
+                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                    .overlay {
+                        Divider().offset(y: 2.5)
+                        Divider().offset(y: -2.5)
+                    }.offset(y: -10)
+                VStack(alignment: .leading) {
+                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                    ForEach(applyViewModel.applyProduct) { product in
+                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
                     }
+                    
                 }
-                .listRowSeparator(.hidden)
-                .listRowInsets(EdgeInsets())
             }
             .listStyle(.plain)
         }
-        .horizontalPadding()
         .onAppear {
             searchStore.findSearchKeyword(keyword: searchText)
+            applyViewModel.findSearchKeyword(keyword: searchText)
+            auctionViewModel.findSearchKeyword(keyword: searchText)
         }
     }
 }
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(searchStore: SearchStore(), searchText: .constant("서치텍스트"))
+        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"))
             .environmentObject(ApplyProductStore())
             .environmentObject(AuctionProductViewModel())
     }

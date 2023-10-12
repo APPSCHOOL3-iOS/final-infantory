@@ -10,9 +10,8 @@ import SwiftUI
 struct SearchMainView: View {
         
     @StateObject var searchStore: SearchStore = SearchStore()
-    @EnvironmentObject var applyViewModel: ApplyProductStore
-    @EnvironmentObject var auctionViewModel: AuctionProductViewModel
-    
+    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @State private var searchText: String = ""
     @State private var isShowingSearchResult: Bool = false
     
@@ -74,15 +73,14 @@ struct SearchMainView: View {
             
         }
         .navigationDestination(isPresented: $isShowingSearchResult) {
-            SearchResultView(searchStore: searchStore, searchText: $searchText)
+            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText)
         }
     }
 }
 
 struct SearchMainView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMainView()
-            .environmentObject(ApplyProductStore())
-            .environmentObject(AuctionProductViewModel())
+        SearchMainView(applyViewModel: ApplyProductStore())
+    
     }
 }

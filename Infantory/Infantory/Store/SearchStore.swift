@@ -13,8 +13,7 @@ class SearchStore: ObservableObject {
     @Published var searchArray: Set<String> = []
     @Published var selectedCategory: SearchResultCategory = .total
     @Published var influencer: [User] = []
-    @Published var searchAuctionProduct: [AuctionProduct] = []
-    @Published var searchApplyProduct: [ApplyProduct] = []
+
     
     init() {
         fetchSearchHistory()
@@ -66,8 +65,6 @@ class SearchStore: ObservableObject {
             influencer = influencer.filter { influencer in
                 influencer.nickName.localizedCaseInsensitiveContains(keyword)
             }
-            try await fetchSearchAuctionProduct(keyword: keyword)
-            try await fetchSearchApplyProduct(keyword: keyword)
         }
     }
     
@@ -84,26 +81,6 @@ class SearchStore: ObservableObject {
             } catch {
                 print("error: 인플루언서를 불러오지 못했습니다.")
             }
-        }
-    }
-    
-    @MainActor
-    func fetchSearchAuctionProduct(keyword: String) async throws {
-        let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
-        let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
-    
-        searchAuctionProduct = products.filter { product in
-            product.productName.localizedCaseInsensitiveContains(keyword)
-        }
-    }
-    
-    @MainActor
-    func fetchSearchApplyProduct(keyword: String) async throws {
-        let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
-        let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
-        
-        searchApplyProduct = products.filter { product in
-            product.productName.localizedCaseInsensitiveContains(keyword)
         }
     }
 }

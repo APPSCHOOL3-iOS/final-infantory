@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyMainView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @ObservedObject var applyViewModel: ApplyProductStore = ApplyProductStore()
 
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
@@ -24,7 +24,7 @@ struct ApplyMainView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            NavigationLink(destination: SearchMainView().environmentObject(applyViewModel)) {
+                            NavigationLink(destination: SearchMainView()) {
                                 Image(systemName: "magnifyingglass")
                                     .foregroundColor(.black)
                             }
@@ -50,7 +50,7 @@ struct ApplyMainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: SearchMainView().environmentObject(applyViewModel)) {
+                        NavigationLink(destination: SearchMainView()) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.black)
                         }
