@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileEditView: View {
-    @StateObject var photoStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     @State var profileName: String = ""
     @State var name: String = ""
     @State var phoneNumber: String = ""
@@ -29,7 +29,7 @@ struct ProfileEditView: View {
             }
             .navigationBar(title: "내 프로필 편집")
             .onAppear {
-                photoStore.getProfileImageDownloadURL()
+                photosSelectorStore.getProfileImageDownloadURL()
             }
         }
     }

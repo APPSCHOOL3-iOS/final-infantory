@@ -11,13 +11,13 @@ import Photos
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var photoStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    CachedImage(url: photoStore.profileImage ?? "") { phase in
+                    CachedImage(url: photosSelectorStore.profileImage ?? "") { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -223,7 +223,7 @@ struct MyInfoMainView: View {
             .padding()
             .navigationTitle("")
             .onAppear {
-                photoStore.getProfileImageDownloadURL()
+                photosSelectorStore.getProfileImageDownloadURL()
             }
         }
     }
