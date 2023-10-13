@@ -19,7 +19,7 @@ struct ApplyDetailView: View {
                     ApplyBuyerView(product: product)
                 HStack {
                     if product.influencerProfile == nil {
-                        Image("Influencer1")
+                        Image("smallAppIcon")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 40, height: 40)
@@ -142,7 +142,7 @@ struct ApplyFooter: View {
                 try await applyViewModel.fetchApplyProducts()
             }
         }, content: {
-            ApplySheetView(applyViewModel: applyViewModel,isShowingApplySheet: $isShowingApplySheet, product: product)
+            ApplySheetView(applyViewModel: applyViewModel, isShowingApplySheet: $isShowingApplySheet, product: product)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
 
@@ -157,7 +157,7 @@ struct ApplyFooter: View {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(applyViewModel: ApplyProductStore(),product:
+        ApplyDetailView(applyViewModel: ApplyProductStore(), product:
                             ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
         .environmentObject(LoginStore())
     }

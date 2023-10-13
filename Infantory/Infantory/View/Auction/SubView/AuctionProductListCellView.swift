@@ -11,35 +11,6 @@ struct AuctionProductListCellView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     var product: AuctionProduct
     var body: some View {
-        VStack {
-            HStack {
-                if product.influencerProfile == nil {
-                    Image("Influencer1")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(20)
-                } else {
-                    AsyncImage(url: URL(string: product.influencerProfile ?? "")) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .cornerRadius(20)
-                    } placeholder: {
-                        ProgressView()
-                    }
-                }
-                
-                Text(product.influencerNickname)
-                    .font(.infanFootnoteBold)
-                
-                Spacer()
-                TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
-            }
-        }
-        .padding(.top, 10)
-        .padding(.bottom, 6)
-        .horizontalPadding()
         
         NavigationLink {
             AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
@@ -57,13 +28,45 @@ struct AuctionProductListCellView: View {
                                            height: (.screenWidth - 100) / 2)
                                     .clipped()
                             case .success(let image):
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: (.screenWidth - 100) / 2,
-                                           height: (.screenWidth - 100) / 2)
-                                    .clipped()
-                                //
+                                if product.auctionFilter == .close {
+                                    ZStack {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .blur(radius: 5)
+                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                            .clipped()
+                                        
+                                        Text("응모 종료")
+                                            .padding(10)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .background(Color.infanDarkGray)
+                                            .cornerRadius(20)
+                                    }
+                                } else if product.auctionFilter == .planned {
+                                    ZStack {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .blur(radius: 5)
+                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                            .clipped()
+                                        
+                                        Text("응모 예정")
+                                            .padding(10)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .background(Color.infanOrange)
+                                            .cornerRadius(20)
+                                    }
+                                } else {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
+                                        .clipped()
+                                }
                             case .failure:
                                 Image(systemName: "xmark")
                                     .frame(width: (.screenWidth - 100) / 2,
@@ -77,7 +80,7 @@ struct AuctionProductListCellView: View {
                     } else {
                         ZStack(alignment: .topLeading) {
                             
-                            Image("appleLogo")
+                            Image("smallAppIcon")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: (.screenWidth - 100) / 2,
@@ -122,4 +125,3 @@ struct AuctionProductListCellView_Previews: PreviewProvider {
         AuctionProductListCellView(auctionViewModel: AuctionProductViewModel(), product: AuctionProduct(id: "", productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "", influencerProfile: "", winningUserID: "", startDate: Date(), endDate: Date(), minPrice: 0, winningPrice: 0))
     }
 }
-

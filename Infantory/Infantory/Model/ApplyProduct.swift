@@ -10,7 +10,7 @@ import FirebaseFirestoreSwift
 
 // 응모
 struct ApplyProduct: Productable, Identifiable, Codable {
-
+    
     @DocumentID var id: String?
     var productName: String
     var productImageURLStrings: [String]
@@ -32,17 +32,15 @@ struct ApplyProduct: Productable, Identifiable, Codable {
         return endDate.timeIntervalSince(Date())
     }
     var applyFilter: ApplyFilter {
-        get {
-            if startRemainingTime > 0.0 {
-                return .planned
-            } else if startRemainingTime < 0.0 && endRemainingTime > 0.0 {
-                return .inProgress
-            } else if endRemainingTime < 0.0 {
-                return .close
-            }
-            
+        if startRemainingTime > 0.0 {
             return .planned
+        } else if startRemainingTime < 0.0 && endRemainingTime > 0.0 {
+            return .inProgress
+        } else if endRemainingTime < 0.0 {
+            return .close
         }
+        
+        return .planned
     }
     
     // 응모한 유저

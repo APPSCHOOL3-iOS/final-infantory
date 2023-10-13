@@ -220,6 +220,7 @@ final class LoginStore: ObservableObject {
         }
     }
     
+    @MainActor
     func fetchUser(userUID: String) async throws {
         let userDocument = try await Firestore.firestore().collection("Users").document(userUID).getDocument()
         let user = try userDocument.data(as: User.self)
