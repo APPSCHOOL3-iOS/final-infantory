@@ -36,13 +36,13 @@ struct AuctionDetailView: View {
     }
 }
 
-struct AuctionDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel(), auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
-        }
-    }
-}
+//struct AuctionDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel(), auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
+//        }
+//    }
+//}
 
 struct Footer: View {
     @EnvironmentObject var loginStore: LoginStore
@@ -55,6 +55,7 @@ struct Footer: View {
     @State private var showAlert: Bool = false
     
     @State private var isShowingLoginSheet: Bool = false
+    @State private var isHighestBidder: Bool = false
     
     var body: some View {
         VStack {
@@ -71,15 +72,15 @@ struct Footer: View {
                 }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.infanMain)
-                        .frame(width: CGFloat.screenWidth - 40, height: 54)
-                        .overlay {
-                            Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
-                                .font(.infanHeadlineBold)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                        }
+                        RoundedRectangle(cornerRadius: 10)
+                        .fill(isHighestBidder ? Color.infanGray : Color.infanMain)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            .overlay {
+                                Text( isHighestBidder ? "현재 최고입찰자입니다" : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
+                                    .font(.infanHeadlineBold)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
                 } else if auctionStore.product.auctionFilter == .planned {
                     Text("경매 시작 전입니다.")
                         .font(.infanHeadlineBold)
@@ -102,7 +103,7 @@ struct Footer: View {
                         )
                 }
             }
-            .disabled(auctionStore.product.auctionFilter == .close || auctionStore.product.auctionFilter == .planned)
+            .disabled(auctionStore.product.auctionFilter == .close || auctionStore.product.auctionFilter == .planned || isHighestBidder)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -126,7 +127,11 @@ struct Footer: View {
             LoginSheetView()
                 .environmentObject(loginStore)
         }
-        
+        .onAppear {
+            if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
+                isHighestBidder = true
+            }
+        }
     }
 }
 
