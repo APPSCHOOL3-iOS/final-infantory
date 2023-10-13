@@ -59,66 +59,109 @@ struct SearchResultView: View {
             .padding([.top])
             .horizontalPadding()
             
-            ScrollView {
-                switch searchStore.selectedCategory {
-                case .total:
-                    if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyViewModel.applyProduct.count == 0 {
-                        Spacer().frame(height: .screenHeight * 0.03)
-                        Text("검색된 결과가 없습니다.")
-                    } else {
-                        if searchStore.influencer.count != 0 {
-                            VStack(alignment: .leading) {
-                                Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                SearchInfluencerView(searchStore: searchStore)
-                            }
-                            Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                .overlay {
-                                    Divider().offset(y: 2.5)
-                                    Divider().offset(y: -2.5)
+            switch searchStore.selectedCategory {
+            case .total:
+                ScrollView {
+                    VStack {
+                        if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyViewModel.applyProduct.count == 0 {
+                            Spacer().frame(height: .screenHeight * 0.03)
+                            Text("검색된 결과가 없습니다.")
+                        } else {
+                            if searchStore.influencer.count < 6 {
+                                VStack(alignment: .leading) {
+                                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
                                 }
-                        }
-                        
-                        if auctionViewModel.auctionProduct.count != 0 {
-                            VStack(alignment: .leading) {
-                                Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                SearchAuctionView(auctionViewModel: auctionViewModel)
+                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                    .overlay {
+                                        Divider().offset(y: 2.5)
+                                        Divider().offset(y: -2.5)
+                                    }
+                            } else {
+                                VStack(alignment: .leading) {
+                                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
+                                    
+                                }
+                                SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .influencer)
+                                    .padding()
+                                
+                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                    .overlay {
+                                        Divider().offset(y: 2.5)
+                                        Divider().offset(y: -2.5)
+                                    }
                             }
-                            Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                .overlay {
-                                    Divider().offset(y: 2.5)
-                                    Divider().offset(y: -2.5)
-                                }.offset(y: -10)
-                        }
-                        
-                        if applyViewModel.applyProduct.count != 0 {
-                            VStack(alignment: .leading) {
-                                Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                SearchApplyView(applyViewModel: applyViewModel)
+                            
+                            if auctionViewModel.auctionProduct.count < 4 {
+                                VStack(alignment: .leading) {
+                                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
+                                }
+                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                    .overlay {
+                                        Divider().offset(y: 2.5)
+                                        Divider().offset(y: -2.5)
+                                    }.offset(y: -10)
+                            } else {
+                                VStack(alignment: .leading) {
+                                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
+                                    
+                                }
+                                SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .auction)
+                                    .padding()
+                                
+                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
+                                    .overlay {
+                                        Divider().offset(y: 2.5)
+                                        Divider().offset(y: -2.5)
+                                    }
+                            }
+                            
+                            if applyViewModel.applyProduct.count < 4 {
+                                VStack(alignment: .leading) {
+                                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
+                                }
+                                
+                            } else {
+                                VStack(alignment: .leading) {
+                                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
+                                    SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
+                                    
+                                }
+                                VStack {
+                                    SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .apply)
+                                        .padding()
+                                }
+                                .padding(.bottom)
                             }
                         }
                     }
-                case .influencer:
-                    if searchStore.influencer.count == 0 {
-                        Spacer().frame(height: .screenHeight * 0.03)
-                        Text("검색된 결과가 없습니다.")
-                    } else {
-                        Spacer().frame(height: .screenHeight * 0.01)
-                        SearchInfluencerView(searchStore: searchStore)
-                    }
-                case .auction:
-                    if auctionViewModel.auctionProduct.count == 0 {
-                        Spacer().frame(height: .screenHeight * 0.03)
-                        Text("검색된 결과가 없습니다.")
-                    } else {
-                        SearchAuctionView(auctionViewModel: auctionViewModel)
-                    }
-                case .apply:
-                    if applyViewModel.applyProduct.count == 0 {
-                        Spacer().frame(height: .screenHeight * 0.03)
-                        Text("검색된 결과가 없습니다.")
-                    } else {
-                        SearchApplyView(applyViewModel: applyViewModel)
-                    }
+                }
+                .padding(.bottom, 1)
+            case .influencer:
+                if searchStore.influencer.count == 0 {
+                    Spacer().frame(height: .screenHeight * 0.03)
+                    Text("검색된 결과가 없습니다.")
+                } else {
+                    Spacer().frame(height: .screenHeight * 0.01)
+                    SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
+                }
+            case .auction:
+                if auctionViewModel.auctionProduct.count == 0 {
+                    Spacer().frame(height: .screenHeight * 0.03)
+                    Text("검색된 결과가 없습니다.")
+                } else {
+                    SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: .underLimit)
+                }
+            case .apply:
+                if applyViewModel.applyProduct.count == 0 {
+                    Spacer().frame(height: .screenHeight * 0.03)
+                    Text("검색된 결과가 없습니다.")
+                } else {
+                    SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: .underLimit)
                 }
             }
         }
@@ -133,6 +176,6 @@ struct SearchResultView: View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"),searchCategory: .total)
+        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"), searchCategory: .total)
     }
 }

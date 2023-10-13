@@ -80,14 +80,14 @@ struct SearchMainView: View {
             
         }
         .navigationDestination(isPresented: $isShowingSearchResult) {
-            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText , searchCategory: searchCategory)
+            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText, searchCategory: searchCategory)
         }
     }
 }
 
 struct SearchMainView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMainView(applyViewModel: ApplyProductStore(),searchCategory: .total)
+        SearchMainView(applyViewModel: ApplyProductStore(), searchCategory: .total)
     
     }
 }

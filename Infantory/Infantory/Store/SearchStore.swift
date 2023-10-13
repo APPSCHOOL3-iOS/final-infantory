@@ -14,7 +14,6 @@ class SearchStore: ObservableObject {
     @Published var selectedCategory: SearchResultCategory = .total
     @Published var influencer: [User] = []
 
-    
     init() {
         fetchSearchHistory()
     }
@@ -90,4 +89,9 @@ enum SearchResultCategory: String, CaseIterable {
     case influencer = "인플루언서"
     case auction = "경매"
     case apply = "응모"
+}
+
+enum SearchResultCount {
+    case underLimit
+    case overLimit
 }
