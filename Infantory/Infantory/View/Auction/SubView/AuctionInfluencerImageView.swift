@@ -30,28 +30,30 @@ struct AuctionInfluencerImageView: View {
                                 switch phase {
                                 case .empty:
                                     ProgressView()
-                                    
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
+                                        .cornerRadius(20)
                                 case .success(let image):
                                     image
                                         .resizable()
-                                        .aspectRatio(contentMode: .fit)
+                                        .aspectRatio(contentMode: .fill)
                                         .frame(width: 40, height: 40)
                                         .cornerRadius(20)
                                     
-                                case .failure(_):
+                                case .failure:
                                     Image(systemName: "xmark")
-                                        .symbolVariant(.circle.fill)
-                                        .foregroundColor(.white)
-                                        .frame(width: 100, height: 100)
-                                        .background(Color.infanGray,
-                                                    in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 40)
+                                        .cornerRadius(20)
                                 @unknown default:
+                                    
                                     EmptyView()
                                 }
                             }
                         }
                         
                         Text(product.influencerNickname)
+                            .foregroundColor(.black)
                             .font(.infanFootnoteBold)
                         
                     }
