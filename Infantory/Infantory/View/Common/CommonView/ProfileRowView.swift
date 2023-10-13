@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileRowView: View {
-    let imageURLString: String = "https://data1.pokemonkorea.co.kr/newdata/pokedex/full/000401.png"
+    let imageURLString: String
     let nickname: String
 
     @State private var isShowingSheet: Bool = false
@@ -20,10 +20,31 @@ struct ProfileRowView: View {
                 .frame(width: 50)
                 .foregroundColor(.gray).opacity(0.2)
                 .overlay {
-                    AsyncImage(url: URL(string: imageURLString)!) { image in
-                        image.image?
-                            .resizable()
-                    }
+                        CachedImage(url: imageURLString) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                
+                            case .failure:
+                                Image(systemName: "xmark")
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 40, height: 40)
+                                    .cornerRadius(20)
+                                
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                    
                 }
 
             Text(nickname)
@@ -47,6 +68,6 @@ struct ProfileRowView: View {
 
 struct ProfileRowView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileRowView(nickname: "상필갓")
+        ProfileRowView(imageURLString: "", nickname: "상필갓")
     }
 }

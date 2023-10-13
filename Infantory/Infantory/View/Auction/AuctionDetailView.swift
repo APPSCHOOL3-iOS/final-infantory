@@ -22,7 +22,7 @@ struct AuctionDetailView: View {
                 
                 AuctionBuyerView(auctionStore: auctionStore)
                 
-                ProfileRowView(nickname: auctionStore.product.influencerNickname)
+                ProfileRowView(imageURLString: auctionStore.product.influencerProfile ?? "", nickname: auctionStore.product.influencerNickname)
                 
                 AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)

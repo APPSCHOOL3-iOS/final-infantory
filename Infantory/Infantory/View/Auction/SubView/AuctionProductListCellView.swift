@@ -21,7 +21,7 @@ struct AuctionProductListCellView: View {
                         .frame(width: 40, height: 40)
                         .cornerRadius(20)
                 } else {
-                    CachedImage(url: product.influencerProfile ?? "https://media.bunjang.co.kr/product/233471258_1_1692280086_w%7Bres%7D.jpg") { phase in
+                    CachedImage(url: product.influencerProfile ?? "") { phase in
                         switch phase {
                         case .empty:
                             ProgressView()
@@ -30,6 +30,7 @@ struct AuctionProductListCellView: View {
                                 .cornerRadius(20)
                         case .success(let image):
                             image
+                                .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
