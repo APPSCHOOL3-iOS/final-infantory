@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchResultView: View {
-    
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject var applyViewModel: ApplyProductStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     @ObservedObject var searchStore: SearchStore
@@ -17,18 +17,9 @@ struct SearchResultView: View {
     @State var isAnimating: Bool = false
     @Binding var searchText: String
     @State var searchCategory: SearchResultCategory
-    
+    @State private var isShowingToastMessage: Bool = false
     var body: some View {
         VStack {
-            TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
-                .padding(10)
-                .background(Color.infanLightGray.opacity(0.3))
-                .cornerRadius(5)
-                .onSubmit {
-                    searchStore.addSearchHistory(keyword: searchText)
-                }
-                .submitLabel(.search)
-                .horizontalPadding()
             HStack {
                 ForEach(SearchResultCategory.allCases, id: \.self) { category in
                     VStack {
@@ -64,73 +55,44 @@ struct SearchResultView: View {
                 ScrollView {
                     VStack {
                         if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyViewModel.applyProduct.count == 0 {
-                            Spacer().frame(height: .screenHeight * 0.03)
-                            Text("검색된 결과가 없습니다.")
+                            SearchResultEmptyView()
                         } else {
-                            if searchStore.influencer.count < 6 {
-                                VStack(alignment: .leading) {
-                                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
-                                }
-                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                    .overlay {
-                                        Divider().offset(y: 2.5)
-                                        Divider().offset(y: -2.5)
-                                    }
+                            if searchStore.influencer.count > 0 && searchStore.influencer.count < 6 {
+                                SearchTotalCellView(category: "인플루언서", content: SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.underLimit))
+                                SearchRectangleView()
+                            } else if searchStore.influencer.count == 0 {
+                                EmptyView()
                             } else {
-                                VStack(alignment: .leading) {
-                                    Text("인플루언서").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
-                                    
-                                }
+                                SearchTotalCellView(category: "인플루언서", content: SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
+                                .padding(.bottom)
                                 SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .influencer)
                                     .padding()
                                 
-                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                    .overlay {
-                                        Divider().offset(y: 2.5)
-                                        Divider().offset(y: -2.5)
-                                    }
+                                SearchRectangleView()
                             }
                             
-                            if auctionViewModel.auctionProduct.count < 4 {
-                                VStack(alignment: .leading) {
-                                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
-                                }
-                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                    .overlay {
-                                        Divider().offset(y: 2.5)
-                                        Divider().offset(y: -2.5)
-                                    }.offset(y: -10)
+                            if auctionViewModel.auctionProduct.count > 0 &&
+                                auctionViewModel.auctionProduct.count < 4 {
+                                SearchTotalCellView(category: "경매", content: SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit))
+                                SearchRectangleView().offset(y: -10)
+                            } else if auctionViewModel.auctionProduct.count == 0 {
+                                EmptyView()
                             } else {
-                                VStack(alignment: .leading) {
-                                    Text("경매").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
-                                    
-                                }
+                                SearchTotalCellView(category: "경매", content: SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
                                 SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .auction)
                                     .padding()
                                 
-                                Rectangle().fill(Color.infanLightGray.opacity(0.3)).frame(height: 5)
-                                    .overlay {
-                                        Divider().offset(y: 2.5)
-                                        Divider().offset(y: -2.5)
-                                    }
+                                SearchRectangleView()
                             }
                             
-                            if applyViewModel.applyProduct.count < 4 {
-                                VStack(alignment: .leading) {
-                                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
-                                }
+                            if applyViewModel.applyProduct.count > 0 &&
+                                applyViewModel.applyProduct.count < 4 {
+                                SearchTotalCellView(category: "응모", content: SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit))
                                 
+                            } else if applyViewModel.applyProduct.count == 0 {
+                                EmptyView()
                             } else {
-                                VStack(alignment: .leading) {
-                                    Text("응모").font(.infanBody.bold()).foregroundColor(.infanMain.opacity(0.7)).padding()
-                                    SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit)
-                                    
-                                }
+                                SearchTotalCellView(category: "응모", content: SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
                                 VStack {
                                     SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .apply)
                                         .padding()
@@ -143,33 +105,60 @@ struct SearchResultView: View {
                 .padding(.bottom, 1)
             case .influencer:
                 if searchStore.influencer.count == 0 {
-                    Spacer().frame(height: .screenHeight * 0.03)
-                    Text("검색된 결과가 없습니다.")
+                    SearchResultEmptyView()
                 } else {
-                    Spacer().frame(height: .screenHeight * 0.01)
+                    Spacer().frame(height: .screenHeight * 0.02)
                     SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.underLimit)
                 }
             case .auction:
                 if auctionViewModel.auctionProduct.count == 0 {
-                    Spacer().frame(height: .screenHeight * 0.03)
-                    Text("검색된 결과가 없습니다.")
+                    SearchResultEmptyView()
                 } else {
                     SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: .underLimit)
                 }
             case .apply:
                 if applyViewModel.applyProduct.count == 0 {
-                    Spacer().frame(height: .screenHeight * 0.03)
-                    Text("검색된 결과가 없습니다.")
+                    SearchResultEmptyView()
                 } else {
                     SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: .underLimit)
                 }
             }
+        }
+        .overlay {
+            ToastMessage(content: Text("키워드를 입력해주세요."), isPresented: $isShowingToastMessage)
         }
         .onAppear {
             searchStore.selectedCategory = searchCategory
             searchStore.findSearchKeyword(keyword: searchText)
             applyViewModel.findSearchKeyword(keyword: searchText)
             auctionViewModel.findSearchKeyword(keyword: searchText)
+        }
+        .navigationBar(title: "")
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
+                    .padding(10)
+                    .background(Color.infanLightGray.opacity(0.3))
+                    .cornerRadius(5)
+                    .onChange(of: searchText, perform: { value in
+                        if value.isEmpty {
+                            dismiss()
+                        }
+                    })
+                    .onSubmit {
+                        if searchText.isEmpty {
+                            isShowingToastMessage = true
+                            return
+                        }
+                        searchStore.addSearchHistory(keyword: searchText)
+                        searchStore.selectedCategory = searchCategory
+                        searchStore.findSearchKeyword(keyword: searchText)
+                        applyViewModel.findSearchKeyword(keyword: searchText)
+                        auctionViewModel.findSearchKeyword(keyword: searchText)
+                    }
+                    .submitLabel(.search)
+                    .frame(width: .screenWidth - 72)
+            }
         }
     }
 }

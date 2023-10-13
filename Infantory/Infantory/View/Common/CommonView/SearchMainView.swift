@@ -19,19 +19,7 @@ struct SearchMainView: View {
     var body: some View {
         VStack {
             VStack {
-                TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
-                    .padding(10)
-                    .background(Color.infanLightGray.opacity(0.3))
-                    .cornerRadius(5)
-                    .onSubmit {
-                        if searchText.isEmpty {
-                            isShowingToastMessage = true
-                            return
-                        }
-                        searchStore.addSearchHistory(keyword: searchText)
-                        isShowingSearchResult = true
-                    }
-                    .submitLabel(.search)
+                
                 HStack {
                     Text("최근검색어")
                         .bold()
@@ -81,6 +69,25 @@ struct SearchMainView: View {
         }
         .navigationDestination(isPresented: $isShowingSearchResult) {
             SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText, searchCategory: searchCategory)
+        }
+        .navigationBar(title: "")
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
+                    .padding(10)
+                    .background(Color.infanLightGray.opacity(0.3))
+                    .cornerRadius(5)
+                    .onSubmit {
+                        if searchText.isEmpty {
+                            isShowingToastMessage = true
+                            return
+                        }
+                        searchStore.addSearchHistory(keyword: searchText)
+                        isShowingSearchResult = true
+                    }
+                    .submitLabel(.search)
+                    .frame(width: .screenWidth - 72)
+            }
         }
     }
 }

@@ -15,13 +15,17 @@ struct SearchApplyView: View {
     
     var body: some View {
         ScrollView {
-            if showCellCount == .underLimit {
-                ForEach(applyViewModel.applyProduct) { product in
-                    ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
-                }
-            } else {
-                ForEach(applyViewModel.applyProduct.prefix(3)) { product in
-                    ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+            VStack {
+                if showCellCount == .underLimit {
+                    ForEach(applyViewModel.applyProduct) { product in
+                        ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                    }
+                } else {
+                    ForEach(applyViewModel.applyProduct.prefix(3)) { product in
+                        ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                    }
                 }
             }
         }

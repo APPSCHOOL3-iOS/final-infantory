@@ -15,13 +15,17 @@ struct SearchAuctionView: View {
     
     var body: some View {
         ScrollView {
-            if showCellCount == .underLimit {
-                ForEach(auctionViewModel.auctionProduct) { product in
-                    AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
-                }
-            } else {
-                ForEach(auctionViewModel.auctionProduct.prefix(3)) { product in
-                    AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
+            VStack {
+                if showCellCount == .underLimit {
+                    ForEach(auctionViewModel.auctionProduct) { product in
+                        AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
+                        AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
+                    }
+                } else {
+                    ForEach(auctionViewModel.auctionProduct.prefix(3)) { product in
+                        AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
+                        AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
+                    }
                 }
             }
         }

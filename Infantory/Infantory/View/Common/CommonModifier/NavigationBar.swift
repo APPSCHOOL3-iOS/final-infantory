@@ -19,7 +19,7 @@ struct NavigationBar: ViewModifier {
                     }) {
                         Image(systemName: "chevron.left")
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(.infanMain)
                 }
             }
             .navigationTitle(title)

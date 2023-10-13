@@ -33,7 +33,6 @@ final class ApplyProductStore: ObservableObject {
         self.applyProduct = products
         fetchInfluencerProfile(products: products)
     }
-    
     @MainActor
     func fetchInfluencerProfile(products: [ApplyProduct]) {
         for product in products {
@@ -45,17 +44,12 @@ final class ApplyProductStore: ObservableObject {
                         self.applyProduct[index].influencerProfile = influencerProfile
                         self.updateFilter(filter: self.selectedFilter)
                     }
-                } else {
-                    #if DEBUG
-                    print("인플루언서 프로필이 없습니다")
-                    #endif
                 }
                 
             }
         }
     }
     
-    @MainActor
     func updateFilter(filter: ApplyFilter) {
         switch filter {
         case .inProgress:
@@ -90,7 +84,6 @@ final class ApplyProductStore: ObservableObject {
         }
     }
     
-    @MainActor
     func addApplyTicketUserId(ticketCount: Int,
                               product: ApplyProduct,
                               userID: String,
@@ -132,7 +125,6 @@ final class ApplyProductStore: ObservableObject {
         }
     }
     
-    @MainActor
     func addApplyofUser(ticketCount: Int,
                         product: ApplyProduct,
                         userUID: String,
@@ -149,6 +141,7 @@ final class ApplyProductStore: ObservableObject {
             .collection("ApplyTickets")
             .addDocument(from: applyTicket)
     }
+
     @MainActor
     func fetchSearchApplyProduct(keyword: String) async throws {
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
@@ -159,7 +152,6 @@ final class ApplyProductStore: ObservableObject {
         }
     }
     
-    @MainActor
     func findSearchKeyword(keyword: String) {
         Task {
             try await fetchSearchApplyProduct(keyword: keyword)

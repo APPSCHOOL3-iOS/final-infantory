@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseFirestore
 
-class SearchStore: ObservableObject {
+@MainActor
+final class SearchStore: ObservableObject {
     
     @Published var searchArray: Set<String> = []
     @Published var selectedCategory: SearchResultCategory = .total
@@ -57,7 +58,6 @@ class SearchStore: ObservableObject {
         }
     }
     
-    @MainActor
     func findSearchKeyword(keyword: String) {
         Task {
             try await fetchInfluencer(keyword: keyword)
@@ -67,7 +67,6 @@ class SearchStore: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchInfluencer(keyword: String) async throws {
         influencer = []
         let query = Firestore.firestore().collection("Users").whereField("isInfluencer", isEqualTo: "influencer")

@@ -133,6 +133,11 @@
 		EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */; };
 		EC98B6362AD80225001B7102 /* SearchAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6352AD80225001B7102 /* SearchAuctionView.swift */; };
 		EC98B6382AD802B9001B7102 /* SearchApplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6372AD802B9001B7102 /* SearchApplyView.swift */; };
+		EC98B63A2AD8FB55001B7102 /* SearchResultEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6392AD8FB55001B7102 /* SearchResultEmptyView.swift */; };
+		EC98B63C2AD8FDF1001B7102 /* SearchRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B63B2AD8FDF1001B7102 /* SearchRectangleView.swift */; };
+		EC98B63E2AD8FF1D001B7102 /* SearchTotalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B63D2AD8FF1D001B7102 /* SearchTotalCellView.swift */; };
+		EC98B6402AD92BF7001B7102 /* ApplyInfluencerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B63F2AD92BF7001B7102 /* ApplyInfluencerImageView.swift */; };
+		EC98B6422AD931D7001B7102 /* AuctionInfluencerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6412AD931D7001B7102 /* AuctionInfluencerImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +258,11 @@
 		EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfluencerView.swift; sourceTree = "<group>"; };
 		EC98B6352AD80225001B7102 /* SearchAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAuctionView.swift; sourceTree = "<group>"; };
 		EC98B6372AD802B9001B7102 /* SearchApplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApplyView.swift; sourceTree = "<group>"; };
+		EC98B6392AD8FB55001B7102 /* SearchResultEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultEmptyView.swift; sourceTree = "<group>"; };
+		EC98B63B2AD8FDF1001B7102 /* SearchRectangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRectangleView.swift; sourceTree = "<group>"; };
+		EC98B63D2AD8FF1D001B7102 /* SearchTotalCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTotalCellView.swift; sourceTree = "<group>"; };
+		EC98B63F2AD92BF7001B7102 /* ApplyInfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyInfluencerImageView.swift; sourceTree = "<group>"; };
+		EC98B6412AD931D7001B7102 /* AuctionInfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionInfluencerImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +317,7 @@
 			children = (
 				0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */,
 				843B34302AD7A9A700EAA7D3 /* ApplyProductListCellView.swift */,
+				EC98B63F2AD92BF7001B7102 /* ApplyInfluencerImageView.swift */,
 				844BB4F42ACF9E4F004891DD /* ApplyFilterButtonView.swift */,
 				844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */,
 				844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */,
@@ -325,6 +336,7 @@
 			children = (
 				0CD2F7002ABD4EE100FCF88E /* ProductListView.swift */,
 				EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */,
+				EC98B6412AD931D7001B7102 /* AuctionInfluencerImageView.swift */,
 				0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */,
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
 				112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */,
@@ -595,6 +607,9 @@
 				648689122ACE751800423321 /* TimerView.swift */,
 				843BE81B2AD6404E00C54943 /* SearchMainView.swift */,
 				843BE81F2AD667D200C54943 /* SearchResultView.swift */,
+				EC98B63D2AD8FF1D001B7102 /* SearchTotalCellView.swift */,
+				EC98B63B2AD8FDF1001B7102 /* SearchRectangleView.swift */,
+				EC98B6392AD8FB55001B7102 /* SearchResultEmptyView.swift */,
 				843B34322AD8D7EE00EAA7D3 /* SearchMoreItemButtonView.swift */,
 				EC98B6332AD8018F001B7102 /* SearchInfluencerView.swift */,
 				EC98B6352AD80225001B7102 /* SearchAuctionView.swift */,
@@ -754,6 +769,7 @@
 				0C82A3312AC2934E009F6D97 /* ApplyDetailView.swift in Sources */,
 				11F0E0622AD62F9E00B49420 /* ActivityOption.swift in Sources */,
 				844BB4E92ACBE8A3004891DD /* LoginAddressWebView.swift in Sources */,
+				EC98B6402AD92BF7001B7102 /* ApplyInfluencerImageView.swift in Sources */,
 				0C82A3342AC29625009F6D97 /* ApplyDetailDescriptionView.swift in Sources */,
 				0CE402192ABAC91A00F69B7E /* AuctionRegistrationView.swift in Sources */,
 				0C82A32D2AC278A6009F6D97 /* ApplyRegistrationView.swift in Sources */,
@@ -804,6 +820,7 @@
 				A0B5AFE42AC3FE130055E714 /* PaymentCost.swift in Sources */,
 				11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */,
 				849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */,
+				EC98B6422AD931D7001B7102 /* AuctionInfluencerImageView.swift in Sources */,
 				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,
 				0C82A32F2AC279BB009F6D97 /* ApplyProductStore.swift in Sources */,
 				11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */,
@@ -849,9 +866,12 @@
 				A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */,
 				0C82A3382AC29A0B009F6D97 /* ApplyLogoCell.swift in Sources */,
 				0CD2F6FF2ABD4D8400FCF88E /* AuctionFilterButtonView.swift in Sources */,
+				EC98B63C2AD8FDF1001B7102 /* SearchRectangleView.swift in Sources */,
 				A091E5B02ABC7917000894FC /* ApplyMainView.swift in Sources */,
 				0CED22542ACD40E100CD1456 /* AuctionRegisterStore.swift in Sources */,
+				EC98B63E2AD8FF1D001B7102 /* SearchTotalCellView.swift in Sources */,
 				0CD2F7012ABD4EE100FCF88E /* ProductListView.swift in Sources */,
+				EC98B63A2AD8FB55001B7102 /* SearchResultEmptyView.swift in Sources */,
 				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
 				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
 				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,

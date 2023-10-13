@@ -16,10 +16,12 @@ struct ApplyProductListView: View {
         ScrollView {
             VStack {
                 ForEach(applyViewModel.filteredProduct) { product in
+                    ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
                     ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
                 }
             }
         }
+        
         .refreshable {
             Task {
                 do {
