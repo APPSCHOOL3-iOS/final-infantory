@@ -67,18 +67,20 @@ struct Footer: View {
                 }
                 if loginStore.warning == false {
                     isShowingAuctionBidSheet = true
+                } else {
+                    isShowingAuctionNoticeSheet = true
                 }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
-                    Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
-                        .font(.infanHeadlineBold)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanMain)
-                                .frame(width: CGFloat.screenWidth - 40, height: 54)
-                        )
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.infanMain)
+                        .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        .overlay {
+                            Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
+                                .font(.infanHeadlineBold)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
                 } else if auctionStore.product.auctionFilter == .planned {
                     Text("경매 시작 전입니다.")
                         .font(.infanHeadlineBold)
@@ -101,16 +103,11 @@ struct Footer: View {
                         )
                 }
             }
-            .disabled(auctionStore.remainingTime <= 0)
+            .disabled(auctionStore.product.auctionFilter == .close || auctionStore.product.auctionFilter == .planned)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 110)
-        .background(
-            Rectangle()
-                .stroke(lineWidth: 0.1)
-                .background(.white)
-        )
         .offset(x: 0, y: 40)
         .sheet(isPresented: loginStore.warning ? $isShowingAuctionNoticeSheet : loginStore.$warning, onDismiss: {
             isShowingAuctionBidSheet.toggle()

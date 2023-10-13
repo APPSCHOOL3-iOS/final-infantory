@@ -36,7 +36,6 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     var winningPrice: Int?
     
     var auctionFilter: AuctionFilter {
-        get {
             if startRemainingTime > 0.0 {
                 return .planned
             } else if startRemainingTime < 0.0 && endRemainingTime > 0.0 {
@@ -46,7 +45,6 @@ struct AuctionProduct: Productable, Identifiable, Codable {
             }
             
             return .planned
-        }
     }
     
 }

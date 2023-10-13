@@ -38,7 +38,7 @@ struct ProductListView: View {
                                             .frame(width: 40, height: 40)
                                             .cornerRadius(20)
                                         
-                                    case .failure(_):
+                                    case .failure:
                                         Image(systemName: "xmark")
                                             .symbolVariant(.circle.fill)
                                             .foregroundColor(.white)

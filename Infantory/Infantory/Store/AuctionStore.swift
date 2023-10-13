@@ -136,8 +136,13 @@ extension Encodable {
     func asDictionary() throws -> [String: Any] {
         let data = try JSONEncoder().encode(self)
         guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-            throw NSError()
+            throw EncodableError.serializationFailed
         }
         return dictionary
     }
+}
+
+// 추후에 에러끼리 enum으로 묶어서 정리해도 괜찮을 듯
+enum EncodableError: Error {
+    case serializationFailed
 }

@@ -18,7 +18,6 @@ struct SearchAuctionView: View {
     }
 }
 
-
 struct SearchAuctionView_Previews: PreviewProvider {
     static var previews: some View {
         SearchAuctionView(auctionViewModel: AuctionProductViewModel())

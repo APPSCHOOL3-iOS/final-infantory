@@ -14,6 +14,8 @@ struct AuctionNoticeSheetView: View {
 
     @EnvironmentObject var loginStore: LoginStore
     
+    @State private var isShowingNoticeChecked: Bool = false
+    
     var body: some View {
         VStack {
             ZStack {
@@ -36,10 +38,10 @@ struct AuctionNoticeSheetView: View {
             }
             HStack {
                 Button(action: {
-                    loginStore.warning = false
+                    isShowingNoticeChecked.toggle()
                 }, label: {
                     HStack {
-                        if loginStore.warning == true {
+                        if isShowingNoticeChecked == false {
                             Text("\(Image(systemName: "square"))")
                         } else {
                             Text("\(Image(systemName: "checkmark.square.fill"))")
@@ -49,12 +51,17 @@ struct AuctionNoticeSheetView: View {
                 })
                 Spacer()
             }
-            .foregroundColor(loginStore.warning == true ? .infanGray : .infanMain)
+            .foregroundColor(isShowingNoticeChecked ? .infanGray : .infanMain)
             .font(.infanFootnoteBold)
             .padding(.bottom)
             
             MainColorButton(text: "확인") {
-                isShowingAuctionNoticeSheet = false
+                if isShowingNoticeChecked {
+                    loginStore.warning = false
+                    isShowingAuctionNoticeSheet = false
+                }
+                print("isShowingAuctionNoticeSheet ----\(isShowingAuctionNoticeSheet)")
+                
             }
         }
         .horizontalPadding()

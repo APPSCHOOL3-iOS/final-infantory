@@ -38,6 +38,7 @@ final class LoginStore: ObservableObject {
                 try await fetchUser(userUID: userUid)
             }
         }
+//        UserDefaults.standard.removeObject(forKey: "warning")
     }
     
     func kakaoAuthSignIn(completion: @escaping (Bool) -> Void) {

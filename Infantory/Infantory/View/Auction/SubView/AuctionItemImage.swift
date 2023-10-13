@@ -24,7 +24,7 @@ struct AuctionItemImage: View {
                             .scaledToFill()
                             .clipped()
                         
-                    case .failure(_):
+                    case .failure:
                         Image(systemName: "xmark")
                             .symbolVariant(.circle.fill)
                             .foregroundColor(.white)
