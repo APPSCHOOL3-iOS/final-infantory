@@ -19,7 +19,7 @@ struct ApplyDetailView: View {
                     ApplyBuyerView(product: product)
                 HStack {
                     if product.influencerProfile == nil {
-                        Image("Influencer1")
+                        Image("smallAppIcon")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 40, height: 40)

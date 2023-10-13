@@ -18,7 +18,7 @@ struct SearchInfluencerView: View {
                 ForEach(searchStore.influencer) { influencer in
                     HStack {
                         if influencer.profileImageURLString == nil {
-                            Image("Influencer1")
+                            Image("smallAppIcon")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
@@ -56,7 +56,7 @@ struct SearchInfluencerView: View {
                 ForEach(searchStore.influencer.prefix(5)) { influencer in
                     HStack {
                         if influencer.profileImageURLString == nil {
-                            Image("Influencer1")
+                            Image("smallAppIcon")
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
