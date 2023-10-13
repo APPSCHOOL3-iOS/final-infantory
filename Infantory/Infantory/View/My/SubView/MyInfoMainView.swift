@@ -11,31 +11,26 @@ import Photos
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @StateObject var myStore: MyStore = MyStore()
     
+    @State private var selectedUIImage: UIImage?
+    @State private var selectedImage: Image?
+    @State private var image: Image?
     var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    CachedImage(url: photosSelectorStore.profileImage ?? "") { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: 60, height: 60)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 60, height: 60)
-                                .clipShape(Circle())
-                                .clipped()
-                        case .failure:
-                            Image(systemName: "person.circle.fill")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        @unknown default:
-                            EmptyView()
-                        }
+                    if selectedImage != nil {
+                        selectedImage?
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 65, height: 65)
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .foregroundColor(.gray)
+                            .frame(width: 65, height: 65)
                     }
                     
                     VStack(alignment: .leading) {
@@ -59,7 +54,7 @@ struct MyInfoMainView: View {
                 HStack(spacing: 20) {
                     NavigationLink {
                         // 프로필 관리 버튼 액션
-                        ProfileEditView()
+                        ProfileEditView(myStore: myStore, selectedImage: $selectedImage)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -219,16 +214,11 @@ struct MyInfoMainView: View {
                 .padding(.horizontal)
                 .foregroundColor(.primary)
                 .listStyle(.plain)
-            }
-            .padding()
-            .navigationTitle("")
-            .onAppear {
-                photosSelectorStore.getProfileImageDownloadURL()
+                
             }
         }
     }
 }
-
 struct MyInfoMainView_Previews: PreviewProvider {
     static var previews: some View {
         MyInfoMainView()
