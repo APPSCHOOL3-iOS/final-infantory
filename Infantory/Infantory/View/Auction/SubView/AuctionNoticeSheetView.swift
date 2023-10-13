@@ -59,7 +59,7 @@ struct AuctionNoticeSheetView: View {
                 if isShowingNoticeChecked {
                     loginStore.warning = false
                     isShowingAuctionNoticeSheet = false
-                }else {
+                } else {
                     isShowingAuctionNoticeSheet = false
                 }
                 
