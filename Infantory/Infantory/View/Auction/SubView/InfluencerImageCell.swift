@@ -11,7 +11,7 @@ struct InfluencerImageCell: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                Image("Influencer1")
+                Image("smallAppIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 150, height: 200)

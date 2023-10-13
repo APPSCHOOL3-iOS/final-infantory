@@ -12,58 +12,6 @@ struct AuctionProductListCellView: View {
     var product: AuctionProduct
     
     var body: some View {
-        VStack {
-            HStack {
-                if product.influencerProfile == nil {
-                    Image("Influencer1")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .cornerRadius(20)
-                } else {
-                    CachedImage(url: product.influencerProfile ?? "") { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                            
-                        case .failure:
-                            Image(systemName: "xmark")
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                            
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                }
-                Text(product.influencerNickname)
-                    .font(.infanFootnoteBold)
-            
-                Spacer()
-
-                if product.auctionFilter == .planned {
-                    Text("\(Image(systemName: "timer")) \(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
-                        .font(.infanFootnote)
-                        .foregroundColor(.infanOrange)
-                } else {
-                    TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
-                }
-            }
-        }
-        .padding(.top, 10)
-        .padding(.bottom, 6)
-        .horizontalPadding()
-        
         NavigationLink {
             AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
         } label: {
@@ -131,7 +79,7 @@ struct AuctionProductListCellView: View {
                     } else {
                         ZStack(alignment: .topLeading) {
                             
-                            Image("appleLogo")
+                            Image("smallAppIcon")
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: (.screenWidth - 100) / 2,

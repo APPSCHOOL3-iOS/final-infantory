@@ -16,6 +16,8 @@ struct ProductListView: View {
         ScrollView {
             VStack {
                 ForEach(auctionViewModel.filteredProduct) { product in
+
+                    AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
                     AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                 }
             }

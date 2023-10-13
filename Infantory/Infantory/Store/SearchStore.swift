@@ -6,15 +6,15 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseFirestore
 
-class SearchStore: ObservableObject {
+@MainActor
+final class SearchStore: ObservableObject {
     
     @Published var searchArray: Set<String> = []
     @Published var selectedCategory: SearchResultCategory = .total
     @Published var influencer: [User] = []
 
-    
     init() {
         fetchSearchHistory()
     }
@@ -58,7 +58,6 @@ class SearchStore: ObservableObject {
         }
     }
     
-    @MainActor
     func findSearchKeyword(keyword: String) {
         Task {
             try await fetchInfluencer(keyword: keyword)
@@ -68,7 +67,6 @@ class SearchStore: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchInfluencer(keyword: String) async throws {
         influencer = []
         let query = Firestore.firestore().collection("Users").whereField("isInfluencer", isEqualTo: "influencer")
@@ -90,4 +88,9 @@ enum SearchResultCategory: String, CaseIterable {
     case influencer = "인플루언서"
     case auction = "경매"
     case apply = "응모"
+}
+
+enum SearchResultCount {
+    case underLimit
+    case overLimit
 }

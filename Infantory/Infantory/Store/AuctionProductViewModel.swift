@@ -82,6 +82,8 @@ final class AuctionProductViewModel: ObservableObject {
             }
         }
     }
+    
+    @MainActor
     func fetchSearchActionProduct(keyword: String) async throws {
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
