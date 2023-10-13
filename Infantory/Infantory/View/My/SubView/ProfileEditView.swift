@@ -47,9 +47,9 @@ struct ProfileEditView: View {
                                                              phoneNumber: phoneNumber) {_ in
                                     print("유저 업데이트 됨")
                                 }
+                                dismiss()
                             }
                         }
-                        //                    dismiss()
                     }
                 }
                 .padding(.bottom)
