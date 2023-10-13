@@ -15,8 +15,6 @@ struct AuctionDetailView: View {
     
     @ObservedObject var auctionStore: AuctionStore
     
-    @State var timer: String = ""
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
@@ -34,6 +32,7 @@ struct AuctionDetailView: View {
             }
             Footer(auctionStore: auctionStore)
         }
+        .navigationBar(title: "상세정보")
     }
 }
 

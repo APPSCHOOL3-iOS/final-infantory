@@ -22,8 +22,28 @@ final class AuctionProductViewModel: ObservableObject {
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
-        DispatchQueue.main.async {
-            self.auctionProduct = products
+        self.auctionProduct = products
+        await fetchInfluencerProfile(products: products)
+    }
+    
+    @MainActor
+    func fetchInfluencerProfile(products: [AuctionProduct]) {
+        for product in products {
+            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
+            documentReference.getDocument { (document, _ ) in
+                if let document = document, document.exists {
+                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].influencerProfile = influencerProfile
+                        self.updateFilter(filter: self.selectedFilter)
+                    }
+                } else {
+#if DEBUG
+                    print("인플루언서 프로필이 없습니다")
+#endif
+                }
+                
+            }
         }
     }
     
