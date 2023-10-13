@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProductListView: View {
     
-    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     @State private var heartButton: Bool = false
     
@@ -17,6 +16,7 @@ struct ProductListView: View {
         ScrollView {
             VStack {
                 ForEach(auctionViewModel.filteredProduct) { product in
+
                     AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
                     AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                 }

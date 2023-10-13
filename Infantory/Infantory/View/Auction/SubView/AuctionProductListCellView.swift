@@ -10,15 +10,14 @@ import SwiftUI
 struct AuctionProductListCellView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     var product: AuctionProduct
+    
     var body: some View {
-        
         NavigationLink {
             AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
         } label: {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 16) {
                     if product.productImageURLStrings.count > 0 {
-                        
                         CachedImage(url: product.productImageURLStrings[0]) { phase in
                             switch phase {
                             case .empty:
@@ -37,7 +36,7 @@ struct AuctionProductListCellView: View {
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
                                         
-                                        Text("응모 종료")
+                                        Text("경매 종료")
                                             .padding(10)
                                             .bold()
                                             .foregroundColor(.white)

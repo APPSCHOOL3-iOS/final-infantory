@@ -15,8 +15,6 @@ struct AuctionDetailView: View {
     
     @ObservedObject var auctionStore: AuctionStore
     
-    @State var timer: String = ""
-    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
@@ -24,7 +22,7 @@ struct AuctionDetailView: View {
                 
                 AuctionBuyerView(auctionStore: auctionStore)
                 
-                ProfileRowView(nickname: auctionStore.product.influencerNickname)
+                ProfileRowView(imageURLString: auctionStore.product.influencerProfile ?? "", nickname: auctionStore.product.influencerNickname)
                 
                 AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
@@ -34,16 +32,17 @@ struct AuctionDetailView: View {
             }
             Footer(auctionStore: auctionStore)
         }
+        .navigationBar(title: "상세정보")
     }
 }
 
-struct AuctionDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel(), auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
-        }
-    }
-}
+//struct AuctionDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationStack {
+//            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel(), auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
+//        }
+//    }
+//}
 
 struct Footer: View {
     @EnvironmentObject var loginStore: LoginStore
@@ -56,6 +55,7 @@ struct Footer: View {
     @State private var showAlert: Bool = false
     
     @State private var isShowingLoginSheet: Bool = false
+    @State private var isHighestBidder: Bool = false
     
     var body: some View {
         VStack {
@@ -67,18 +67,20 @@ struct Footer: View {
                 }
                 if loginStore.warning == false {
                     isShowingAuctionBidSheet = true
+                } else {
+                    isShowingAuctionNoticeSheet = true
                 }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
-                    Text("입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
-                        .font(.infanHeadlineBold)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanMain)
-                                .frame(width: CGFloat.screenWidth - 40, height: 54)
-                        )
+                        RoundedRectangle(cornerRadius: 10)
+                        .fill(isHighestBidder ? Color.infanGray : Color.infanMain)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            .overlay {
+                                Text( isHighestBidder ? "현재 최고입찰자입니다" : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
+                                    .font(.infanHeadlineBold)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
                 } else if auctionStore.product.auctionFilter == .planned {
                     Text("경매 시작 전입니다.")
                         .font(.infanHeadlineBold)
@@ -101,16 +103,11 @@ struct Footer: View {
                         )
                 }
             }
-            .disabled(auctionStore.remainingTime <= 0)
+            .disabled(auctionStore.product.auctionFilter == .close || auctionStore.product.auctionFilter == .planned || isHighestBidder)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 110)
-        .background(
-            Rectangle()
-                .stroke(lineWidth: 0.1)
-                .background(.white)
-        )
         .offset(x: 0, y: 40)
         .sheet(isPresented: loginStore.warning ? $isShowingAuctionNoticeSheet : loginStore.$warning, onDismiss: {
             isShowingAuctionBidSheet.toggle()
@@ -130,7 +127,11 @@ struct Footer: View {
             LoginSheetView()
                 .environmentObject(loginStore)
         }
-        
+        .onAppear {
+            if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
+                isHighestBidder = true
+            }
+        }
     }
 }
 
