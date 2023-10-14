@@ -117,9 +117,10 @@ final class ApplyProductStore: ObservableObject {
                         }
                     }
                 }
+                
                 let applyActivityInfo = ApplyActivityInfo(productId: product.id ?? "",
-                                                          ticketCount: product.applyUserIDs.count,
-                                                               timestamp: Date().timeIntervalSince1970)
+                                                          ticketCount: product.applyUserIDs.filter { $0 == userUID }.count,
+                                                          timestamp: Date().timeIntervalSince1970)
                 self.updateAuctionActivityInfo(applyActivityInfo: applyActivityInfo)
             } else {
                 #if DEBUG
