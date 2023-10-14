@@ -138,7 +138,7 @@ final class ApplyProductStore: ObservableObject {
             do {
                 var applyActivityInfos = try document?.data(as: User.self).applyActivityInfos
                 applyActivityInfos?.append(applyActivityInfo)
-                let dicApplyActivityInfos = try? applyActivityInfos?.asDictionary()
+                let dicApplyActivityInfos = try? applyActivityInfos?.map { try $0.asDictionary() }
                 Firestore.firestore().collection("Users").document(userUID).updateData(["applyActivityInfos": dicApplyActivityInfos ?? []])
             } catch {
                 print("DEBUG: format fail")
