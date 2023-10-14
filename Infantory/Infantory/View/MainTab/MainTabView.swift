@@ -9,8 +9,6 @@ import SwiftUI
 import Photos
 
 struct MainTabView: View {
-    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
-    
     @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
@@ -42,8 +40,8 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            ActivityMainView(auctionProducts: auctionViewModel.auctionProduct,
-                             auctionActivityInfos: loginStore.currentUser.auctionActivityInfos ?? [])
+            ActivityMainView(myAuctionActivityInfos: loginStore.currentUser.auctionActivityInfos ?? [],
+                             myApplyActivityInfos: loginStore.currentUser.applyActivityInfos ?? [])
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
                         .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
@@ -62,11 +60,6 @@ struct MainTabView: View {
         
         .tint(Color.infanMain)
         .onAppearFetchUser()
-        .onAppear {
-            Task {
-                try await auctionViewModel.fetchAuctionProducts()
-            }
-        }
     }
 }
 

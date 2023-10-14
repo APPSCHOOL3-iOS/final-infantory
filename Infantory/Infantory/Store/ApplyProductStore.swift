@@ -117,10 +117,31 @@ final class ApplyProductStore: ObservableObject {
                         }
                     }
                 }
+                let applyActivityInfo = ApplyActivityInfo(productId: product.id ?? "",
+                                                          ticketCount: product.applyUserIDs.count,
+                                                               timestamp: Date().timeIntervalSince1970)
+                self.updateAuctionActivityInfo(applyActivityInfo: applyActivityInfo)
             } else {
                 #if DEBUG
                 print("Document does not exist")
                 #endif
+            }
+        }
+    }
+    
+    func updateAuctionActivityInfo(applyActivityInfo: ApplyActivityInfo) {
+        let userUID = Auth.auth().currentUser?.uid ?? ""
+        Firestore.firestore().collection("Users").document(userUID).getDocument { document, error in
+            if let error = error {
+                print("DEBUG: applyActivityInfo fetch Error: \(error)")
+            }
+            do {
+                var applyActivityInfos = try document?.data(as: User.self).applyActivityInfos
+                applyActivityInfos?.append(applyActivityInfo)
+                let dicApplyActivityInfos = try? applyActivityInfos?.asDictionary()
+                Firestore.firestore().collection("Users").document(userUID).updateData(["applyActivityInfos": dicApplyActivityInfos ?? []])
+            } catch {
+                print("DEBUG: format fail")
             }
         }
     }
