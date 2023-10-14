@@ -8,38 +8,35 @@
 import SwiftUI
 
 struct ActivityMainView: View {
-    @ObservedObject var activityStore: ActivityStore = ActivityStore()
-    //    @ObservedObject var auctionStore: AuctionStore
+    @State var myAuctionInfos: [AuctionActivityData] = []
+    let myAuctionActivityInfos: [AuctionActivityInfo]
     
-    @EnvironmentObject var loginStore: LoginStore
+    @State var myApplyInfos: [ApplyActivityData] = []
+    let myApplyActivityInfos: [ApplyActivityInfo]
     
     @State private var selectedFilter: ActivityOption = .auction
-    
-    let auctionProducts: [AuctionProduct]
-    let auctionActivityInfos: [AuctionActivityInfo]
     
     var body: some View {
         VStack {
             Section {
                 ScrollView {
                     if selectedFilter.title == "경매" {
-                        Text("\(activityStore.auctionActivityDatas.count)")
-                        ForEach(activityStore.auctionActivityDatas, id: \.productId ) { activityData in
-                            ActivityRow(imageURLString: activityData.imageURLString,
-                                        text1: activityData.winningPrice,
-                                        text2: activityData.price,
-                                        productName: activityData.productName,
-                                        remainingTime: activityData.remainingTime)
+                        ForEach(myAuctionInfos, id: \.productId ) { info in
+                            ActivityRow(imageURLString: info.imageURLString,
+                                        text1: info.winningPrice,
+                                        text2: info.price,
+                                        productName: info.productName,
+                                        remainingTime: info.remainingTime)
                             .padding()
                             Divider()
                         }
                     } else {
-                        ForEach(activityStore.applyActivityDatas, id: \.productId) { activityData in
-                            ActivityRow(imageURLString: activityData.imageURLString,
-                                        text1: activityData.totalApplyCount,
-                                        text2: activityData.myApplyCount,
-                                        productName: activityData.productName,
-                                        remainingTime: activityData.remainingTime)
+                        ForEach(myApplyInfos, id: \.productId) { info in
+                            ActivityRow(imageURLString: info.imageURLString,
+                                        text1: info.totalApplyCount,
+                                        text2: info.myApplyCount,
+                                        productName: info.productName,
+                                        remainingTime: info.remainingTime)
                             .padding()
                             Divider()
                         }
@@ -51,20 +48,26 @@ struct ActivityMainView: View {
             }
         }
         .onAppear {
-            activityStore.fetchMyAuctionProducts(auctionProducts: auctionProducts, auctionActivityInfos: auctionActivityInfos)
+            Task {
+                let acticityInfo = ActivityInfo(auctionActivityInfos: myAuctionActivityInfos,
+                                                applyActivityInfos: myApplyActivityInfos)
+                
+                myAuctionInfos = await acticityInfo.getMyAuctionInfos()
+                myApplyInfos = await acticityInfo.getMyApplyInfos()
+            }
         }
     }
 }
 
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityMainView(auctionProducts: [], auctionActivityInfos: [])
+        ActivityMainView(myAuctionActivityInfos: [], myApplyActivityInfos: [])
             .environmentObject(LoginStore())
     }
 }
 
 struct ActivityRow: View {
-    let imageURLString: [String]
+    let imageURLString: String
     let text1: Int
     let text2: Int
     let productName: String
@@ -72,12 +75,12 @@ struct ActivityRow: View {
     
     var body: some View {
         HStack {
-//            AsyncImage(url: URL(string: imageURLString[0])!) { image in
-//                image.image?
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(width: 50)
-//            }
+            AsyncImage(url: URL(string: imageURLString)!) { image in
+                image.image?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+            }
             Text("\(productName)")
                 .frame(width: 80)
             
