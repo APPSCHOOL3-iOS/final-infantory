@@ -17,7 +17,7 @@ struct ActivityOptionBar: View {
             ForEach(ActivityOption.allCases, id: \.rawValue) { item in
                 VStack {
                     Text(item.title)
-                        .font(.subheadline)
+                        .font(.infanBody)
                         .fontWeight(selectedFilter == item ? .semibold : .regular)
                         .foregroundColor(selectedFilter == item ? .black : .gray)
                     
@@ -32,11 +32,9 @@ struct ActivityOptionBar: View {
                             .frame(height: 3)
                     }
                 }
+                .contentShape(Rectangle())
                 .onTapGesture {
                     self.selectedFilter = item
-//                    withAnimation(.easeInOut) {
-//                        
-//                    }
                 }
             }
         }

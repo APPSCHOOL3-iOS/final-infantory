@@ -12,7 +12,7 @@ struct TimerView: View {
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             if remainingTime <= 0 {
                 Text("\(Image(systemName: "timer")) 종료됨")
                     .font(.infanFootnote)

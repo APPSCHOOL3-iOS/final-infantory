@@ -26,7 +26,7 @@ struct ActivityMainView: View {
                                         text1: info.winningPrice,
                                         text2: info.price,
                                         productName: info.productName,
-                                        remainingTime: info.remainingTime)
+                                        remainingTime: info.remainingTime, selectedFilter: $selectedFilter)
                             .padding()
                             Divider()
                         }
@@ -36,7 +36,7 @@ struct ActivityMainView: View {
                                         text1: info.totalApplyCount,
                                         text2: info.myApplyCount,
                                         productName: info.productName,
-                                        remainingTime: info.remainingTime)
+                                        remainingTime: info.remainingTime, selectedFilter: $selectedFilter)
                             .padding()
                             Divider()
                         }
@@ -54,6 +54,12 @@ struct ActivityMainView: View {
                 
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
+                
+                //가장 최근에 입찰한 순으로 정렬하고 싶음, 근데 여기서하니까 속도도 느리구
+                myAuctionInfos.sort { pro1, pro2 in
+                    pro1.timestamp > pro2.timestamp
+                }
+                print("myAuctionInfos...\(myAuctionInfos)")
             }
         }
     }
@@ -61,8 +67,10 @@ struct ActivityMainView: View {
 
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
-        ActivityMainView(myAuctionActivityInfos: [], myApplyActivityInfos: [])
-            .environmentObject(LoginStore())
+        NavigationStack {
+            ActivityMainView(myAuctionActivityInfos: [], myApplyActivityInfos: [])
+                .environmentObject(LoginStore())
+        }
     }
 }
 
@@ -73,29 +81,53 @@ struct ActivityRow: View {
     let productName: String
     let remainingTime: Double
     
+    @Binding var selectedFilter: ActivityOption
+    
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: imageURLString)!) { image in
-                image.image?
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50)
+            CachedImage(url: imageURLString) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(20)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 90, height: 90)
+                case .failure:
+                    Image(systemName: "smallAppIcon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 90, height: 90)
+                        .cornerRadius(20)
+                    
+                @unknown default:
+                    EmptyView()
+                }
             }
-            Text("\(productName)")
-                .frame(width: 80)
             
-            VStack {
-                Text("\(text1)")
-                    .font(.infanFootnoteBold)
-                    .padding()
-                Text("\(text2)")
-                    .foregroundColor(.infanGray)
-                    .font(.infanFootnote)
+            VStack(alignment: .leading) {
+                Text("\(productName)")
+                    .font(.infanHeadlineBold)
+                    .padding(.bottom, 15)
+                Group {
+                    Text(selectedFilter.title == "경매" ? "\(text1)원" : "전체 응모수 \(text1)회")
+                        .font(.infanFootnoteBold)
+                        .padding(.bottom, 5)
+                        
+                    Text(selectedFilter.title == "경매" ? "\(text2)원" : "사용 응모권 \(text2)회")
+                        .foregroundColor(.infanGray)
+                        .font(.infanFootnote)
+                }
             }
             
             Spacer()
             TimerView(remainingTime: remainingTime)
                 .frame(width: 100)
+                .lineLimit(1)
         }
     }
 }
