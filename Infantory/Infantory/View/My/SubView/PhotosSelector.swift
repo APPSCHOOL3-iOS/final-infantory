@@ -13,9 +13,10 @@ struct PhotosSelector: View {
     @State private var cameraSheetShowing = false
     
     @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
+    @Binding var selectedUIImage: UIImage?
     @Binding var selectedUIImageString: String?
-    @Binding var selectedImage: Image?
+    
+    @State var selectedImage: Image?
     @State var image: Image?
     
     func loadImage() {
@@ -30,12 +31,12 @@ struct PhotosSelector: View {
                 image
                     .resizable()
                     .clipShape(Circle())
-                    .frame(width: 65, height: 65)
+                    .frame(width: 80, height: 80)
             } else {
                 Image(systemName: "person.circle.fill")
                     .resizable()
                     .foregroundColor(.gray)
-                    .frame(width: 65, height: 65)
+                    .frame(width: 80, height: 80)
             }
             
             VStack {
@@ -53,7 +54,7 @@ struct PhotosSelector: View {
                             cameraSheetShowing = true
                         } label: {
                             Text("사진촬영")
-                                .font(.infanHeadlineBold)
+                                .font(.infanBody)
                                 .foregroundColor(.infanDarkGray)
                         }
                     }
@@ -71,7 +72,7 @@ struct PhotosSelector: View {
                             showImagePicker.toggle()
                         } label: {
                             Text("앨범에서 선택")
-                                .font(.infanHeadlineBold)
+                                .font(.infanBody)
                                 .foregroundColor(.infanDarkGray)
                         }
                     }
@@ -81,7 +82,6 @@ struct PhotosSelector: View {
         }
         .sheet(isPresented: $showImagePicker, onDismiss: {
             loadImage()
-            selectedImage = image
         }) {
             ProfileImagePicker(selectedUIImageString: $selectedUIImageString, selectedUIImage: $selectedUIImage)
         }
@@ -90,9 +90,9 @@ struct PhotosSelector: View {
         }
     }
 }
-
-struct PhotosSelector_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotosSelector(selectedUIImageString: .constant(nil), selectedImage: .constant(nil))
-    }
-}
+//
+//struct PhotosSelector_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PhotosSelector(selectedUIImageString: .constant(nil), selectedImage: .constant(nil))
+//    }
+//}

@@ -13,7 +13,7 @@ struct MyMainView: View {
     @State private var isShowingLoginSheet: Bool = false
     
     var body: some View {
-        VStack {
+        NavigationStack {
             if loginStore.userUid.isEmpty {
                 Button(action: {
                     isShowingLoginSheet = true

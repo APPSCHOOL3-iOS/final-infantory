@@ -18,36 +18,29 @@ struct ApplyDetailView: View {
             ScrollView {
                     ApplyBuyerView(product: product)
                 HStack {
-                    if product.influencerProfile == nil {
-                        Image("smallAppIcon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 40, height: 40)
-                            .cornerRadius(20)
-                    } else {
-                        CachedImage(url: product.influencerProfile ?? "") { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .scaledToFill()
-                                    .frame(width: (.screenWidth - 100) / 2,
-                                           height: (.screenWidth - 100) / 2)
-                                    .clipped()
-                            case .success(let image):
-                                image
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
-                                //
-                            case .failure:
-                                Image(systemName: "xmark")
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
-                                
-                            @unknown default:
-                                EmptyView()
-                            }
+                    CachedImage(url: product.influencerProfile ?? "") { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                                .scaledToFill()
+                                .frame(width: (.screenWidth - 100) / 2,
+                                       height: (.screenWidth - 100) / 2)
+                                .clipped()
+                        case .success(let image):
+                            image
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
+                            //
+                        case .failure:
+                            Image("smallAppIcon")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 40, height: 40)
+                                .cornerRadius(20)
+                            
+                        @unknown default:
+                            EmptyView()
                         }
                     }
                    

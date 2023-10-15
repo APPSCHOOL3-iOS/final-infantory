@@ -16,7 +16,6 @@ struct ToastMessage<Content: View>: View {
     var body: some View {
         if isPresented {
             VStack {
-                Spacer()
                 content
                     .padding()
                     .background(Color.infanMain.opacity(0.7))

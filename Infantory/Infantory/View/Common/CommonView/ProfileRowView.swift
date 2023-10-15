@@ -35,7 +35,7 @@ struct ProfileRowView: View {
                                     .clipShape(Circle())
                                 
                             case .failure:
-                                Image(systemName: "xmark")
+                                Image(systemName: "smallAppIcon")
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 40, height: 40)
                                     .cornerRadius(20)

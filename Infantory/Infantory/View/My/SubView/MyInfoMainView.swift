@@ -12,211 +12,212 @@ import Photos
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
-    @StateObject var myStore: MyStore = MyStore()
-    
-    @State private var selectedUIImage: UIImage?
-    @State private var selectedImage: Image?
-    @State private var image: Image?
     var body: some View {
         NavigationStack {
             ScrollView {
-                HStack {
-                    if selectedImage != nil {
-                        selectedImage?
-                            .resizable()
-                            .clipShape(Circle())
-                            .frame(width: 65, height: 65)
-                    } else {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .foregroundColor(.gray)
-                            .frame(width: 65, height: 65)
+                // 프사이미지, 닉네임, 응모권 관심상품
+                VStack(spacing: 20) {
+                    HStack(spacing: 16) {
+                        CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .frame(width: 80, height: 80)
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .frame(width: 80, height: 80)
+                                
+                            case .failure(let error):
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .frame(width: 80, height: 80)
+                            }
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("\(loginStore.currentUser.name)")
+                                .font(.infanTitle2)
+                            
+                            HStack {
+                                HStack {
+                                    Text("응모권 \(loginStore.totalApplyTicketCount)")
+                                }
+                                
+                                HStack {
+                                    Text("관심상품 0")
+                                }
+                            }
+                            .font(.infanFootnote)
+                            .foregroundColor(Color.infanDarkGray)
+                        }
+                        Spacer()
                     }
                     
-                    VStack(alignment: .leading) {
-                        Text("\(loginStore.currentUser.name)")// 내 이름
-                            .font(.infanTitle2)
-                            .padding(.bottom, 1)
-                        //                            Text("\(loginStore.currentUser.email)")// 내 이메일
-                        HStack {
-                            Text("응모권")
-                            Text("\(loginStore.totalApplyTicketCount)")
-                                .font(.infanHeadlineBold)
-                            Text("관심상품")
-                            Text("0")
-                                .font(.infanHeadlineBold)
+                    // 프로필 관리, 배송지 관리 버튼
+                    HStack(spacing: 10) {
+                        NavigationLink {
+                            ProfileEditView(nickName: loginStore.currentUser.nickName,
+                                            phoneNumber: loginStore.currentUser.phoneNumber)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .strokeBorder(Color.infanDarkGray, lineWidth: 1)
+                                    .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                    .foregroundColor(.white)
+                                
+                                Text("프로필 관리")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanDarkGray)
+                            }
+                        }
+                        NavigationLink {
+                            // 배송지 관리
+                            MyAddressMainView()
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .strokeBorder(Color.infanDarkGray, lineWidth: 1)
+                                    .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                    .foregroundColor(.white)
+                                
+                                Text("배송지 관리")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanDarkGray)
+                            }
                         }
                     }
-                    .padding(.leading)
-                    Spacer()
-                }
-                .padding(.leading, 23)
-                HStack(spacing: 20) {
-                    NavigationLink {
-                        // 프로필 관리 버튼 액션
-                        ProfileEditView(myStore: myStore, selectedImage: $selectedImage)
-                    } label: {
+                    
+                    // 상품 내역, 결제완료~배송완료
+                    VStack(spacing: 16) {
+                        HStack(alignment: .top) {
+                            Text("상품 내역")
+                                .font(.infanHeadlineBold)
+                            Spacer()
+                        }
+                        
+                        // 결제완료 준비중 배송중 배송완료
+                        
                         ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .frame(width: 160, height: 30)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.infanDarkGray, lineWidth: 1)
-                                )
-                                .foregroundColor(.white)
-                                .padding(2)
-                            Text("프로필 관리")
-                                .font(.infanHeadlineBold)
-                                .foregroundColor(.infanDarkGray)
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanLightGray.opacity(0.3))
+                            
+                            HStack {
+                                VStack(spacing: 8) {
+                                    Text("0")
+                                        .foregroundColor(.infanMain)
+                                        .font(.infanHeadlineBold)
+                                    Text("결제완료")
+                                        .font(.infanFootnote)
+                                }
+                                .frame(width: (.screenWidth - 70) / 4)
+                                
+                                Rectangle()
+                                    .fill(Color.infanLightGray)
+                                    .frame(width: 1)
+                                
+                                VStack(spacing: 8) {
+                                    Text("0")
+                                        .font(.infanHeadlineBold)
+                                    Text("준비중")
+                                        .font(.infanFootnote)
+                                }
+                                .frame(width: (.screenWidth - 70) / 4)
+                                
+                                VStack(spacing: 8) {
+                                    Text("0")
+                                        .font(.infanHeadlineBold)
+                                    Text("배송중")
+                                        .font(.infanFootnote)
+                                }
+                                .frame(width: (.screenWidth - 70) / 4)
+                                
+                                VStack(spacing: 8) {
+                                    Text("0")
+                                        .font(.infanHeadlineBold)
+                                    Text("배송완료")
+                                        .font(.infanFootnote)
+                                }
+                                .frame(width: (.screenWidth - 70) / 4)
+                                
+                            }
+                            .padding(.vertical, 16)
+                            .foregroundColor(Color.black)
                         }
                     }
-                    NavigationLink {
-                        // 배송지 관리
-                        MyAddressMainView()
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .frame(width: 160, height: 30)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color.infanDarkGray, lineWidth: 1)
-                                )
-                                .foregroundColor(.white)
-                                .padding(2)
-                            Text("배송지 관리")
-                                .font(.infanHeadlineBold)
-                                .foregroundColor(.infanDarkGray)
+                    
+                    // 입찰내역, 응모내역, 결제정보, 로그아웃
+                    VStack(alignment: .leading, spacing: 16) {
+                        NavigationLink {
+                            Text("입찰 내역이 보여질 화면입니다.")
+                        } label: {
+                            HStack {
+                                Image(systemName: "list.bullet.rectangle.portrait")
+                                    .frame(width: 24)
+                                
+                                Text("입찰내역")
+                                    .font(.infanHeadline)
+                                Spacer()
+                            }
                         }
-                    }
-                }
-                .padding(.vertical)
-                
-                Divider()
-                VStack {
-                    HStack(alignment: .top) {
-                        Text("최근 주문 내역")
-                            .font(.infanHeadlineBold)
-                        Spacer()
-                    }
-                    .padding(.horizontal)
-                    HStack {
-                        VStack(spacing: 5) {
-                            Text("0")
-                                .font(.infanTitle2)
-                            Text("결제완료")
-                                .font(.infanFootnote)
+                        Divider()
+                        NavigationLink {
+                            Text("응모 내역이 보여질 화면입니다.")
+                        } label: {
+                            HStack {
+                                Image("apply")
+                                    .frame(width: 24)
+                                
+                                Text("응모내역")
+                                    .font(.infanHeadline)
+                                Spacer()
+                            }
                         }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
-                        .cornerRadius(10)
-                        VStack(spacing: 5) {
-                            Text("0")
-                                .font(.infanTitle2)
-                            Text("준비중")
-                                .font(.infanFootnote)
+                        Divider()
+                        NavigationLink {
+                            Text("결제정보가 보여질 화면입니다.")
+                        } label: {
+                            HStack {
+                                Image(systemName: "tag")
+                                    .frame(width: 24)
+                                
+                                Text("결제정보")
+                                    .font(.infanHeadline)
+                                Spacer()
+                            }
                         }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
-                        .cornerRadius(10)
-                        VStack(spacing: 5) {
-                            Text("0")
-                                .font(.infanTitle2)
-                            Text("배송중")
-                                .font(.infanFootnote)
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
-                        .cornerRadius(10)
-                        VStack(spacing: 5) {
-                            Text("0")
-                                .font(.infanTitle2)
-                            Text("배송완료")
-                                .font(.infanFootnote)
-                        }
-                        .frame(width: 50, height: 50)
-                        .padding()
-                        .background(Color.infanLightGray)
-                        .foregroundColor(.infanGray)
-                        .cornerRadius(10)
-                    }
-                    .padding(.horizontal)
-                }
-                Divider()
-                
-                LazyVStack(alignment: .leading) {
-                    NavigationLink {
-                        Text("입찰 내역이 보여질 화면입니다.")
-                    } label: {
+                        Divider()
                         HStack {
-                            Image(systemName: "list.bullet.rectangle.portrait")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 5, height: 25)
-                                .horizontalPadding()
-                            Text("입찰내역")
-                                .frame(height: 50)
-                            Spacer()
+                            Button(action: {
+                                loginStore.kakaoLogout()
+                            }, label: {
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                    .frame(width: 24)
+                                
+                                Text("로그아웃")
+                                    .font(.infanHeadline)
+                                Spacer()
+                            })
+                            .foregroundColor(.infanRed)
                         }
                     }
-                    Divider()
-                    NavigationLink {
-                        Text("응모 내역이 보여질 화면입니다.")
-                    } label: {
-                        HStack {
-                            Image(systemName: "ticket")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 5, height: 20)
-                                .horizontalPadding()
-                            Text("응모내역")
-                                .frame(height: 50)
-                            Spacer()
-                        }
-                    }
-                    Divider()
-                    NavigationLink {
-                        Text("결제정보가 보여질 화면입니다.")
-                    } label: {
-                        HStack {
-                            Image(systemName: "tag")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 5, height: 25)
-                                .horizontalPadding()
-                            Text("결제정보")
-                                .frame(height: 50)
-                            Spacer()
-                        }
-                    }
-                    Divider()
-                    HStack {
-                        Button(action: {
-                            loginStore.kakaoLogout()
-                        }, label: {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 5, height: 25)
-                            Text("로그아웃")
-                                .frame(height: 50)
-                        })
-                        .foregroundColor(.infanRed)
-                        Spacer()
-                    }
-                    .padding(.horizontal)
+                    
+                    .foregroundColor(.primary)
+                    .listStyle(.plain)
+                    
                 }
-                .padding(.horizontal)
-                .foregroundColor(.primary)
-                .listStyle(.plain)
-                
+                .horizontalPadding()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("마이")
+                    .font(.infanHeadlineBold)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 struct MyInfoMainView_Previews: PreviewProvider {

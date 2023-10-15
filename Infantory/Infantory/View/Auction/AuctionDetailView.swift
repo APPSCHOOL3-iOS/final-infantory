@@ -36,31 +36,18 @@ struct AuctionDetailView: View {
     }
 }
 
-//struct AuctionDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationStack {
-//            AuctionDetailView(auctionProductViewModel: AuctionProductViewModel(), auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
-//        }
-//    }
-//}
-
 struct Footer: View {
     @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionStore: AuctionStore
-    
     @State private var isShowingAuctionNoticeSheet: Bool = false
-    
     @State private var isShowingAuctionBidSheet: Bool = false
-    
     @State private var showAlert: Bool = false
-    
     @State private var isShowingLoginSheet: Bool = false
     @State private var isHighestBidder: Bool = false
     
     var body: some View {
         VStack {
             ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
-                .offset(y: -350)
             Button {
                 if loginStore.userUid.isEmpty {
                     isShowingLoginSheet = true
