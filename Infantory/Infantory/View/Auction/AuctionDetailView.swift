@@ -54,7 +54,7 @@ struct Footer: View {
     @State private var showAlert: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @State private var isHighestBidder: Bool = false
-    
+    @State private var highestBidderState: Bool = false
     var body: some View {
         
         VStack {
@@ -135,7 +135,7 @@ struct Footer: View {
             
         })
         .sheet(isPresented: $isShowingAuctionBidSheet) {
-            AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
+            AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert, highestBidderState: $highestBidderState)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         }
@@ -147,6 +147,9 @@ struct Footer: View {
             if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
                 isHighestBidder = true
             }
+        }
+        .onChange(of: highestBidderState) { value in
+            isHighestBidder = value
         }
     }
 }
