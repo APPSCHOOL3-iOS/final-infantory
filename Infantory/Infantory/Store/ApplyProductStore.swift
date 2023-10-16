@@ -102,13 +102,13 @@ final class ApplyProductStore: ObservableObject {
                 // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
                 documentReference.updateData(["applyUserIDs": currentArray]) { (error) in
                     if error != nil {
-                        #if DEBUG
+#if DEBUG
                         print("Error updating document: (error)")
-                        #endif
+#endif
                     } else {
-                        #if DEBUG
+#if DEBUG
                         print("Document successfully updated")
-                        #endif
+#endif
                         Task {
                             try await self.addApplyofUser(ticketCount: ticketCount,
                                                           product: product,
@@ -123,9 +123,9 @@ final class ApplyProductStore: ObservableObject {
                                                           timestamp: Date().timeIntervalSince1970)
                 self.updateAuctionActivityInfo(applyActivityInfo: applyActivityInfo)
             } else {
-                #if DEBUG
+#if DEBUG
                 print("Document does not exist")
-                #endif
+#endif
             }
         }
     }
@@ -163,14 +163,19 @@ final class ApplyProductStore: ObservableObject {
             .collection("ApplyTickets")
             .addDocument(from: applyTicket)
     }
-
+    
     @MainActor
     func fetchSearchApplyProduct(keyword: String) async throws {
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
-        applyProduct = products.filter { product in
+        self.applyProduct = products
+        fetchInfluencerProfile(products: products)
+        applyProduct = applyProduct.filter { product in
             product.productName.localizedCaseInsensitiveContains(keyword)
+        }
+        applyProduct.sort {
+            $0.endRemainingTime > $1.endRemainingTime
         }
     }
     

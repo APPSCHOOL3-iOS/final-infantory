@@ -16,6 +16,7 @@ struct SearchMainView: View {
     @State private var isShowingSearchResult: Bool = false
     @State private var isShowingToastMessage: Bool = false
     var searchCategory: SearchResultCategory
+    @FocusState private var focus: String?
     var body: some View {
         VStack {
             VStack {
@@ -85,9 +86,13 @@ struct SearchMainView: View {
                         searchStore.addSearchHistory(keyword: searchText)
                         isShowingSearchResult = true
                     }
+                    .focused($focus, equals: searchText)
                     .submitLabel(.search)
                     .frame(width: .screenWidth - 72)
             }
+        }
+        .onAppear {
+            focus = searchText
         }
     }
 }

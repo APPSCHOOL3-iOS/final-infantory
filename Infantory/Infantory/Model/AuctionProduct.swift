@@ -23,7 +23,7 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     // 응모 시작일, 마감일
     var startDate: Date
     var endDate: Date
-    
+    var registerDate: Date
     var startRemainingTime: Double {
         return startDate.timeIntervalSince(Date())
     }
@@ -59,7 +59,7 @@ extension AuctionProduct {
         winningUserID: nil, // 낙찰자가 아직 없는 경우 nil로 설정
         startDate: Date(), // 현재 날짜로 설정
         endDate: Date().addingTimeInterval(24 * 60 * 60), // 현재 날짜로부터 7일 후로 설정
-        minPrice: 100, // 시작가
+        registerDate: Date(), minPrice: 100, // 시작가
         winningPrice: 100000 // 낙찰가는 아직 결정되지 않았으므로 0으로 설정
     )
 }

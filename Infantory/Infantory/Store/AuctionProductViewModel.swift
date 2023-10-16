@@ -38,17 +38,11 @@ final class AuctionProductViewModel: ObservableObject {
                         self.auctionProduct[index].influencerProfile = influencerProfile
                         self.updateFilter(filter: self.selectedFilter)
                     }
-                } else {
-#if DEBUG
-                    print("인플루언서 프로필이 없습니다")
-#endif
-                }
-                
+                }  
             }
         }
     }
     
-    @MainActor
     func updateFilter(filter: AuctionFilter) {
         switch filter {
         case .inProgress:
@@ -89,12 +83,16 @@ final class AuctionProductViewModel: ObservableObject {
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
-        auctionProduct = products.filter { product in
+        self.auctionProduct = products
+        fetchInfluencerProfile(products: products)
+        auctionProduct = auctionProduct.filter { product in
             product.productName.localizedCaseInsensitiveContains(keyword)
+        }
+        auctionProduct.sort {
+            $0.endRemainingTime > $1.endRemainingTime
         }
     }
     
-    @MainActor
     func findSearchKeyword(keyword: String) {
         Task {
             try await fetchSearchActionProduct(keyword: keyword)

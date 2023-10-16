@@ -45,7 +45,7 @@ struct ApplyBuyerView_Previews: PreviewProvider {
             winningUserID: "user1",
             startDate: Date(),
             endDate: Date().addingTimeInterval(86400), // 1 day from now
-            applyUserIDs: ["user2", "user3"],
+            registerDate: Date(), applyUserIDs: ["user2", "user3"],
             winningPrice: 100
         ))
     }

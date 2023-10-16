@@ -63,7 +63,7 @@ struct ApplyAddButtonView: View {
 struct ApplyAddButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ApplyAddButtonView(isShowingApplySheet: .constant(true), isShowingLoginSheet: .constant(true), product:
-                ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+                            ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
             .environmentObject(LoginStore())
     }
 }

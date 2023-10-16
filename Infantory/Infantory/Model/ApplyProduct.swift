@@ -25,6 +25,7 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     // 응모 시작일, 마감일
     var startDate: Date
     var endDate: Date
+    var registerDate: Date
     var startRemainingTime: Double {
         return startDate.timeIntervalSince(Date())
     }
