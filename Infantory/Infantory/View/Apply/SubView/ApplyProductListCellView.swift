@@ -126,6 +126,6 @@ struct ApplyProductListCellView: View {
 
 struct ApplyProductListCellView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyProductListCellView(applyViewModel: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+        ApplyProductListCellView(applyViewModel: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
     }
 }

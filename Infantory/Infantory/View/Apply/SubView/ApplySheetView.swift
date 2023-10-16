@@ -128,7 +128,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), applyUserIDs: [""]))
+        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
             .environmentObject(LoginStore())
     }
 }

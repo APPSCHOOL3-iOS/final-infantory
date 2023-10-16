@@ -34,6 +34,7 @@ struct SearchInfluencerView: View {
                                             .cornerRadius(20)
                                     case .success(let image):
                                         image
+                                            .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 40)
                                             .cornerRadius(20)
@@ -72,6 +73,7 @@ struct SearchInfluencerView: View {
                                             .cornerRadius(20)
                                     case .success(let image):
                                         image
+                                            .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 40)
                                             .cornerRadius(20)

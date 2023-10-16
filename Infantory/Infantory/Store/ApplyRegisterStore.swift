@@ -83,10 +83,10 @@ class ApplyRegisterStore: ObservableObject {
                                                  productImageURLStrings: imageStrings,
                                                  description: itemDescription,
                                                  influencerID: user.id ?? UUID().uuidString,
-                                                 influencerNickname: user.name,
+                                                 influencerNickname: user.nickName,
                                                  startDate: startDate,
                                                  endDate: endDate,
-                                                 applyUserIDs: [])
+                                                 registerDate: Date(), applyUserIDs: [])
         
         return product
     }

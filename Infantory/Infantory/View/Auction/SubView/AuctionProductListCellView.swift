@@ -121,6 +121,6 @@ struct AuctionProductListCellView: View {
 
 struct AuctionProductListCellView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionProductListCellView(auctionViewModel: AuctionProductViewModel(), product: AuctionProduct(id: "", productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "", influencerProfile: "", winningUserID: "", startDate: Date(), endDate: Date(), minPrice: 0, winningPrice: 0))
+        AuctionProductListCellView(auctionViewModel: AuctionProductViewModel(), product: AuctionProduct(id: "", productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "", influencerProfile: "", winningUserID: "", startDate: Date(), endDate: Date(), registerDate: Date(), minPrice: 0, winningPrice: 0))
     }
 }

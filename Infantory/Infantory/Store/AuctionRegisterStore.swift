@@ -85,10 +85,10 @@ class AuctionRegisterStore: ObservableObject {
                                                      productImageURLStrings: imageStrings,
                                                      description: itemDescription,
                                                      influencerID: user.id ?? UUID().uuidString,
-                                                     influencerNickname: user.name,
+                                                     influencerNickname: user.nickName,
                                                      startDate: startDate,
                                                      endDate: endDate,
-                                                     minPrice: Int(startingPrice) ?? 0,
+                                                     registerDate: Date(), minPrice: Int(startingPrice) ?? 0,
                                                      winningPrice: Int(startingPrice))
         
         return product
