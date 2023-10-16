@@ -80,6 +80,7 @@ final class SearchStore: ObservableObject {
                 print("error: 인플루언서를 불러오지 못했습니다.")
             }
         }
+        print("fetchInfluencer - 1번이어야함")
     }
 }
 

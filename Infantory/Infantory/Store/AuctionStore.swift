@@ -1,5 +1,7 @@
 import Foundation
 import Firebase
+import FirebaseDatabase
+import FirebaseFirestore
 import Combine
 
 class AuctionStore: ObservableObject {
