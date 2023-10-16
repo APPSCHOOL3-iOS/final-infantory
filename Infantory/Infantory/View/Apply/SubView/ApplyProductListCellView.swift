@@ -36,6 +36,7 @@ struct ApplyProductListCellView: View {
                                             .blur(radius: 5)
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                            .cornerRadius(10)
                                         
                                         Text("응모 종료")
                                             .padding(10)
@@ -52,6 +53,7 @@ struct ApplyProductListCellView: View {
                                             .blur(radius: 5)
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                            .cornerRadius(10)
                                         
                                         Text("응모 예정")
                                             .padding(10)
@@ -66,6 +68,7 @@ struct ApplyProductListCellView: View {
                                         .scaledToFill()
                                         .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                         .clipped()
+                                        .cornerRadius(10)
                                 }
                             case .failure:
                                 Image(systemName: "xmark")
