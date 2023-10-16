@@ -44,6 +44,16 @@ class InfanDateFormatter {
         
         return formatter
     }()
+    
+    private let dateTimeFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour, .minute]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        
+        return formatter
+    }()
+    
     /// M/D h:MM
     func dateTimeString(from date: Date) -> String {
         return dateAndTimeFormatter.string(from: date)
@@ -61,6 +71,13 @@ class InfanDateFormatter {
     
     func dateToSecondString(from date: Double) -> String {
         if let formattedString = dateToSecondFormatter.string(from: date) {
+            return formattedString
+        }
+        return ""
+    }
+    
+    func dateTimeString(from date: Double) -> String {
+        if let formattedString = dateTimeFormatter.string(from: date) {
             return formattedString
         }
         return ""
