@@ -75,7 +75,7 @@ struct ActivityMainView: View {
                 myAuctionInfos.sort { pro1, pro2 in
                     pro1.timestamp > pro2.timestamp
                 }
-
+                
                 myApplyInfos.sort { pro1, pro2 in
                     pro1.timestamp > pro2.timestamp
                 }
@@ -138,29 +138,36 @@ struct ActivityRow: View {
                     .font(.infanHeadlineBold)
                     .padding(.bottom, 15)
                 
-                TimerView(remainingTime: remainingTime)
-                    .frame(width: 100)
-                    .lineLimit(1)
-                
-                
-
+                HStack {
+                    TimerView(remainingTime: remainingTime)
+                        .frame(width: 100)
+                        .lineLimit(1)
+                    Spacer()
+                }
             }
-            
             Spacer()
-
+            
             VStack(alignment: .leading) {
                 Text("\(biddingTime)")
+                    .padding(.bottom)
                 
-                Text("")
+                Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
                 
-                    Text(selectedFilter.title == "경매" ? "최고 입찰가 \(text1)원" : "전체 응모수 \(text1)회")
-                        .font(.infanFootnoteBold)
-                        .padding(.bottom, 5)
-                        
-                    Text(selectedFilter.title == "경매" ? "나의 입찰가 \(text2)원" : "사용 응모권 \(text2)회")
-                        .foregroundColor(.infanGray)
-                        .font(.infanFootnote)
+                HStack {
+                    Text( "\(text1)")
+                    Text(selectedFilter.title == "경매" ? "원" : "회")
+                }
+                .padding(.bottom, 5)
+                
+                Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
+                HStack {
+                    Text( "\(text2)")
+                    Text(selectedFilter.title == "경매" ? "원" : "회")
+                }
+                .foregroundColor(.infanGray)
+                
             }
+            .font(.infanFootnoteBold)
         }
     }
 }

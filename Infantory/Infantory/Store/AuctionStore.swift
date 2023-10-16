@@ -96,9 +96,13 @@ class AuctionStore: ObservableObject {
                         let auctionActivityInfosData = try? infos.map { try $0.asDictionary() }
                         self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
                             .updateData(["auctionActivityInfos": auctionActivityInfosData ?? []])
+                    } else {
+                        let auctionActivityInfosData = try? productInfo.asDictionary()
+                        self.firestore.collection("Users").document(Auth.auth().currentUser?.uid ?? "")
+                            .updateData(["auctionActivityInfos": [auctionActivityInfosData]])
                     }
                 }
-        }
+    }
 
     func updateWinningPrice(winningPrice: Int) {
         guard let productId = product.id else { return }
