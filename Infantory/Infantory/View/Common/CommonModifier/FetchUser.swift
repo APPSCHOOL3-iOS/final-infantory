@@ -19,6 +19,6 @@ struct FetchUser: ViewModifier {
                         try await loginStore.fetchUser(userUID: loginStore.userUid)
                     }
                 }
-            }
+        }
     }
 }

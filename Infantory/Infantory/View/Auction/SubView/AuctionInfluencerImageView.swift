@@ -15,7 +15,7 @@ struct AuctionInfluencerImageView: View {
     var body: some View {
         HStack {
             NavigationLink {
-                Text("아무거나")
+                InfluencerMainView(influencerID: product.influencerID)
             } label: {
                 VStack {
                     HStack {
