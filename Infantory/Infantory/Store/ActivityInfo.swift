@@ -20,13 +20,9 @@ struct ActivityInfo {
         return auctionActivityInfos.flatMap { info in
             products.filter { $0.id == info.productId }.map { product in
                 AuctionActivityData(
-                    productId: product.id ?? "",
+                    product: product,
                     price: info.price,
-                    timestamp: info.timestamp,
-                    winningPrice: product.winningPrice ?? 0,
-                    imageURLString: product.productImageURLStrings[0],
-                    productName: product.productName,
-                    remainingTime: product.endDate.timeIntervalSince(Date())
+                    timestamp: info.timestamp
                 )
             }
         }
@@ -75,13 +71,9 @@ struct ActivityInfo {
 }
 
 struct AuctionActivityData {
-    var productId: String
+    let product: AuctionProduct
     var price: Int
     var timestamp: Double
-    var winningPrice: Int
-    var imageURLString: String
-    var productName: String
-    var remainingTime: Double
 }
 
 struct ApplyActivityData {

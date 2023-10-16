@@ -14,7 +14,7 @@ struct AuctionProductListCellView: View {
     
     var body: some View {
         NavigationLink {
-            AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
+            AuctionDetailView(auctionStore: AuctionStore(product: product))
         } label: {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 16) {

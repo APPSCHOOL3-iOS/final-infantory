@@ -27,15 +27,15 @@ struct ActivityMainView: View {
                 Section {
                     ScrollView {
                         if selectedFilter.title == "경매" {
-                            ForEach(myAuctionInfos, id: \.productId ) { info in
+                            ForEach(myAuctionInfos, id: \.product.id ) { info in
                                 NavigationLink {
-//                                    AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: <#T##AuctionProduct#>))
+                                    AuctionDetailView(auctionStore: AuctionStore(product: info.product))
                                 } label: {
-                                    ActivityRow(imageURLString: info.imageURLString,
-                                                text1: info.winningPrice,
+                                    ActivityRow(imageURLString: info.product.productImageURLStrings[0],
+                                                text1: info.product.winningPrice ?? 0,
                                                 text2: info.price,
-                                                productName: info.productName,
-                                                remainingTime: info.remainingTime,
+                                                productName: info.product.productName,
+                                                remainingTime: info.product.endDate.timeIntervalSinceNow,
                                                 biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp),
                                                 selectedFilter: $selectedFilter)
                                     .padding()
@@ -158,10 +158,6 @@ struct ActivityRow: View {
                         .font(.infanHeadlineBold)
                     
                     Spacer()
-                    
-                    TimerView(remainingTime: remainingTime)
-                        .frame(width: 100)
-                        .lineLimit(1)
                 }
                 .padding(.bottom, 5)
                 
@@ -180,8 +176,6 @@ struct ActivityRow: View {
                     
                     HStack {
                         Text( "\(text2)\(selectedFilter.title == "경매" ? "원" : "회")")
-                        Text("(\(biddingTime))")
-                            .foregroundColor(.gray)
                         
                         Spacer()
                     }
@@ -189,6 +183,9 @@ struct ActivityRow: View {
                 }
             }
             .font(.infanFootnote)
+            
+            TimerView(remainingTime: remainingTime)
+                .lineLimit(1)
         }
     }
 }

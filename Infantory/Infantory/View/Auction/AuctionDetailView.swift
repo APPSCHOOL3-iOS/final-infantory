@@ -11,7 +11,6 @@ import ExpandableText
 struct AuctionDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     @ObservedObject var auctionStore: AuctionStore
     
