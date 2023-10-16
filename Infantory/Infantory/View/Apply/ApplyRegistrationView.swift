@@ -75,12 +75,10 @@ struct ApplyRegistrationView: View {
                         }
                     }
                     
-                    Divider()
-                    Spacer()
                     MainColorButton(text: "등록하기") {
                         if title.isEmpty {
                             showAlert = true
-                            alertMessage = "제목을 입력해주세요."
+                            alertMessage = "애장품 이름을 입력해주세요."
                         } else if itemDescription.isEmpty {
                             showAlert = true
                             alertMessage = "소개를 입력해주세요."
@@ -97,6 +95,7 @@ struct ApplyRegistrationView: View {
                             }
                         }
                     }
+                    .padding(.vertical, 30)
                 }
                 .padding([.leading, .trailing], 20)
                 .alert(isPresented: $showAlert) {
