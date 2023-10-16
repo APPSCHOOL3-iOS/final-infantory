@@ -25,17 +25,19 @@ struct EntryTicketView: View {
                 }
                 .padding([.bottom, .top], 15)
                 
-                HStack {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("23.07.21")
-                        Text("출석체크")
-                    }
-                    .padding(.leading, 30)
-                    Spacer()
-                    Text("+ 1")
-                        .padding(.trailing, 30)
-                }
-                
+//                HStack {
+//                    VStack(alignment: .leading, spacing: 10) {
+//                        ForEach(loginStore.currentUser.applyTicket ?? ) { ticket in
+//                            Text("23.07.21")
+//                            Text("출석체크")
+//                            Text("카운트 \(ticket.count)")
+//                        }
+//                        .padding(.leading, 30)
+//                        Spacer()
+//                        Text("+ 1")
+//                            .padding(.trailing, 30)
+//                    }
+//                }
                 Divider()
                 HStack {
                     VStack(alignment: .leading, spacing: 10) {
@@ -60,41 +62,41 @@ struct EntryTicketView: View {
                         .padding(.trailing, 30)
                 }
                 
-//                Divider()
-//                HStack {
-//                    VStack(alignment: .leading, spacing: 10) {
-//                        Text("23.07.21")
-//                        Text("출석체크")
-//                    }
-//                    .padding(.leading, 30)
-//                    Spacer()
-//                    Text("+ 1")
-//                        .padding(.trailing, 30)
-//                }
-//
-//                Divider()
-//                HStack {
-//                    VStack(alignment: .leading, spacing: 10) {
-//                        Text("23.07.21")
-//                        Text("응모 : 바지")
-//                    }
-//                    .padding(.leading, 30)
-//                    Spacer()
-//                    Text("+ 1")
-//                        .padding(.trailing, 30)
-//                }
-//
-//                Divider()
-//                HStack {
-//                    VStack(alignment: .leading, spacing: 10) {
-//                        Text("23.07.21")
-//                        Text("응모 : 수지신발")
-//                    }
-//                    .padding(.leading, 30)
-//                    Spacer()
-//                    Text("+ 1")
-//                        .padding(.trailing, 30)
-//                }
+                //                Divider()
+                //                HStack {
+                //                    VStack(alignment: .leading, spacing: 10) {
+                //                        Text("23.07.21")
+                //                        Text("출석체크")
+                //                    }
+                //                    .padding(.leading, 30)
+                //                    Spacer()
+                //                    Text("+ 1")
+                //                        .padding(.trailing, 30)
+                //                }
+                //
+                //                Divider()
+                //                HStack {
+                //                    VStack(alignment: .leading, spacing: 10) {
+                //                        Text("23.07.21")
+                //                        Text("응모 : 바지")
+                //                    }
+                //                    .padding(.leading, 30)
+                //                    Spacer()
+                //                    Text("+ 1")
+                //                        .padding(.trailing, 30)
+                //                }
+                //
+                //                Divider()
+                //                HStack {
+                //                    VStack(alignment: .leading, spacing: 10) {
+                //                        Text("23.07.21")
+                //                        Text("응모 : 수지신발")
+                //                    }
+                //                    .padding(.leading, 30)
+                //                    Spacer()
+                //                    Text("+ 1")
+                //                        .padding(.trailing, 30)
+                //                }
             }
         }
         .navigationTitle("응모권")

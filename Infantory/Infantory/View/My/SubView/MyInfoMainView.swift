@@ -34,11 +34,13 @@ struct MyInfoMainView: View {
                                     .resizable()
                                     .clipShape(Circle())
                                     .frame(width: 80, height: 80)
+                            @unknown default:
+                                EmptyView()
                             }
                         }
                         
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("\(loginStore.currentUser.name)")
+                            Text("\(loginStore.currentUser.nickName)")
                                 .font(.infanTitle2)
                             
                             HStack {
@@ -65,25 +67,10 @@ struct MyInfoMainView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 5)
                                     .strokeBorder(Color.infanDarkGray, lineWidth: 1)
-                                    .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                    .frame(width: (.screenWidth - 50), height: 30)
                                     .foregroundColor(.white)
                                 
-                                Text("프로필 관리")
-                                    .font(.infanBody)
-                                    .foregroundColor(.infanDarkGray)
-                            }
-                        }
-                        NavigationLink {
-                            // 배송지 관리
-                            MyAddressMainView()
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .strokeBorder(Color.infanDarkGray, lineWidth: 1)
-                                    .frame(width: (.screenWidth - 50) / 2, height: 30)
-                                    .foregroundColor(.white)
-                                
-                                Text("배송지 관리")
+                                Text("프로필 편집")
                                     .font(.infanBody)
                                     .foregroundColor(.infanDarkGray)
                             }
