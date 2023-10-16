@@ -3,7 +3,6 @@
 //  Infantory
 //
 //  Created by 김성훈 on 2023/09/21.
-//
 
 import SwiftUI
 
@@ -18,6 +17,10 @@ struct ActivityMainView: View {
     
     var searchCategory: SearchResultCategory = .total
     
+//    @ObservedObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
+//    @ObservedObject var auctionStore: AuctionStore = AuctionStore(product: )
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -25,13 +28,23 @@ struct ActivityMainView: View {
                     ScrollView {
                         if selectedFilter.title == "경매" {
                             ForEach(myAuctionInfos, id: \.productId ) { info in
-                                ActivityRow(imageURLString: info.imageURLString,
-                                            text1: info.winningPrice,
-                                            text2: info.price,
-                                            productName: info.productName,
-                                            remainingTime: info.remainingTime, biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp), selectedFilter: $selectedFilter)
-                                .padding()
+                                NavigationLink {
+//                                    AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: <#T##AuctionProduct#>))
+                                } label: {
+                                    ActivityRow(imageURLString: info.imageURLString,
+                                                text1: info.winningPrice,
+                                                text2: info.price,
+                                                productName: info.productName,
+                                                remainingTime: info.remainingTime,
+                                                biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp),
+                                                selectedFilter: $selectedFilter)
+                                    .padding()
+                                    
+                                }
+                                .foregroundColor(.black)
+                                
                                 Divider()
+
                             }
                         } else {
                             ForEach(myApplyInfos, id: \.productId) { info in
@@ -39,7 +52,8 @@ struct ActivityMainView: View {
                                             text1: info.totalApplyCount,
                                             text2: info.myApplyCount,
                                             productName: info.productName,
-                                            remainingTime: info.remainingTime, biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp), selectedFilter: $selectedFilter)
+                                            remainingTime: info.remainingTime, 
+                                            biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp), selectedFilter: $selectedFilter)
                                 .padding()
                                 Divider()
                             }
@@ -119,8 +133,10 @@ struct ActivityRow: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 90, height: 90)
+                        .clipShape(Rectangle())
+                        
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()

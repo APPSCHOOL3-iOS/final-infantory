@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AuctionProductListCellView: View {
+    @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     var product: AuctionProduct
     
@@ -43,6 +44,7 @@ struct AuctionProductListCellView: View {
                                             .background(Color.infanDarkGray)
                                             .cornerRadius(20)
                                     }
+                                
                                 } else if product.auctionFilter == .planned {
                                     ZStack {
                                         image
