@@ -97,8 +97,6 @@ struct AuctionRegistrationView: View {
                         }
                     }
                     
-                    Spacer()
-                    
                     MainColorButton(text: "등록하기") {
                         if title.isEmpty {
                             showAlert = true
@@ -124,6 +122,7 @@ struct AuctionRegistrationView: View {
                             }
                         }
                     }
+                    .padding(.vertical, 30)
                 }
                 .alert(isPresented: $showAlert) {
                     Alert(title: Text(""), message: Text(alertMessage), dismissButton: .default(Text("확인")))
