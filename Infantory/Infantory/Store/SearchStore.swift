@@ -82,6 +82,10 @@ final class SearchStore: ObservableObject {
         }
         print("fetchInfluencer - 1번이어야함")
     }
+    
+    func shuffledInfluencer() -> [User] {
+        influencer.shuffled()
+    }
 }
 
 enum SearchResultCategory: String, CaseIterable {

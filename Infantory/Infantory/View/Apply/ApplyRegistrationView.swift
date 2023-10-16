@@ -63,7 +63,7 @@ struct ApplyRegistrationView: View {
                         .font(.infanHeadlineBold)
                         .padding(.vertical)
                     HStack {
-                        Text("응모종료일")
+                        Text("응모기간")
                             .font(.infanHeadlineBold)
                         Spacer()
                         Text("\(resultText)")

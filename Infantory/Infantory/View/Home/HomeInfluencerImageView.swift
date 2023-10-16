@@ -15,7 +15,7 @@ struct HomeInfluencerImageView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(searchStore.influencer.shuffled().prefix(10)) { influencer in
+                ForEach(searchStore.shuffledInfluencer().prefix(10)) { influencer in
                     VStack {
                         if influencer.profileImageURLString == nil {
                             Image("smallAppIcon")
@@ -33,6 +33,7 @@ struct HomeInfluencerImageView: View {
                                         .cornerRadius(40)
                                 case .success(let image):
                                     image
+                                        .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 60, height: 60)
                                         .cornerRadius(40)
