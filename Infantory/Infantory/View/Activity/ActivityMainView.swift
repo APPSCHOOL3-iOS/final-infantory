@@ -3,7 +3,6 @@
 //  Infantory
 //
 //  Created by 김성훈 on 2023/09/21.
-//
 
 import SwiftUI
 
@@ -16,35 +15,66 @@ struct ActivityMainView: View {
     
     @State private var selectedFilter: ActivityOption = .auction
     
+    var searchCategory: SearchResultCategory = .total
+    
+//    @ObservedObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
+//    @ObservedObject var auctionStore: AuctionStore = AuctionStore(product: )
+    
     var body: some View {
-        VStack {
-            Section {
-                ScrollView {
-                    if selectedFilter.title == "경매" {
-                        ForEach(myAuctionInfos, id: \.productId ) { info in
-                            ActivityRow(imageURLString: info.imageURLString,
-                                        text1: info.winningPrice,
-                                        text2: info.price,
-                                        productName: info.productName,
-                                        remainingTime: info.remainingTime, selectedFilter: $selectedFilter)
-                            .padding()
-                            Divider()
+        NavigationStack {
+            VStack {
+                Section {
+                    ScrollView {
+                        if selectedFilter.title == "경매" {
+                            ForEach(myAuctionInfos, id: \.productId ) { info in
+                                NavigationLink {
+//                                    AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: <#T##AuctionProduct#>))
+                                } label: {
+                                    ActivityRow(imageURLString: info.imageURLString,
+                                                text1: info.winningPrice,
+                                                text2: info.price,
+                                                productName: info.productName,
+                                                remainingTime: info.remainingTime,
+                                                biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp),
+                                                selectedFilter: $selectedFilter)
+                                    .padding()
+                                    
+                                }
+                                .foregroundColor(.black)
+                                
+                                Divider()
+
+                            }
+                        } else {
+                            ForEach(myApplyInfos, id: \.productId) { info in
+                                ActivityRow(imageURLString: info.imageURLString,
+                                            text1: info.totalApplyCount,
+                                            text2: info.myApplyCount,
+                                            productName: info.productName,
+                                            remainingTime: info.remainingTime, 
+                                            biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp), selectedFilter: $selectedFilter)
+                                .padding()
+                                Divider()
+                            }
+                            
                         }
-                    } else {
-                        ForEach(myApplyInfos, id: \.productId) { info in
-                            ActivityRow(imageURLString: info.imageURLString,
-                                        text1: info.totalApplyCount,
-                                        text2: info.myApplyCount,
-                                        productName: info.productName,
-                                        remainingTime: info.remainingTime, selectedFilter: $selectedFilter)
-                            .padding()
-                            Divider()
-                        }
-                        
+                    }
+                } header: {
+                    ActivityOptionBar(selectedFilter: $selectedFilter)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.black)
                     }
                 }
-            } header: {
-                ActivityOptionBar(selectedFilter: $selectedFilter)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("활동현황")
+                        .font(.infanHeadlineBold)
+                }
             }
         }
         .onAppear {
@@ -59,7 +89,14 @@ struct ActivityMainView: View {
                 myAuctionInfos.sort { pro1, pro2 in
                     pro1.timestamp > pro2.timestamp
                 }
-                print("myAuctionInfos...\(myAuctionInfos)")
+                
+                myApplyInfos.sort { pro1, pro2 in
+                    pro1.timestamp > pro2.timestamp
+                }
+                
+                myApplyInfos = Array(Set(myApplyInfos.map { $0.productId })).compactMap { id in
+                    myApplyInfos.first { $0.productId == id }
+                }
             }
         }
     }
@@ -80,6 +117,7 @@ struct ActivityRow: View {
     let text2: Int
     let productName: String
     let remainingTime: Double
+    let biddingTime: String
     
     @Binding var selectedFilter: ActivityOption
     
@@ -95,8 +133,11 @@ struct ActivityRow: View {
                 case .success(let image):
                     image
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .frame(width: 90, height: 90)
+                        .clipShape(Rectangle())
+                        .cornerRadius(7)
+                        
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()
@@ -109,25 +150,45 @@ struct ActivityRow: View {
                 }
             }
             
+            .padding(.trailing, 10)
+            
             VStack(alignment: .leading) {
-                Text("\(productName)")
-                    .font(.infanHeadlineBold)
-                    .padding(.bottom, 15)
-                Group {
-                    Text(selectedFilter.title == "경매" ? "\(text1)원" : "전체 응모수 \(text1)회")
-                        .font(.infanFootnoteBold)
+                HStack {
+                    Text("\(productName)")
+                        .font(.infanHeadlineBold)
+                    
+                    Spacer()
+                    
+                    TimerView(remainingTime: remainingTime)
+                        .frame(width: 100)
+                        .lineLimit(1)
+                }
+                .padding(.bottom, 5)
+                
+                Spacer()
+                
+                VStack(alignment: .leading) {
+                    Group {
+                        Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
+                        Text( "\(text1)\(selectedFilter.title == "경매" ? "원" : "회")")
                         .padding(.bottom, 5)
+                    }
+                    .font(.infanFootnoteBold)
+                    
+                    Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
+                        .foregroundColor(.infanMain)
+                    
+                    HStack {
+                        Text( "\(text2)\(selectedFilter.title == "경매" ? "원" : "회")")
+                        Text("(\(biddingTime))")
+                            .foregroundColor(.gray)
                         
-                    Text(selectedFilter.title == "경매" ? "\(text2)원" : "사용 응모권 \(text2)회")
-                        .foregroundColor(.infanGray)
-                        .font(.infanFootnote)
+                        Spacer()
+                    }
+                    .foregroundColor(.infanMain)
                 }
             }
-            
-            Spacer()
-            TimerView(remainingTime: remainingTime)
-                .frame(width: 100)
-                .lineLimit(1)
+            .font(.infanFootnote)
         }
     }
 }

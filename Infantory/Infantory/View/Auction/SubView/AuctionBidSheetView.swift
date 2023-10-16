@@ -20,6 +20,7 @@ struct AuctionBidSheetView: View {
     @State private var selectedAmount: Int = 0 // 선택된 금액
     
     @Binding var showAlert: Bool
+    @Binding var highestBidderState: Bool
 
     var isSelected: Bool {
         return selectedAmount == 0
@@ -45,6 +46,7 @@ struct AuctionBidSheetView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                         showAlert = false
                     }
+                    highestBidderState = true
                 } label: {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(isSelected ? .infanGray : Color.infanMain)
@@ -118,6 +120,6 @@ extension AuctionBidSheetView {
 
 struct AuctionBidSheetView_Previews: PreviewProvider {
     static var previews: some View {
-        AuctionBidSheetView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true))
+        AuctionBidSheetView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct), isShowingAuctionBidSheet: .constant(true), showAlert: .constant(true), highestBidderState: .constant(true))
     }
 }

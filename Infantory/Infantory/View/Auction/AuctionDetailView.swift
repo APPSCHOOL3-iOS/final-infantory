@@ -32,7 +32,17 @@ struct AuctionDetailView: View {
             }
             Footer(auctionStore: auctionStore)
         }
+        .onAppear {
+            finishAuction(product: &auctionStore.product)
+        }
         .navigationBar(title: "상세정보")
+    }
+    
+    // 경매가 끝났고, 내가 최고 입찰자라면 product.winningUserID에 추가하는 로직 만들기
+    func finishAuction(product: inout AuctionProduct) {
+        if auctionStore.product.auctionFilter == .close {
+            product.winningUserID = auctionStore.biddingInfos.last?.userID
+        }
     }
 }
 
@@ -44,8 +54,9 @@ struct Footer: View {
     @State private var showAlert: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @State private var isHighestBidder: Bool = false
-    
+    @State private var highestBidderState: Bool = false
     var body: some View {
+        
         VStack {
             ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
             Button {
@@ -59,15 +70,15 @@ struct Footer: View {
                 }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
-                        RoundedRectangle(cornerRadius: 10)
+                    RoundedRectangle(cornerRadius: 10)
                         .fill(isHighestBidder ? Color.infanGray : Color.infanMain)
-                            .frame(width: CGFloat.screenWidth - 40, height: 54)
-                            .overlay {
-                                Text( isHighestBidder ? "현재 최고입찰자입니다" : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
-                                    .font(.infanHeadlineBold)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                            }
+                        .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        .overlay {
+                            Text( isHighestBidder ? "현재 최고입찰자입니다" : "입찰 \(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice) 원")
+                                .font(.infanHeadlineBold)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                        }
                 } else if auctionStore.product.auctionFilter == .planned {
                     Text("경매 시작 전입니다.")
                         .font(.infanHeadlineBold)
@@ -79,18 +90,36 @@ struct Footer: View {
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
                 } else {
-                    Text("이미 종료된 경매입니다.")
-                    
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanGray)
-                                .frame(width: CGFloat.screenWidth - 40, height: 54)
-                        )
+                    if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
+                        NavigationLink {
+                            PaymentView()
+                        } label: {
+                            Text("결제하기")
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.infanMain)
+                                        .frame(width: CGFloat.screenWidth - 40, height: 54)
+                                )
+                                .contentShape(Rectangle())
+                            
+                        }
+                    } else {
+                        Text("이미 종료된 경매입니다.")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.infanGray)
+                                    .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            )
+                    }
                 }
             }
-            .disabled(auctionStore.product.auctionFilter == .close || auctionStore.product.auctionFilter == .planned || isHighestBidder)
+            .disabled((auctionStore.product.auctionFilter == .close && (auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)) ||
+                          auctionStore.product.auctionFilter == .planned ||
+                          isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -106,7 +135,7 @@ struct Footer: View {
             
         })
         .sheet(isPresented: $isShowingAuctionBidSheet) {
-            AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert)
+            AuctionBidSheetView(auctionStore: auctionStore, isShowingAuctionBidSheet: $isShowingAuctionBidSheet, showAlert: $showAlert, highestBidderState: $highestBidderState)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium])
         }
@@ -118,6 +147,9 @@ struct Footer: View {
             if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
                 isHighestBidder = true
             }
+        }
+        .onChange(of: highestBidderState) { value in
+            isHighestBidder = value
         }
     }
 }
