@@ -151,7 +151,7 @@ struct MyInfoMainView: View {
                         }
                         Divider()
                         NavigationLink {
-                            Text("응모 내역이 보여질 화면입니다.")
+                            EntryTicketView()
                         } label: {
                             HStack {
                                 Image("apply")
