@@ -30,7 +30,7 @@ struct InfantoryApp: App {
     }
     
     @StateObject private var loginStore = LoginStore()
-    
+    @StateObject var influencerStore: InfluencerStore = InfluencerStore()
     var body: some Scene {
         WindowGroup {
             VStack {
@@ -42,6 +42,7 @@ struct InfantoryApp: App {
                     }
             }
             .environmentObject(loginStore)
+            .environmentObject(influencerStore)
         }
     }
 }

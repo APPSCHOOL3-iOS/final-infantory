@@ -12,7 +12,6 @@ struct MainTabView: View {
     @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
-    
     var body: some View {
         TabView(selection: $selectedIndex) {
             HomeMainView()

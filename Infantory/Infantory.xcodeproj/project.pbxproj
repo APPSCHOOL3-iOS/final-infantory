@@ -139,6 +139,9 @@
 		EC98B63E2AD8FF1D001B7102 /* SearchTotalCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B63D2AD8FF1D001B7102 /* SearchTotalCellView.swift */; };
 		EC98B6402AD92BF7001B7102 /* ApplyInfluencerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B63F2AD92BF7001B7102 /* ApplyInfluencerImageView.swift */; };
 		EC98B6422AD931D7001B7102 /* AuctionInfluencerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6412AD931D7001B7102 /* AuctionInfluencerImageView.swift */; };
+		EC9E6D132ADCCA4700FD0831 /* InfluencerMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E6D122ADCCA4700FD0831 /* InfluencerMainView.swift */; };
+		EC9E6D152ADCCC4B00FD0831 /* InfluencerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E6D142ADCCC4B00FD0831 /* InfluencerStore.swift */; };
+		EC9E6D182ADCD06300FD0831 /* InfluencerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +268,9 @@
 		EC98B63D2AD8FF1D001B7102 /* SearchTotalCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTotalCellView.swift; sourceTree = "<group>"; };
 		EC98B63F2AD92BF7001B7102 /* ApplyInfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyInfluencerImageView.swift; sourceTree = "<group>"; };
 		EC98B6412AD931D7001B7102 /* AuctionInfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionInfluencerImageView.swift; sourceTree = "<group>"; };
+		EC9E6D122ADCCA4700FD0831 /* InfluencerMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfluencerMainView.swift; path = Infantory/Store/InfluencerMainView.swift; sourceTree = SOURCE_ROOT; };
+		EC9E6D142ADCCC4B00FD0831 /* InfluencerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerStore.swift; sourceTree = "<group>"; };
+		EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +426,7 @@
 		A091E5742ABAA487000894FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EC9E6D112ADCCA1D00FD0831 /* Influencer */,
 				EC9E6D0F2ADCC98B00FD0831 /* Search */,
 				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5AA2ABC76B6000894FC /* MainTab */,
@@ -449,6 +456,7 @@
 				6402F0B22AD7A64500FE9256 /* ActivityInfo.swift */,
 				A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */,
 				0CF546742AD622650075C3FD /* PhotoStore.swift */,
+				EC9E6D142ADCCC4B00FD0831 /* InfluencerStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -668,6 +676,23 @@
 			path = SubView;
 			sourceTree = "<group>";
 		};
+		EC9E6D112ADCCA1D00FD0831 /* Influencer */ = {
+			isa = PBXGroup;
+			children = (
+				EC9E6D122ADCCA4700FD0831 /* InfluencerMainView.swift */,
+				EC9E6D162ADCD04A00FD0831 /* SubView */,
+			);
+			path = Influencer;
+			sourceTree = "<group>";
+		};
+		EC9E6D162ADCD04A00FD0831 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -822,6 +847,7 @@
 				0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */,
 				843B34312AD7A9A700EAA7D3 /* ApplyProductListCellView.swift in Sources */,
 				11BAE3752ACCE82400F887C7 /* AuctionBidSheetView.swift in Sources */,
+				EC9E6D182ADCD06300FD0831 /* InfluencerImageView.swift in Sources */,
 				A0A6628F2ACD8074000F2EF6 /* InfanDateFormatter.swift in Sources */,
 				113A15712AC1195E00ED0555 /* PaymentChoiceView.swift in Sources */,
 				A091E5B42ABC7EA0000894FC /* ActivityMainView.swift in Sources */,
@@ -847,6 +873,7 @@
 				0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */,
 				0CD2F7052ABD50F500FCF88E /* User.swift in Sources */,
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
+				EC9E6D152ADCCC4B00FD0831 /* InfluencerStore.swift in Sources */,
 				016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */,
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,
 				843BE81C2AD6404E00C54943 /* SearchMainView.swift in Sources */,
@@ -897,6 +924,7 @@
 				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,
 				EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
+				EC9E6D132ADCCA4700FD0831 /* InfluencerMainView.swift in Sources */,
 				0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,
