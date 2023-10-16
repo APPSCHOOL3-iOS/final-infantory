@@ -29,8 +29,8 @@ struct HomeInfluencerImageView: View {
                                 case .empty:
                                     ProgressView()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .cornerRadius(20)
+                                        .frame(width: 60, height: 60)
+                                        .cornerRadius(40)
                                 case .success(let image):
                                     image
                                         .aspectRatio(contentMode: .fill)

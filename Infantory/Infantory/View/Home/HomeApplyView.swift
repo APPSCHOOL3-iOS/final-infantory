@@ -1,51 +1,25 @@
 //
-//  HomeHotAuctionView.swift
+//  HomeApplyView.swift
 //  Infantory
 //
-//  Created by 안지영 on 2023/10/15.
+//  Created by 안지영 on 2023/10/16.
 //
 
 import SwiftUI
 
-// 1. 진행중인 상품목록을 가져온다
-// 2. 진행중인 상품목록 중 참여를 많이한 순으로 Sort한다.
-
-// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ 
-struct HomeHotAuctionView: View {
+struct HomeApplyView: View {
     
-    @ObservedObject var auctionViewModel: AuctionProductViewModel
-    private var sortFilteredProduct: [AuctionProduct] {
-        return auctionViewModel.filteredProduct.sorted {
-            $0.biddingInfo?.count ?? 0 > $1.biddingInfo?.count ?? 0
-        }
-    }
+    @ObservedObject var applyViewModel: ApplyProductStore
     
     var body: some View {
+        
         ScrollView(.horizontal) {
             HStack {
-                ForEach(sortFilteredProduct) { product in
+                ForEach(applyViewModel.filteredProduct.prefix(5)) { product in
                     NavigationLink {
-                        AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
+                        ApplyDetailView(applyViewModel: applyViewModel, product: product)
                     } label: {
                         VStack(alignment: .leading) {
-                            ZStack(alignment: .center) {
-                                Rectangle()
-                                    .padding(3)
-                                    .foregroundColor(.clear)
-                                    .frame(width: (.screenWidth - 200) / 2, height: .screenHeight * 0.025)
-                                    .background(Color.clear)
-                                    .cornerRadius(10)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .inset(by: 0.5)
-                                            .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom), lineWidth: 1.5)
-                                        
-                                    )
-                                
-                                Label("\(product.biddingInfo?.count ?? 0)회 참여", systemImage: "person.2.fill")
-                                    .font(.infanFootnote)
-                            }
-                            
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
                                     switch phase {
@@ -85,15 +59,13 @@ struct HomeHotAuctionView: View {
                             
                             VStack(alignment: .leading) {
                                 Text(product.influencerNickname)
-                                    .font(.infanFootnoteBold)
-                                HStack {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.blue)
-                                    Text("\(product.winningPrice ?? 0) 원") // 이거 현재 최고가로 바꿔야함
-                                        .foregroundColor(Color.infanDarkGray)
-                                }
-                                .font(.infanFootnote)
+                                    .bold()
+                                Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                    .foregroundColor(Color.infanDarkGray)
+                                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                                    .foregroundColor(Color.infanRed)
                             }
+                            .font(.infanFootnote)
                             .padding()
                         }
                     }
@@ -104,8 +76,8 @@ struct HomeHotAuctionView: View {
     }
 }
 
-struct HomeHotAuctionView_Previews: PreviewProvider {
+struct HomeApplyView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeHotAuctionView(auctionViewModel: AuctionProductViewModel())
+        HomeApplyView(applyViewModel: ApplyProductStore())
     }
 }

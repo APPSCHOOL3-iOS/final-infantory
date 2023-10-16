@@ -32,6 +32,7 @@ final class ApplyProductStore: ObservableObject {
         
         self.applyProduct = products
         fetchInfluencerProfile(products: products)
+        print("응모 3번이어야함")
     }
     @MainActor
     func fetchInfluencerProfile(products: [ApplyProduct]) {

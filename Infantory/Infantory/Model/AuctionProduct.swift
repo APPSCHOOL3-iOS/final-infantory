@@ -45,6 +45,8 @@ struct AuctionProduct: Productable, Identifiable, Codable {
         }
         return .planned
     }
+    
+    var biddingInfo: [BiddingInfo]? = nil
 }
 
 #if DEBUG

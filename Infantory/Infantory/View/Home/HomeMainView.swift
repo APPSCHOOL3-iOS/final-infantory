@@ -12,6 +12,7 @@ struct HomeMainView: View {
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @StateObject var searchStore: SearchStore = SearchStore()
+    
     @State private var isShowingDetail = false
     var searchCategory: SearchResultCategory = .total
     
@@ -37,12 +38,12 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("⏳곧 마감되는 응모에 참여해보세요!⌛️")
                         .font(.infanTitle2)
-                    // 응모뷰 넣기
+                    HomeApplyView(applyViewModel: applyViewModel)
                 }
                 .padding([.top, .bottom])
                 
             }
-            .padding()
+            .horizontalPadding()
             .scrollIndicators(.hidden)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -62,7 +63,9 @@ struct HomeMainView: View {
                 Task {
                     try await searchStore.fetchInfluencer(keyword: "")
                     try await auctionViewModel.fetchAuctionProducts()
-                    auctionViewModel.updateFilter(filter: .inProgress)
+                    try await applyViewModel.fetchApplyProducts()
+                    applyViewModel.updateFilter(filter: .inProgress)
+                    applyViewModel.sortInProgressProduct(filter: .deadline)
                 }
             }
         }
