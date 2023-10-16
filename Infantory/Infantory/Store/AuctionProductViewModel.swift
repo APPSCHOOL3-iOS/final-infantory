@@ -120,7 +120,6 @@ final class AuctionProductViewModel: ObservableObject {
             let dbRef = Database.database().reference()
             dbRef.child("biddingInfos/\(productId)")
                 .queryOrdered(byChild: "timeStamp")
-                .queryLimited(toLast: 10)
                 .observe(.value, with: { snapshot in
                     var parsedBiddingInfos: [BiddingInfo] = []
                     
@@ -142,8 +141,8 @@ final class AuctionProductViewModel: ObservableObject {
                             parsedBiddingInfos.append(biddingInfo)
                         }
                     }
-                    if let index = self.filteredProduct.firstIndex(where: { $0.id == product.id}) {
-                        self.filteredProduct[index].biddingInfo = parsedBiddingInfos
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].biddingInfo = parsedBiddingInfos
                         print("fetchData 되는거임!!!!!!!")
                     }
                 })

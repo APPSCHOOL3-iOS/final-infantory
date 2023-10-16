@@ -84,7 +84,7 @@ struct AuctionRegistrationView: View {
                         .padding(.vertical)
                     
                     HStack {
-                        Text("경매종료일")
+                        Text("경매기간")
                             .font(.infanHeadlineBold)
                         Spacer()
                         Text("\(resultText)")
