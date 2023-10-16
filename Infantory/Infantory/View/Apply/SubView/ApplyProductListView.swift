@@ -13,15 +13,18 @@ struct ApplyProductListView: View {
     @State private var heartButton: Bool = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                ForEach(applyViewModel.filteredProduct) { product in
-                    ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
-                    ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+        VStack {
+            if applyViewModel.filteredProduct.isEmpty {
+                applyEmptyListItemCell
+            } else {
+                ScrollView {
+                    ForEach(applyViewModel.filteredProduct) { product in
+                        ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                    }
                 }
             }
         }
-        
         .refreshable {
             Task {
                 do {
@@ -40,6 +43,24 @@ struct ApplyProductListView: View {
                 }
             }
         }
+    }
+}
+
+extension ApplyProductListView {
+    var applyEmptyListItemCell: some View {
+        VStack {
+            Spacer()
+            if applyViewModel.selectedFilter == .inProgress {
+                Text("진행중인 응모가 없습니다.")
+            } else if applyViewModel.selectedFilter == .planned {
+                Text("진행 예정인 응모가 없습니다.")
+            } else {
+                Text("종료된 응모가 없습니다.")
+            }
+            Spacer()
+        }
+        .font(.infanBody)
+        .foregroundColor(.infanGray)
     }
 }
 

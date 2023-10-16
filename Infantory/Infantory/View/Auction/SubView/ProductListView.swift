@@ -13,11 +13,11 @@ struct ProductListView: View {
     @State private var heartButton: Bool = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                if auctionViewModel.filteredProduct.isEmpty {
-                    emptyListItemCell
-                } else {
+        VStack {
+            if auctionViewModel.filteredProduct.isEmpty {
+                emptyListItemCell
+            } else {
+                ScrollView {
                     ForEach(auctionViewModel.filteredProduct) { product in
                         AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
                         AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
@@ -57,18 +57,17 @@ struct ProductListView_Previews: PreviewProvider {
 extension ProductListView {
     var emptyListItemCell: some View {
         VStack {
+            Spacer()
             if auctionViewModel.selectedFilter == .inProgress {
                 Text("진행중인 경매가 없습니다.")
-                    
             } else if auctionViewModel.selectedFilter == .planned {
                 Text("진행 예정인 경매가 없습니다.")
             } else {
                 Text("종료된 경매가 없습니다.")
             }
-            
+            Spacer()
         }
-        .font(.infanTitle2Bold)
-        .foregroundColor(.infanMain)
-        .padding(.top, 50)
+        .font(.infanBody)
+        .foregroundColor(.infanGray)
     }
 }
