@@ -136,6 +136,7 @@ struct ActivityRow: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 90, height: 90)
                         .clipShape(Rectangle())
+                        .cornerRadius(7)
                         
                 case .failure:
                     Image(systemName: "smallAppIcon")
@@ -149,41 +150,45 @@ struct ActivityRow: View {
                 }
             }
             
+            .padding(.trailing, 10)
+            
             VStack(alignment: .leading) {
-                Text("\(productName)")
-                    .font(.infanHeadlineBold)
-                    .padding(.bottom, 15)
-                
                 HStack {
+                    Text("\(productName)")
+                        .font(.infanHeadlineBold)
+                    
+                    Spacer()
+                    
                     TimerView(remainingTime: remainingTime)
                         .frame(width: 100)
                         .lineLimit(1)
-                    Spacer()
-                }
-            }
-            Spacer()
-            
-            VStack(alignment: .leading) {
-                Text("\(biddingTime)")
-                    .padding(.bottom)
-                
-                Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
-                
-                HStack {
-                    Text( "\(text1)")
-                    Text(selectedFilter.title == "경매" ? "원" : "회")
                 }
                 .padding(.bottom, 5)
                 
-                Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
-                HStack {
-                    Text( "\(text2)")
-                    Text(selectedFilter.title == "경매" ? "원" : "회")
-                }
-                .foregroundColor(.infanGray)
+                Spacer()
                 
+                VStack(alignment: .leading) {
+                    Group {
+                        Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
+                        Text( "\(text1)\(selectedFilter.title == "경매" ? "원" : "회")")
+                        .padding(.bottom, 5)
+                    }
+                    .font(.infanFootnoteBold)
+                    
+                    Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
+                        .foregroundColor(.infanMain)
+                    
+                    HStack {
+                        Text( "\(text2)\(selectedFilter.title == "경매" ? "원" : "회")")
+                        Text("(\(biddingTime))")
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                    }
+                    .foregroundColor(.infanMain)
+                }
             }
-            .font(.infanFootnoteBold)
+            .font(.infanFootnote)
         }
     }
 }
