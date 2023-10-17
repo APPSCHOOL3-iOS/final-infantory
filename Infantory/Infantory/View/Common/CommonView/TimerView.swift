@@ -16,6 +16,7 @@ struct TimerView: View {
             if remainingTime <= 0 {
                 Text("\(Image(systemName: "timer")) 종료됨")
                     .font(.infanFootnote)
+                    .frame(width: 110, alignment: .leading)
                     .foregroundColor(.gray)
             } else {
                 HStack {
