@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct PaymentReceiptView: View {
     let paymentStore: PaymentStore
@@ -43,6 +44,9 @@ struct PaymentReceiptView: View {
             
             Button {
                 isShowingPaymentSheet = false
+                Task {
+                    updateIsPaid()
+                }
             } label: {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: CGFloat.screenWidth - 30, height: 60)
@@ -59,6 +63,19 @@ struct PaymentReceiptView: View {
         .onAppear {
             paymentStore.uploadPaymentInfo(paymentInfo: paymentInfo)
         }
+    }
+    
+    func updateIsPaid() {
+        let firestore = Firestore.firestore()
+        firestore.collection("AuctionProducts").document(paymentStore.product.id ?? "").updateData([
+                    "isPaid": true
+                ]) { error in
+                    if let error = error {
+                        print("updating Error: \(error)")
+                    } else {
+                        print("successfully updated!")
+                    }
+                }
     }
 }
 

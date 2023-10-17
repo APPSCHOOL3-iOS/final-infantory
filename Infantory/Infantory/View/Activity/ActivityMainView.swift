@@ -135,40 +135,6 @@ struct ActivityRow: View {
                         .frame(width: 40, height: 40)
                         .cornerRadius(20)
                 case .success(let image):
-                    if myAuctionInfos?.product.auctionFilter == .close {
-                        ZStack {
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 90, height: 90)
-                                .blur(radius: 5)
-                                .clipShape(Rectangle())
-                                .cornerRadius(7)
-                            
-                            if myAuctionInfos?.product.biddingInfo?.last?.userID == loginStore.currentUser.id {
-                                Text("낙찰")
-                                    .padding(10)
-                                    .bold()
-                                    .foregroundColor(.white)
-                                    .background(Color.infanMain)
-                                    .cornerRadius(20)
-                            } else {
-                                Text("미낙찰")
-                                    .padding(10)
-                                    .bold()
-                                    .foregroundColor(.white)
-                                    .background(Color.infanDarkGray)
-                                    .cornerRadius(20)
-                            }
-                        }
-                    } else if myAuctionInfos?.product.auctionFilter == .inProgress {
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .clipShape(Rectangle())
-                            .cornerRadius(7)
-                    }
                     
                     if myApplyInfos?.product.applyFilter == .close {
                         ZStack {
@@ -205,6 +171,43 @@ struct ActivityRow: View {
                             .clipShape(Rectangle())
                             .cornerRadius(7)
                     }
+                    
+                    if myAuctionInfos?.product.auctionFilter == .close {
+                        ZStack {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .blur(radius: 5)
+                                .clipShape(Rectangle())
+                                .cornerRadius(7)
+                            
+                            if myAuctionInfos?.product.biddingInfo?.last?.userID == loginStore.currentUser.id {
+                                Text("낙찰")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(20)
+                            } else {
+                                Text("미낙찰")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanDarkGray)
+                                    .cornerRadius(20)
+                            }
+                        }
+                    } else if myAuctionInfos?.product.auctionFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
+                    }
+                    
+
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()

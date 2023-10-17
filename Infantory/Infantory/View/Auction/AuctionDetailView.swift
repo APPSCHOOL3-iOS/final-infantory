@@ -91,7 +91,16 @@ struct Footer: View {
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
                 } else {
-                    if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
+                    if auctionStore.product.isPaid == true {
+                        Text("결제 완료")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.infanGray)
+                                    .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            )
+                    } else if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
                         Button {
                             isShowingPaymentSheet = true
                         } label: {
@@ -120,7 +129,7 @@ struct Footer: View {
             }
             .disabled((auctionStore.product.auctionFilter == .close && (auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)) ||
                       auctionStore.product.auctionFilter == .planned ||
-                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id || (isHighestBidder && auctionStore.product.auctionFilter == .inProgress)
+                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id || (isHighestBidder && auctionStore.product.auctionFilter == .inProgress || auctionStore.product.isPaid == true)
             )
             .offset(y: -20)
         }
