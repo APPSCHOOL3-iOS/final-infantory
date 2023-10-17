@@ -125,14 +125,14 @@ struct ActivityRow: View {
                                 .cornerRadius(7)
                             
                             if myAuctionInfos?.product.biddingInfo?.last?.userID == loginStore.currentUser.id {
-                                Text("낙찰 성공")
+                                Text("낙찰")
                                     .padding(10)
                                     .bold()
                                     .foregroundColor(.white)
                                     .background(Color.infanMain)
                                     .cornerRadius(20)
                             } else {
-                                Text("경매 종료")
+                                Text("미낙찰")
                                     .padding(10)
                                     .bold()
                                     .foregroundColor(.white)
