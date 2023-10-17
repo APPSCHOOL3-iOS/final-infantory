@@ -9,43 +9,113 @@ import SwiftUI
 
 struct HomeBannerView: View {
     
-    // 이거 일단.. 따로 뭔가 만들어야 할듯,,,, 일단 아무 이미지나 넣어놓음
-    private var product: [String] = ["https://www.denews.co.kr/news/photo/202009/15323_16884_5536.jpg", "https://diamall.co.kr/web/product/tiny/20200206/8d8f437cb7eeed5694944942f4a113d2.jpg"]
+    @ObservedObject var applyViewModel: ApplyProductStore
+    private var selectedProducts: [ApplyProduct] {
+        applyViewModel.applyProduct.filter { product in
+            product.applyFilter == .close
+        }.filter { product in
+            product.applyCloseFilter == .afterRaffle
+        }
+    }
     
     var body: some View {
         TabView {
-            ForEach(product, id: \.self) { item in
-                CachedImage(url: item) { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .scaledToFill()
-                            .clipped()
-                    case .success(let image):
-                        image
+            ForEach(selectedProducts) { product in
+                NavigationLink {
+                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                } label: {
+                    ZStack(alignment: .center) {
+                        Image("finalApplyfinal")
                             .resizable()
-                            .scaledToFill()
-                            .clipped()
-                    case .failure:
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .scaledToFill()
-                            .clipped()
+                            .aspectRatio(contentMode: .fill)
                         
-                    @unknown default:
-                        EmptyView()
+                        VStack {
+                            Spacer()
+                            
+                            if product.productImageURLStrings.count > 0 {
+                                CachedImage(url: product.productImageURLStrings[0]) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .scaledToFill()
+                                            .frame(width: (.screenWidth - 100) / 2,
+                                                   height: (.screenWidth - 100) / 2)
+                                            .clipped()
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: .screenWidth * 0.585, height: (.screenWidth * 0.666) / 2 - 1)
+                                            .clipped()
+                                    case .failure:
+                                        Image(systemName: "xmark")
+                                            .frame(width: (.screenWidth - 100) / 2,
+                                                   height: (.screenWidth - 100) / 2)
+                                        
+                                    @unknown default:
+                                        EmptyView()
+                                    }
+                                }
+                                
+                            } else {
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: (.screenWidth - 100) / 2,
+                                           height: (.screenWidth - 100) / 2)
+                                    .clipped()
+                            }
+                        }
+                        
+                        HStack {
+                            Spacer()
+                                .frame(width: .screenWidth * 0.6)
+                            
+                            if product.influencerProfile == nil {
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 70, height: 70)
+                                    .cornerRadius(35)
+                                    .rotationEffect(.degrees(30))
+                            } else {
+                                CachedImage(url: product.influencerProfile ?? "") { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 70, height: 70)
+                                            .cornerRadius(35)
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 70, height: 70)
+                                            .cornerRadius(35)
+                                            .rotationEffect(.degrees(30))
+                                    case .failure:
+                                        Image(systemName: "xmark")
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 70, height: 70)
+                                            .cornerRadius(35)
+                                        
+                                    @unknown default:
+                                        EmptyView()
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
         .tabViewStyle(PageTabViewStyle())
-        .frame(width: .screenWidth - 20, height: .screenWidth - 150)
-        .cornerRadius(10)
+        .frame(width: .screenWidth, height: .screenWidth * 0.666)
     }
 }
 
 struct HomeBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeBannerView()
+        HomeBannerView(applyViewModel: ApplyProductStore())
     }
 }

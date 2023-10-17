@@ -72,15 +72,12 @@ struct HomeHotAuctionView: View {
                                 }
                                 
                             } else {
-                                ZStack(alignment: .topLeading) {
-                                    Image("smallAppIcon")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: (.screenWidth - 100) / 2,
-                                               height: (.screenWidth - 100) / 2)
-                                        .clipped()
-                                }
-                                .padding(8)
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: (.screenWidth - 100) / 2,
+                                           height: (.screenWidth - 100) / 2)
+                                    .clipped()
                             }
                             
                             VStack(alignment: .leading) {
@@ -98,6 +95,7 @@ struct HomeHotAuctionView: View {
                         }
                     }
                 }
+                .padding(.leading, 20)
             }
             .scrollIndicators(.hidden)
         }
