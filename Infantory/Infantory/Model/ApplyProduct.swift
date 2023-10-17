@@ -50,6 +50,8 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     // 지불 가격
     var winningPrice: Int?
     var applyInfoIDs: [String] = []
+    
+    var isPaid: Bool = false
 }
 
 /* 응모 가져올때 가정

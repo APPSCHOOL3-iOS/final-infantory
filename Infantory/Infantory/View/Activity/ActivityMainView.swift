@@ -79,6 +79,19 @@ struct ActivityMainView: View {
                 }
             }
         }
+        .refreshable {
+            Task {
+                let acticityInfo = ActivityInfo(auctionActivityInfos: myAuctionActivityInfos,
+                                                applyActivityInfos: myApplyActivityInfos)
+                
+                myAuctionInfos = await acticityInfo.getMyAuctionInfos()
+                myApplyInfos = await acticityInfo.getMyApplyInfos()
+                
+                myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
+                    myApplyInfos.first { $0.product.id  == id }
+                }
+            }
+        }
     }
 }
 

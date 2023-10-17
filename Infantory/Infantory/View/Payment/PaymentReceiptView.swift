@@ -11,6 +11,8 @@ struct PaymentReceiptView: View {
     let paymentStore: PaymentStore
     let paymentInfo: PaymentInfo
     
+    @Binding var isShowingPaymentSheet: Bool
+    
     var body: some View {
         VStack {
             Text("주문이 완료되었습니다!")
@@ -39,9 +41,8 @@ struct PaymentReceiptView: View {
             }
             Spacer()
             
-            NavigationLink {
-                HomeMainView()
-                    .navigationBarHidden(true)
+            Button {
+                isShowingPaymentSheet = false
             } label: {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: CGFloat.screenWidth - 30, height: 60)
@@ -72,7 +73,8 @@ struct ReceiptView_Previews: PreviewProvider {
                                                                               addressDetail: ""),
                                                         deliveryRequest: .door,
                                                         deliveryCost: 3000,
-                                                        paymentMethod: .accountTransfer))
+                                                        paymentMethod: .accountTransfer), 
+                               isShowingPaymentSheet: .constant(true))
         }
     }
 }

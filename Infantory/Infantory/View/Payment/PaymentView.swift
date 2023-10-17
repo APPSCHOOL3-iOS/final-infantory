@@ -10,24 +10,27 @@ import SwiftUI
 struct PaymentView: View {
     var paymentStore: PaymentStore
     @State var paymentInfo: PaymentInfo
+    @Binding var isShowingPaymentSheet: Bool
     
     var body: some View {
-        VStack {
-            ScrollView {
-                LazyVStack(pinnedViews: .sectionFooters) {
-                    PaymentAddressView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
-                    
-                    PaymentPriceView(price: paymentStore.product.winningPrice ?? 0)
-                    
-                    PaymentMethodView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
-                        .padding(.top)
-                    
-                    payButton
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    LazyVStack(pinnedViews: .sectionFooters) {
+                        PaymentAddressView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
+                        
+                        PaymentPriceView(price: paymentStore.product.winningPrice ?? 0)
+                        
+                        PaymentMethodView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
+                            .padding(.top)
+                        
+                        payButton
+                    }
                 }
             }
+            .navigationBar(title: "배송 / 결재")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .navigationBar(title: "배송 / 결재")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -41,7 +44,8 @@ struct PaymentView_Previews: PreviewProvider {
                                                                        addressDetail: ""),
                                                  deliveryRequest: .door,
                                                  deliveryCost: 3000,
-                                                 paymentMethod: .accountTransfer)
+                                                 paymentMethod: .accountTransfer),
+                        isShowingPaymentSheet: .constant(true)
             )
         }
     }
@@ -51,7 +55,9 @@ extension PaymentView {
     
     var payButton: some View {
         NavigationLink {
-            PaymentReceiptView(paymentStore: paymentStore, paymentInfo: paymentInfo)
+            PaymentReceiptView(paymentStore: paymentStore,
+                               paymentInfo: paymentInfo,
+                               isShowingPaymentSheet: $isShowingPaymentSheet)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)

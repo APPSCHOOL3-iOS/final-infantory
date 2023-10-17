@@ -35,6 +35,8 @@ struct AuctionProduct: Productable, Identifiable, Codable {
     var minPrice: Int
     var winningPrice: Int?
     
+    var isPaid: Bool = false
+    
     var auctionFilter: AuctionFilter {
         if startRemainingTime > 0.0 {
             return .planned

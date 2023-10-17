@@ -65,7 +65,7 @@ extension PaymentAddressView {
                 .padding(.trailing)
                 
                 VStack(alignment: .leading) {
-                    Text(paymentStore.product.influencerID)
+                    Text(paymentStore.user.nickName)
                         .fontWeight(.semibold)
                     
                     Text(paymentStore.product.productName)
