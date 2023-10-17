@@ -15,20 +15,11 @@ struct MyMainView: View {
     var body: some View {
         NavigationStack {
             if loginStore.userUid.isEmpty {
-                Button(action: {
-                    isShowingLoginSheet = true
-                }, label: {
-                    Text("로그인")
-                })
+                MyLoginView()
             } else {
                 MyInfoMainView()
             }
         }
-        .sheet(isPresented: $isShowingLoginSheet, content: {
-            LoginSheetView()
-                .environmentObject(loginStore)
-        })
-        
     }
 }
 

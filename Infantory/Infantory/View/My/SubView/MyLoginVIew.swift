@@ -9,77 +9,30 @@ import SwiftUI
 import PhotosUI
 import Photos
 
-struct MyInfoMainView: View {
+struct MyLoginView: View {
     @EnvironmentObject var loginStore: LoginStore
+    
+    @State private var isShowingLoginSheet: Bool = false
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     var body: some View {
         NavigationStack {
             ScrollView {
                 // 프사이미지, 닉네임, 응모권 관심상품
                 VStack(spacing: 20) {
-                    HStack(spacing: 16) {
-                        CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .frame(width: 80, height: 80)
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 80, height: 80)
-                                
-                            case .failure(let error):
-                                Image("smallAppIcon")
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 80, height: 80)
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("\(loginStore.currentUser.nickName)")
-                                .font(.infanTitle2)
-                            
-                            HStack {
-                                HStack {
-                                    Text("응모권 \(loginStore.totalApplyTicketCount)")
-                                }
-                                
-                                HStack {
-                                    Text("관심상품 0")
-                                }
-                            }
-                            .font(.infanFootnote)
-                            .foregroundColor(Color.infanDarkGray)
-                        }
-                        Spacer()
+                    // 로그인 버튼
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(Color.infanMain, lineWidth: 2)
+                            .frame(width: (.screenWidth - 50), height: 60)
+                            .foregroundColor(.white)
+                        Button(action: {
+                            isShowingLoginSheet = true
+                        }, label: {
+                            Text("로그인이 필요한 서비스 입니다.")
+                                .frame(width: (.screenWidth - 50), height: 60)
+                                .foregroundColor(.infanMain)
+                        })
                     }
-                    
-                    // 프로필 관리, 배송지 관리 버튼
-                    HStack(spacing: 10) {
-                        NavigationLink {
-                            ProfileEditView(nickName: loginStore.currentUser.nickName,
-                                            phoneNumber: loginStore.currentUser.phoneNumber,
-                                            myZipCode: loginStore.currentUser.address.zonecode,
-                                            myAddress: loginStore.currentUser.address.address,
-                                            myDetailAddress: loginStore.currentUser.address.addressDetail)
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .strokeBorder(Color.infanDarkGray, lineWidth: 1)
-                                    .frame(width: (.screenWidth - 50), height: 30)
-                                    .foregroundColor(.white)
-                                
-                                Text("프로필 편집")
-                                    .font(.infanBody)
-                                    .foregroundColor(.infanDarkGray)
-                            }
-                        }
-                    }
-                    
                     // 상품 내역, 결제완료~배송완료
                     VStack(spacing: 16) {
                         HStack(alignment: .top) {
@@ -140,8 +93,8 @@ struct MyInfoMainView: View {
                     
                     // 입찰내역, 응모내역, 결제정보, 로그아웃
                     VStack(alignment: .leading, spacing: 16) {
-                        NavigationLink {
-                            Text("입찰 내역이 보여질 화면입니다.")
+                        Button {
+                            
                         } label: {
                             HStack {
                                 Image(systemName: "list.bullet.rectangle.portrait")
@@ -153,8 +106,8 @@ struct MyInfoMainView: View {
                             }
                         }
                         Divider()
-                        NavigationLink {
-                            EntryTicketView()
+                        Button {
+                            
                         } label: {
                             HStack {
                                 Image("apply")
@@ -166,8 +119,8 @@ struct MyInfoMainView: View {
                             }
                         }
                         Divider()
-                        NavigationLink {
-                            Text("결제정보가 보여질 화면입니다.")
+                        Button {
+                            
                         } label: {
                             HStack {
                                 Image(systemName: "tag")
@@ -178,22 +131,7 @@ struct MyInfoMainView: View {
                                 Spacer()
                             }
                         }
-                        Divider()
-                        HStack {
-                            Button(action: {
-                                loginStore.kakaoLogout()
-                            }, label: {
-                                Image(systemName: "rectangle.portrait.and.arrow.right")
-                                    .frame(width: 24)
-                                
-                                Text("로그아웃")
-                                    .font(.infanHeadline)
-                                Spacer()
-                            })
-                            .foregroundColor(.infanRed)
-                        }
                     }
-                    
                     .foregroundColor(.primary)
                     .listStyle(.plain)
                     
@@ -201,6 +139,10 @@ struct MyInfoMainView: View {
                 .horizontalPadding()
             }
         }
+        .sheet(isPresented: $isShowingLoginSheet, content: {
+            LoginSheetView()
+                .environmentObject(loginStore)
+        })
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Text("마이")
@@ -210,9 +152,9 @@ struct MyInfoMainView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
-struct MyInfoMainView_Previews: PreviewProvider {
+struct MyLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        MyInfoMainView()
+        MyLoginView()
             .environmentObject(LoginStore())
     }
 }

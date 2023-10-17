@@ -17,6 +17,8 @@
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
 		01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78842AD9326000790A56 /* EntryTiketView.swift */; };
+		01CE788B2ADE229300790A56 /* MyBidMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE788A2ADE229300790A56 /* MyBidMainView.swift */; };
+		01CE788D2ADE26DF00790A56 /* MyLoginVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */; };
 		0C25176E2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */; };
 		0C82A32D2AC278A6009F6D97 /* ApplyRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */; };
 		0C82A32F2AC279BB009F6D97 /* ApplyProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */; };
@@ -157,6 +159,8 @@
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 		01CE78842AD9326000790A56 /* EntryTiketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTiketView.swift; sourceTree = "<group>"; };
+		01CE788A2ADE229300790A56 /* MyBidMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBidMainView.swift; sourceTree = "<group>"; };
+		01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginVIew.swift; sourceTree = "<group>"; };
 		0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailDescriptionView.swift; sourceTree = "<group>"; };
 		0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegistrationView.swift; sourceTree = "<group>"; };
 		0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductStore.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
+				01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */,
 				0CF5467F2AD633610075C3FD /* ProfileEditView.swift */,
 				0CF546722AD6209F0075C3FD /* PhotosSelector.swift */,
 				01CE78822AD931C200790A56 /* ProfileImagePicker.swift */,
@@ -538,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				A091E5B12ABC7A20000894FC /* MyMainView.swift */,
+				01CE788A2ADE229300790A56 /* MyBidMainView.swift */,
 				016AAEDC2AD5316D000B69E4 /* SubView */,
 			);
 			path = My;
@@ -875,6 +881,7 @@
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
 				EC9E6D152ADCCC4B00FD0831 /* InfluencerStore.swift in Sources */,
 				016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */,
+				01CE788B2ADE229300790A56 /* MyBidMainView.swift in Sources */,
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,
 				843BE81C2AD6404E00C54943 /* SearchMainView.swift in Sources */,
 				A091E5B22ABC7A21000894FC /* MyMainView.swift in Sources */,
@@ -925,6 +932,7 @@
 				EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
 				EC9E6D132ADCCA4700FD0831 /* InfluencerMainView.swift in Sources */,
+				01CE788D2ADE26DF00790A56 /* MyLoginVIew.swift in Sources */,
 				0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,
