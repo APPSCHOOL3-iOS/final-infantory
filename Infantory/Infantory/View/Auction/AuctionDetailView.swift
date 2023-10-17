@@ -104,16 +104,14 @@ struct Footer: View {
                         Button {
                             isShowingPaymentSheet = true
                         } label: {
-                            Text("결제하기")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.infanMain)
-                                        .frame(width: CGFloat.screenWidth - 40, height: 54)
-                                        
-                                )
-                                .contentShape(Rectangle())
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanMain)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                                .overlay {
+                                    Text("결제하기")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                         }
                     } else {
                         Text("이미 종료된 경매입니다.")

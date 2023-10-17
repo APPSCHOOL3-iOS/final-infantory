@@ -49,13 +49,28 @@ extension PaymentAddressView {
     var productInfo: some View {
         VStack {
             HStack(alignment: .top) {
-                AsyncImage(url: URL(string: paymentStore.product.productImageURLStrings[0])) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                } placeholder: {
-                    ProgressView()
+                CachedImage(url: paymentStore.product.productImageURLStrings[0]) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .cornerRadius(20)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .frame(width: 100, height: 100)
+                            
+                    case .failure:
+                        Image(systemName: "xmark")
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(20)
+                        
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 10)

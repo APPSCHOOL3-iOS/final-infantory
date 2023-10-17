@@ -48,7 +48,7 @@ struct ActivityMainView: View {
                                 } label: {
                                     ActivityRow(product: info.product,
                                                 myActivity: info.myApplyCount,
-                                                selectedFilter: $selectedFilter)
+                                                selectedFilter: $selectedFilter, myApplyInfos: info)
                                     .padding()
                                 }
                                 .foregroundColor(.black)
@@ -123,7 +123,7 @@ struct ActivityRow: View {
     var myApplyInfos: ApplyActivityData?
     
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     
     var body: some View {
         HStack {
@@ -132,11 +132,35 @@ struct ActivityRow: View {
                 case .empty:
                     ProgressView()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 90, height: 90)
                         .cornerRadius(20)
                 case .success(let image):
-                    
-                    if myApplyInfos?.product.applyFilter == .close {
+                    if myApplyInfos?.product.applyFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
+                        
+                        // 응모 당첨자 구분 필요
+                        //                            if myApplyInfos?.product. == loginStore.currentUser.id {
+                        //                                Text("응모 당첨")
+                        //                                    .padding(10)
+                        //                                    .bold()
+                        //                                    .foregroundColor(.white)
+                        //                                    .background(Color.infanMain)
+                        //                                    .cornerRadius(20)
+                        //                            } else {
+                        //                                Text("경매 종료")
+                        //                                    .padding(10)
+                        //                                    .bold()
+                        //                                    .foregroundColor(.white)
+                        //                                    .background(Color.infanDarkGray)
+                        //                                    .cornerRadius(20)
+                        //                            }
+                        
+                    } else if myApplyInfos?.product.applyFilter == .close {
                         ZStack {
                             image
                                 .resizable()
@@ -145,33 +169,23 @@ struct ActivityRow: View {
                                 .blur(radius: 5)
                                 .clipShape(Rectangle())
                                 .cornerRadius(7)
-               
-                            // 응모 당첨자 구분 필요
-//                            if myApplyInfos?.product. == loginStore.currentUser.id {
-//                                Text("응모 당첨")
-//                                    .padding(10)
-//                                    .bold()
-//                                    .foregroundColor(.white)
-//                                    .background(Color.infanMain)
-//                                    .cornerRadius(20)
-//                            } else {
-//                                Text("경매 종료")
-//                                    .padding(10)
-//                                    .bold()
-//                                    .foregroundColor(.white)
-//                                    .background(Color.infanDarkGray)
-//                                    .cornerRadius(20)
-//                            }
+                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
+                                Text("당첨")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(20)
+                            } else {
+                                Text("미당첨")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanDarkGray)
+                                    .cornerRadius(20)
+                            }
                         }
-                    } else if myApplyInfos?.product.applyFilter == .inProgress {
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .clipShape(Rectangle())
-                            .cornerRadius(7)
                     }
-                    
                     if myAuctionInfos?.product.auctionFilter == .close {
                         ZStack {
                             image
@@ -182,7 +196,7 @@ struct ActivityRow: View {
                                 .clipShape(Rectangle())
                                 .cornerRadius(7)
                             
-                            if myAuctionInfos?.product.biddingInfo?.last?.userID == loginStore.currentUser.id {
+                            if isWinner() {
                                 Text("낙찰")
                                     .padding(10)
                                     .bold()
@@ -207,7 +221,6 @@ struct ActivityRow: View {
                             .cornerRadius(7)
                     }
                     
-
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()
@@ -262,10 +275,20 @@ struct ActivityRow: View {
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
         }
-        .onAppear {
-            print("\(myAuctionInfos?.product.productName)product.biddingInfo.last.userId\(myAuctionInfos?.product.biddingInfo?.last?.userID)")
-            
-            print("\(myAuctionInfos?.product.productName)product.winningUserID \(myAuctionInfos?.product.winningUserID)")
+    }
+    
+    func isWinner() -> Bool {
+        if let activityInfos = loginStore.currentUser.auctionActivityInfos, 
+            let price = product.winningPrice {
+            for info in activityInfos {
+                if info.productId == product.id {
+                    print(price)
+                    print(info.price)
+                    return info.price == price
+                }
+                
+            }
         }
+        return false
     }
 }

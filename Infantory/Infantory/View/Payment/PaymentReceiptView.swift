@@ -68,7 +68,7 @@ struct PaymentReceiptView: View {
     func updateIsPaid() {
         let firestore = Firestore.firestore()
         firestore.collection("AuctionProducts").document(paymentStore.product.id ?? "").updateData([
-                    "isPaid": true
+                    "isPaid": false
                 ]) { error in
                     if let error = error {
                         print("updating Error: \(error)")
