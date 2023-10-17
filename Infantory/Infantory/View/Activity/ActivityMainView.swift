@@ -15,6 +15,8 @@ struct ActivityMainView: View {
     
     @State private var selectedFilter: ActivityOption = .auction
     
+    let applyStore: ApplyProductStore = ApplyProductStore()
+    
     var searchCategory: SearchResultCategory = .total
     
     var body: some View {
@@ -40,10 +42,16 @@ struct ActivityMainView: View {
                             }
                         } else {
                             ForEach(myApplyInfos, id: \.product.id) { info in
-                                ActivityRow(product: info.product,
-                                            myActivity: info.myApplyCount,
-                                            selectedFilter: $selectedFilter)
-                                .padding()
+                                NavigationLink {
+                                    ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                } label: {
+                                    ActivityRow(product: info.product,
+                                                myActivity: info.myApplyCount,
+                                                selectedFilter: $selectedFilter)
+                                    .padding()
+                                }
+                                .foregroundColor(.black)
+                                
                                 Divider()
                             }
                             
@@ -144,6 +152,7 @@ struct ActivityRow: View {
                 HStack {
                     Text("\(product.productName)")
                         .font(.infanHeadlineBold)
+                        .frame(alignment: .leading)
                     
                     Spacer()
                 }

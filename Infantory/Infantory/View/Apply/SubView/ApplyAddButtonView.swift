@@ -49,7 +49,15 @@ struct ApplyAddButtonView: View {
                 Button {
                     isShowingPaymentSheet = true
                 } label: {
-                    Text("결재하기")
+                    Text("결제하기")
+                        .font(.infanHeadlineBold)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanMain)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                        )
                 }
             } else {
                 Text("이미 종료된 응모입니다.")

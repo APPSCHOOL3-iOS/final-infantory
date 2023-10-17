@@ -52,8 +52,8 @@ extension PaymentAddressView {
                 AsyncImage(url: URL(string: paymentStore.product.productImageURLStrings[0])) { image in
                     image
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 90, height: 90)
+                        .scaledToFill()
+                        .frame(width: 100, height: 100)
                 } placeholder: {
                     ProgressView()
                 }
