@@ -111,9 +111,9 @@ struct Footer: View {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(Color.infanMain)
                                         .frame(width: CGFloat.screenWidth - 40, height: 54)
+                                        
                                 )
                                 .contentShape(Rectangle())
-                            
                         }
                     } else {
                         Text("이미 종료된 경매입니다.")
