@@ -71,6 +71,7 @@ struct HomeApplyView: View {
                         }
                     }
                 }
+                .padding(.leading, 20)
             }
             .scrollIndicators(.hidden)
         }

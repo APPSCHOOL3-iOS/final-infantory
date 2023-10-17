@@ -15,43 +15,47 @@ struct HomeInfluencerImageView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(searchStore.shuffledInfluencer().prefix(10)) { influencer in
-                    VStack {
-                        if influencer.profileImageURLString == nil {
-                            Image("smallAppIcon")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 60, height: 60)
-                                .cornerRadius(40)
-                        } else {
-                            CachedImage(url: influencer.profileImageURLString ?? "") { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 60, height: 60)
-                                        .cornerRadius(40)
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 60, height: 60)
-                                        .cornerRadius(40)
-                                case .failure:
-                                    Image(systemName: "xmark")
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 40, height: 40)
-                                        .cornerRadius(20)
-                                    
-                                @unknown default:
-                                    EmptyView()
+                ForEach(searchStore.influencer.prefix(10)) { influencer in
+                    NavigationLink {
+                        InfluencerMainView(influencerID: influencer.id ?? "")
+                    } label: {
+                        VStack {
+                            if influencer.profileImageURLString == nil {
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 60, height: 60)
+                                    .cornerRadius(40)
+                            } else {
+                                CachedImage(url: influencer.profileImageURLString ?? "") { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(40)
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 60, height: 60)
+                                            .cornerRadius(40)
+                                    case .failure:
+                                        Image(systemName: "xmark")
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 40, height: 40)
+                                            .cornerRadius(20)
+                                        
+                                    @unknown default:
+                                        EmptyView()
+                                    }
                                 }
                             }
+                            Text(influencer.nickName)
+                                .font(.infanFootnote)
                         }
-                        Text(influencer.nickName)
-                            .font(.infanFootnote)
+                        .padding(.leading, 20)
                     }
-                    .padding(8)
                 }
             }
         }

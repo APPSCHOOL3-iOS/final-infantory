@@ -20,7 +20,7 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     var influencerID: String
     var influencerNickname: String
     var influencerProfile: String? = nil
-    var winningUserID: String?
+    var winningUserID: String? = nil
     
     // 응모 시작일, 마감일
     var startDate: Date
@@ -42,6 +42,14 @@ struct ApplyProduct: Productable, Identifiable, Codable {
         }
         
         return .planned
+    }
+    
+    var applyCloseFilter: ApplyCloseFilter {
+        if winningUserID == nil {
+            return .beforeRaffle
+        } else {
+            return .afterRaffle
+        }
     }
     
     // 응모한 유저

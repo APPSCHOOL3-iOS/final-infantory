@@ -17,3 +17,8 @@ enum ApplyInprogressFilter: String, CaseIterable {
     case deadline = "마감순"
     case popular = "인기순"
 }
+
+enum ApplyCloseFilter: String, CaseIterable {
+    case beforeRaffle = "추첨 전"
+    case afterRaffle = "추첨 후"
+}

@@ -19,11 +19,12 @@ struct HomeMainView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                HomeBannerView()
+                HomeBannerView(applyViewModel: applyViewModel)
                 
                 VStack(alignment: .leading) {
                     Text("다양한 인플루언서를 만나보세요!✨")
                         .font(.infanTitle2)
+                        .horizontalPadding()
                     HomeInfluencerImageView(applyViewModel: applyViewModel, searchStore: searchStore)
                 }
                 .padding([.top, .bottom])
@@ -31,6 +32,7 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("🔥HOT🔥 애장품 경매에 참여해보세요!")
                         .font(.infanTitle2)
+                        .horizontalPadding()
                     HomeHotAuctionView(auctionViewModel: auctionViewModel)
                 }
                 .padding([.top, .bottom])
@@ -38,12 +40,12 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("⏳곧 마감되는 응모에 참여해보세요!⌛️")
                         .font(.infanTitle2)
+                        .horizontalPadding()
                     HomeApplyView(applyViewModel: applyViewModel)
                 }
                 .padding([.top, .bottom])
                 
             }
-            .horizontalPadding()
             .scrollIndicators(.hidden)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
