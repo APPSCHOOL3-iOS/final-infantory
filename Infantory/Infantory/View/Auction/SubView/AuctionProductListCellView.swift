@@ -14,7 +14,7 @@ struct AuctionProductListCellView: View {
     
     var body: some View {
         NavigationLink {
-            AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
+            AuctionDetailView(auctionStore: AuctionStore(product: product))
         } label: {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 16) {
@@ -36,6 +36,7 @@ struct AuctionProductListCellView: View {
                                             .blur(radius: 5)
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                            .cornerRadius(10)
                                         
                                         Text("경매 종료")
                                             .padding(10)
@@ -53,6 +54,7 @@ struct AuctionProductListCellView: View {
                                             .blur(radius: 5)
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                            .cornerRadius(10)
                                         
                                         Text("응모 예정")
                                             .padding(10)
@@ -67,6 +69,7 @@ struct AuctionProductListCellView: View {
                                         .scaledToFill()
                                         .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                         .clipped()
+                                        .cornerRadius(10)
                                 }
                             case .failure:
                                 Image(systemName: "xmark")

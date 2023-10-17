@@ -9,11 +9,11 @@ import SwiftUI
 import WebKit
 
 struct PaymentAddressWebView: View {
-    @ObservedObject var viewModel: PaymentStore
+    @Binding var paymentInfo: PaymentInfo
     
     var body: some View {
         WebView(
-            viewModel: viewModel,
+            paymentInfo: $paymentInfo,
             url: URL(string: "https://ozdevelop.github.io/KakaoAddressAPI.github.io/")!
         )
         .edgesIgnoringSafeArea(.all)
@@ -22,15 +22,21 @@ struct PaymentAddressWebView: View {
 
 struct PaymentAddressWebView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentAddressWebView(viewModel: PaymentStore(user: User.dummyUser,
-                                                          product: AuctionProduct.dummyProduct))
+        PaymentAddressWebView(paymentInfo: .constant(PaymentInfo(userId: "",
+                                                                 address: Address.init(address: "",
+                                                                                       zonecode: "",
+                                                                                       addressDetail: ""),
+                                                                 deliveryRequest: .door,
+                                                                 deliveryCost: 3000,
+                                                                 paymentMethod: .accountTransfer))
+        )
     }
 }
 
 struct WebView: UIViewRepresentable {
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject var viewModel: PaymentStore
+    @Binding var paymentInfo: PaymentInfo
     
     let url: URL
     let contentController = WKUserContentController()
@@ -64,7 +70,7 @@ struct WebView: UIViewRepresentable {
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if let data = message.body as? [String: Any] {
-                parent.viewModel.paymentInfo.address = Address(address: data["address"] as! String,
+                parent.paymentInfo.address = Address(address: data["address"] as! String,
                                                                zonecode: data["zonecode"] as! String,
                                                                addressDetail: "")
                 parent.presentationMode.wrappedValue.dismiss()

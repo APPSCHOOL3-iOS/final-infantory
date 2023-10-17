@@ -11,7 +11,6 @@ import ExpandableText
 struct AuctionDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var auctionProductViewModel: AuctionProductViewModel
     
     @ObservedObject var auctionStore: AuctionStore
     
@@ -51,10 +50,12 @@ struct Footer: View {
     @ObservedObject var auctionStore: AuctionStore
     @State private var isShowingAuctionNoticeSheet: Bool = false
     @State private var isShowingAuctionBidSheet: Bool = false
+    @State var isShowingPaymentSheet: Bool = false
     @State private var showAlert: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @State private var isHighestBidder: Bool = false
     @State private var highestBidderState: Bool = false
+    
     var body: some View {
         
         VStack {
@@ -90,20 +91,27 @@ struct Footer: View {
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
                 } else {
-                    if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
-                        NavigationLink {
-                            PaymentView()
+                    if auctionStore.product.isPaid == true {
+                        Text("결제 완료")
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.infanGray)
+                                    .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            )
+                    } else if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
+                        Button {
+                            isShowingPaymentSheet = true
                         } label: {
-                            Text("결제하기")
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.infanMain)
-                                        .frame(width: CGFloat.screenWidth - 40, height: 54)
-                                )
-                                .contentShape(Rectangle())
-                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.infanMain)
+                                .frame(width: CGFloat.screenWidth - 40, height: 54)
+                                .overlay {
+                                    Text("결제하기")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
                         }
                     } else {
                         Text("이미 종료된 경매입니다.")
@@ -118,8 +126,9 @@ struct Footer: View {
                 }
             }
             .disabled((auctionStore.product.auctionFilter == .close && (auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)) ||
-                          auctionStore.product.auctionFilter == .planned ||
-                          isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)
+                      auctionStore.product.auctionFilter == .planned ||
+                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id || (isHighestBidder && auctionStore.product.auctionFilter == .inProgress || auctionStore.product.isPaid == true)
+            )
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
@@ -142,6 +151,18 @@ struct Footer: View {
         .sheet(isPresented: $isShowingLoginSheet) {
             LoginSheetView()
                 .environmentObject(loginStore)
+        }
+        .sheet(isPresented: $isShowingPaymentSheet) {
+            PaymentView(paymentStore: PaymentStore(user: loginStore.currentUser, product: auctionStore.product),
+                        paymentInfo: PaymentInfo(userId: loginStore.currentUser.id ?? "",
+                                                 auctionProduct: auctionStore.product,
+                                                 applyProduct: nil,
+                                                 address: loginStore.currentUser.address,
+                                                 deliveryRequest: .door,
+                                                 deliveryCost: 3000,
+                                                 paymentMethod: PaymentMethod.accountTransfer),
+                        isShowingPaymentSheet: $isShowingPaymentSheet
+            )
         }
         .onAppear {
             if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {

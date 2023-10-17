@@ -23,4 +23,6 @@ protocol Productable {
     
     // 지불 가격
     var winningPrice: Int? { get set }
+    
+    var isPaid: Bool { get set }
 }

@@ -15,11 +15,9 @@ struct ActivityMainView: View {
     
     @State private var selectedFilter: ActivityOption = .auction
     
+    let applyStore: ApplyProductStore = ApplyProductStore()
+    
     var searchCategory: SearchResultCategory = .total
-    
-//    @ObservedObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
-    
-//    @ObservedObject var auctionStore: AuctionStore = AuctionStore(product: )
     
     var body: some View {
         NavigationStack {
@@ -27,34 +25,34 @@ struct ActivityMainView: View {
                 Section {
                     ScrollView {
                         if selectedFilter.title == "경매" {
-                            ForEach(myAuctionInfos, id: \.productId ) { info in
+                            ForEach(myAuctionInfos, id: \.product.id ) { info in
                                 NavigationLink {
-//                                    AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: <#T##AuctionProduct#>))
+                                    AuctionDetailView(auctionStore: AuctionStore(product: info.product))
+                                    
                                 } label: {
-                                    ActivityRow(imageURLString: info.imageURLString,
-                                                text1: info.winningPrice,
-                                                text2: info.price,
-                                                productName: info.productName,
-                                                remainingTime: info.remainingTime,
-                                                biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp),
-                                                selectedFilter: $selectedFilter)
+                                    ActivityRow(product: info.product,
+                                                myActivity: info.myPrice,
+                                                selectedFilter: $selectedFilter, myAuctionInfos: info)
                                     .padding()
                                     
                                 }
                                 .foregroundColor(.black)
                                 
                                 Divider()
-
+                                
                             }
                         } else {
-                            ForEach(myApplyInfos, id: \.productId) { info in
-                                ActivityRow(imageURLString: info.imageURLString,
-                                            text1: info.totalApplyCount,
-                                            text2: info.myApplyCount,
-                                            productName: info.productName,
-                                            remainingTime: info.remainingTime, 
-                                            biddingTime: InfanDateFormatter.shared.dateTimeString(from: info.timestamp), selectedFilter: $selectedFilter)
-                                .padding()
+                            ForEach(myApplyInfos, id: \.product.id) { info in
+                                NavigationLink {
+                                    ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                } label: {
+                                    ActivityRow(product: info.product,
+                                                myActivity: info.myApplyCount,
+                                                selectedFilter: $selectedFilter, myApplyInfos: info)
+                                    .padding()
+                                }
+                                .foregroundColor(.black)
+                                
                                 Divider()
                             }
                             
@@ -85,17 +83,21 @@ struct ActivityMainView: View {
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
                 
-                //가장 최근에 입찰한 순으로 정렬하고 싶음, 근데 여기서하니까 속도도 느리구
-                myAuctionInfos.sort { pro1, pro2 in
-                    pro1.timestamp > pro2.timestamp
+                myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
+                    myApplyInfos.first { $0.product.id  == id }
                 }
+            }
+        }
+        .refreshable {
+            Task {
+                let acticityInfo = ActivityInfo(auctionActivityInfos: myAuctionActivityInfos,
+                                                applyActivityInfos: myApplyActivityInfos)
                 
-                myApplyInfos.sort { pro1, pro2 in
-                    pro1.timestamp > pro2.timestamp
-                }
+                myAuctionInfos = await acticityInfo.getMyAuctionInfos()
+                myApplyInfos = await acticityInfo.getMyApplyInfos()
                 
-                myApplyInfos = Array(Set(myApplyInfos.map { $0.productId })).compactMap { id in
-                    myApplyInfos.first { $0.productId == id }
+                myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
+                    myApplyInfos.first { $0.product.id  == id }
                 }
             }
         }
@@ -112,32 +114,113 @@ struct ActivityMainView_Previews: PreviewProvider {
 }
 
 struct ActivityRow: View {
-    let imageURLString: String
-    let text1: Int
-    let text2: Int
-    let productName: String
-    let remainingTime: Double
-    let biddingTime: String
+    let product: Productable
+    let myActivity: Int
     
     @Binding var selectedFilter: ActivityOption
     
+    var myAuctionInfos: AuctionActivityData?
+    var myApplyInfos: ApplyActivityData?
+    
+    @EnvironmentObject var loginStore: LoginStore
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
     var body: some View {
         HStack {
-            CachedImage(url: imageURLString) { phase in
+            CachedImage(url: product.productImageURLStrings[0]) { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
+                        .frame(width: 90, height: 90)
                         .cornerRadius(20)
                 case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 90, height: 90)
-                        .clipShape(Rectangle())
-                        .cornerRadius(7)
+                    if myApplyInfos?.product.applyFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
                         
+                        // 응모 당첨자 구분 필요
+                        //                            if myApplyInfos?.product. == loginStore.currentUser.id {
+                        //                                Text("응모 당첨")
+                        //                                    .padding(10)
+                        //                                    .bold()
+                        //                                    .foregroundColor(.white)
+                        //                                    .background(Color.infanMain)
+                        //                                    .cornerRadius(20)
+                        //                            } else {
+                        //                                Text("경매 종료")
+                        //                                    .padding(10)
+                        //                                    .bold()
+                        //                                    .foregroundColor(.white)
+                        //                                    .background(Color.infanDarkGray)
+                        //                                    .cornerRadius(20)
+                        //                            }
+                        
+                    } else if myApplyInfos?.product.applyFilter == .close {
+                        ZStack {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .blur(radius: 5)
+                                .clipShape(Rectangle())
+                                .cornerRadius(7)
+                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
+                                Text("당첨")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(20)
+                            } else {
+                                Text("미당첨")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanDarkGray)
+                                    .cornerRadius(20)
+                            }
+                        }
+                    }
+                    if myAuctionInfos?.product.auctionFilter == .close {
+                        ZStack {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .blur(radius: 5)
+                                .clipShape(Rectangle())
+                                .cornerRadius(7)
+                            
+                            if isWinner() {
+                                Text("낙찰")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(20)
+                            } else {
+                                Text("미낙찰")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanDarkGray)
+                                    .cornerRadius(20)
+                            }
+                        }
+                    } else if myAuctionInfos?.product.auctionFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
+                    }
+                    
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()
@@ -149,39 +232,39 @@ struct ActivityRow: View {
                     EmptyView()
                 }
             }
-            
             .padding(.trailing, 10)
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text("\(productName)")
+                    Text("\(product.productName)")
                         .font(.infanHeadlineBold)
+                        .frame(alignment: .leading)
                     
                     Spacer()
-                    
-                    TimerView(remainingTime: remainingTime)
-                        .frame(width: 100)
-                        .lineLimit(1)
                 }
                 .padding(.bottom, 5)
                 
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    Group {
-                        Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
-                        Text( "\(text1)\(selectedFilter.title == "경매" ? "원" : "회")")
-                        .padding(.bottom, 5)
+                    
+                    Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
+                    
+                    if let auctionProduct = product as? AuctionProduct {
+                        Text("\(auctionProduct.winningPrice ?? 0)원")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
+                    } else if let applyProduct = product as? ApplyProduct {
+                        Text("\(applyProduct.applyUserIDs.count) 개")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
                     }
-                    .font(.infanFootnoteBold)
                     
                     Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
                         .foregroundColor(.infanMain)
                     
                     HStack {
-                        Text( "\(text2)\(selectedFilter.title == "경매" ? "원" : "회")")
-                        Text("(\(biddingTime))")
-                            .foregroundColor(.gray)
+                        Text( "\(myActivity)\(selectedFilter.title == "경매" ? "원" : "회")")
                         
                         Spacer()
                     }
@@ -189,6 +272,23 @@ struct ActivityRow: View {
                 }
             }
             .font(.infanFootnote)
+            
+            TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
         }
+    }
+    
+    func isWinner() -> Bool {
+        if let activityInfos = loginStore.currentUser.auctionActivityInfos, 
+            let price = product.winningPrice {
+            for info in activityInfos {
+                if info.productId == product.id {
+                    print(price)
+                    print(info.price)
+                    return info.price == price
+                }
+                
+            }
+        }
+        return false
     }
 }

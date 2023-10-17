@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PaymentAddressView: View {
-    @ObservedObject var viewModel: PaymentStore
+    let paymentStore: PaymentStore
+    @Binding var paymentInfo: PaymentInfo
     @State var directMessage: String = ""
     
     var body: some View {
@@ -29,8 +30,16 @@ struct PaymentAddressView: View {
 struct PaymentAddressView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentAddressView(viewModel: PaymentStore(user: User.dummyUser,
-                                                           product: AuctionProduct.dummyProduct))
+            PaymentAddressView(paymentStore: PaymentStore(user: User.dummyUser,
+                                                          product: AuctionProduct.dummyProduct),
+                               paymentInfo: .constant(PaymentInfo(userId: "",
+                                                                  address: Address.init(address: "",
+                                                                                        zonecode: "",
+                                                                                        addressDetail: ""),
+                                                                  deliveryRequest: .door,
+                                                                  deliveryCost: 3000,
+                                                                  paymentMethod: .accountTransfer))
+            )
         }
     }
 }
@@ -40,13 +49,28 @@ extension PaymentAddressView {
     var productInfo: some View {
         VStack {
             HStack(alignment: .top) {
-                AsyncImage(url: URL(string: viewModel.product.productImageURLStrings[0])) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 90, height: 90)
-                } placeholder: {
-                    ProgressView()
+                CachedImage(url: paymentStore.product.productImageURLStrings[0]) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .cornerRadius(20)
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .frame(width: 100, height: 100)
+                            
+                    case .failure:
+                        Image(systemName: "xmark")
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(20)
+                        
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 10)
@@ -56,12 +80,12 @@ extension PaymentAddressView {
                 .padding(.trailing)
                 
                 VStack(alignment: .leading) {
-                    Text(viewModel.product.influencerID)
+                    Text(paymentStore.user.nickName)
                         .fontWeight(.semibold)
                     
-                    Text(viewModel.product.productName)
+                    Text(paymentStore.product.productName)
                     
-                    Text(viewModel.product.description)
+                    Text(paymentStore.product.description)
                         .foregroundColor(.gray)
                 }
                 
@@ -79,7 +103,7 @@ extension PaymentAddressView {
                 Spacer()
                 
                 NavigationLink {
-                    PaymentAddressWebView(viewModel: viewModel)
+                    PaymentAddressWebView(paymentInfo: $paymentInfo)
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     Text("주소 변경")
@@ -97,7 +121,7 @@ extension PaymentAddressView {
                 HStack {
                     Text(item.title)
                         .frame(width: 50, alignment: .leading)
-                    Text(item.content(viewModel: viewModel))
+                    Text(item.content(paymentStore: paymentStore))
                 }
             }
             
@@ -113,7 +137,7 @@ extension PaymentAddressView {
             Button {
                 
             } label: {
-                Picker("Choose a message", selection: $viewModel.paymentInfo.deliveryRequest) {
+                Picker("Choose a message", selection: $paymentInfo.deliveryRequest) {
                     Text("부재 시 문 앞에 놓아주세요").tag(PaymentInfo.DeliveryMessages.door)
                     Text("부재 시 경비실에 맡겨 주세요").tag(PaymentInfo.DeliveryMessages.securityOffice)
                     Text("배송 전 연락 바랍니다").tag(PaymentInfo.DeliveryMessages.call)
@@ -122,7 +146,7 @@ extension PaymentAddressView {
                 .pickerStyle(.menu)
                 .accentColor(.infanDarkGray)
                 
-                if viewModel.paymentInfo.deliveryRequest == PaymentInfo.DeliveryMessages.directMessage {
+                if paymentInfo.deliveryRequest == PaymentInfo.DeliveryMessages.directMessage {
                     TextField("메시지를 입력해 주세요", text: $directMessage)
                         .padding(.leading, -20)
                 }

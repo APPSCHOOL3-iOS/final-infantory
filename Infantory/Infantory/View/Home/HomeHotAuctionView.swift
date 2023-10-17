@@ -25,7 +25,7 @@ struct HomeHotAuctionView: View {
             HStack {
                 ForEach(sortFilteredProduct) { product in
                     NavigationLink {
-                        AuctionDetailView(auctionProductViewModel: auctionViewModel, auctionStore: AuctionStore(product: product))
+                        AuctionDetailView(auctionStore: AuctionStore(product: product))
                     } label: {
                         VStack(alignment: .leading) {
                             ZStack(alignment: .center) {

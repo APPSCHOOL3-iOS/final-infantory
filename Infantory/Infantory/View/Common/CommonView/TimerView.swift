@@ -16,14 +16,22 @@ struct TimerView: View {
             if remainingTime <= 0 {
                 Text("\(Image(systemName: "timer")) 종료됨")
                     .font(.infanFootnote)
+                    
+                    .frame(width: 110, alignment: .leading)
                     .foregroundColor(.gray)
+                    
             } else {
-                Label("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))",
-                      systemImage: "timer")
+                HStack {
+                    Image(systemName: "timer")
+                    Text("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))")
+                }
+                .frame(width: 110, alignment: .leading)
+                
                 .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
                 .font(.infanFootnote)
             }
         }
+        .padding(.trailing, -10)
         .onReceive(timer) { _ in
             if remainingTime > 0 {
                 remainingTime -= 1
@@ -39,6 +47,6 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(remainingTime: 0)
+        TimerView(remainingTime: 3000)
     }
 }

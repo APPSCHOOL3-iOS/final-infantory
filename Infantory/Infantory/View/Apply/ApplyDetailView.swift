@@ -114,11 +114,15 @@ struct ApplyFooter: View {
     @ObservedObject var applyViewModel: ApplyProductStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
+    @State private var isShowingPaymentSheet: Bool = false
     var product: ApplyProduct
     
     var body: some View {
         VStack {
-            ApplyAddButtonView(isShowingApplySheet: $isShowingApplySheet, isShowingLoginSheet: $isShowingLoginSheet, product: product)
+            ApplyAddButtonView(isShowingApplySheet: $isShowingApplySheet, 
+                               isShowingLoginSheet: $isShowingLoginSheet,
+                               isShowingPaymentSheet: $isShowingPaymentSheet,
+                               product: product)
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 110)
@@ -140,6 +144,20 @@ struct ApplyFooter: View {
                 .presentationDetents([.fraction(0.45)])
 
         })
+        
+        .sheet(isPresented: $isShowingPaymentSheet) {
+            PaymentView(paymentStore: PaymentStore(user: loginStore.currentUser,
+                                                   product: product),
+                        paymentInfo: PaymentInfo(userId: loginStore.currentUser.id ?? "",
+                                                 auctionProduct: nil,
+                                                 applyProduct: product,
+                                                 address: loginStore.currentUser.address,
+                                                 deliveryRequest: .door,
+                                                 deliveryCost: 3000,
+                                                 paymentMethod: PaymentMethod.accountTransfer),
+                        isShowingPaymentSheet: $isShowingPaymentSheet
+            )
+        }
         
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
