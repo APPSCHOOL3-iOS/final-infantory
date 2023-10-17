@@ -40,6 +40,7 @@ struct InfantoryApp: App {
                             _ = AuthController.handleOpenUrl(url: url)
                         }
                     }
+                
             }
             .environmentObject(loginStore)
             .environmentObject(influencerStore)
