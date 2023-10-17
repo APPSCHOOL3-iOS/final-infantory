@@ -125,7 +125,8 @@ struct Footer: View {
             }
             .disabled((auctionStore.product.auctionFilter == .close && (auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)) ||
                       auctionStore.product.auctionFilter == .planned ||
-                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)
+                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id || (isHighestBidder && auctionStore.product.auctionFilter == .inProgress)
+            )
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)

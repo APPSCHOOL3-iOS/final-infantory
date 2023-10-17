@@ -26,10 +26,11 @@ struct ActivityMainView: View {
                             ForEach(myAuctionInfos, id: \.product.id ) { info in
                                 NavigationLink {
                                     AuctionDetailView(auctionStore: AuctionStore(product: info.product))
+                                    
                                 } label: {
                                     ActivityRow(product: info.product,
                                                 myActivity: info.myPrice,
-                                                selectedFilter: $selectedFilter)
+                                                selectedFilter: $selectedFilter, myAuctionInfos: info)
                                     .padding()
                                     
                                 }
@@ -42,7 +43,7 @@ struct ActivityMainView: View {
                             ForEach(myApplyInfos, id: \.product.id) { info in
                                 ActivityRow(product: info.product,
                                             myActivity: info.myApplyCount,
-                                            selectedFilter: $selectedFilter)
+                                            selectedFilter: $selectedFilter, myApplyInfos: info)
                                 .padding()
                                 Divider()
                             }
@@ -97,6 +98,12 @@ struct ActivityRow: View {
     
     @Binding var selectedFilter: ActivityOption
     
+    var myAuctionInfos: AuctionActivityData?
+    var myApplyInfos: ApplyActivityData?
+    
+    @EnvironmentObject var loginStore: LoginStore
+    @ObservedObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
     var body: some View {
         HStack {
             CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -107,13 +114,76 @@ struct ActivityRow: View {
                         .frame(width: 40, height: 40)
                         .cornerRadius(20)
                 case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 90, height: 90)
-                        .clipShape(Rectangle())
-                        .cornerRadius(7)
+                    if myAuctionInfos?.product.auctionFilter == .close {
+                        ZStack {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .blur(radius: 5)
+                                .clipShape(Rectangle())
+                                .cornerRadius(7)
+                            
+                            if myAuctionInfos?.product.biddingInfo?.last?.userID == loginStore.currentUser.id {
+                                Text("낙찰 성공")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanMain)
+                                    .cornerRadius(20)
+                            } else {
+                                Text("경매 종료")
+                                    .padding(10)
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .background(Color.infanDarkGray)
+                                    .cornerRadius(20)
+                            }
+                        }
+                    } else if myAuctionInfos?.product.auctionFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
+                    }
                     
+                    if myApplyInfos?.product.applyFilter == .close {
+                        ZStack {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 90, height: 90)
+                                .blur(radius: 5)
+                                .clipShape(Rectangle())
+                                .cornerRadius(7)
+               
+                            // 응모 당첨자 구분 필요
+//                            if myApplyInfos?.product. == loginStore.currentUser.id {
+//                                Text("응모 당첨")
+//                                    .padding(10)
+//                                    .bold()
+//                                    .foregroundColor(.white)
+//                                    .background(Color.infanMain)
+//                                    .cornerRadius(20)
+//                            } else {
+//                                Text("경매 종료")
+//                                    .padding(10)
+//                                    .bold()
+//                                    .foregroundColor(.white)
+//                                    .background(Color.infanDarkGray)
+//                                    .cornerRadius(20)
+//                            }
+                        }
+                    } else if myApplyInfos?.product.applyFilter == .inProgress {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 90, height: 90)
+                            .clipShape(Rectangle())
+                            .cornerRadius(7)
+                    }
                 case .failure:
                     Image(systemName: "smallAppIcon")
                         .resizable()
@@ -166,6 +236,11 @@ struct ActivityRow: View {
             .font(.infanFootnote)
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
+        }
+        .onAppear {
+            print("\(myAuctionInfos?.product.productName)product.biddingInfo.last.userId\(myAuctionInfos?.product.biddingInfo?.last?.userID)")
+            
+            print("\(myAuctionInfos?.product.productName)product.winningUserID \(myAuctionInfos?.product.winningUserID)")
         }
     }
 }
