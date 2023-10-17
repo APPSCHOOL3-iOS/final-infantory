@@ -20,11 +20,11 @@ enum PaymentAddress: Int, CaseIterable {
         }
     }
     
-    func content(viewModel: PaymentStore) -> String {
+    func content(paymentStore: PaymentStore) -> String {
         switch self {
-        case .prizeWinner: return viewModel.user.name
-        case .phoneNumber: return viewModel.user.phoneNumber
-        case .address: return viewModel.paymentInfo.address.address
+        case .prizeWinner: return paymentStore.user.name
+        case .phoneNumber: return paymentStore.user.phoneNumber
+        case .address: return paymentStore.user.address.address
         }
     }
 }

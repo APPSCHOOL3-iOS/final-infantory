@@ -8,26 +8,18 @@
 import Foundation
 import Firebase
 
-class PaymentStore: ObservableObject {
-    //받아오고
-    @Published var user: User = User.dummyUser
-    @Published var product: Productable = AuctionProduct.dummyProduct
-    //업로드
-    @Published var paymentInfo: PaymentInfo
+struct PaymentStore {
+    var user: User
+    var product: Productable
     
     let database = Firestore.firestore()
     
     init(user: User, product: Productable) {
-        paymentInfo = PaymentInfo(
-            userId: user.id ?? "",
-            product: product.id ?? "",
-            address: user.address,
-            deliveryRequest: .door,
-            deliveryCost: 3000,
-            paymentMethod: PaymentMethod.accountTransfer)
+        self.user =  user
+        self.product = product
     }
     
-    func uploadPaymentInfo() {
+    func uploadPaymentInfo(paymentInfo: PaymentInfo) {
         let paymentInfoRef = database.collection("paymentInfos")
         let paymentInfoId = UUID().uuidString
         do {

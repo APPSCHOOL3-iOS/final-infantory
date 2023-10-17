@@ -18,8 +18,12 @@ struct TimerView: View {
                     .font(.infanFootnote)
                     .foregroundColor(.gray)
             } else {
-                Label("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))",
-                      systemImage: "timer")
+                HStack {
+                    Image(systemName: "timer")
+                    Text("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))")
+                }
+                .frame(width: 110, alignment: .leading)
+                .padding()
                 .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
                 .font(.infanFootnote)
             }
@@ -39,6 +43,6 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView(remainingTime: 0)
+        TimerView(remainingTime: 3000)
     }
 }

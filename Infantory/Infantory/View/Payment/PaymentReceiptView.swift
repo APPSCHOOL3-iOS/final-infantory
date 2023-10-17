@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PaymentReceiptView: View {
-    @ObservedObject var viewModel: PaymentStore
+    let paymentStore: PaymentStore
+    let paymentInfo: PaymentInfo
     
     var body: some View {
         VStack {
@@ -23,18 +24,18 @@ struct PaymentReceiptView: View {
                     HStack {
                         Text("주문자")
                             .frame(width: 50, alignment: .leading)
-                        Text(viewModel.user.name)
+                        Text(paymentStore.user.name)
                     }
                     
                     HStack {
                         Text("주소")
                             .frame(width: 50, alignment: .leading)
-                        Text(viewModel.user.address.address)
+                        Text(paymentStore.user.address.address)
                     }
                 }
                 .padding()
                 
-                PaymentPriceView(price: viewModel.product.winningPrice ?? 0)
+                PaymentPriceView(price: paymentStore.product.winningPrice ?? 0)
             }
             Spacer()
             
@@ -44,6 +45,7 @@ struct PaymentReceiptView: View {
             } label: {
                 RoundedRectangle(cornerRadius: 10)
                     .frame(width: CGFloat.screenWidth - 30, height: 60)
+                    .foregroundColor(.infanMain)
                     .overlay(
                         Text("완료")
                             .foregroundColor(.white)
@@ -54,7 +56,7 @@ struct PaymentReceiptView: View {
         }
         .navigationBar(title: "구매완료")
         .onAppear {
-            viewModel.uploadPaymentInfo()
+            paymentStore.uploadPaymentInfo(paymentInfo: paymentInfo)
         }
     }
 }
@@ -62,8 +64,15 @@ struct PaymentReceiptView: View {
 struct ReceiptView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentReceiptView(viewModel: PaymentStore(user: User.dummyUser,
-                                                           product: AuctionProduct.dummyProduct))
+            PaymentReceiptView(paymentStore: PaymentStore(user: User.dummyUser,
+                                                       product: AuctionProduct.dummyProduct),
+                               paymentInfo: PaymentInfo(userId: "",
+                                                        address: Address.init(address: "",
+                                                                              zonecode: "",
+                                                                              addressDetail: ""),
+                                                        deliveryRequest: .door,
+                                                        deliveryCost: 3000,
+                                                        paymentMethod: .accountTransfer))
         }
     }
 }

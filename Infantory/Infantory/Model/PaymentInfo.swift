@@ -11,7 +11,8 @@ import FirebaseFirestoreSwift
 struct PaymentInfo: Codable {
     var id: UUID?
     var userId: String
-    var product: String //productID
+    var auctionProduct: AuctionProduct?
+    var applyProduct: ApplyProduct?
     var address: Address
     var deliveryRequest: DeliveryMessages
     var deliveryCost: Int

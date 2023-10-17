@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct PaymentMethodView: View {
-    @ObservedObject var viewModel: PaymentStore
+    var paymentStore: PaymentStore
+    @Binding var paymentInfo: PaymentInfo
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,8 +29,16 @@ struct PaymentMethodView: View {
 struct PaymentMethodView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentMethodView(viewModel: PaymentStore(user: User.dummyUser,
-                                                          product: AuctionProduct.dummyProduct))
+            PaymentMethodView(paymentStore: PaymentStore(user: User.dummyUser,
+                                                         product: AuctionProduct.dummyProduct),
+                              paymentInfo: .constant(PaymentInfo(userId: "",
+                                                                 address: Address.init(address: "",
+                                                                                       zonecode: "",
+                                                                                       addressDetail: ""),
+                                                                 deliveryRequest: .door,
+                                                                 deliveryCost: 3000,
+                                                                 paymentMethod: .accountTransfer))
+            )
         }
     }
 }
@@ -37,14 +46,14 @@ struct PaymentMethodView_Previews: PreviewProvider {
 extension PaymentMethodView {
     
     var accountButton: some View {
-        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == .accountTransfer
+        let isSelectedMethod = paymentInfo.paymentMethod == .accountTransfer
         
         return(
             VStack(alignment: .leading) {
                 Text("계좌 간편결제")
                     .font(.callout)
                 Button {
-                    viewModel.paymentInfo.paymentMethod  = .accountTransfer
+                    paymentInfo.paymentMethod  = .accountTransfer
                 } label: {
                     NavigationLink {
                         PaymentChoiceView()
@@ -70,7 +79,7 @@ extension PaymentMethodView {
     }
     
     var cardButton: some View {
-        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == .card
+        let isSelectedMethod =  paymentInfo.paymentMethod == .card
         
         return (
             VStack(alignment: .leading) {
@@ -84,7 +93,7 @@ extension PaymentMethodView {
                 }
                 
                 Button {
-                    viewModel.paymentInfo.paymentMethod = .card
+                    paymentInfo.paymentMethod = .card
                 } label: {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 10)
@@ -130,9 +139,9 @@ extension PaymentMethodView {
             }
             
             HStack(alignment: .center, spacing: 15) {
-                PayButtonView(viewModel: viewModel, payName: .naverPay)
-                PayButtonView(viewModel: viewModel, payName: .kakaoPay)
-                PayButtonView(viewModel: viewModel, payName: .tossPay)
+                PayButtonView(paymentInfo: $paymentInfo, payName: .naverPay)
+                PayButtonView(paymentInfo: $paymentInfo, payName: .kakaoPay)
+                PayButtonView(paymentInfo: $paymentInfo, payName: .tossPay)
             }
         }
     }

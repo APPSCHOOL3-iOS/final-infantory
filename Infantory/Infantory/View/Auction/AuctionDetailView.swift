@@ -91,7 +91,14 @@ struct Footer: View {
                 } else {
                     if auctionStore.biddingInfos.last?.userID == loginStore.currentUser.id {
                         NavigationLink {
-                            PaymentView()
+                            PaymentView(paymentStore: PaymentStore(user: loginStore.currentUser, product: auctionStore.product),
+                                        paymentInfo: PaymentInfo(userId: loginStore.currentUser.id ?? "",
+                                                                 auctionProduct: auctionStore.product,
+                                                                 applyProduct: nil,
+                                                                 address: loginStore.currentUser.address,
+                                                                 deliveryRequest: .door,
+                                                                 deliveryCost: 3000,
+                                                                 paymentMethod: PaymentMethod.accountTransfer))
                         } label: {
                             Text("결제하기")
                                 .fontWeight(.bold)
@@ -117,8 +124,8 @@ struct Footer: View {
                 }
             }
             .disabled((auctionStore.product.auctionFilter == .close && (auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)) ||
-                          auctionStore.product.auctionFilter == .planned ||
-                          isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)
+                      auctionStore.product.auctionFilter == .planned ||
+                      isHighestBidder && auctionStore.biddingInfos.last?.userID != loginStore.currentUser.id)
             .offset(y: -20)
         }
         .frame(minWidth: 0, maxWidth: .infinity)

@@ -8,22 +8,21 @@
 import SwiftUI
 
 struct PaymentView: View {
-    @StateObject var viewmodel = PaymentStore(user: User.dummyUser, product: AuctionProduct.dummyProduct)
+    var paymentStore: PaymentStore
+    @State var paymentInfo: PaymentInfo
     
     var body: some View {
         VStack {
             ScrollView {
                 LazyVStack(pinnedViews: .sectionFooters) {
-                    Section {
-                        PaymentAddressView(viewModel: viewmodel)
-                        
-                        PaymentPriceView(price: viewmodel.product.winningPrice ?? 0)
-                        
-                        PaymentMethodView(viewModel: viewmodel)
-                            .padding(.top)
-                        
-                        payButton
-                    }
+                    PaymentAddressView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
+                    
+                    PaymentPriceView(price: paymentStore.product.winningPrice ?? 0)
+                    
+                    PaymentMethodView(paymentStore: paymentStore, paymentInfo: $paymentInfo)
+                        .padding(.top)
+                    
+                    payButton
                 }
             }
         }
@@ -35,7 +34,15 @@ struct PaymentView: View {
 struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentView()
+            PaymentView(paymentStore: PaymentStore(user: User.dummyUser, product: AuctionProduct.dummyProduct),
+                        paymentInfo: PaymentInfo(userId: "",
+                                                 address: Address.init(address: "",
+                                                                       zonecode: "",
+                                                                       addressDetail: ""),
+                                                 deliveryRequest: .door,
+                                                 deliveryCost: 3000,
+                                                 paymentMethod: .accountTransfer)
+            )
         }
     }
 }
@@ -44,13 +51,13 @@ extension PaymentView {
     
     var payButton: some View {
         NavigationLink {
-            PaymentReceiptView(viewModel: viewmodel)
+            PaymentReceiptView(paymentStore: paymentStore, paymentInfo: paymentInfo)
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(.infanMain)
                     .frame(height: 54)
-            
+                
                 Text("결제하기")
                     .foregroundColor(.white)
                     .font(.infanHeadlineBold)

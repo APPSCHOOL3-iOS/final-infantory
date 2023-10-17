@@ -125,7 +125,6 @@ struct ActivityRow: View {
                     EmptyView()
                 }
             }
-            
             .padding(.trailing, 10)
             
             VStack(alignment: .leading) {
@@ -145,8 +144,12 @@ struct ActivityRow: View {
                     
                     if let auctionProduct = product as? AuctionProduct {
                         Text("\(auctionProduct.winningPrice ?? 0)원")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
                     } else if let applyProduct = product as? ApplyProduct {
                         Text("\(applyProduct.applyUserIDs.count) 개")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
                     }
                     
                     Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
@@ -163,7 +166,6 @@ struct ActivityRow: View {
             .font(.infanFootnote)
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
-                .lineLimit(1)
         }
     }
 }
