@@ -167,13 +167,13 @@ struct MyInfoMainView: View {
                         }
                         Divider()
                         NavigationLink {
-                            Text("결제정보가 보여질 화면입니다.")
+                            CustomerCenterView()
                         } label: {
                             HStack {
-                                Image(systemName: "tag")
+                                Image(systemName: "megaphone")
                                     .frame(width: 24)
                                 
-                                Text("결제정보")
+                                Text("고객센터")
                                     .font(.infanHeadline)
                                 Spacer()
                             }
