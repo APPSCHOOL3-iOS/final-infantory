@@ -21,8 +21,7 @@ struct ActivityInfo {
             products.filter { $0.id == info.productId }.map { product in
                 AuctionActivityData(
                     product: product,
-                    price: info.price,
-                    timestamp: info.timestamp
+                    myPrice: info.price
                 )
             }
         }
@@ -45,13 +44,8 @@ struct ActivityInfo {
         return applyActivityInfos.flatMap { info in
             products.filter { $0.id == info.productId }.map { product in
                 ApplyActivityData(
-                    productId: product.id ?? "",
-                    myApplyCount: info.ticketCount,
-                    timestamp: info.timestamp,
-                    totalApplyCount: product.applyUserIDs.count,
-                    imageURLString: product.productImageURLStrings[0],
-                    productName: product.productName,
-                    remainingTime: product.endDate.timeIntervalSince(Date())
+                    product: product,
+                    myApplyCount: info.ticketCount
                 )
             }
         }
@@ -72,16 +66,10 @@ struct ActivityInfo {
 
 struct AuctionActivityData {
     let product: AuctionProduct
-    var price: Int
-    var timestamp: Double
+    let myPrice: Int
 }
 
 struct ApplyActivityData {
-    var productId: String
-    var myApplyCount: Int
-    var timestamp: Double
-    var totalApplyCount: Int
-    var imageURLString: String
-    var productName: String
-    var remainingTime: Double
+    let product: ApplyProduct
+    let myApplyCount: Int
 }
