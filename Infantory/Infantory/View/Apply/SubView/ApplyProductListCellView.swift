@@ -108,7 +108,7 @@ struct ApplyProductListCellView: View {
                         }
                         
                         Spacer()
-                        VStack {
+                        VStack(alignment: .leading) {
                             Text("시작일  \(InfanDateFormatter.shared.dateTimeString(from: product.startDate))")
                                 .font(.infanFootnote)
                                 .foregroundColor(.infanGray)

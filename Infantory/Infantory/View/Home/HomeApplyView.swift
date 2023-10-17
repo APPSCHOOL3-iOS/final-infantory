@@ -20,8 +20,8 @@ struct HomeApplyView: View {
                         ApplyDetailView(applyViewModel: applyViewModel, product: product)
                     } label: {
                         VStack(alignment: .leading) {
-                                
-                                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                            
+                            TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                             
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -49,15 +49,13 @@ struct HomeApplyView: View {
                                 }
                                 
                             } else {
-                                ZStack(alignment: .topLeading) {
-                                    Image("smallAppIcon")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: (.screenWidth - 100) / 2,
-                                               height: (.screenWidth - 100) / 2)
-                                        .clipped()
-                                }
-                                .padding(8)
+                                Image("smallAppIcon")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: (.screenWidth - 100) / 2,
+                                           height: (.screenWidth - 100) / 2)
+                                    .clipped()
+                                
                             }
                             
                             VStack(alignment: .leading) {
