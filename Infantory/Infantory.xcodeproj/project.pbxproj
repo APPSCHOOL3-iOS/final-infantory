@@ -130,6 +130,10 @@
 		A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */; };
 		A0B5AFE32AC3FE130055E714 /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */; };
 		A0B5AFE42AC3FE130055E714 /* PaymentCost.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AFE12AC3FE130055E714 /* PaymentCost.swift */; };
+		A0C285DD2ADE0ED000C997ED /* SUIT-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0C285D92ADE0ED000C997ED /* SUIT-Regular.otf */; };
+		A0C285DE2ADE0ED000C997ED /* SUIT-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0C285DA2ADE0ED000C997ED /* SUIT-Medium.otf */; };
+		A0C285DF2ADE0ED000C997ED /* SUIT-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0C285DB2ADE0ED000C997ED /* SUIT-Bold.otf */; };
+		A0C285E02ADE0ED000C997ED /* SUIT-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0C285DC2ADE0ED000C997ED /* SUIT-SemiBold.otf */; };
 		EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */; };
 		EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7B11682ABAC984001303D1 /* LoginSheetView.swift */; };
 		EC98B6322AD7D789001B7102 /* AuctionProductListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */; };
@@ -261,6 +265,10 @@
 		A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appkey.swift; sourceTree = "<group>"; };
 		A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
 		A0B5AFE12AC3FE130055E714 /* PaymentCost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentCost.swift; sourceTree = "<group>"; };
+		A0C285D92ADE0ED000C997ED /* SUIT-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Regular.otf"; sourceTree = "<group>"; };
+		A0C285DA2ADE0ED000C997ED /* SUIT-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Medium.otf"; sourceTree = "<group>"; };
+		A0C285DB2ADE0ED000C997ED /* SUIT-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Bold.otf"; sourceTree = "<group>"; };
+		A0C285DC2ADE0ED000C997ED /* SUIT-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.otf"; sourceTree = "<group>"; };
 		EC4D59C12ABD9C99007FC25E /* PaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPriceView.swift; sourceTree = "<group>"; };
 		EC7B11682ABAC984001303D1 /* LoginSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSheetView.swift; sourceTree = "<group>"; };
 		EC98B6312AD7D789001B7102 /* AuctionProductListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductListCellView.swift; sourceTree = "<group>"; };
@@ -641,6 +649,7 @@
 		A0B5AFCD2AC1D42D0055E714 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				A0C285CA2ADE0E7600C997ED /* Font */,
 				A091E5632AB9FB65000894FC /* InfantoryApp.swift */,
 				A091E5672AB9FB68000894FC /* Assets.xcassets */,
 				A091E5A42ABC1E9B000894FC /* Colors.xcassets */,
@@ -648,6 +657,17 @@
 				A0B5AFDD2AC3EC2A0055E714 /* Appkey.swift */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		A0C285CA2ADE0E7600C997ED /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A0C285DB2ADE0ED000C997ED /* SUIT-Bold.otf */,
+				A0C285DA2ADE0ED000C997ED /* SUIT-Medium.otf */,
+				A0C285D92ADE0ED000C997ED /* SUIT-Regular.otf */,
+				A0C285DC2ADE0ED000C997ED /* SUIT-SemiBold.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		EC9E6D0F2ADCC98B00FD0831 /* Search */ = {
@@ -774,7 +794,11 @@
 				A091E5732AB9FC5C000894FC /* .swiftlint.yml in Resources */,
 				A091E5A52ABC1E9B000894FC /* Colors.xcassets in Resources */,
 				A0A042872AD8376700598274 /* GoogleService-Info.plist in Resources */,
+				A0C285DD2ADE0ED000C997ED /* SUIT-Regular.otf in Resources */,
+				A0C285E02ADE0ED000C997ED /* SUIT-SemiBold.otf in Resources */,
+				A0C285DE2ADE0ED000C997ED /* SUIT-Medium.otf in Resources */,
 				A091E56B2AB9FB68000894FC /* Preview Assets.xcassets in Resources */,
+				A0C285DF2ADE0ED000C997ED /* SUIT-Bold.otf in Resources */,
 				A091E5682AB9FB68000894FC /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
