@@ -9,7 +9,22 @@ import SwiftUI
 
 struct MyBidMainView: View {
     var body: some View {
-        Text("Hello, World!")
+            Form {
+                HStack(spacing:10) {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: (.screenWidth - 120) / 4, height: 40)
+                        .padding(.trailing)
+                    VStack(spacing: 10) {
+                        Text("인플루언서 이름")
+                        Text("상품이름")
+                    }
+                    Spacer()
+                    Text("10000원")
+                }
+            }
+            .horizontalPadding()
     }
 }
 
