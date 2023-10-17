@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CustomerCenterView: View {
+struct MyAppInfoView: View {
     @State private var showingModalTermsOfUse: Bool = false
     @State private var showingModalPrivacyPolicy: Bool = false
     @State private var showingModalOpenSource: Bool = false
@@ -19,13 +19,6 @@ struct CustomerCenterView: View {
                     Text("앱 정보")
                         .font(.infanTitle2Bold)
                         .padding(.bottom, 10)
-                    Button {
-                        
-                    } label: {
-                        Text("외부 라이브러리")
-                            .font(.system(size: 18))
-                    }
-                    Divider()
                     Button {
                         
                     } label: {
@@ -80,8 +73,8 @@ struct CustomerCenterView: View {
     }
 }
 
-struct CustomerCenterView_Previews: PreviewProvider {
+struct MyAppInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomerCenterView()
+        MyAppInfoView()
     }
 }

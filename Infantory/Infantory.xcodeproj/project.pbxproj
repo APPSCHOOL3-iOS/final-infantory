@@ -14,7 +14,7 @@
 		015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */; };
 		016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */; };
 		016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */; };
-		01910C952ADE4E4400D9CCA2 /* CustomerCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* CustomerCenterView.swift */; };
+		01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */; };
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
 		01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78842AD9326000790A56 /* EntryTiketView.swift */; };
@@ -156,7 +156,7 @@
 		0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductListView.swift; sourceTree = "<group>"; };
 		016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegisterStore.swift; sourceTree = "<group>"; };
 		016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMainView.swift; sourceTree = "<group>"; };
-		01910C942ADE4E4400D9CCA2 /* CustomerCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCenterView.swift; sourceTree = "<group>"; };
+		01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppInfoView.swift; sourceTree = "<group>"; };
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 		01CE78842AD9326000790A56 /* EntryTiketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTiketView.swift; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
-				01910C942ADE4E4400D9CCA2 /* CustomerCenterView.swift */,
+				01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */,
 				01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */,
 				0CF5467F2AD633610075C3FD /* ProfileEditView.swift */,
 				0CF546722AD6209F0075C3FD /* PhotosSelector.swift */,
@@ -909,7 +909,7 @@
 				A0B5AFE32AC3FE130055E714 /* PaymentStore.swift in Sources */,
 				844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */,
 				01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */,
-				01910C952ADE4E4400D9CCA2 /* CustomerCenterView.swift in Sources */,
+				01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
 				844BB4F32ACF9D7F004891DD /* ApplyFilter.swift in Sources */,
 				844BB4F52ACF9E4F004891DD /* ApplyFilterButtonView.swift in Sources */,

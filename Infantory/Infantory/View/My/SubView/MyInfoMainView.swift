@@ -11,10 +11,12 @@ import Photos
 
 struct MyInfoMainView: View {
     @EnvironmentObject var loginStore: LoginStore
+    @Environment(\.dismiss) private var dismiss
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    @State private var isAlertShowing: Bool = false
+    
     var body: some View {
         NavigationStack {
-            ScrollView {
                 // 프사이미지, 닉네임, 응모권 관심상품
                 VStack(spacing: 20) {
                     HStack(spacing: 16) {
@@ -147,7 +149,7 @@ struct MyInfoMainView: View {
                                 Image(systemName: "list.bullet.rectangle.portrait")
                                     .frame(width: 24)
                                 
-                                Text("입찰내역")
+                                Text("결제정보")
                                     .font(.infanHeadline)
                                 Spacer()
                             }
@@ -167,13 +169,14 @@ struct MyInfoMainView: View {
                         }
                         Divider()
                         NavigationLink {
-                            CustomerCenterView()
+//                            CustomerCenterView()
+                            MyAppInfoView()
                         } label: {
                             HStack {
                                 Image(systemName: "megaphone")
                                     .frame(width: 24)
                                 
-                                Text("고객센터")
+                                Text("앱 정보")
                                     .font(.infanHeadline)
                                 Spacer()
                             }
@@ -181,7 +184,7 @@ struct MyInfoMainView: View {
                         Divider()
                         HStack {
                             Button(action: {
-                                loginStore.kakaoLogout()
+                                isAlertShowing.toggle()
                             }, label: {
                                 Image(systemName: "rectangle.portrait.and.arrow.right")
                                     .frame(width: 24)
@@ -196,11 +199,67 @@ struct MyInfoMainView: View {
                     
                     .foregroundColor(.primary)
                     .listStyle(.plain)
-                    
+                    Spacer()
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("고객센터 1599-2892")
+                                .font(.infanHeadlineBold)
+                                .padding(.bottom, 8)
+                            Text("운영시간 평일 09:00 ~ 18:00(토,일,공휴일 휴무)")
+                                .font(.infanFootnoteBold)
+                                .foregroundColor(.infanLightGray)
+                            Text("점심시간 평일 12:00 ~ 13:00")
+                                .font(.infanFootnoteBold)
+                                .foregroundColor(.infanLightGray)
+                            HStack {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .strokeBorder(Color.infanDarkGray, lineWidth: 1)
+                                        .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                        .foregroundColor(.white)
+                                    Button {
+                                        
+                                    } label: {
+                                        Text("자주 묻는 질문")
+                                            .font(.infanBody)
+                                            .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                            .foregroundColor(.white)
+                                            .background(Color.black)
+                                            .cornerRadius(5)
+                                    }
+                                }
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .strokeBorder(Color.infanDarkGray, lineWidth: 1)
+                                        .frame(width: (.screenWidth - 50) / 2, height: 30)
+                                        .foregroundColor(.white)
+                                    Button {
+                                        
+                                    } label: {
+                                        Text("1:1 문의")
+                                            .font(.infanBody)
+                                            .foregroundColor(.black)
+                                    }
+                                }
+                            }
+                            .padding(.vertical, 15)
+                        }
+                        Spacer()
+                    }
                 }
+                .padding(.vertical)
                 .horizontalPadding()
-            }
         }
+        .alert(isPresented: $isAlertShowing) {
+                    Alert(title: Text(""),
+                          message: Text("로그아웃 하시겠습니까?"),
+                          primaryButton: .cancel(Text("확인"), action: {
+                        loginStore.kakaoLogout()
+                    }),
+                          secondaryButton: .destructive(Text("취소"), action: {
+                        dismiss()
+                    }))
+                }
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Text("마이")
