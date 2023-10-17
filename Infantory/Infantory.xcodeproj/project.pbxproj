@@ -15,6 +15,7 @@
 		016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */; };
 		016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */; };
 		01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */; };
+		01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */; };
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
 		01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78842AD9326000790A56 /* EntryTiketView.swift */; };
@@ -157,6 +158,7 @@
 		016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegisterStore.swift; sourceTree = "<group>"; };
 		016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMainView.swift; sourceTree = "<group>"; };
 		01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppInfoView.swift; sourceTree = "<group>"; };
+		01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsView.swift; sourceTree = "<group>"; };
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 		01CE78842AD9326000790A56 /* EntryTiketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTiketView.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				01CE78822AD931C200790A56 /* ProfileImagePicker.swift */,
 				0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */,
 				01CE78842AD9326000790A56 /* EntryTiketView.swift */,
+				01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
+				01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
