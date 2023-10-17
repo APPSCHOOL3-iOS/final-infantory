@@ -20,6 +20,9 @@ struct HomeApplyView: View {
                         ApplyDetailView(applyViewModel: applyViewModel, product: product)
                     } label: {
                         VStack(alignment: .leading) {
+                                
+                                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                            
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
                                     switch phase {
@@ -62,8 +65,6 @@ struct HomeApplyView: View {
                                     .bold()
                                 Text("전체 응모: \(product.applyUserIDs.count) 회")
                                     .foregroundColor(Color.infanDarkGray)
-                                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
-                                    .foregroundColor(Color.infanRed)
                             }
                             .font(.infanFootnote)
                             .padding()
