@@ -18,9 +18,9 @@ struct ProfileEditView: View {
     @State private var selectedUIImageString: String?
     @State private var selectedUIImage: UIImage?
     @State var image: Image?
-    @State private var myZipCode: String = ""
-    @State private var myAddress: String = ""
-    @State private var myDetailAddress: String = ""
+    @State var myZipCode: String = ""
+    @State var myAddress: String = ""
+    @State var myDetailAddress: String = ""
     @State private var showAlert: Bool = false
     
     var body: some View {
@@ -37,7 +37,7 @@ struct ProfileEditView: View {
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
-                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: "우편 번호를 검색하세요", text: $myZipCode)
+                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myZipCode, text: $myZipCode)
                                 .disabled(true)
                             
                             NavigationLink {
@@ -56,10 +56,10 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
-                        UnderlineTextField(textFieldTitle: "주소", placeholder: "우편 번호 검색 후, 자동 입력 됩니다", text: $myAddress)
+                        UnderlineTextField(textFieldTitle: "주소", placeholder: myAddress, text: $myAddress)
                             .disabled(true)
                         
-                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: "건물, 아파트, 동/호수 입력", text: $myDetailAddress)
+                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myDetailAddress, text: $myDetailAddress)
                     }
                     .padding(.bottom, 30)
 

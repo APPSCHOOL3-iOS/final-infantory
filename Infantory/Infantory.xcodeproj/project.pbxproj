@@ -14,9 +14,12 @@
 		015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */; };
 		016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */; };
 		016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */; };
+		01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */; };
+		01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */; };
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
 		01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78842AD9326000790A56 /* EntryTiketView.swift */; };
+		01CE788D2ADE26DF00790A56 /* MyLoginVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */; };
 		0C25176E2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */; };
 		0C82A32D2AC278A6009F6D97 /* ApplyRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */; };
 		0C82A32F2AC279BB009F6D97 /* ApplyProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */; };
@@ -158,9 +161,12 @@
 		0157833F2AC3BDBB001FEC98 /* ApplyProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductListView.swift; sourceTree = "<group>"; };
 		016AAEDA2AD51C3D000B69E4 /* ApplyRegisterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegisterStore.swift; sourceTree = "<group>"; };
 		016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMainView.swift; sourceTree = "<group>"; };
+		01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppInfoView.swift; sourceTree = "<group>"; };
+		01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsView.swift; sourceTree = "<group>"; };
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 		01CE78842AD9326000790A56 /* EntryTiketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTiketView.swift; sourceTree = "<group>"; };
+		01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLoginVIew.swift; sourceTree = "<group>"; };
 		0C25176D2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailDescriptionView.swift; sourceTree = "<group>"; };
 		0C82A32C2AC278A6009F6D97 /* ApplyRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyRegistrationView.swift; sourceTree = "<group>"; };
 		0C82A32E2AC279BB009F6D97 /* ApplyProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProductStore.swift; sourceTree = "<group>"; };
@@ -313,11 +319,14 @@
 			isa = PBXGroup;
 			children = (
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
+				01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */,
+				01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */,
 				0CF5467F2AD633610075C3FD /* ProfileEditView.swift */,
 				0CF546722AD6209F0075C3FD /* PhotosSelector.swift */,
 				01CE78822AD931C200790A56 /* ProfileImagePicker.swift */,
 				0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */,
 				01CE78842AD9326000790A56 /* EntryTiketView.swift */,
+				01910C962ADE720600D9CCA2 /* PaymentDetailsView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -722,6 +731,7 @@
 				A091E55C2AB9FB65000894FC /* Sources */,
 				A091E55D2AB9FB65000894FC /* Frameworks */,
 				A091E55E2AB9FB65000894FC /* Resources */,
+				01910C932ADE435000D9CCA2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -806,9 +816,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		01910C932ADE435000D9CCA2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
 		A091E5712AB9FBA4000894FC /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -854,6 +880,7 @@
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
 				844BB4ED2ACD2F22004891DD /* ApplyBuyerView.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
+				01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */,
 				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
@@ -910,6 +937,7 @@
 				A0B5AFE32AC3FE130055E714 /* PaymentStore.swift in Sources */,
 				844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */,
 				01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */,
+				01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
 				844BB4F32ACF9D7F004891DD /* ApplyFilter.swift in Sources */,
 				844BB4F52ACF9E4F004891DD /* ApplyFilterButtonView.swift in Sources */,
@@ -949,6 +977,7 @@
 				EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */,
 				EC4D59C22ABD9C99007FC25E /* PaymentPriceView.swift in Sources */,
 				EC9E6D132ADCCA4700FD0831 /* InfluencerMainView.swift in Sources */,
+				01CE788D2ADE26DF00790A56 /* MyLoginVIew.swift in Sources */,
 				0CF546802AD633610075C3FD /* ProfileEditView.swift in Sources */,
 				A0B5AFDB2AC2C3830055E714 /* HorizontalPadding.swift in Sources */,
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,
