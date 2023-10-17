@@ -28,7 +28,7 @@ struct PaymentView: View {
                     }
                 }
             }
-            .navigationBar(title: "배송 / 결재")
+            .navigationBar(title: "배송 / 결제")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

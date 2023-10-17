@@ -45,20 +45,42 @@ struct ApplyAddButtonView: View {
                             .fill(Color.infanGray)
                             .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )
-            } else if product.winningUserID == loginStore.currentUser.id {
-                Button {
-                    isShowingPaymentSheet = true
-                } label: {
-                    Text("결제하기")
+            } else if product.applyCloseFilter == .afterRaffle {
+                if product.winningUserID == loginStore.currentUser.id {
+                    Button {
+                        isShowingPaymentSheet = true
+                    } label: {
+                        Text("결제하기")
+                            .font(.infanHeadlineBold)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.infanMain)
+                                    .frame(width: CGFloat.screenWidth - 40, height: 54)
+                            )
+                    }
+                } else {
+                    Text("이미 종료된 응모입니다.")
                         .font(.infanHeadlineBold)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .background(
                             RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.infanMain)
+                                .fill(Color.infanGray)
                                 .frame(width: CGFloat.screenWidth - 40, height: 54)
                         )
                 }
+            } else if product.applyCloseFilter == .beforeRaffle {
+                Text("추첨 중인 응모입니다.")
+                    .font(.infanHeadlineBold)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.infanGray)
+                            .frame(width: CGFloat.screenWidth - 40, height: 54)
+                    )
             } else {
                 Text("이미 종료된 응모입니다.")
                     .font(.infanHeadlineBold)

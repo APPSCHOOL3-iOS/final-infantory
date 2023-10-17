@@ -16,36 +16,32 @@ struct ProfileRowView: View {
     var body: some View {
         HStack {
 
-            Circle()
-                .frame(width: 50)
-                .foregroundColor(.gray).opacity(0.2)
-                .overlay {
-                        CachedImage(url: imageURLString) { phase in
-                            switch phase {
-                            case .empty:
-                                ProgressView()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 50, height: 50)
-                                    .clipShape(Circle())
-                                
-                            case .failure:
-                                Image(systemName: "smallAppIcon")
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 40, height: 40)
-                                    .cornerRadius(20)
-                                
-                            @unknown default:
-                                EmptyView()
-                            }
-                        }
+            CachedImage(url: imageURLString) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .scaledToFill()
+                        .frame(width: (.screenWidth - 100) / 2,
+                               height: (.screenWidth - 100) / 2)
+                        .clipped()
+                case .success(let image):
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(20)
+                    //
+                case .failure:
+                    Image("smallAppIcon")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 40, height: 40)
+                        .cornerRadius(20)
                     
+                @unknown default:
+                    EmptyView()
                 }
+            }
 
             Text(nickname)
 
