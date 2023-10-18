@@ -132,7 +132,7 @@ struct MyInfoMainView: View {
                 // 입찰내역, 응모내역, 결제정보, 로그아웃
                 VStack(alignment: .leading, spacing: 16) {
                     NavigationLink {
-                        PaymentDetailsView()
+                        MyPaymentsListView()
                     } label: {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.portrait")
