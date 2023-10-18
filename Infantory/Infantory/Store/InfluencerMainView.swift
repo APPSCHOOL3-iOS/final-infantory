@@ -40,16 +40,34 @@ struct InfluencerMainView: View {
             
             TabView(selection: $searchCategory) {
                 ForEach(InfluencerCategory.allCases, id: \.self) { category in
-                    ScrollView {
                         switch searchCategory {
                         case .auction:
-                            InfluencerAuctionListView(auctionViewModel: auctionViewModel)
-                                .tag(category)
+                            VStack {
+                                if influencerStore.influencerAuctionProduct.isEmpty {
+                                    Text("경매 등록상품이 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanDarkGray)
+                                } else {
+                                    ScrollView {
+                                        InfluencerAuctionListView(auctionViewModel: auctionViewModel)
+                                    }
+                                }
+                            }
+                            .tag(category)
                         case .apply:
-                            InfluencerApplyListView(applyViewModel: applyViewModel)
-                                .tag(category)
+                            VStack {
+                                if influencerStore.influencerApplyProduct.isEmpty {
+                                    Text("응모 등록상품이 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanDarkGray)
+                                } else {
+                                    ScrollView {
+                                        InfluencerApplyListView(applyViewModel: applyViewModel)
+                                    }
+                                }
+                            }
+                            .tag(category)
                         }
-                    }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
