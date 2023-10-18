@@ -68,14 +68,14 @@ struct PaymentReceiptView: View {
     func updateIsPaid() {
         let firestore = Firestore.firestore()
         firestore.collection("AuctionProducts").document(paymentStore.product.id ?? "").updateData([
-                    "isPaid": false
-                ]) { error in
-                    if let error = error {
-                        print("updating Error: \(error)")
-                    } else {
-                        print("successfully updated!")
-                    }
-                }
+            "isPaid": true
+        ]) { error in
+            if let error = error {
+                print("updating Error: \(error)")
+            } else {
+                print("successfully updated!")
+            }
+        }
     }
 }
 
@@ -83,14 +83,14 @@ struct ReceiptView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             PaymentReceiptView(paymentStore: PaymentStore(user: User.dummyUser,
-                                                       product: AuctionProduct.dummyProduct),
+                                                          product: AuctionProduct.dummyProduct),
                                paymentInfo: PaymentInfo(userId: "",
                                                         address: Address.init(address: "",
                                                                               zonecode: "",
                                                                               addressDetail: ""),
                                                         deliveryRequest: .door,
                                                         deliveryCost: 3000,
-                                                        paymentMethod: .accountTransfer), 
+                                                        paymentMethod: .accountTransfer),
                                isShowingPaymentSheet: .constant(true))
         }
     }
