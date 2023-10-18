@@ -21,23 +21,26 @@ struct InfluencerMainView: View {
         VStack {
             
             InfluencerImageView()
-            Button {
-                if influencerStore.isFollow {
-                    influencerStore.unfollowInfluencer(influencerID: influencerID, userID: loginStore.userUid)
-                } else {
-                    influencerStore.followInfluencer(influencerID: influencerID, userID: loginStore.userUid)
-                }
-            } label: {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(influencerStore.isFollow ? Color.infanLightGray: Color.infanMain)
-                    .cornerRadius(8)
-                    .overlay {
-                        Text(influencerStore.isFollow ? "팔로우 취소": "팔로우")
-                            .foregroundColor(.white)
-                            .font(.infanHeadline)
-                            .padding()
+            
+            if influencerID != loginStore.userUid {
+                Button {
+                    if influencerStore.isFollow {
+                        influencerStore.unfollowInfluencer(influencerID: influencerID, userID: loginStore.userUid)
+                    } else {
+                        influencerStore.followInfluencer(influencerID: influencerID, userID: loginStore.userUid)
                     }
-                    .frame(width: .screenWidth - 40, height: 40)
+                } label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .fill(influencerStore.isFollow ? Color.infanLightGray: Color.infanMain)
+                        .cornerRadius(8)
+                        .overlay {
+                            Text(influencerStore.isFollow ? "팔로우 취소": "팔로우")
+                                .foregroundColor(.white)
+                                .font(.infanHeadline)
+                                .padding()
+                        }
+                        .frame(width: .screenWidth - 40, height: 40)
+                }
             }
             
             InfluencerTabBarView(searchCategory: $searchCategory)
