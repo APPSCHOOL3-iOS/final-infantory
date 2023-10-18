@@ -124,6 +124,7 @@ struct SearchResultView: View {
             ToolbarItem(placement: .navigation) {
                 TextField("인플루언서 or 경매/응모 키워드 검색", text: $searchText)
                     .padding(10)
+                    .foregroundColor(.infanBlack)
                     .background(Color.infanLightGray.opacity(0.3))
                     .cornerRadius(5)
                     .onChange(of: searchText, perform: { value in

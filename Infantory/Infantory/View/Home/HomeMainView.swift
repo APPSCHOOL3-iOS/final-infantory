@@ -24,6 +24,7 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("다양한 인플루언서를 만나보세요!✨")
                         .font(.infanTitle2)
+                        .foregroundColor(.infanBlack)
                         .horizontalPadding()
                     HomeInfluencerImageView(applyViewModel: applyViewModel, searchStore: searchStore)
                 }
@@ -32,6 +33,7 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("🔥HOT🔥 애장품 경매에 참여해보세요!")
                         .font(.infanTitle2)
+                        .foregroundColor(.infanBlack)
                         .horizontalPadding()
                     HomeHotAuctionView(auctionViewModel: auctionViewModel)
                 }
@@ -40,6 +42,7 @@ struct HomeMainView: View {
                 VStack(alignment: .leading) {
                     Text("⏳곧 마감되는 응모에 참여해보세요!⌛️")
                         .font(.infanTitle2)
+                        .foregroundColor(.infanBlack)
                         .horizontalPadding()
                     HomeApplyView(applyViewModel: applyViewModel)
                 }
@@ -51,13 +54,14 @@ struct HomeMainView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
+                            .foregroundColor(.infanBlack)
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("Infantory")
                         .font(.infanTitleBold)
+                        .foregroundColor(.infanBlack)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)

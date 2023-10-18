@@ -53,6 +53,7 @@ struct HomeInfluencerImageView: View {
                             }
                             Text(influencer.nickName)
                                 .font(.infanFootnote)
+                                .foregroundColor(.infanBlack)
                         }
                         .padding(.leading, 20)
                     }

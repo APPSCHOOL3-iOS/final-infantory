@@ -19,34 +19,7 @@ struct ApplyDetailView: View {
             ScrollView {
                 ApplyBuyerView(product: product)
                 HStack {
-                    CachedImage(url: product.influencerProfile ?? "") { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .scaledToFill()
-                                .frame(width: (.screenWidth - 100) / 2,
-                                       height: (.screenWidth - 100) / 2)
-                                .clipped()
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                            //
-                        case .failure:
-                            Image("smallAppIcon")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 40, height: 40)
-                                .cornerRadius(20)
-                            
-                        @unknown default:
-                            EmptyView()
-                        }
-                    }
-                    
-                    Text(product.influencerNickname)
+                    ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
                     Spacer()
                     
                     Button(action: {
@@ -57,6 +30,7 @@ struct ApplyDetailView: View {
                     .buttonStyle(.plain)
                 }
                 .horizontalPadding()
+                .padding(.bottom, 5)
                 
                 TabView {
                     ForEach(product.productImageURLStrings, id: \.self) { item in
@@ -92,6 +66,7 @@ struct ApplyDetailView: View {
             
             ApplyFooter(applyViewModel: applyViewModel, product: product)
         }
+        .navigationBar(title: "상세정보")
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
             
             Button("차단하기", role: .destructive) {
@@ -102,7 +77,6 @@ struct ApplyDetailView: View {
                 
             }
             Button("취소", role: .cancel) {}
-            
         }
     }
 }
@@ -125,12 +99,6 @@ struct ApplyFooter: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity)
         .frame(height: 110)
-        .background(
-            Rectangle()
-                .stroke(lineWidth: 0.1)
-                .background(.white)
-            
-        )
         .offset(x: 0, y: 40)
         .sheet(isPresented: $isShowingApplySheet, onDismiss: {
             Task {

@@ -19,7 +19,15 @@ struct ProductListView: View {
             } else {
                 ScrollView {
                     ForEach(auctionViewModel.filteredProduct) { product in
-                        AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
+                        HStack {
+                            AuctionInfluencerImageView(product: product)
+                            
+                            Spacer()
+                            
+                            AuctionTimerView(product: product)
+                        }
+                        .horizontalPadding()
+                        
                         AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                     }
                 }
