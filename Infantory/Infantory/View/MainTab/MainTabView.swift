@@ -39,8 +39,7 @@ struct MainTabView: View {
                 }
                 .tag(2)
             
-            ActivityMainView(myAuctionActivityInfos: loginStore.currentUser.auctionActivityInfos ?? [],
-                             myApplyActivityInfos: loginStore.currentUser.applyActivityInfos ?? [])
+            ActivityMainView()
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
                         .foregroundColor(selectedIndex == 3 ? .infanMain : .black)

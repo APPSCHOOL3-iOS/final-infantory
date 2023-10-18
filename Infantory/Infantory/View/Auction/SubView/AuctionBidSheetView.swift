@@ -47,6 +47,9 @@ struct AuctionBidSheetView: View {
                         showAlert = false
                     }
                     highestBidderState = true
+                    Task {
+                        try await loginStore.fetchUser(userUID: loginStore.userUid)
+                    }
                 } label: {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(isSelected ? .infanGray : Color.infanMain)

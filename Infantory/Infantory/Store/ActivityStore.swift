@@ -9,22 +9,21 @@ import Foundation
 import Firebase
 
 struct ActivityInfo {
-    let auctionActivityInfos: [AuctionActivityInfo]
-    let applyActivityInfos: [ApplyActivityInfo]
+    var loginStore: LoginStore
     
     let database = Firestore.firestore()
     
     func getMyAuctionInfos() async -> [AuctionActivityData] {
         let products: [AuctionProduct] = await fetchAuctionProducts()
-        
-        return auctionActivityInfos.flatMap { info in
+        try? await loginStore.fetchUser(userUID: loginStore.userUid)
+        return loginStore.currentUser.auctionActivityInfos?.flatMap { info in
             products.filter { $0.id == info.productId }.map { product in
                 AuctionActivityData(
                     product: product,
                     myPrice: info.price
                 )
             }
-        }
+        } ?? []
     }
     
     func fetchAuctionProducts() async -> [AuctionProduct] {
@@ -41,14 +40,14 @@ struct ActivityInfo {
     func getMyApplyInfos() async -> [ApplyActivityData] {
         let products: [ApplyProduct] = await fetchApplyProducts()
         
-        return applyActivityInfos.flatMap { info in
+        return loginStore.currentUser.applyActivityInfos?.flatMap { info in
             products.filter { $0.id == info.productId }.map { product in
                 ApplyActivityData(
                     product: product,
                     myApplyCount: info.ticketCount
                 )
             }
-        }
+        } ?? []
     }
     
     func fetchApplyProducts() async -> [ApplyProduct] {
