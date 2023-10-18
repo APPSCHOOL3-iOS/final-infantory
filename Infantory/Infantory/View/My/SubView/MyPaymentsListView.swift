@@ -122,6 +122,7 @@ struct MyPaymentsListView: View {
                 }
             }
         }
+        .navigationBar(title: "결제정보")
     }
 }
 
