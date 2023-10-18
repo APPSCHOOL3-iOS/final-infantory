@@ -52,7 +52,8 @@ struct SearchInfluencerView: View {
                                         }
                                     }
                                 }
-                                Text(influencer.nickName).foregroundColor(.black)
+                                Text(influencer.nickName)
+                                    .foregroundColor(.infanBlack)
                                 Spacer()
                             }
                             .horizontalPadding()
@@ -96,6 +97,7 @@ struct SearchInfluencerView: View {
                                     }
                                 }
                                 Text(influencer.nickName)
+                                    .foregroundColor(.infanBlack)
                                 Spacer()
                             }
                             .horizontalPadding()

@@ -44,6 +44,7 @@ struct HomeHotAuctionView: View {
                                 
                                 Label("\(product.biddingInfo?.count ?? 0)회 참여", systemImage: "person.2.fill")
                                     .font(.infanFootnote)
+                                    .foregroundColor(.infanBlack)
                             }
                             
                             if product.productImageURLStrings.count > 0 {
@@ -83,10 +84,11 @@ struct HomeHotAuctionView: View {
                             VStack(alignment: .leading) {
                                 Text(product.influencerNickname)
                                     .font(.infanFootnoteBold)
+                                    .foregroundColor(.infanBlack)
                                 HStack {
                                     Image(systemName: "arrowtriangle.up.fill")
                                         .foregroundColor(.blue)
-                                    Text("\(product.winningPrice ?? 0) 원") // 이거 현재 최고가로 바꿔야함
+                                    Text("\(product.winningPrice ?? 0) 원")
                                         .foregroundColor(Color.infanDarkGray)
                                 }
                                 .font(.infanFootnote)

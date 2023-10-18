@@ -18,12 +18,24 @@ struct SearchApplyView: View {
             VStack {
                 if showCellCount == .underLimit {
                     ForEach(applyViewModel.applyProduct) { product in
-                        ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                        HStack {
+                            ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                            Spacer()
+                            ApplyTimerView(applyViewModel: applyViewModel, product: product)
+                        }
+                        .horizontalPadding()
+                        
                         ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
                     }
                 } else {
                     ForEach(applyViewModel.applyProduct.prefix(3)) { product in
-                        ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                        HStack {
+                            ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                            Spacer()
+                            ApplyTimerView(applyViewModel: applyViewModel, product: product)
+                        }
+                        .horizontalPadding()
+                        
                         ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
                     }
                 }

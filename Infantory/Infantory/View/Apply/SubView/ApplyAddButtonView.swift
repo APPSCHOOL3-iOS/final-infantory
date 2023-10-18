@@ -26,7 +26,7 @@ struct ApplyAddButtonView: View {
                     }
                 } label: {
                     Text("응모하기")
-                        .font(.title2)
+                        .font(.infanHeadlineBold)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .background(

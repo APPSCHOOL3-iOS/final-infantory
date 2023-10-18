@@ -18,12 +18,24 @@ struct SearchAuctionView: View {
             VStack {
                 if showCellCount == .underLimit {
                     ForEach(auctionViewModel.auctionProduct) { product in
-                        AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
+                        HStack {
+                            AuctionInfluencerImageView(product: product)
+                            Spacer()
+                            AuctionTimerView(product: product)
+                        }
+                        .horizontalPadding()
+                        
                         AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                     }
                 } else {
                     ForEach(auctionViewModel.auctionProduct.prefix(3)) { product in
-                        AuctionInfluencerImageView(auctionViewModel: auctionViewModel, product: product)
+                        HStack {
+                            AuctionInfluencerImageView(product: product)
+                            Spacer()
+                            AuctionTimerView(product: product)
+                        }
+                        .horizontalPadding()
+                        
                         AuctionProductListCellView(auctionViewModel: auctionViewModel, product: product)
                     }
                 }

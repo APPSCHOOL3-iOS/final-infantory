@@ -10,6 +10,7 @@ import PhotosUI
 import Photos
 
 struct MyInfoMainView: View {
+    @StateObject var myPaymentStore: MyPaymentStore = MyPaymentStore()
     @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
@@ -42,9 +43,17 @@ struct MyInfoMainView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 4) {
+                        HStack {
                         Text("\(loginStore.currentUser.nickName)")
                             .font(.infanTitle2)
-                        
+                            Spacer()
+                            Image("applyTicket")
+                                .resizable()
+                                .frame(width: 20, height: 15)
+                                .aspectRatio(contentMode: .fit)
+                            Text(": \(loginStore.totalApplyTicketCount) 장")
+                                .font(.infanHeadline)
+                        }
                     }
                     Spacer()
                 }
@@ -87,7 +96,7 @@ struct MyInfoMainView: View {
                         
                         HStack {
                             VStack(spacing: 8) {
-                                Text("0")
+                                Text("\(myPaymentStore.myPayments.count)")
                                     .foregroundColor(.infanMain)
                                     .font(.infanHeadlineBold)
                                 Text("결제완료")
@@ -132,7 +141,7 @@ struct MyInfoMainView: View {
                 // 입찰내역, 응모내역, 결제정보, 로그아웃
                 VStack(alignment: .leading, spacing: 16) {
                     NavigationLink {
-                        PaymentDetailsView()
+                        MyPaymentsListView(myPaymentStore: myPaymentStore)
                     } label: {
                         HStack {
                             Image(systemName: "list.bullet.rectangle.portrait")
@@ -224,6 +233,11 @@ struct MyInfoMainView: View {
             .padding(.vertical)
             .horizontalPadding()
         }
+        .task({
+           Task {
+               try await myPaymentStore.fetchMyPayments(userId: loginStore.currentUser.id ?? "")
+           }
+        })
         .alert(isPresented: $isAlertShowing) {
             Alert(title: Text(""),
                   message: Text("로그아웃 하시겠습니까?"),
@@ -238,18 +252,6 @@ struct MyInfoMainView: View {
             ToolbarItem(placement: .navigationBarLeading) {
                 Text("마이")
                     .font(.infanHeadlineBold)
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                HStack {
-                    Image("applyTicket")
-                        .resizable()
-                        .frame(width: 20, height: 15)
-                        .aspectRatio(contentMode: .fit)
-                    Text(": \(loginStore.totalApplyTicketCount) 장")
-                        .font(.infanHeadline)
-                }
             }
         }
         .navigationBarTitleDisplayMode(.inline)
