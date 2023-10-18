@@ -60,6 +60,7 @@ struct HomeApplyView: View {
                             
                             VStack(alignment: .leading) {
                                 Text(product.influencerNickname)
+                                    .foregroundColor(.infanBlack)
                                     .bold()
                                 Text("전체 응모: \(product.applyUserIDs.count) 회")
                                     .foregroundColor(Color.infanDarkGray)

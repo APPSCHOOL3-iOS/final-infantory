@@ -10,7 +10,7 @@ import SwiftUI
 struct InfluencerImageView: View {
     
     @EnvironmentObject var influencerStore: InfluencerStore
-    
+
     var body: some View {
         HStack(spacing: 40) {
             VStack(alignment: .leading) {
@@ -45,22 +45,28 @@ struct InfluencerImageView: View {
                         }
                     }
                 }
-                Text("\(influencerStore.influencer.name)").font(.infanHeadlineBold)
+                Text("\(influencerStore.influencer.name)")
+                    .font(.infanHeadlineBold)
+                    .foregroundColor(.infanBlack)
             }
             VStack {
-                Text("0").font(.infanHeadlineBold)
+                Text("0")
+                    .font(.infanHeadlineBold)
                 Text("경매품")
             }
+            .foregroundColor(.infanBlack)
             
             VStack {
                 Text("0").font(.infanHeadlineBold)
                 Text("응모품")
             }
+            .foregroundColor(.infanBlack)
             
             VStack {
                 Text("\(influencerStore.influencer.follower?.count ?? 0)").font(.infanHeadlineBold)
                 Text("팔로워")
             }
+            .foregroundColor(.infanBlack)
         }
         .padding()
     }

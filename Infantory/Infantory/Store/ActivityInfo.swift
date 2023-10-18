@@ -12,7 +12,6 @@ struct ActivityInfo {
     let auctionActivityInfos: [AuctionActivityInfo]
     let applyActivityInfos: [ApplyActivityInfo]
     
-        
     let database = Firestore.firestore()
     
     func getMyAuctionInfos() async -> [AuctionActivityData] {

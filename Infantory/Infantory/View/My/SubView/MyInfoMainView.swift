@@ -32,7 +32,7 @@ struct MyInfoMainView: View {
                                 .clipShape(Circle())
                                 .frame(width: 80, height: 80)
                             
-                        case .failure(let error):
+                        case .failure:
                             Image("smallAppIcon")
                                 .resizable()
                                 .clipShape(Circle())
