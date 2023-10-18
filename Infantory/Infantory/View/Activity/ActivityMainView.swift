@@ -7,11 +7,9 @@
 import SwiftUI
 
 struct ActivityMainView: View {
+    @EnvironmentObject var loginStore: LoginStore
     @State var myAuctionInfos: [AuctionActivityData] = []
-    let myAuctionActivityInfos: [AuctionActivityInfo]
-    
     @State var myApplyInfos: [ApplyActivityData] = []
-    let myApplyActivityInfos: [ApplyActivityInfo]
     
     @State private var selectedFilter: ActivityOption = .auction
     
@@ -28,11 +26,11 @@ struct ActivityMainView: View {
                             ForEach(myAuctionInfos, id: \.product.id ) { info in
                                 NavigationLink {
                                     AuctionDetailView(auctionStore: AuctionStore(product: info.product))
-                                    
                                 } label: {
                                     ActivityRow(product: info.product,
                                                 myActivity: info.myPrice,
-                                                selectedFilter: $selectedFilter, myAuctionInfos: info)
+                                                selectedFilter: $selectedFilter, 
+                                                myAuctionInfos: info)
                                     .padding()
                                     
                                 }
@@ -77,8 +75,7 @@ struct ActivityMainView: View {
         }
         .onAppear {
             Task {
-                let acticityInfo = ActivityInfo(auctionActivityInfos: myAuctionActivityInfos,
-                                                applyActivityInfos: myApplyActivityInfos)
+                let acticityInfo = ActivityInfo(loginStore: loginStore)
                 
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
@@ -89,13 +86,13 @@ struct ActivityMainView: View {
             }
         }
         .refreshable {
+            
             Task {
-                let acticityInfo = ActivityInfo(auctionActivityInfos: myAuctionActivityInfos,
-                                                applyActivityInfos: myApplyActivityInfos)
+                let acticityInfo = ActivityInfo(loginStore: loginStore)
                 
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
-                
+                print(myAuctionInfos)
                 myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
                     myApplyInfos.first { $0.product.id  == id }
                 }
@@ -107,7 +104,7 @@ struct ActivityMainView: View {
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ActivityMainView(myAuctionActivityInfos: [], myApplyActivityInfos: [])
+            ActivityMainView()
                 .environmentObject(LoginStore())
         }
     }
@@ -170,12 +167,21 @@ struct ActivityRow: View {
                                 .clipShape(Rectangle())
                                 .cornerRadius(7)
                             if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
-                                Text("당첨")
-                                    .padding(10)
-                                    .bold()
-                                    .foregroundColor(.white)
-                                    .background(Color.infanMain)
-                                    .cornerRadius(20)
+                                if myApplyInfos?.product.isPaid == true {
+                                    Text("결재완료")
+                                        .padding(10)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .background(Color.infanMain)
+                                        .cornerRadius(20)
+                                } else {
+                                    Text("당첨")
+                                        .padding(10)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .background(Color.infanMain)
+                                        .cornerRadius(20)
+                                }
                             } else {
                                 Text("미당첨")
                                     .padding(10)
@@ -197,12 +203,22 @@ struct ActivityRow: View {
                                 .cornerRadius(7)
                             
                             if isWinner() {
-                                Text("낙찰")
-                                    .padding(10)
-                                    .bold()
-                                    .foregroundColor(.white)
-                                    .background(Color.infanMain)
-                                    .cornerRadius(20)
+                                if myAuctionInfos?.product.isPaid == true {
+                                    Text("결재완료")
+                                        .padding(10)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .background(Color.infanMain)
+                                        .cornerRadius(20)
+                                } else {
+                                    Text("낙찰")
+                                        .padding(10)
+                                        .bold()
+                                        .foregroundColor(.white)
+                                        .background(Color.infanMain)
+                                        .cornerRadius(20)
+                                }
+                                
                             } else {
                                 Text("미낙찰")
                                     .padding(10)
