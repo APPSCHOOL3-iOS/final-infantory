@@ -22,7 +22,11 @@ struct InfluencerMainView: View {
             
             InfluencerImageView()
             Button {
-                influencerStore.followInfluencer(influencerID: influencerID, userID: loginStore.userUid)
+                if influencerStore.isFollow {
+                    influencerStore.unfollowInfluencer(influencerID: influencerID, userID: loginStore.userUid)
+                } else {
+                    influencerStore.followInfluencer(influencerID: influencerID, userID: loginStore.userUid)
+                }
             } label: {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(influencerStore.isFollow ? Color.infanLightGray: Color.infanMain)

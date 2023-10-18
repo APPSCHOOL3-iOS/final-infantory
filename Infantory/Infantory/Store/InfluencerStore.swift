@@ -88,6 +88,9 @@ final class InfluencerStore: ObservableObject {
 #if DEBUG
                         print("Document successfully updated")
 #endif
+                        Task {
+                            try await self.fetchFollower(influencerID: influencerID, userID: userID)
+                        }
                     }
                 }
             }
@@ -103,22 +106,42 @@ final class InfluencerStore: ObservableObject {
             if followArray.contains(influencerID) {
                 DispatchQueue.main.async {
                     self.isFollow = true
-                    
-                    print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
-                    print(influencerID)
-                    print(self.isFollow)
                 }
             } else {
                 DispatchQueue.main.async {
                     self.isFollow = false
-                    
-                    print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
-                    print(influencerID)
-                    print(self.isFollow)
                 }
             }
         }
-        
+    }
+    
+    func unfollowInfluencer(influencerID: String, userID: String) {
+        let documentReference = Firestore.firestore().collection("Users").document(userID)
+        documentReference.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // 문서가 존재하는 경우, 현재 배열 필드 값을 가져옵니다.
+                var currentArray = document.data()?["follower"] as? [String]? ?? []
+                if let index = currentArray?.firstIndex(of: influencerID) {
+                    currentArray?.remove(at: index)
+                }
+                
+                // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
+                documentReference.updateData(["follower": currentArray ?? []]) { (error) in
+                    if error != nil {
+#if DEBUG
+                        print("Error updating document: (error)")
+#endif
+                    } else {
+#if DEBUG
+                        print("Document successfully updated")
+#endif
+                        Task {
+                            try await self.fetchFollower(influencerID: influencerID, userID: userID)
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
