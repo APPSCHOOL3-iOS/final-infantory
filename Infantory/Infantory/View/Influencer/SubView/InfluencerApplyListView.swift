@@ -11,6 +11,7 @@ struct InfluencerApplyListView: View {
     
     @EnvironmentObject private var influencerStore: InfluencerStore
     @ObservedObject var applyViewModel: ApplyProductStore
+
     let columns = [GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3))]
     
     var body: some View {
