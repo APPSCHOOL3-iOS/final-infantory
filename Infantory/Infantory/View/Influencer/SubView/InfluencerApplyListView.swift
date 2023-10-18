@@ -14,88 +14,75 @@ struct InfluencerApplyListView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        LazyVGrid(columns: columns) {
-//            ForEach(influencerStore.influencerApplyProduct) { product in
-//                NavigationLink {
-//                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
-//                } label: {
-//                    if product.productImageURLStrings.count > 0 {
-//                        CachedImage(url: product.productImageURLStrings[0]) { phase in
-//                            switch phase {
-//                            case .empty:
-//                                ProgressView()
-//                                    .scaledToFill()
-//                                    .frame(width: (.screenWidth - 100) / 2,
-//                                           height: (.screenWidth - 100) / 2)
-//                                    .clipped()
-//                            case .success(let image):
-//                                if product.auctionFilter == .close {
-//                                    ZStack {
-//                                        image
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .blur(radius: 5)
-//                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
-//                                            .clipped()
-//                                            .cornerRadius(10)
-//
-//                                        Text("경매 종료")
-//                                            .padding(10)
-//                                            .bold()
-//                                            .foregroundColor(.white)
-//                                            .background(Color.infanDarkGray)
-//                                            .cornerRadius(20)
-//                                    }
-//
-//                                } else if product.auctionFilter == .planned {
-//                                    ZStack {
-//                                        image
-//                                            .resizable()
-//                                            .scaledToFill()
-//                                            .blur(radius: 5)
-////                                            .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
-//                                            .clipped()
-//                                            .cornerRadius(10)
-//
-//                                        Text("응모 예정")
-//                                            .padding(10)
-//                                            .bold()
-//                                            .foregroundColor(.white)
-//                                            .background(Color.infanOrange)
-//                                            .cornerRadius(20)
-//                                    }
-//                                } else {
-//                                    image
-//                                        .resizable()
-//                                        .scaledToFill()
-////                                        .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
-//                                        .clipped()
-//                                        .cornerRadius(10)
-//                                }
-//                            case .failure:
-//                                Image(systemName: "xmark")
-////                                    .frame(width: (.screenWidth - 100) / 2,
-////                                           height: (.screenWidth - 100) / 2)
-//
-//                            @unknown default:
-//                                EmptyView()
-//                            }
-//                        }
-//
-//                    } else {
-//                        ZStack(alignment: .topLeading) {
-//
-//                            Image("smallAppIcon")
-//                                .resizable()
-//                                .scaledToFill()
-////                                .frame(width: (.screenWidth - 100) / 2,
-////                                       height: (.screenWidth - 100) / 2)
-//                                .clipped()
-//
-//                        }
-//                    }
-//                }
-//            }
+        LazyVGrid(columns: columns, spacing: 1) {
+            ForEach(influencerStore.influencerApplyProduct) { product in
+                NavigationLink {
+                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                } label: {
+                    if product.productImageURLStrings.count > 0 {
+                        CachedImage(url: product.productImageURLStrings[0]) { phase in
+                            switch phase {
+                            case .empty:
+                                ProgressView()
+                                    .scaledToFill()
+                                    .clipped()
+                            case .success(let image):
+                                if product.applyFilter == .close {
+                                    ZStack {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(height: .screenWidth / 3)
+                                            .blur(radius: 5)
+                                            .clipped()
+                                        
+                                        Text("경매 종료")
+                                            .padding(10)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .background(Color.infanDarkGray)
+                                            .cornerRadius(20)
+                                    }
+                                    
+                                } else if product.applyFilter == .planned {
+                                    ZStack {
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(height: .screenWidth / 3)
+                                            .blur(radius: 5)
+                                            .clipped()
+                                        
+                                        Text("응모 예정")
+                                            .padding(10)
+                                            .bold()
+                                            .foregroundColor(.white)
+                                            .background(Color.infanOrange)
+                                            .cornerRadius(20)
+                                    }
+                                } else {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: .screenWidth / 3)
+                                        .clipped()
+                                }
+                            case .failure:
+                                Image(systemName: "xmark")
+                                
+                            @unknown default:
+                                EmptyView()
+                            }
+                        }
+                        
+                    } else {
+                        Image("smallAppIcon")
+                            .resizable()
+                            .scaledToFill()
+                            .clipped()
+                    }
+                }
+            }
         }
     }
 }

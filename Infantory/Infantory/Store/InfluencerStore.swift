@@ -15,7 +15,6 @@ final class InfluencerStore: ObservableObject {
     @Published var influencerAuctionProduct: [AuctionProduct] = []
     
     func fetchInfluencer(influencerID: String) async throws {
-        influencer = User()
         let query = try await Firestore.firestore().collection("Users").document(influencerID).getDocument()
         DispatchQueue.main.async {
             do {
@@ -27,7 +26,9 @@ final class InfluencerStore: ObservableObject {
     }
     
     func fetchInfluencerApplyProduct(influencerID: String) async throws {
-        influencerApplyProduct = []
+        DispatchQueue.main.async {
+            self.influencerApplyProduct = []
+        }
         let query = Firestore.firestore().collection("ApplyProducts").whereField("influencerID", isEqualTo: influencerID)
         let snapshot = try await query.getDocuments()
         let documents = snapshot.documents
@@ -44,7 +45,9 @@ final class InfluencerStore: ObservableObject {
     }
     
     func fetchInfluencerAuctionProduct(influencerID: String) async throws {
-        influencerAuctionProduct = []
+        DispatchQueue.main.async {
+            self.influencerAuctionProduct = []
+        }
         let query = Firestore.firestore().collection("AuctionProducts").whereField("influencerID", isEqualTo: influencerID)
         let snapshot = try await query.getDocuments()
         let documents = snapshot.documents

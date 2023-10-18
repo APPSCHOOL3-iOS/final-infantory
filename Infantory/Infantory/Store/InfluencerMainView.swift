@@ -41,9 +41,10 @@ struct InfluencerMainView: View {
             }
         }
         .navigationBar(title: influencerStore.influencer.nickName)
-        .onAppear {
+        .task {
             Task {
                 try await influencerStore.fetchInfluencer(influencerID: influencerID)
+                try await influencerStore.fetchInfluencerApplyProduct(influencerID: influencerID)
             }
         }
         .refreshable {
