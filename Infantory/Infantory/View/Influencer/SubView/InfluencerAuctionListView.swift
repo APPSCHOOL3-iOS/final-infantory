@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct InfluencerApplyListView: View {
+struct InfluencerAuctionListView: View {
     
     @EnvironmentObject private var influencerStore: InfluencerStore
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var auctionViewModel: AuctionProductViewModel
     let columns = [GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3))]
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 1) {
-            ForEach(influencerStore.influencerApplyProduct) { product in
+        LazyVGrid(columns: columns) {
+            ForEach(influencerStore.influencerAuctionProduct) { product in
                 NavigationLink {
-                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                    AuctionDetailView(auctionStore: AuctionStore(product: product))
                 } label: {
                     if product.productImageURLStrings.count > 0 {
                         CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -27,7 +27,7 @@ struct InfluencerApplyListView: View {
                                     .scaledToFill()
                                     .clipped()
                             case .success(let image):
-                                if product.applyFilter == .close {
+                                if product.auctionFilter == .close {
                                     ZStack {
                                         image
                                             .resizable()
@@ -36,7 +36,7 @@ struct InfluencerApplyListView: View {
                                             .blur(radius: 5)
                                             .clipped()
                                         
-                                        Text("응모 종료")
+                                        Text("경매 종료")
                                             .padding(10)
                                             .bold()
                                             .foregroundColor(.white)
@@ -44,7 +44,7 @@ struct InfluencerApplyListView: View {
                                             .cornerRadius(20)
                                     }
                                     
-                                } else if product.applyFilter == .planned {
+                                } else if product.auctionFilter == .planned {
                                     ZStack {
                                         image
                                             .resizable()
@@ -53,7 +53,7 @@ struct InfluencerApplyListView: View {
                                             .blur(radius: 5)
                                             .clipped()
                                         
-                                        Text("응모 예정")
+                                        Text("경매 예정")
                                             .padding(10)
                                             .bold()
                                             .foregroundColor(.white)
@@ -87,8 +87,8 @@ struct InfluencerApplyListView: View {
     }
 }
 
-struct InfluencerApplyListView_Previews: PreviewProvider {
+struct InfluencerAuctionListView_Previews: PreviewProvider {
     static var previews: some View {
-        InfluencerApplyListView(applyViewModel: ApplyProductStore())
+        InfluencerAuctionListView(auctionViewModel: AuctionProductViewModel())
     }
 }
