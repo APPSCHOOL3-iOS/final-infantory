@@ -19,7 +19,9 @@ struct SearchMoreItemButtonView: View {
             } label: {
                 HStack {
                     Text("\(selectedCategory.rawValue) 더보기")
+                        .foregroundColor(.infanBlack)
                     Image(systemName: "chevron.right")
+                        .foregroundColor(.infanBlack)
                 }
             }
             .foregroundColor(.black)

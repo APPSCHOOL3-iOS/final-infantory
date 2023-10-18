@@ -12,6 +12,7 @@ struct SearchResultEmptyView: View {
         VStack {
             Spacer().frame(height: .screenHeight * 0.04)
             Text("검색된 결과가 없습니다.")
+                .foregroundColor(.infanBlack)
             Spacer()
         }
     }

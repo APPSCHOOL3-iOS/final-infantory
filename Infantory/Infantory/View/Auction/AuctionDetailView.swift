@@ -14,6 +14,8 @@ struct AuctionDetailView: View {
     
     @ObservedObject var auctionStore: AuctionStore
     
+    @State private var isShowingActionSheet: Bool = false
+    
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView(showsIndicators: false) {
@@ -21,7 +23,20 @@ struct AuctionDetailView: View {
                 
                 AuctionBuyerView(auctionStore: auctionStore)
                 
-                ProfileRowView(imageURLString: auctionStore.product.influencerProfile ?? "", nickname: auctionStore.product.influencerNickname)
+                HStack {
+                    AuctionInfluencerImageView(product: auctionStore.product)
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        isShowingActionSheet = true
+                    }, label: {
+                        Image(systemName: "ellipsis")
+                    })
+                    .buttonStyle(.plain)
+                }
+                .horizontalPadding()
+                .padding(.bottom, 5)
                 
                 AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
@@ -35,6 +50,18 @@ struct AuctionDetailView: View {
             finishAuction(product: &auctionStore.product)
         }
         .navigationBar(title: "상세정보")
+        .confirmationDialog("", isPresented: $isShowingActionSheet) {
+            
+            Button("차단하기", role: .destructive) {
+                
+            }
+            
+            Button("저장하기", role: .none) {
+                
+            }
+            Button("취소", role: .cancel) {}
+            
+        }
     }
     
     // 경매가 끝났고, 내가 최고 입찰자라면 product.winningUserID에 추가하는 로직 만들기
