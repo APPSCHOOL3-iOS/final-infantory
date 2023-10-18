@@ -10,9 +10,13 @@ import SwiftUI
 struct InfluencerMainView: View {
     
     @EnvironmentObject var influencerStore: InfluencerStore
+    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
+    
     var influencerID: String
     @State var searchCategory: InfluencerCategory = .auction
     var isFollow: Bool = true
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -33,6 +37,7 @@ struct InfluencerMainView: View {
                 }
                 
                 InfluencerTabBarView(searchCategory: $searchCategory)
+                InfluencerApplyListView(applyViewModel: applyViewModel)
             }
         }
         .navigationBar(title: influencerStore.influencer.nickName)

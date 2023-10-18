@@ -142,7 +142,6 @@ final class AuctionProductViewModel: ObservableObject {
                     }
                     if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
                         self.auctionProduct[index].biddingInfo = parsedBiddingInfos
-                        print("fetchData 되는거임!!!!!!!")
                     }
                 })
         }
