@@ -10,7 +10,6 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class MyProfileEditStore: ObservableObject {
-    
     private let dbRef = Firestore.firestore().collection("Users")
     private let storage = Storage.storage().reference()
     

@@ -17,6 +17,7 @@
 		01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */; };
 		01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */; };
 		01910C9B2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C9A2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift */; };
+		01910C9D2ADF9F7A00D9CCA2 /* MyPaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */; };
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
 		01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78842AD9326000790A56 /* EntryTiketView.swift */; };
@@ -166,6 +167,7 @@
 		01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppInfoView.swift; sourceTree = "<group>"; };
 		01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsListView.swift; sourceTree = "<group>"; };
 		01910C9A2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsDetailView.swift; sourceTree = "<group>"; };
+		01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStore.swift; sourceTree = "<group>"; };
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
 		01CE78842AD9326000790A56 /* EntryTiketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryTiketView.swift; sourceTree = "<group>"; };
@@ -473,6 +475,7 @@
 				A0B5AFE02AC3FE130055E714 /* PaymentStore.swift */,
 				0CF546742AD622650075C3FD /* PhotoStore.swift */,
 				EC9E6D142ADCCC4B00FD0831 /* InfluencerStore.swift */,
+				01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				844BB4F72ACFD7BF004891DD /* FetchUser.swift in Sources */,
 				11183A6F2ACD40D30010012C /* AuctionStore.swift in Sources */,
 				844BB4F92AD5AB00004891DD /* ApplyAddButtonView.swift in Sources */,
+				01910C9D2ADF9F7A00D9CCA2 /* MyPaymentStore.swift in Sources */,
 				114F305B2ABD1A79008497A8 /* AuctionMainView.swift in Sources */,
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
 				A031F3AD2AD5825A00F67988 /* ImageRetriver.swift in Sources */,

@@ -17,10 +17,10 @@ struct EntryTicketView: View {
                     Spacer()
                     Image("applyTicket")
                         .resizable()
-                        .frame(width: 30, height: 30)
+                        .frame(width: 20, height: 20)
                         .aspectRatio(contentMode: .fit)
                     Text(": \(loginStore.totalApplyTicketCount) 장")
-                        .font(.infanTitle2)
+                        .font(.infanHeadlineBold)
                 }
                 .padding(.vertical, 15)
                 
@@ -30,14 +30,15 @@ struct EntryTicketView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text("\(ticket.date)")
-                                        .font(.infanHeadline)
+                                        .font(.infanFootnote)
                                     Text("\(ticket.ticketGetAndUse)")
-                                    Divider()
+                                        .font(.infanHeadlineBold)
                                 }
                                 Spacer()
                                 Text("\(ticket.count)")
-                                    .font(.infanTitle2)
+                                    .font(.infanHeadlineBold)
                             }
+                            Divider()
                             .font(.infanHeadlineBold)
                         }
                     }
@@ -46,7 +47,7 @@ struct EntryTicketView: View {
             }
             .horizontalPadding()
         }
-        .navigationTitle("응모권")
+        .navigationBar(title: "응모권")
     }
 }
 
