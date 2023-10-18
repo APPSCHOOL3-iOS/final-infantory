@@ -9,26 +9,26 @@ import SwiftUI
 
 struct InfluencerMainView: View {
     
-    @EnvironmentObject var influencerStore: InfluencerStore
+    @EnvironmentObject private var loginStore: LoginStore
+    @EnvironmentObject private var influencerStore: InfluencerStore
     @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @State var searchCategory: InfluencerCategory = .auction
     
     var influencerID: String
-    var isFollow: Bool = true
     
     var body: some View {
         VStack {
             
             InfluencerImageView()
             Button {
-                
+                influencerStore.followInfluencer(influencerID: influencerID, userID: loginStore.userUid)
             } label: {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(isFollow ? Color.infanLightGray: Color.infanMain)
+                    .fill(influencerStore.isFollow ? Color.infanLightGray: Color.infanMain)
                     .cornerRadius(8)
                     .overlay {
-                        Text(isFollow ? "팔로우 취소": "팔로우")
+                        Text(influencerStore.isFollow ? "팔로우 취소": "팔로우")
                             .foregroundColor(.white)
                             .font(.infanHeadline)
                             .padding()
@@ -40,34 +40,34 @@ struct InfluencerMainView: View {
             
             TabView(selection: $searchCategory) {
                 ForEach(InfluencerCategory.allCases, id: \.self) { category in
-                        switch searchCategory {
-                        case .auction:
-                            VStack {
-                                if influencerStore.influencerAuctionProduct.isEmpty {
-                                    Text("경매 등록상품이 없습니다.")
-                                        .font(.infanBody)
-                                        .foregroundColor(.infanDarkGray)
-                                } else {
-                                    ScrollView {
-                                        InfluencerAuctionListView(auctionViewModel: auctionViewModel)
-                                    }
+                    switch searchCategory {
+                    case .auction:
+                        VStack {
+                            if influencerStore.influencerAuctionProduct.isEmpty {
+                                Text("경매 등록상품이 없습니다.")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanDarkGray)
+                            } else {
+                                ScrollView {
+                                    InfluencerAuctionListView(auctionViewModel: auctionViewModel)
                                 }
                             }
-                            .tag(category)
-                        case .apply:
-                            VStack {
-                                if influencerStore.influencerApplyProduct.isEmpty {
-                                    Text("응모 등록상품이 없습니다.")
-                                        .font(.infanBody)
-                                        .foregroundColor(.infanDarkGray)
-                                } else {
-                                    ScrollView {
-                                        InfluencerApplyListView(applyViewModel: applyViewModel)
-                                    }
-                                }
-                            }
-                            .tag(category)
                         }
+                        .tag(category)
+                    case .apply:
+                        VStack {
+                            if influencerStore.influencerApplyProduct.isEmpty {
+                                Text("응모 등록상품이 없습니다.")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanDarkGray)
+                            } else {
+                                ScrollView {
+                                    InfluencerApplyListView(applyViewModel: applyViewModel)
+                                }
+                            }
+                        }
+                        .tag(category)
+                    }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
@@ -81,6 +81,7 @@ struct InfluencerMainView: View {
                 try await influencerStore.fetchInfluencer(influencerID: influencerID)
                 try await influencerStore.fetchInfluencerApplyProduct(influencerID: influencerID)
                 try await influencerStore.fetchInfluencerAuctionProduct(influencerID: influencerID)
+                try await influencerStore.fetchFollower(influencerID: influencerID, userID: loginStore.userUid)
             }
         }
         .refreshable {

@@ -27,7 +27,6 @@ final class AuctionProductViewModel: ObservableObject {
         self.auctionProduct = products
         try await fetchData(products: products)
         try await fetchInfluencerProfile(products: products)
-        print("경매 2번이어야함")
     }
     
     @MainActor
@@ -40,20 +39,6 @@ final class AuctionProductViewModel: ObservableObject {
                 self.auctionProduct[index].influencerProfile = influencerProfile
                 self.updateFilter(filter: self.selectedFilter)
             }
-            //            documentReference.getDocument { (document, _ ) in
-            //                if let document = document, document.exists {
-            //                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
-            //                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-            //                        self.auctionProduct[index].influencerProfile = influencerProfile
-            //                        self.updateFilter(filter: self.selectedFilter)
-            //                    }
-            //                } else {
-            //#if DEBUG
-            //                    print("인플루언서 프로필이 없습니다")
-            //#endif
-            //                }
-            //
-            //            }
         }
     }
     
@@ -65,7 +50,6 @@ final class AuctionProductViewModel: ObservableObject {
                 $0.auctionFilter == .inProgress
             }
             sortInProgressProduct(filter: progressSelectedFilter)
-            print("필터되는거임!!!!!!!!!")
         case .planned:
             selectedFilter = .planned
             filteredProduct = auctionProduct.filter {

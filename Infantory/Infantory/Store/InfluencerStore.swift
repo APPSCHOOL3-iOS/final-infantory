@@ -13,6 +13,7 @@ final class InfluencerStore: ObservableObject {
     @Published var selectedCategory: InfluencerCategory = .auction
     @Published var influencerApplyProduct: [ApplyProduct] = []
     @Published var influencerAuctionProduct: [AuctionProduct] = []
+    @Published var isFollow: Bool = false
     
     func fetchInfluencer(influencerID: String) async throws {
         let query = try await Firestore.firestore().collection("Users").document(influencerID).getDocument()
@@ -61,6 +62,63 @@ final class InfluencerStore: ObservableObject {
                 print("error: 해당 인플루언서의 경매 상품을 불러오지 못했습니다.")
             }
         }
+    }
+    
+    // 팔로우 추가함수
+    func followInfluencer(influencerID: String, userID: String) {
+        let documentReference = Firestore.firestore().collection("Users").document(userID)
+        documentReference.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // 문서가 존재하는 경우, 현재 배열 필드 값을 가져옵니다.
+                var currentArray = document.data()?["follower"] as? [String]? ?? []
+                currentArray?.append(influencerID)
+                
+                var followers: [String] = []
+                if currentArray == nil {
+                    followers.append(influencerID)
+                }
+                
+                // 업데이트된 배열을 Firestore에 다시 업데이트합니다.
+                documentReference.updateData(["follower": currentArray == nil ? followers : currentArray ?? []]) { (error) in
+                    if error != nil {
+#if DEBUG
+                        print("Error updating document: (error)")
+#endif
+                    } else {
+#if DEBUG
+                        print("Document successfully updated")
+#endif
+                    }
+                }
+            }
+        }
+    }
+    
+    func fetchFollower(influencerID: String, userID: String) async throws {
+        let documentReference = Firestore.firestore().collection("Users").document(userID)
+        let snapshot = try await documentReference.getDocument()
+        
+        let currentArray = snapshot.data()?["follower"] as? [String]? ?? []
+        if let followArray = currentArray {
+            if followArray.contains(influencerID) {
+                DispatchQueue.main.async {
+                    self.isFollow = true
+                    
+                    print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
+                    print(influencerID)
+                    print(self.isFollow)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.isFollow = false
+                    
+                    print("⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️⭕️")
+                    print(influencerID)
+                    print(self.isFollow)
+                }
+            }
+        }
+        
     }
 }
 
