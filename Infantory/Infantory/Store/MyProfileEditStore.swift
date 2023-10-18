@@ -76,7 +76,6 @@ class MyProfileEditStore: ObservableObject {
                         print(error.localizedDescription)
 #endif
                     } else {
-                        print("======URL=====\n\(url)")
                         let url = url?.absoluteString ?? ""
                         completion(url)
                     }
