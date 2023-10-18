@@ -20,7 +20,7 @@ struct MyPaymentsListView: View {
                 case .auction:
                     VStack {
                         HStack {
-                            CachedImage(url: payment.auctionProduct?.influencerProfile ?? "") { phase in
+                            CachedImage(url: payment.auctionProduct?.productImageURLStrings[0] ?? "") { phase in
                                 switch phase {
                                 case .empty:
                                     ProgressView()
@@ -30,7 +30,6 @@ struct MyPaymentsListView: View {
                                         .resizable()
                                         .clipShape(Circle())
                                         .frame(width: 80, height: 80)
-                                    
                                 case .failure(let error):
                                     Image("smallAppIcon")
                                         .resizable()
@@ -45,7 +44,7 @@ struct MyPaymentsListView: View {
                                 Text("\(payment.auctionProduct?.productName ?? "")")
                             }
                             Spacer()
-                            Text("\(payment.auctionProduct?.winningPrice ?? 0)원")
+                            Text("\((payment.auctionProduct?.winningPrice ?? 0) + (payment.deliveryCost))원")
                             Button {
                                 showingModal.toggle()
                             } label: {
@@ -59,11 +58,11 @@ struct MyPaymentsListView: View {
                         }
                         Spacer()
                         Divider()
-                        if showingModal {
-                            MyPaymentsDetailView(payment: payment)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                                .background(Color.white)
-                        }
+//                        if showingModal {
+//                            MyPaymentsDetailView(payment: payment)
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+//                                .background(Color.white)
+//                        }
                     }
                     .padding(.vertical)
                     .horizontalPadding()
@@ -110,17 +109,25 @@ struct MyPaymentsListView: View {
                         }
                         Spacer()
                         Divider()
-                        if showingModal {
-                            MyPaymentsDetailView(payment: payment)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                                .background(Color.white)
-                        }
+//                        if showingModal {
+//                            MyPaymentsDetailView(payment: payment)
+//                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+//                                .background(Color.white)
+//                        }
                     }
                     .padding(.vertical)
                     .horizontalPadding()
 
                 }
+                if showingModal {
+                    MyPaymentsDetailView(payment: payment)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                        .background(Color.white)
+                }
             }
+        }
+        .onAppear {
+            print("\(String(describing: myPaymentStore.fetchMyPayments))")
         }
         .navigationBar(title: "결제정보")
     }

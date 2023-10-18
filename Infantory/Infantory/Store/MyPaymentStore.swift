@@ -21,7 +21,9 @@ final class MyPaymentStore: ObservableObject {
     
     func fetchMyPayments(userId: String) async throws {
         let snapshot = try await database.whereField("userId", isEqualTo: userId).getDocuments()
+        print(snapshot.count)
         let infos = snapshot.documents.compactMap { try? $0.data(as: PaymentInfo.self)}
+        print(infos)
         let filteredInfos = self.filterIsPaidProduct(infos)
         
         await updateMyPayments(payments: filteredInfos)
