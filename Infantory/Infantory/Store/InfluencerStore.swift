@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 final class InfluencerStore: ObservableObject {
     @Published var influencer: User = User()
+    @Published var selectedCategory: InfluencerCategory = .auction
     
     @MainActor
     func fetchInfluencer(influencerID: String) async throws {
@@ -17,4 +18,9 @@ final class InfluencerStore: ObservableObject {
         let query = try await Firestore.firestore().collection("Users").document(influencerID).getDocument()
         influencer = try query.data(as: User.self)
     }
+}
+
+enum InfluencerCategory: String, CaseIterable {
+    case auction = "경매"
+    case apply = "응모"
 }

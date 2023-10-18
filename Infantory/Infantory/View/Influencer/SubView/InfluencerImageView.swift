@@ -10,7 +10,7 @@ import SwiftUI
 struct InfluencerImageView: View {
     
     @EnvironmentObject var influencerStore: InfluencerStore
-    
+
     var body: some View {
         HStack(spacing: 40) {
             VStack(alignment: .leading) {

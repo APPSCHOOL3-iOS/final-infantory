@@ -11,7 +11,8 @@ struct InfluencerMainView: View {
     
     @EnvironmentObject var influencerStore: InfluencerStore
     var influencerID: String
-    
+    @State var searchCategory: InfluencerCategory = .auction
+    var isFollow: Bool = true
     var body: some View {
         ScrollView {
             VStack {
@@ -20,10 +21,10 @@ struct InfluencerMainView: View {
                     
                 } label: {
                     RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.infanMain)
+                        .fill(isFollow ? Color.infanLightGray: Color.infanMain)
                         .cornerRadius(8)
                         .overlay {
-                            Text("팔로우")
+                            Text(isFollow ? "팔로우 취소": "팔로우")
                                 .foregroundColor(.white)
                                 .font(.infanHeadline)
                                 .padding()
@@ -31,6 +32,7 @@ struct InfluencerMainView: View {
                         .frame(width: .screenWidth - 40, height: 40)
                 }
                 
+                InfluencerTabBarView(searchCategory: $searchCategory)
             }
         }
         .navigationBar(title: influencerStore.influencer.nickName)
