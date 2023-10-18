@@ -15,7 +15,7 @@ struct MyPaymentsListView: View {
     
     var body: some View {
         ScrollView {
-            ForEach(myPaymentStore.myPayments)  { payment in
+            ForEach(myPaymentStore.myPayments) { payment in
                 switch payment.type {
                 case .auction:
                     VStack {
@@ -58,8 +58,10 @@ struct MyPaymentsListView: View {
                         }
                         Spacer()
                         Divider()
+                        if showingModal {
+                                MyPaymentPriceView(price: payment.auctionProduct?.winningPrice ?? 0, payment: payment)
+                        }
                     }
-                    
                 case .apply:
                     VStack {
                         HStack {
@@ -104,15 +106,8 @@ struct MyPaymentsListView: View {
                         Divider()
                     }
                 }
-                if showingModal {
-                    MyPaymentsDetailView(payment: payment)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                        .background(Color.white)
-                }
             }
         }
-        .padding(.vertical)
-        .horizontalPadding()
         .onAppear {
             print("\(String(describing: myPaymentStore.fetchMyPayments))")
         }

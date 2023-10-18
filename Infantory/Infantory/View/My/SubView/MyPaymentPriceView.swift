@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct PaymentPriceView: View {
+struct MyPaymentPriceView: View {
     let price: Int
     let viewTitle: String = "최종 주문정보"
+    var payment: PaymentInfo
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,9 +23,9 @@ struct PaymentPriceView: View {
                 
                 ForEach(PaymentCost.allCases, id: \.rawValue) { item in
                     if item == .totalPrice {
-                        TotalPriceRow(item: item, price: price)
+                        TotalPriceRow(item: item, price: payment.auctionProduct?.winningPrice ?? 0)
                     } else {
-                        PriceDetailRow(item: item, price: price)
+                        PriceDetailRow(item: item, price: payment.auctionProduct?.winningPrice ?? 0)
                     }
                     
                 }
@@ -34,16 +35,22 @@ struct PaymentPriceView: View {
     }
 }
 
-struct PaymentPriceView_Previews: PreviewProvider {
+struct MyPaymentPriceView_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentPriceView(price: 100000)
+        MyPaymentPriceView(price: 100000, payment: PaymentInfo(userId: "",
+                                                               address: Address.init(address: "",
+                                                                                     zonecode: "",
+                                                                                     addressDetail: ""),
+                                                               deliveryRequest: .door,
+                                                               deliveryCost: 3000,
+                                                               paymentMethod: .accountTransfer))
     }
 }
 
-struct TotalPriceRow: View {
+struct MyTotalPriceRow: View {
     let item: PaymentCost
     let price: Int
-    
+    var payment: PaymentInfo
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
             Divider()
@@ -53,7 +60,7 @@ struct TotalPriceRow: View {
             }
             HStack {
                 Spacer()
-                Text("\(item.receipt(productPrice: price))원")
+                Text("\(item.receipt(productPrice: payment.auctionProduct?.winningPrice ?? 0))원")
                     .foregroundColor(.red)
                     .font(.headline)
                     .padding(.horizontal)
@@ -64,10 +71,10 @@ struct TotalPriceRow: View {
     }
 }
 
-struct PriceDetailRow: View {
+struct MyPriceDetailRow: View {
     let item: PaymentCost
     let price: Int
-    
+    var payment: PaymentInfo
     var body: some View {
         HStack {
             Text(item.title)
@@ -82,7 +89,7 @@ struct PriceDetailRow: View {
             }
             Spacer()
             
-            Text("\(item.receipt(productPrice: price))원")
+            Text("\(item.receipt(productPrice: payment.auctionProduct?.winningPrice ?? 0))원")
         }
         .padding(.horizontal)
     }
