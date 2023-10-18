@@ -77,7 +77,6 @@ struct HomeBannerView: View {
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 70, height: 70)
                                     .cornerRadius(35)
-                                    .rotationEffect(.degrees(30))
                             } else {
                                 CachedImage(url: product.influencerProfile ?? "") { phase in
                                     switch phase {
@@ -92,7 +91,6 @@ struct HomeBannerView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 70, height: 70)
                                             .cornerRadius(35)
-                                            .rotationEffect(.degrees(30))
                                     case .failure:
                                         Image(systemName: "xmark")
                                             .aspectRatio(contentMode: .fill)

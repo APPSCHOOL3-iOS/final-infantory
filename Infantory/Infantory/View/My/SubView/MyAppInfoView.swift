@@ -43,26 +43,29 @@ struct MyAppInfoView: View {
                         Text("이용약관")
                             .font(.system(size: 18))
                     }
-                    Divider()
-                    Button {
-                        showingModalPrivacyPolicy.toggle()
-                    } label: {
-                        Text("개인정보처리방침")
-                            .font(.system(size: 18))
-                    }
-                    Divider()
-                    Button {
-                        showingModalOpenSource.toggle()
-                    } label: {
-                        Text("오픈소스 라이선스")
-                            .font(.system(size: 18))
-                    }
-                    Divider()
-                    HStack {
-                        Text("버전 1.0.0(23.10.25)")
-                            .font(.infanFootnote)
-                            .foregroundColor(.infanLightGray)
-                        Spacer()
+                    
+                    Group {
+                        Divider()
+                        Button {
+                            showingModalPrivacyPolicy.toggle()
+                        } label: {
+                            Text("개인정보처리방침")
+                                .font(.system(size: 18))
+                        }
+                        Divider()
+                        Button {
+                            showingModalOpenSource.toggle()
+                        } label: {
+                            Text("오픈소스 라이선스")
+                                .font(.system(size: 18))
+                        }
+                        Divider()
+                        HStack {
+                            Text("버전 1.0.0(23.10.25)")
+                                .font(.infanFootnote)
+                                .foregroundColor(.infanLightGray)
+                            Spacer()
+                        }
                     }
                 }
                 .foregroundColor(.black)

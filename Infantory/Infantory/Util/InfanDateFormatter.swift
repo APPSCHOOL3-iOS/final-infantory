@@ -14,8 +14,9 @@ class InfanDateFormatter {
     
     private let dateAndTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M/dd E a h:MM"
-        formatter.locale = Locale.current
+        formatter.dateFormat = "M/dd E a h:mm"
+        formatter.locale = Locale(identifier: "ko_kr") // 한국 시간 지정
+        formatter.timeZone = TimeZone(abbreviation: "KST") // 한국 시간대 지정
         
         return formatter
     }()
@@ -23,15 +24,17 @@ class InfanDateFormatter {
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "M/dd"
-        formatter.locale = Locale.current
+        formatter.locale = Locale(identifier: "ko_kr") // 한국 시간 지정
+        formatter.timeZone = TimeZone(abbreviation: "KST") // 한국 시간대 지정
         
         return formatter
     }()
     
     private let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "HH:MM:SS"
-        formatter.locale = Locale.current
+        formatter.dateFormat = "HH:mm:SS"
+        formatter.locale = Locale(identifier: "ko_kr") // 한국 시간 지정
+        formatter.timeZone = TimeZone(abbreviation: "KST") // 한국 시간대 지정
         
         return formatter
     }()

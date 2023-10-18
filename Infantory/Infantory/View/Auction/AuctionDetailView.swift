@@ -177,27 +177,29 @@ struct Footer: View {
 
 extension AuctionDetailView {
     var productInfo: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
-                Text("\(auctionStore.product.productName)")
-                    .font(.infanTitle2)
-                Spacer()
+                
                 // 남은 시간
                 TimerView(remainingTime: auctionStore.remainingTime)
-            }
-            .padding(.top)
-            .horizontalPadding()
-            
-            // 제품 설명
-            HStack {
-                Text("\(auctionStore.product.description)")
-                    .font(.body)//optional
-                    .foregroundColor(.primary)//optional
-                    .padding(.horizontal, 24)//optional
-                    .padding(.bottom, 100)
-                
                 Spacer()
             }
+            .horizontalPadding()
+            .padding([.top, .bottom], 5)
+            
+            VStack(alignment: .leading) {
+                Text("\(auctionStore.product.productName)")
+                    .font(.infanTitle2Bold)
+                    .padding(.bottom)
+                
+                // 제품 설명
+                Text("\(auctionStore.product.description)")
+                    .font(.infanBody)
+                    .foregroundColor(.primary)
+                    .padding(.bottom, 100)
+                    .multilineTextAlignment(.leading)
+            }
+            .horizontalPadding()
         }
     }
 }

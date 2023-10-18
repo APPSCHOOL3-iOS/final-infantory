@@ -59,9 +59,11 @@ struct ApplyRegistrationView: View {
                                       text: $itemDescription)
                     
                     Divider()
-                    DatePicker("응모시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                    DatePicker("응모시작일", selection: $selectedDate, in: Date()..., displayedComponents: [.hourAndMinute, .date])
                         .font(.infanHeadlineBold)
                         .padding(.vertical)
+                        .environment(\.locale, Locale.init(identifier: "ko_kr"))
+                    
                     HStack {
                         Text("응모기간")
                             .font(.infanHeadlineBold)
@@ -86,7 +88,7 @@ struct ApplyRegistrationView: View {
                             let product = applyRegisterStore.makeApplyModel(title: title,
                                                                             apply: apply, itemDescription: itemDescription,
                                                                             imageStrings: productSelectedImageNames + custumeSelectedImageNames,
-                                                                            startDate: applyStartDate,
+                                                                            startDate: selectedDate,
                                                                             endDate: applyEndDate,
                                                                             user: loginStore.currentUser)
                             Task {
@@ -134,7 +136,7 @@ extension ApplyRegistrationView {
                             .foregroundColor(.infanMain)
                             .padding()
                     }
-                    .frame(width: (.screenWidth-70)/4, height: 54)
+                    .frame(width: (.screenWidth - 70) / 4, height: 54)
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
@@ -144,7 +146,7 @@ extension ApplyRegistrationView {
                             .font(.infanHeadline)
                             .padding()
                     }
-                    .frame(width: (.screenWidth-70)/4, height: 54)
+                    .frame(width: (.screenWidth - 70) / 4, height: 54)
             }
         }
         .buttonStyle(.plain)

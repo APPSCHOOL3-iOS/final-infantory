@@ -79,9 +79,10 @@ struct AuctionRegistrationView: View {
                                 .font(.infanHeadlineBold)
                         }
                     }
-                    DatePicker("경매시작일", selection: $selectedDate, displayedComponents: [.hourAndMinute, .date])
+                    DatePicker("경매시작일", selection: $selectedDate, in: Date()..., displayedComponents: [.hourAndMinute, .date])
                         .font(.infanHeadlineBold)
                         .padding(.vertical)
+                        .environment(\.locale, Locale.init(identifier: "ko_kr"))
                     
                     HStack {
                         Text("경매기간")
@@ -113,7 +114,7 @@ struct AuctionRegistrationView: View {
                                                                            itemDescription: itemDescription,
                                                                            startingPrice: auctionStartingPrice,
                                                                            imageStrings: auctionProductSelectedImageNames + auctionCustumeSelectedImageNames,
-                                                                           startDate: auctionStartDate,
+                                                                           startDate: selectedDate,
                                                                            endDate: auctionEndDate,
                                                                            user: loginStore.currentUser)
                             Task {
@@ -160,7 +161,7 @@ extension AuctionRegistrationView {
                             .foregroundColor(.infanMain)
                             .padding()
                     }
-                    .frame(width: (.screenWidth-70)/4, height: 54)
+                    .frame(width: (.screenWidth - 70) / 4, height: 54)
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)
@@ -170,7 +171,7 @@ extension AuctionRegistrationView {
                             .font(.infanHeadline)
                             .padding()
                     }
-                    .frame(width: (.screenWidth-70)/4, height: 54)
+                    .frame(width: (.screenWidth - 70) / 4, height: 54)
             }
         }
         .buttonStyle(.plain)

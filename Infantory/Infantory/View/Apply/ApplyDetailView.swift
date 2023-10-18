@@ -12,11 +12,12 @@ struct ApplyDetailView: View {
     @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var applyViewModel: ApplyProductStore
     var product: ApplyProduct
+    
     @State private var isShowingActionSheet: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
-                    ApplyBuyerView(product: product)
+                ApplyBuyerView(product: product)
                 HStack {
                     CachedImage(url: product.influencerProfile ?? "") { phase in
                         switch phase {
@@ -28,6 +29,7 @@ struct ApplyDetailView: View {
                                 .clipped()
                         case .success(let image):
                             image
+                                .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 40, height: 40)
                                 .cornerRadius(20)
@@ -43,7 +45,7 @@ struct ApplyDetailView: View {
                             EmptyView()
                         }
                     }
-                   
+                    
                     Text(product.influencerNickname)
                     Spacer()
                     
@@ -84,11 +86,8 @@ struct ApplyDetailView: View {
                 .tabViewStyle(PageTabViewStyle())
                 .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                 .cornerRadius(10)
-                Text(product.description)
-                    .horizontalPadding()
-                    .padding(.top)
-                    .padding(.bottom, 100)
-                    .multilineTextAlignment(.leading)
+                
+                productInfo
             }
             
             ApplyFooter(applyViewModel: applyViewModel, product: product)
@@ -142,7 +141,7 @@ struct ApplyFooter: View {
             ApplySheetView(applyViewModel: applyViewModel, isShowingApplySheet: $isShowingApplySheet, product: product)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
-
+            
         })
         
         .sheet(isPresented: $isShowingPaymentSheet) {
@@ -163,6 +162,35 @@ struct ApplyFooter: View {
             LoginSheetView()
                 .environmentObject(loginStore)
         })
+    }
+}
+
+extension ApplyDetailView {
+    var productInfo: some View {
+        VStack(alignment: .leading) {
+            HStack {
+                
+                // 남은 시간
+                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                Spacer()
+            }
+            .horizontalPadding()
+            .padding([.top, .bottom], 5)
+            
+            VStack(alignment: .leading) {
+                Text("\(product.productName)")
+                    .font(.infanTitle2Bold)
+                    .padding(.bottom)
+                
+                // 제품 설명
+                Text("\(product.description)")
+                    .font(.infanBody)
+                    .foregroundColor(.primary)
+                    .padding(.bottom, 100)
+                    .multilineTextAlignment(.leading)
+            }
+            .horizontalPadding()
+        }
     }
 }
 
