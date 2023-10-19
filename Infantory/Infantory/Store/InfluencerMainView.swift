@@ -16,7 +16,7 @@ struct InfluencerMainView: View {
     @State var searchCategory: InfluencerCategory = .auction
     
     var influencerID: String
-    
+
     var body: some View {
         VStack {
             
@@ -98,6 +98,7 @@ struct InfluencerMainView: View {
         }
         .onAppear {
             influencerStore.selectedCategory = .auction
+            searchCategory = .auction
         }
     }
 }
