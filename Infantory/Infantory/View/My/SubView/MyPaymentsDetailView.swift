@@ -8,18 +8,24 @@
 import SwiftUI
 
 struct MyPaymentsDetailView: View {
-    var myPaymentStore: MyPaymentStore
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var loginStore: LoginStore
+    var myPaymentStore: MyPaymentStore
+    
     @Binding var selectedIndex: Int
     var body: some View {
         ScrollView {
             // 상세내역 가운데로 오게하기
-            // 이전뷰로 돌아가기 버튼 
+            // 이전뷰로 돌아가기 버튼
             switch myPaymentStore.myPayments[selectedIndex].type {
             case .auction:
                 VStack(alignment: .leading, spacing: 13) {
-                    Text("상세내역")
-                        .font(.infanTitle2)
+                    HStack {
+                        Spacer()
+                        Text("상세내역")
+                            .font(.infanTitle2)
+                        Spacer()
+                    }
                     HStack {
                         CachedImage(url: myPaymentStore.myPayments[selectedIndex].auctionProduct?.productImageURLStrings[0] ?? "") { phase in
                             switch phase {
@@ -30,6 +36,7 @@ struct MyPaymentsDetailView: View {
                                 image
                                     .resizable()
                                     .frame(width: 100, height: 100)
+                                    .cornerRadius(5)
                             case .failure(let error):
                                 Image("smallAppIcon")
                                     .resizable()
@@ -38,9 +45,11 @@ struct MyPaymentsDetailView: View {
                                 EmptyView()
                             }
                         }
-                        VStack(spacing: 10) {
+                        VStack(alignment: .leading, spacing: 20) {
                             Text("\(myPaymentStore.myPayments[selectedIndex].auctionProduct?.influencerNickname ?? "")")
+                                .font(.infanHeadline)
                             Text("\(myPaymentStore.myPayments[selectedIndex].auctionProduct?.productName ?? "")")
+                                .font(.infanHeadlineBold)
                         }
                         Spacer()
                     }
@@ -73,14 +82,14 @@ struct MyPaymentsDetailView: View {
                         Text("\(myPaymentStore.myPayments[selectedIndex].auctionProduct?.winningPrice ?? 0)원")
                             .foregroundColor(.infanBlack)
                             .font(.infanHeadline)
-                    }
+                    }.frame(width: (.screenWidth - 50))
                     HStack {
                         Text("수수료")
                             .font(.infanHeadline)
                             .foregroundColor(.infanLightGray)
                         Spacer()
                         Text("0원")
-                    }
+                    }.frame(width: (.screenWidth - 50))
                     HStack {
                         Text("배송비")
                             .font(.infanHeadline)
@@ -89,7 +98,7 @@ struct MyPaymentsDetailView: View {
                         Text("\(myPaymentStore.myPayments[selectedIndex].deliveryCost)원")
                             .foregroundColor(.infanBlack)
                             .font(.infanHeadline)
-                    }
+                    }.frame(width: (.screenWidth - 50))
                     VStack {
                         Divider()
                         HStack(alignment: .top) {
@@ -99,14 +108,18 @@ struct MyPaymentsDetailView: View {
                             Spacer()
                             Text("\((myPaymentStore.myPayments[selectedIndex].auctionProduct?.winningPrice ?? 0) + (myPaymentStore.myPayments[selectedIndex].deliveryCost))원")
                                 .foregroundColor(.infanRed)
-                                .font(.infanHeadline)
+                                .font(.infanHeadlineBold)
                         }
-                        .frame(width: (.screenWidth - 30))
+                        .frame(width: (.screenWidth - 50))
                         .padding(.vertical)
                         Divider()
                     }
                     .frame(width: (.screenWidth - 30))
                     .background(Color.gray.opacity(0.1))
+                    MainColorButton(text: "돌아가기") {
+                        dismiss()
+                    }
+                    .offset(y: 50)
                 }
                 .horizontalPadding()
             case .apply:
@@ -133,7 +146,7 @@ struct MyPaymentsDetailView: View {
                         Text("\((myPaymentStore.myPayments[selectedIndex].applyProduct?.winningPrice ?? 0) + (myPaymentStore.myPayments[selectedIndex].deliveryCost))원")
                     }
                 }
-                .horizontalPadding()
+                .padding(.horizontal, 30)
             }
         }
         .padding(.vertical)

@@ -35,6 +35,7 @@ struct MyPaymentsListView: View {
                                         image
                                             .resizable()
                                             .frame(width: 80, height: 80)
+                                            .cornerRadius(5)
                                     case .failure(let error):
                                         Image("smallAppIcon")
                                             .resizable()
@@ -43,16 +44,33 @@ struct MyPaymentsListView: View {
                                         EmptyView()
                                     }
                                 }
-                                VStack(spacing: 10) {
+                                VStack(alignment: .leading, spacing: 10) {
                                     Text("\(myPaymentStore.myPayments[index].auctionProduct?.influencerNickname ?? "")")
+                                        .font(.infanHeadline)
+                                        .foregroundColor(.infanBlack)
                                     Text("\(myPaymentStore.myPayments[index].auctionProduct?.productName ?? "")")
+                                        .font(.infanHeadline)
+                                        .foregroundColor(.infanBlack)
                                 }
                                 Spacer()
-                                Text("\((myPaymentStore.myPayments[index].auctionProduct?.winningPrice ?? 0) + (myPaymentStore.myPayments[index].deliveryCost))원")
+                                VStack(spacing: 10) {
+                                    Text("\((myPaymentStore.myPayments[index].auctionProduct?.winningPrice ?? 0) + (myPaymentStore.myPayments[index].deliveryCost))원")
+                                        .font(.infanHeadline)
+                                        .foregroundColor(.infanBlack)
+                                    Text("주문상세")
+                                        .font(.infanFootnote)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(Color.gray, lineWidth: 1)
+                                                .frame(width: 70, height: 25)
+                                        )
+                                }
+                                .offset(y: 5)
                             }
                             Spacer()
                             Divider()
                         }
+                        .horizontalPadding()
                     case .apply:
                         VStack {
                             HStack {
@@ -82,16 +100,6 @@ struct MyPaymentsListView: View {
                                 }
                                 Spacer()
                                 Text("\(myPaymentStore.myPayments[index].applyProduct?.winningPrice ?? 0)원")
-//                                Button {
-//                                    showingModal.toggle()
-//                                } label: {
-//                                    Image(systemName: showingModal ? "chevron.down" : "chevron.up")
-//                                        .resizable()
-//                                        .aspectRatio(contentMode: .fill)
-//                                        .frame(width: 10, height: 13)
-//                                        .foregroundColor(.black)
-//                                        .padding()
-//                                }
                             }
                             Spacer()
                             Divider()
