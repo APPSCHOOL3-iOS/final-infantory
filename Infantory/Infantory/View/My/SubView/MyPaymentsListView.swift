@@ -31,7 +31,7 @@ struct MyPaymentsListView: View {
                                             .resizable()
                                             .frame(width: 80, height: 80)
                                             .cornerRadius(5)
-                                    case .failure(let error):
+                                    case .failure:
                                         Image("smallAppIcon")
                                             .resizable()
                                             .frame(width: 80, height: 80)
@@ -85,7 +85,7 @@ struct MyPaymentsListView: View {
                                             .clipShape(Circle())
                                             .frame(width: 80, height: 80)
                                         
-                                    case .failure(let error):
+                                    case .failure:
                                         Image("smallAppIcon")
                                             .resizable()
                                             .clipShape(Circle())

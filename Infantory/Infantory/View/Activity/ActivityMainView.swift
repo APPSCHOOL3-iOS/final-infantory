@@ -116,7 +116,7 @@ struct ActivityRow: View {
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @StateObject var myActivityStore: MyActivityStore = MyActivityStore()
-    
+
     var body: some View {
         HStack {
             CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -143,7 +143,7 @@ struct ActivityRow: View {
                                 .blur(radius: 5)
                                 .clipShape(Rectangle())
                                 .cornerRadius(7)
-                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
+                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.email {
                                 if myApplyInfos?.product.isPaid == true {
                                     Text("결제완료")
                                         .padding(10)
@@ -244,8 +244,10 @@ struct ActivityRow: View {
                     Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
                     
                     if let auctionProduct = product as? AuctionProduct {
-                        Text("\(myActivityStore.winningPrice )원")
+                        TextAnimateView(value: myActivityStore.winningPrice)
                             .font(.infanFootnoteBold)
+                            .monospacedDigit()
+                            .animation(Animation.easeInOut(duration: 1))
                             .padding(.bottom, 5)
                     } else if let applyProduct = product as? ApplyProduct {
                         Text("\(myActivityStore.totalApplyCount) 개")

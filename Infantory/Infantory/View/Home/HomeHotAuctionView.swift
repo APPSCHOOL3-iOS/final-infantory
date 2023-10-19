@@ -114,8 +114,10 @@ struct WinningPriceView: View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
                 .foregroundColor(.blue)
-            Text("\(myActivityStore.winningPrice) 원")
+            TextAnimateView(value: myActivityStore.winningPrice)
                 .foregroundColor(Color.infanDarkGray)
+                .monospacedDigit()
+                .animation(Animation.easeInOut(duration: 1))
         }
         .font(.infanFootnote)
         .onAppear {

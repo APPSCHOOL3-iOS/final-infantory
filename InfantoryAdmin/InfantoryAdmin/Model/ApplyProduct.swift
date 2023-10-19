@@ -1,15 +1,14 @@
 //
-//  ApplyProduct.swift
-//  Infantory
+//  ApplyLotteryModel.swift
+//  InfantoryAdmin
 //
-//  Created by 윤경환 on 2023/09/22.
+//  Created by 변상필 on 10/19/23.
 //
 
 import Foundation
 import FirebaseFirestoreSwift
 
-// 응모
-struct ApplyProduct: Productable, Identifiable, Codable {
+struct ApplyProduct: Identifiable, Codable {
     
     @DocumentID var id: String?
     var productName: String
@@ -21,7 +20,7 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     var influencerNickname: String
     var influencerProfile: String? = nil
     var winningUserID: String? = nil
-    
+
     // 응모 시작일, 마감일
     var startDate: Date
     var endDate: Date
@@ -63,16 +62,19 @@ struct ApplyProduct: Productable, Identifiable, Codable {
     var isPaid: Bool = false
 }
 
-/* 응모 가져올때 가정
- 
- 1. User 안에 applyProductsIDs 안에 있는 상품 아이디로 상품을 가져온다
- 2. 상품에 접근을해서 applyInfoIDs 에 접근
- 3. applyInfoIDs를 통해 WhereField를 써서 자신이 한것들 가져오기
- 4. 가져온 나의 배열을 통해 보여주면 됨
- 
- 
- 응모를 할 때 가정
- 1. ApplyInfo를 테이블에 추가
- 2. Product에 applyInfoIDs를 업데이트
- 3. User에 applyProductsIDs배열에 ProductId를 추가
- */
+
+enum ApplyFilter: String, CaseIterable {
+    case inProgress = "진행 응모"
+    case planned = "예정 응모"
+    case close = "종료 응모"
+}
+
+enum ApplyInprogressFilter: String, CaseIterable {
+    case deadline = "마감순"
+    case popular = "인기순"
+}
+
+enum ApplyCloseFilter: String, CaseIterable {
+    case beforeRaffle = "추첨중"
+    case afterRaffle = "추첨완료"
+}

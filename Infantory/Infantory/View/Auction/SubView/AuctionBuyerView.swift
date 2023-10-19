@@ -23,7 +23,10 @@ struct AuctionBuyerView: View {
                     Text("\(auctionStore.biddingInfos.last?.userNickname ?? "시작가")")
                 }
                 Spacer()
-                Text("\(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice)원")
+                TextAnimateView(value: Double(auctionStore.biddingInfos.last?.biddingPrice ?? auctionStore.product.minPrice))
+                    .monospacedDigit()
+                    .animation(Animation.easeInOut(duration: 1))
+
             }
             .foregroundStyle(.black)
             .padding()
