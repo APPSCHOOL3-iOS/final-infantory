@@ -29,6 +29,7 @@ struct ApplyProductListCellView: View {
                                     .clipped()
                             case .success(let image):
                                 if product.applyFilter == .close {
+                                    
                                     ZStack {
                                         image
                                             .resizable()
@@ -38,12 +39,21 @@ struct ApplyProductListCellView: View {
                                             .clipped()
                                             .cornerRadius(10)
                                         
-                                        Text("응모 종료")
-                                            .padding(10)
-                                            .bold()
-                                            .foregroundColor(.white)
-                                            .background(Color.infanDarkGray)
-                                            .cornerRadius(20)
+                                        if product.applyCloseFilter == .beforeRaffle {
+                                            Text("추첨중")
+                                                .padding(10)
+                                                .bold()
+                                                .foregroundColor(.white)
+                                                .background(Color.infanDarkGray)
+                                                .cornerRadius(20)
+                                        } else {
+                                            Text("추첨종료")
+                                                .padding(10)
+                                                .bold()
+                                                .foregroundColor(.white)
+                                                .background(Color.infanDarkGray)
+                                                .cornerRadius(20)
+                                        }
                                     }
                                 } else if product.applyFilter == .planned {
                                     ZStack {
