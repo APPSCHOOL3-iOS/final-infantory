@@ -30,20 +30,36 @@ struct MyUserProfileView: View {
                     EmptyView()
                 }
             }
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                Text("\(loginStore.currentUser.nickName)")
-                    .font(.infanTitle2)
-                    .foregroundColor(.infanBlack)
-                    Spacer()
-                    Image("applyTicket")
-                        .resizable()
-                        .frame(width: 20, height: 15)
-                        .aspectRatio(contentMode: .fit)
-                    Text(": \(loginStore.totalApplyTicketCount) 장")
-                        .font(.infanHeadline)
+            
+            VStack(alignment: .leading, spacing: 10) {
+                    Text("\(loginStore.currentUser.nickName)")
+                        .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
+                HStack {
+                    NavigationLink {
+                        EntryTicketView()
+                    } label: {
+                        Text("응모권: ")
+                        Text("\(loginStore.totalApplyTicketCount)장")
+                            .font(.infanFootnoteBold)
+                            .foregroundColor(.infanMain)
+                            .padding(.leading, -5)
+                    }
+                    Divider()
+                        .frame(height: 15)
+                        .background(Color.gray)
+                    NavigationLink {
+                            Text("내가 팔로우한 인플루언서가 보여질 예정입니다.")
+                    } label: {
+                        Text("팔로잉: ")
+                        Text("15K")
+                            .font(.infanFootnoteBold)
+                            .foregroundColor(.infanMain)
+                            .padding(.leading, -5)
+                    }
                 }
+                .font(.infanFootnote)
+                .foregroundColor(.infanBlack)
             }
             Spacer()
         }

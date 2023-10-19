@@ -24,19 +24,7 @@ struct MyInfoLinkView: View {
                     
                     Text("결제정보")
                         .font(.infanHeadline)
-                    Spacer()
-                }
-            }
-            Divider()
-            NavigationLink {
-                EntryTicketView()
-            } label: {
-                HStack {
-                    Image("apply")
-                        .frame(width: 24)
-                    
-                    Text("응모내역")
-                        .font(.infanHeadline)
+                        .padding(.leading, 5)
                     Spacer()
                 }
             }
@@ -50,6 +38,21 @@ struct MyInfoLinkView: View {
                     
                     Text("앱 정보")
                         .font(.infanHeadline)
+                        .padding(.leading, 5)
+                    Spacer()
+                }
+            }
+            Divider()
+            NavigationLink {
+                
+            } label: {
+                HStack {
+                    Image(systemName: "person.2")
+                        .frame(width: 24)
+                    
+                    Text("1:1 문의")
+                        .font(.infanHeadline)
+                        .padding(.leading, 5)
                     Spacer()
                 }
             }
@@ -63,6 +66,7 @@ struct MyInfoLinkView: View {
                     
                     Text("로그아웃")
                         .font(.infanHeadline)
+                        .padding(.leading, 5)
                     Spacer()
                 })
                 .foregroundColor(.infanRed)

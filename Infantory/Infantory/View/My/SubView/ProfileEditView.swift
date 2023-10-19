@@ -22,15 +22,50 @@ struct ProfileEditView: View {
     @State var myAddress: String = ""
     @State var myDetailAddress: String = ""
     @State private var showAlert: Bool = false
+    @State private var isCheckedNickName: Bool = false
+    @State private var isCheckedButton: Bool = false
+    @State private var checkNickNameResult: String = ""
+    @State private var showToastMessage: Bool = false
+    @State private var toastMessageText: String = ""
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
                     PhotosSelector(selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
-                    UnderlineTextField(textFieldTitle: "닉네임",
-                                       placeholder: nickName,
-                                       text: $nickName)
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            
+                            UnderlineTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
+                            Button {
+                                
+                                loginStore.duplicateNickName(nickName: nickName) { result in
+                                    if nickName == "" {
+                                        isCheckedNickName = false
+                                        checkNickNameResult = "닉네임을 입력해주세요."
+                                    } else if result {
+                                        isCheckedNickName = true
+                                        checkNickNameResult = "사용 가능한 닉네임입니다."
+                                    } else {
+                                        isCheckedNickName = false
+                                        checkNickNameResult = "중복된 닉네임입니다."
+                                    }
+                                }
+                            } label: {
+                                VStack {
+                                    Text("중복확인")
+                                        .font(.infanFootnote)
+                                        .padding(6)
+                                        .foregroundColor(.white)
+                                        .background(Color.infanMain)
+                                        .cornerRadius(10)
+                                }
+                            }
+                        }
+                            Text(checkNickNameResult)
+                                .font(.infanFootnote)
+                                .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
+                    }
                     UnderlineTextField(textFieldTitle: "전화번호",
                                        placeholder: phoneNumber,
                                        text: $phoneNumber)
@@ -76,7 +111,19 @@ struct ProfileEditView: View {
                 .padding(.bottom)
                 .horizontalPadding()
                 .navigationBar(title: "내 프로필 편집")
+                .task({
+                    
+                })
             }
+        }
+    }
+    func mycheckSignUp() {
+        if !isCheckedNickName {
+            showToastMessage = true
+            toastMessageText = "닉네임 중복확인을 해주세요."
+        } else if nickName.isEmpty {
+            showToastMessage = true
+            toastMessageText = "빈칸을 입력해주세요."
         }
     }
 }

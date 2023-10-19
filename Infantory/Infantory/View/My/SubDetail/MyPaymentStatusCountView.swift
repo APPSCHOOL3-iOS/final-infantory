@@ -10,19 +10,18 @@ import SwiftUI
 struct MyPaymentStatusCountView: View {
     @ObservedObject var myPaymentStore: MyPaymentStore
     var body: some View {
-        ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.infanLightGray.opacity(0.3))
-
-                    HStack {
-                        MyPaymentStatusItemView(title: "결제완료", count: myPaymentStore.myPayments.count)
-                        MyPaymentStatusItemView(title: "준비중", count: 0)
-                        MyPaymentStatusItemView(title: "배송중", count: 0)
-                        MyPaymentStatusItemView(title: "배송완료", count: 0)
-                    }
-                    .padding(.vertical, 16)
-                    .foregroundColor(.infanBlack)
-                }
+//        ZStack {
+//            RoundedRectangle(cornerRadius: 10)
+//                .fill(Color.infanLightGray.opacity(0.3))
+//                .frame(width: 350, height: 90)
+            HStack {
+                MyPaymentStatusItemView(title: "결제완료", count: myPaymentStore.myPayments.count)
+                MyPaymentStatusItemView(title: "준비중", count: 0)
+                MyPaymentStatusItemView(title: "배송중", count: 0)
+                MyPaymentStatusItemView(title: "배송완료", count: 0)
+            }
+            .foregroundColor(.infanBlack)
+//        }
     }
 }
 

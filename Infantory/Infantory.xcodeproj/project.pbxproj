@@ -15,6 +15,7 @@
 		0136D6512AE0C9CF0024E68C /* MyPaymentStatusCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */; };
 		0136D6532AE0CA330024E68C /* MyPaymentStatusItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6522AE0CA330024E68C /* MyPaymentStatusItemView.swift */; };
 		0136D6552AE0CB9C0024E68C /* MyInfoLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6542AE0CB9C0024E68C /* MyInfoLinkView.swift */; };
+		0136D6572AE102BB0024E68C /* MyConsumerCenterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6562AE102BB0024E68C /* MyConsumerCenterView.swift */; };
 		0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */; };
 		0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833B2AC11790001FEC98 /* AuctionDetailView.swift */; };
 		0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */; };
@@ -175,6 +176,7 @@
 		0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStatusCountView.swift; sourceTree = "<group>"; };
 		0136D6522AE0CA330024E68C /* MyPaymentStatusItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStatusItemView.swift; sourceTree = "<group>"; };
 		0136D6542AE0CB9C0024E68C /* MyInfoLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoLinkView.swift; sourceTree = "<group>"; };
+		0136D6562AE102BB0024E68C /* MyConsumerCenterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConsumerCenterView.swift; sourceTree = "<group>"; };
 		015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductViewModel.swift; sourceTree = "<group>"; };
 		0157833B2AC11790001FEC98 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
 		0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailImageView.swift; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */,
 				0136D6522AE0CA330024E68C /* MyPaymentStatusItemView.swift */,
 				0136D6542AE0CB9C0024E68C /* MyInfoLinkView.swift */,
+				0136D6562AE102BB0024E68C /* MyConsumerCenterView.swift */,
 			);
 			path = SubDetail;
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				A00EE0A12ACE447200E03146 /* UnderlineTextField.swift in Sources */,
 				0136D64D2AE0C8E50024E68C /* MyProfileEditButton.swift in Sources */,
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
+				0136D6572AE102BB0024E68C /* MyConsumerCenterView.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
 				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
 				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
