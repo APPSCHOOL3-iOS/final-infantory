@@ -18,30 +18,35 @@ struct MyAppInfoView: View {
                 VStack(alignment: .leading, spacing: 17) {
                     Text("앱 정보")
                         .font(.infanTitle2Bold)
+                        .foregroundColor(.infanBlack)
                         .padding(.bottom, 10)
                     Button {
                         
                     } label: {
                         Text("글꼴")
-                            .font(.system(size: 18))
+                            .foregroundColor(.infanBlack)
+                            .font(.infanHeadline)
                     }
                     Divider()
                     Button {
                         
                     } label: {
                         Text("이미지 라이선스")
-                            .font(.system(size: 18))
+                            .foregroundColor(.infanBlack)
+                            .font(.infanHeadline)
                     }
                     Divider()
                     
                     Text("정보")
                         .font(.infanTitle2Bold)
+                        .foregroundColor(.infanBlack)
                         .padding(.bottom, 10)
                     Button {
                         showingModalTermsOfUse.toggle()
                     } label: {
                         Text("이용약관")
-                            .font(.system(size: 18))
+                            .foregroundColor(.infanBlack)
+                            .font(.infanHeadline)
                     }
                     
                     Group {
@@ -50,14 +55,16 @@ struct MyAppInfoView: View {
                             showingModalPrivacyPolicy.toggle()
                         } label: {
                             Text("개인정보처리방침")
-                                .font(.system(size: 18))
+                                .foregroundColor(.infanBlack)
+                                .font(.infanHeadline)
                         }
                         Divider()
                         Button {
                             showingModalOpenSource.toggle()
                         } label: {
                             Text("오픈소스 라이선스")
-                                .font(.system(size: 18))
+                                .foregroundColor(.infanBlack)
+                                .font(.infanHeadline)
                         }
                         Divider()
                         HStack {

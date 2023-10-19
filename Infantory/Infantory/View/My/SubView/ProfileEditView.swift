@@ -80,7 +80,7 @@ struct ProfileEditView: View {
         }
     }
 }
-//
+
 //struct ProfileEditView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ProfileEditView(myStore: MyProfileEditStore(), selectedImage: .constant(nil))
