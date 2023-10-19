@@ -11,7 +11,8 @@ import Photos
 
 struct MyLoginView: View {
     @EnvironmentObject var loginStore: LoginStore
-    
+    @Environment(\.dismiss) private var dismiss
+    @State var showingAlert: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     var body: some View {
@@ -40,9 +41,7 @@ struct MyLoginView: View {
                                 .font(.infanHeadlineBold)
                             Spacer()
                         }
-                        
                         // 결제완료 준비중 배송중 배송완료
-                        
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .fill(Color.infanLightGray.opacity(0.3))
@@ -94,7 +93,7 @@ struct MyLoginView: View {
                     // 입찰내역, 응모내역, 결제정보, 로그아웃
                     VStack(alignment: .leading, spacing: 16) {
                         Button {
-                            
+                            showingAlert.toggle()
                         } label: {
                             HStack {
                                 Image(systemName: "list.bullet.rectangle.portrait")
@@ -107,7 +106,7 @@ struct MyLoginView: View {
                         }
                         Divider()
                         Button {
-                            
+                            showingAlert.toggle()
                         } label: {
                             HStack {
                                 Image("apply")
@@ -120,7 +119,7 @@ struct MyLoginView: View {
                         }
                         Divider()
                         Button {
-                            
+                            showingAlert.toggle()
                         } label: {
                             HStack {
                                 Image(systemName: "tag")
@@ -138,6 +137,16 @@ struct MyLoginView: View {
                 }
                 .horizontalPadding()
             }
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("주의"),
+                  message: Text("로그인이 필요한 서비스 입니다."),
+                  primaryButton: .cancel(Text("확인"), action: {
+                dismiss()
+            }),
+                  secondaryButton: .destructive(Text("취소"), action: {
+                dismiss()
+            }))
         }
         .sheet(isPresented: $isShowingLoginSheet, content: {
             LoginSheetView()
