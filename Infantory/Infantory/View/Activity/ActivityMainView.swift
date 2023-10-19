@@ -244,11 +244,11 @@ struct ActivityRow: View {
                     Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
                     
                     if let auctionProduct = product as? AuctionProduct {
-                        Text("\(auctionProduct.winningPrice ?? 0)원")
+                        Text("\(myActivityStore.winningPrice )원")
                             .font(.infanFootnoteBold)
                             .padding(.bottom, 5)
                     } else if let applyProduct = product as? ApplyProduct {
-                        Text("\(applyProduct.applyUserIDs.count) 개")
+                        Text("\(myActivityStore.totalApplyCount) 개")
                             .font(.infanFootnoteBold)
                             .padding(.bottom, 5)
                     }
@@ -256,12 +256,17 @@ struct ActivityRow: View {
                     Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
                         .foregroundColor(.infanMain)
                     
-                    HStack {
-                        Text( "\(myActivityStore.myBiddingPrice)\(selectedFilter.title == "경매" ? "원" : "회")")
-                        
-                        Spacer()
+                    if let auctionProduct = product as? AuctionProduct {
+                        Text("\(myActivityStore.myBiddingPrice )원")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
+                            .foregroundColor(.infanMain)
+                    } else if let applyProduct = product as? ApplyProduct {
+                        Text("\(myActivityStore.myApplyCount) 개")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
+                            .foregroundColor(.infanMain)
                     }
-                    .foregroundColor(.infanMain)
                 }
             }
             .font(.infanFootnote)
@@ -269,8 +274,12 @@ struct ActivityRow: View {
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
         }
         .onAppear {
-            myActivityStore.fetchMyLastBiddingPrice(userID: loginStore.currentUser.id ?? "",
+            let userID = loginStore.currentUser.id ?? ""
+            myActivityStore.fetchMyLastBiddingPrice(userID: userID,
                                                     productID: product.id ?? "")
+            myActivityStore.fetchWinningPrice(productID: product.id ?? "")
+            myActivityStore.fetchApplyCount(userEmail: loginStore.currentUser.email,
+                                            productID: product.id ?? "")
         }
     }
     

@@ -12,8 +12,13 @@ import FirebaseFirestore
 
 class MyActivityStore: ObservableObject {
     @Published var myBiddingPrice: Int = 0
+    @Published var winningPrice: Int = 0
+    
+    @Published var myApplyCount: Int = 0
+    @Published var totalApplyCount: Int = 0
     
     private var dbRef: DatabaseReference!
+    private let firestore = Firestore.firestore()
     
     init() {
         self.dbRef = Database.database().reference()
@@ -31,6 +36,29 @@ class MyActivityStore: ObservableObject {
                     }
                 }
             }
+    }
+    
+    func fetchWinningPrice(productID: String) {
+        firestore.collection("AuctionProducts").document(productID).getDocument { document, _ in
+            guard let product = try? document?.data(as: AuctionProduct.self) else {
+                print("DEBUG: Failed to decode User not exist")
+                return
+            }
+            self.winningPrice = product.winningPrice ?? 0
+        }
+    }
+    
+    func fetchApplyCount(userEmail: String, productID: String) {
+        firestore.collection("ApplyProducts").document(productID).getDocument { document, _ in
+            guard let product = try? document?.data(as: ApplyProduct.self) else {
+                print("DEBUG: Failed to decode User not exist")
+                return
+            }
+            self.totalApplyCount = product.applyUserIDs.count
+            self.myApplyCount = product.applyUserIDs.filter({ applyUserEmail in
+                return applyUserEmail == userEmail
+            }).count
+        }
     }
 
 }
