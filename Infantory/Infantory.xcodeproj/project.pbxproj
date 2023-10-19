@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		010B8A862AD7907600973E6A /* DressedUpImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A852AD7907600973E6A /* DressedUpImageView.swift */; };
+		0136D6422AE0041E0024E68C /* MyPaymentPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6412AE0041E0024E68C /* MyPaymentPriceView.swift */; };
+		0136D6442AE01D830024E68C /* MyPaymentsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6432AE01D830024E68C /* MyPaymentsDetailView.swift */; };
+		0136D6462AE02BB00024E68C /* MyPaymentAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6452AE02BB00024E68C /* MyPaymentAddressView.swift */; };
 		0157833A2ABD5F86001FEC98 /* AuctionProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */; };
 		0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833B2AC11790001FEC98 /* AuctionDetailView.swift */; };
 		0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */; };
@@ -16,7 +19,6 @@
 		016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */; };
 		01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */; };
 		01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */; };
-		01910C9B2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C9A2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift */; };
 		01910C9D2ADF9F7A00D9CCA2 /* MyPaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */; };
 		01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */; };
 		01CE78832AD931C200790A56 /* ProfileImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CE78822AD931C200790A56 /* ProfileImagePicker.swift */; };
@@ -165,6 +167,9 @@
 
 /* Begin PBXFileReference section */
 		010B8A852AD7907600973E6A /* DressedUpImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressedUpImageView.swift; sourceTree = "<group>"; };
+		0136D6412AE0041E0024E68C /* MyPaymentPriceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentPriceView.swift; sourceTree = "<group>"; };
+		0136D6432AE01D830024E68C /* MyPaymentsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsDetailView.swift; sourceTree = "<group>"; };
+		0136D6452AE02BB00024E68C /* MyPaymentAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentAddressView.swift; sourceTree = "<group>"; };
 		015783392ABD5F86001FEC98 /* AuctionProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProductViewModel.swift; sourceTree = "<group>"; };
 		0157833B2AC11790001FEC98 /* AuctionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailView.swift; sourceTree = "<group>"; };
 		0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionDetailImageView.swift; sourceTree = "<group>"; };
@@ -173,7 +178,6 @@
 		016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoMainView.swift; sourceTree = "<group>"; };
 		01910C942ADE4E4400D9CCA2 /* MyAppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppInfoView.swift; sourceTree = "<group>"; };
 		01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsListView.swift; sourceTree = "<group>"; };
-		01910C9A2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsDetailView.swift; sourceTree = "<group>"; };
 		01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStore.swift; sourceTree = "<group>"; };
 		01CE78802AD930DA00790A56 /* MyProfileEditStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditStore.swift; sourceTree = "<group>"; };
 		01CE78822AD931C200790A56 /* ProfileImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePicker.swift; sourceTree = "<group>"; };
@@ -347,7 +351,9 @@
 				0CF5467B2AD626BA0075C3FD /* UseCameraView.swift */,
 				01CE78842AD9326000790A56 /* EntryTiketView.swift */,
 				01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */,
-				01910C9A2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift */,
+				0136D6412AE0041E0024E68C /* MyPaymentPriceView.swift */,
+				0136D6432AE01D830024E68C /* MyPaymentsDetailView.swift */,
+				0136D6452AE02BB00024E68C /* MyPaymentAddressView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -925,7 +931,7 @@
 				0157833C2AC11790001FEC98 /* AuctionDetailView.swift in Sources */,
 				A031F3AD2AD5825A00F67988 /* ImageRetriver.swift in Sources */,
 				6402F0B32AD7A64600FE9256 /* ActivityStore.swift in Sources */,
-				01910C9B2ADF5E6800D9CCA2 /* MyPaymentsDetailView.swift in Sources */,
+				6402F0B32AD7A64600FE9256 /* ActivityStore.swift in Sources */,
 				0CE4021C2ABACA3400F69B7E /* InfluencerImageCell.swift in Sources */,
 				A0C285EA2ADECB6200C997ED /* Theme.swift in Sources */,
 				843B34312AD7A9A700EAA7D3 /* ApplyProductListCellView.swift in Sources */,
@@ -972,6 +978,7 @@
 				84BF5D432ABAC84F008C0766 /* LoginSignUpView.swift in Sources */,
 				A0B5AFE32AC3FE130055E714 /* PaymentStore.swift in Sources */,
 				844BB4EB2ACD2CCC004891DD /* ApplySheetView.swift in Sources */,
+				0136D6422AE0041E0024E68C /* MyPaymentPriceView.swift in Sources */,
 				01CE78852AD9326000790A56 /* EntryTiketView.swift in Sources */,
 				01910C952ADE4E4400D9CCA2 /* MyAppInfoView.swift in Sources */,
 				64E105C82ABD575A00BFD3DF /* Productable.swift in Sources */,
@@ -981,6 +988,7 @@
 				A091E5A92ABC7415000894FC /* Color+Extension.swift in Sources */,
 				112E5D462AC561550007BBE8 /* AuctionBuyerDetailView.swift in Sources */,
 				010B8A862AD7907600973E6A /* DressedUpImageView.swift in Sources */,
+				0136D6462AE02BB00024E68C /* MyPaymentAddressView.swift in Sources */,
 				11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */,
 				EC98B6322AD7D789001B7102 /* AuctionProductListCellView.swift in Sources */,
 				843B34332AD8D7EE00EAA7D3 /* SearchMoreItemButtonView.swift in Sources */,
@@ -1000,6 +1008,7 @@
 				EC7B11692ABAC984001303D1 /* LoginSheetView.swift in Sources */,
 				A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */,
 				0C82A3382AC29A0B009F6D97 /* ApplyLogoCell.swift in Sources */,
+				0136D6442AE01D830024E68C /* MyPaymentsDetailView.swift in Sources */,
 				0CD2F6FF2ABD4D8400FCF88E /* AuctionFilterButtonView.swift in Sources */,
 				EC98B63C2AD8FDF1001B7102 /* SearchRectangleView.swift in Sources */,
 				A091E5B02ABC7917000894FC /* ApplyMainView.swift in Sources */,

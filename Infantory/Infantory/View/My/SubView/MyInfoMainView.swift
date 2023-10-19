@@ -17,7 +17,7 @@ struct MyInfoMainView: View {
     @State private var isAlertShowing: Bool = false
     
     var body: some View {
-        NavigationStack {
+        VStack {
             // 프사이미지, 닉네임, 응모권 관심상품
             VStack(spacing: 20) {
                 HStack(spacing: 16) {
