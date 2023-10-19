@@ -58,6 +58,8 @@
 		11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */; };
 		11F7EEBC2ABBE382003E3A8C /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */; };
 		6402F0B32AD7A64600FE9256 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402F0B22AD7A64500FE9256 /* ActivityStore.swift */; };
+		64646BD22AE05EC50009E8B3 /* MyActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64646BD12AE05EC50009E8B3 /* MyActivityView.swift */; };
+		64646BD42AE06E380009E8B3 /* MyActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64646BD32AE06E380009E8B3 /* MyActivityStore.swift */; };
 		648689132ACE751800423321 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648689122ACE751800423321 /* TimerView.swift */; };
 		64A043FE2ACFE49A0010D547 /* ExpandableText in Frameworks */ = {isa = PBXBuildFile; productRef = 64A043FD2ACFE49A0010D547 /* ExpandableText */; };
 		64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */; };
@@ -212,6 +214,8 @@
 		11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
 		6402F0B22AD7A64500FE9256 /* ActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
+		64646BD12AE05EC50009E8B3 /* MyActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityView.swift; sourceTree = "<group>"; };
+		64646BD32AE06E380009E8B3 /* MyActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyActivityStore.swift; sourceTree = "<group>"; };
 		648689122ACE751800423321 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		64A6826C2AC28C43007BF628 /* PaymentCardAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCardAddView.swift; sourceTree = "<group>"; };
 		64A6826E2AC2C55E007BF628 /* PaymentAddressWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAddressWebView.swift; sourceTree = "<group>"; };
@@ -486,6 +490,7 @@
 				0CF546742AD622650075C3FD /* PhotoStore.swift */,
 				EC9E6D142ADCCC4B00FD0831 /* InfluencerStore.swift */,
 				01910C9C2ADF9F7A00D9CCA2 /* MyPaymentStore.swift */,
+				64646BD32AE06E380009E8B3 /* MyActivityStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 				A091E5B32ABC7E9F000894FC /* ActivityMainView.swift */,
 				11F0E0632AD6302300B49420 /* ActivityOptionBar.swift */,
 				11F0E0612AD62F9E00B49420 /* ActivityOption.swift */,
+				64646BD12AE05EC50009E8B3 /* MyActivityView.swift */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -905,8 +911,7 @@
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
 				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
-				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
-				01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */,
+				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				0CF546732AD6209F0075C3FD /* PhotosSelector.swift in Sources */,
 				11183A6F2ACD40D30010012C /* AuctionStore.swift in Sources */,
@@ -936,11 +941,13 @@
 				648689132ACE751800423321 /* TimerView.swift in Sources */,
 				11F7EEB82ABBD515003E3A8C /* PaymentInfo.swift in Sources */,
 				A0B5AFE42AC3FE130055E714 /* PaymentCost.swift in Sources */,
+				64646BD42AE06E380009E8B3 /* MyActivityStore.swift in Sources */,
 				11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */,
 				843B34582ADC1D6700EAA7D3 /* HomeInfluencerImageView.swift in Sources */,
 				849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */,
 				EC98B6422AD931D7001B7102 /* AuctionInfluencerImageView.swift in Sources */,
 				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,
+				64646BD22AE05EC50009E8B3 /* MyActivityView.swift in Sources */,
 				0C82A32F2AC279BB009F6D97 /* ApplyProductStore.swift in Sources */,
 				11E4DA5F2ABACBBC00EC84D9 /* PaymentAddressView.swift in Sources */,
 				01CE78812AD930DA00790A56 /* MyProfileEditStore.swift in Sources */,

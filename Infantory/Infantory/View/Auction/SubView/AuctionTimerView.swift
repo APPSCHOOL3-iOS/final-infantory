@@ -16,6 +16,8 @@ struct AuctionTimerView: View {
             Text("\(Image(systemName: "timer")) \(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
                 .font(.infanFootnote)
                 .foregroundColor(.infanOrange)
+        } else if product.auctionFilter == .close {
+            
         } else {
             TimerView(remainingTime: product.endDate.timeIntervalSince(Date()))
         }
