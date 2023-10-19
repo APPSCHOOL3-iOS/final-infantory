@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 class MyActivityStore: ObservableObject {
     @Published var myBiddingPrice: Int = 0
-    @Published var winningPrice: Int = 0
+    @Published var winningPrice: Double = 0
     
     @Published var myApplyCount: Int = 0
     @Published var totalApplyCount: Int = 0
@@ -43,7 +43,7 @@ class MyActivityStore: ObservableObject {
             .observe(.value) { (snapshot) in
                 if let infos = snapshot.children.allObjects as? [DataSnapshot] {
                     if let biddingInfo = infos.last?.value as? [String: AnyObject] {
-                        self.winningPrice = biddingInfo["biddingPrice"] as? Int ?? 0
+                        self.winningPrice = biddingInfo["biddingPrice"] as? Double ?? 0.0
                     }
                 }
             }

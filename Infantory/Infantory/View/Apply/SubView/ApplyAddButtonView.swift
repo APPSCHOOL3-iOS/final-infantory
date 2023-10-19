@@ -100,7 +100,7 @@ struct ApplyAddButtonView: View {
                   primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("확인")))
         }
-        .onAppear{
+        .onAppear {
             if product.winningUserID == loginStore.currentUser.email {
                 isShowingWinning = true
             } else {
