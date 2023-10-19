@@ -100,6 +100,7 @@
 		A05A60FB2AD62C35004F24FA /* CachedImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05A60FA2AD62C35004F24FA /* CachedImageManager.swift */; };
 		A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C94F22ACF1374003243B7 /* MainColorButton.swift */; };
 		A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C94F42ACFFF06003243B7 /* AuctionItemImage.swift */; };
+		A08061C92AE018E000AD5DBE /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A08061C82AE018E000AD5DBE /* Montserrat-ExtraBold.ttf */; };
 		A080771E2AD3F04F00D9F2CE /* BiddingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A080771D2AD3F04F00D9F2CE /* BiddingInfo.swift */; };
 		A086C79F2ABD16DC00F0BF9B /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086C79E2ABD16DC00F0BF9B /* CGFloat+Extension.swift */; };
 		A086C7A12ABD205F00F0BF9B /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A086C7A02ABD205E00F0BF9B /* NavigationBar.swift */; };
@@ -257,6 +258,7 @@
 		A05A60FA2AD62C35004F24FA /* CachedImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageManager.swift; sourceTree = "<group>"; };
 		A05C94F22ACF1374003243B7 /* MainColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainColorButton.swift; sourceTree = "<group>"; };
 		A05C94F42ACFFF06003243B7 /* AuctionItemImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionItemImage.swift; sourceTree = "<group>"; };
+		A08061C82AE018E000AD5DBE /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; };
 		A080771D2AD3F04F00D9F2CE /* BiddingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiddingInfo.swift; sourceTree = "<group>"; };
 		A086C79E2ABD16DC00F0BF9B /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
 		A086C7A02ABD205E00F0BF9B /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -694,6 +696,7 @@
 		A0C285CA2ADE0E7600C997ED /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				A08061C82AE018E000AD5DBE /* Montserrat-ExtraBold.ttf */,
 				A0C285DB2ADE0ED000C997ED /* SUIT-Bold.otf */,
 				A0C285DA2ADE0ED000C997ED /* SUIT-Medium.otf */,
 				A0C285D92ADE0ED000C997ED /* SUIT-Regular.otf */,
@@ -833,6 +836,7 @@
 				A0A042872AD8376700598274 /* GoogleService-Info.plist in Resources */,
 				A0C285DD2ADE0ED000C997ED /* SUIT-Regular.otf in Resources */,
 				A0C285E02ADE0ED000C997ED /* SUIT-SemiBold.otf in Resources */,
+				A08061C92AE018E000AD5DBE /* Montserrat-ExtraBold.ttf in Resources */,
 				A0C285DE2ADE0ED000C997ED /* SUIT-Medium.otf in Resources */,
 				A091E56B2AB9FB68000894FC /* Preview Assets.xcassets in Resources */,
 				A0C285DF2ADE0ED000C997ED /* SUIT-Bold.otf in Resources */,

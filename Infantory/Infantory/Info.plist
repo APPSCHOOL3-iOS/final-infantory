@@ -7,7 +7,7 @@
 		<key>UIImageName</key>
 		<string>launchScreenLogo</string>
 		<key>UIColorName</key>
-		<string>Main</string>
+		<string>Splash</string>
 	</dict>
 	<key>CFBundleURLTypes</key>
 	<array>
@@ -35,21 +35,11 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Pretendard-Bold.otf</string>
-		<string>Pretendard-Medium.otf</string>
-		<string>Pretendard-Regular.otf</string>
-		<string>Pretendard-SemiBold.otf</string>
-		<string>GmarketSansTTFBold.ttf</string>
-		<string>GmarketSansTTFLight.ttf</string>
-		<string>GmarketSansTTFMedium.ttf</string>
 		<string>SUIT-Bold.otf</string>
 		<string>SUIT-Medium.otf</string>
 		<string>SUIT-Regular.otf</string>
 		<string>SUIT-SemiBold.otf</string>
-		<string>NotoSansKR-Bold</string>
-		<string>NotoSansKR-Light</string>
-		<string>NotoSansKR-Medium</string>
-		<string>NotoSansKR-Regluar</string>
+		<string>Montserrat-ExtraBold</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
