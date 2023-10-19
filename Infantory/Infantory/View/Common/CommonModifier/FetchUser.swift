@@ -13,12 +13,12 @@ struct FetchUser: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .onAppear {
+            .task {
                 Task {
                     if !loginStore.userUid.isEmpty {
                         try await loginStore.fetchUser(userUID: loginStore.userUid)
                     }
                 }
-        }
+            }
     }
 }

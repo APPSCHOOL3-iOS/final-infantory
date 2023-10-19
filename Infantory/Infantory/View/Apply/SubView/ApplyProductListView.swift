@@ -42,7 +42,7 @@ struct ApplyProductListView: View {
                 }
             }
         }
-        .onAppear {
+        .task {
             Task {
                 do {
                     try await applyViewModel.fetchApplyProducts()

@@ -65,7 +65,7 @@ struct HomeMainView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
+            .task {
                 Task {
                     try await searchStore.fetchInfluencer(keyword: "")
                     try await auctionViewModel.fetchAuctionProducts()

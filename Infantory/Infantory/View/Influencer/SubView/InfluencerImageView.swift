@@ -66,7 +66,8 @@ struct InfluencerImageView: View {
             .foregroundColor(.infanBlack)
             
             VStack {
-                Text("\(influencerStore.followCount)").font(.infanHeadlineBold)
+                Text("\(influencerStore.followCount)")
+                    .font(.infanHeadlineBold)
                 Text("팔로워")
                     .font(.infanFootnote)
             }
