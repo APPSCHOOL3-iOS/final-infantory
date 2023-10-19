@@ -12,7 +12,7 @@ struct InfluencerImageView: View {
     @EnvironmentObject var influencerStore: InfluencerStore
 
     var body: some View {
-        HStack(spacing: 40) {
+        HStack(spacing: 50) {
             VStack(alignment: .leading) {
                 if influencerStore.influencer.profileImageURLString == nil {
                     Image("smallAppIcon")
@@ -50,21 +50,25 @@ struct InfluencerImageView: View {
                     .foregroundColor(.infanBlack)
             }
             VStack {
-                Text("0")
+                Text("\(influencerStore.influencerAuctionProduct.count)")
                     .font(.infanHeadlineBold)
                 Text("경매품")
+                    .font(.infanFootnote)
             }
             .foregroundColor(.infanBlack)
             
             VStack {
-                Text("0").font(.infanHeadlineBold)
+                Text("\(influencerStore.influencerApplyProduct.count)")
+                    .font(.infanHeadlineBold)
                 Text("응모품")
+                    .font(.infanFootnote)
             }
             .foregroundColor(.infanBlack)
             
             VStack {
-                Text("\(influencerStore.influencer.follower?.count ?? 0)").font(.infanHeadlineBold)
+                Text("\(influencerStore.followCount)").font(.infanHeadlineBold)
                 Text("팔로워")
+                    .font(.infanFootnote)
             }
             .foregroundColor(.infanBlack)
         }
