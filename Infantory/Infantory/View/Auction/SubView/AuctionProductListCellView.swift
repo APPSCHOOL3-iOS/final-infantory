@@ -93,12 +93,14 @@ struct AuctionProductListCellView: View {
                             
                         }
                     }
+                    
                     VStack(alignment: .leading, spacing: 8) {
                         
                         Text("\(product.productName)")
                             .font(.infanBody)
                             .foregroundColor(.infanDarkGray)
                             .multilineTextAlignment(.leading)
+                            .padding(.vertical, 10)
                         
                         Text("\(product.winningPrice ?? 0)원")
                             .font(.infanHeadlineBold)
@@ -112,10 +114,10 @@ struct AuctionProductListCellView: View {
                             
                             Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                 .font(.infanFootnote)
-                                .foregroundColor(.infanGray)
+                                .foregroundColor(.gray)
+                                .bold()
                         }
                     }
-                    Spacer()
                 }
                 Divider()
             }

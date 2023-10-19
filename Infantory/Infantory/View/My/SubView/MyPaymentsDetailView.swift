@@ -37,7 +37,7 @@ struct MyPaymentsDetailView: View {
                                     .resizable()
                                     .frame(width: 100, height: 100)
                                     .cornerRadius(5)
-                            case .failure(let error):
+                            case .failure:
                                 Image("smallAppIcon")
                                     .resizable()
                                     .frame(width: 80, height: 80)

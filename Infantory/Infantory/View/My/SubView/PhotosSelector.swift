@@ -11,7 +11,7 @@ import Photos
 
 struct PhotosSelector: View {
     @State private var cameraSheetShowing = false
-    
+    @EnvironmentObject var loginStore: LoginStore
     @State var showImagePicker = false
     @Binding var selectedUIImage: UIImage?
     @Binding var selectedUIImageString: String?
@@ -27,18 +27,25 @@ struct PhotosSelector: View {
     
     var body: some View {
         VStack {
-            if let image = image {
-                image
-                    .resizable()
-                    .clipShape(Circle())
-                    .frame(width: 80, height: 80)
-            } else {
-                Image(systemName: "person.circle.fill")
-                    .resizable()
-                    .foregroundColor(.gray)
-                    .frame(width: 80, height: 80)
+            CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: 80, height: 80)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 80, height: 80)
+                case .failure:
+                    Image("smallAppIcon")
+                        .resizable()
+                        .clipShape(Circle())
+                        .frame(width: 80, height: 80)
+                @unknown default:
+                    EmptyView()
+                }
             }
-            
             VStack {
                 HStack(alignment: .top) {
                     ZStack {

@@ -17,11 +17,6 @@ struct MyPaymentsListView: View {
     var body: some View {
         ScrollView {
             ForEach(myPaymentStore.myPayments.indices, id: \.self) { index in
-                Button {
-                    selectedIndex = index
-                    print("\(selectedIndex)")
-                    showingModal.toggle()
-                } label: {
                     switch myPaymentStore.myPayments[index].type {
                     case .auction:
                         VStack {
@@ -36,7 +31,7 @@ struct MyPaymentsListView: View {
                                             .resizable()
                                             .frame(width: 80, height: 80)
                                             .cornerRadius(5)
-                                    case .failure(let error):
+                                    case .failure:
                                         Image("smallAppIcon")
                                             .resizable()
                                             .frame(width: 80, height: 80)
@@ -57,13 +52,18 @@ struct MyPaymentsListView: View {
                                     Text("\((myPaymentStore.myPayments[index].auctionProduct?.winningPrice ?? 0) + (myPaymentStore.myPayments[index].deliveryCost))원")
                                         .font(.infanHeadline)
                                         .foregroundColor(.infanBlack)
-                                    Text("주문상세")
-                                        .font(.infanFootnote)
-                                        .background(
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(Color.gray, lineWidth: 1)
-                                                .frame(width: 70, height: 25)
-                                        )
+                                    Button {
+                                        selectedIndex = index
+                                        showingModal.toggle()
+                                    } label: {
+                                        Text("주문상세")
+                                            .font(.infanFootnote)
+                                            .background(
+                                                RoundedRectangle(cornerRadius: 10)
+                                                    .stroke(Color.gray, lineWidth: 1)
+                                                    .frame(width: 70, height: 25)
+                                            )
+                                    }
                                 }
                                 .offset(y: 5)
                             }
@@ -85,7 +85,7 @@ struct MyPaymentsListView: View {
                                             .clipShape(Circle())
                                             .frame(width: 80, height: 80)
                                         
-                                    case .failure(let error):
+                                    case .failure:
                                         Image("smallAppIcon")
                                             .resizable()
                                             .clipShape(Circle())
@@ -105,11 +105,10 @@ struct MyPaymentsListView: View {
                             Divider()
                         }
                     }
-                }
-                .sheet(isPresented: $showingModal, content: {
-                    MyPaymentsDetailView(myPaymentStore: myPaymentStore, selectedIndex: $selectedIndex)
-                })
             }
+            .sheet(isPresented: $showingModal, content: {
+                MyPaymentsDetailView(myPaymentStore: myPaymentStore, selectedIndex: $selectedIndex)
+            })
         }
         .onAppear {
             

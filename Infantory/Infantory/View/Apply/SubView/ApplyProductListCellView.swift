@@ -106,15 +106,13 @@ struct ApplyProductListCellView: View {
                             .font(.infanBody)
                             .foregroundColor(.infanDarkGray)
                             .multilineTextAlignment(.leading)
+                            .padding(.vertical, 10)
                         
-                        HStack {
-                            
-                            if product.applyFilter != .planned {
-                                Text("전체 응모: \(product.applyUserIDs.count) 회")
-                                    .font(.infanHeadlineBold)
-                                    .foregroundColor(.infanDarkGray)
-                                    .multilineTextAlignment(.leading)
-                            }
+                        if product.applyFilter != .planned {
+                            Text("전체 응모: \(product.applyUserIDs.count) 회")
+                                .font(.infanHeadlineBold)
+                                .foregroundColor(.infanDarkGray)
+                                .multilineTextAlignment(.leading)
                         }
                         
                         Spacer()
@@ -125,10 +123,10 @@ struct ApplyProductListCellView: View {
                             
                             Text("마감일  \(InfanDateFormatter.shared.dateTimeString(from: product.endDate))")
                                 .font(.infanFootnote)
-                                .foregroundColor(.infanGray)
+                                .foregroundColor(.gray)
+                                .bold()
                         }
                     }
-                    Spacer()
                 }
                 Divider()
             }
