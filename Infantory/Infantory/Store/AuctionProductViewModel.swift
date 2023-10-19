@@ -39,20 +39,6 @@ final class AuctionProductViewModel: ObservableObject {
                 self.auctionProduct[index].influencerProfile = influencerProfile
                 self.updateFilter(filter: self.selectedFilter)
             }
-            //            documentReference.getDocument { (document, _ ) in
-            //                if let document = document, document.exists {
-            //                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
-            //                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-            //                        self.auctionProduct[index].influencerProfile = influencerProfile
-            //                        self.updateFilter(filter: self.selectedFilter)
-            //                    }
-            //                } else {
-            //#if DEBUG
-            //                    print("인플루언서 프로필이 없습니다")
-            //#endif
-            //                }
-            //
-            //            }
         }
     }
     

@@ -59,8 +59,8 @@ struct HomeMainView: View {
                 }
                 
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Text("Infantory")
-                        .font(.infanTitleBold)
+                    Text("INFANTORY")
+                        .font(.infanLogoTitle)
                         .foregroundColor(.infanBlack)
                 }
             }

@@ -56,7 +56,7 @@ struct AuctionProductListCellView: View {
                                             .clipped()
                                             .cornerRadius(10)
                                         
-                                        Text("응모 예정")
+                                        Text("경매 예정")
                                             .padding(10)
                                             .bold()
                                             .foregroundColor(.white)

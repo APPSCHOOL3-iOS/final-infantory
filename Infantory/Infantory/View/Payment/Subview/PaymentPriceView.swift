@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PaymentPriceView: View {
     let price: Int
-    
     let viewTitle: String = "최종 주문정보"
     
     var body: some View {
@@ -81,7 +80,6 @@ struct PriceDetailRow: View {
                         .foregroundColor(.gray)
                 }
             }
-            
             Spacer()
             
             Text("\(item.receipt(productPrice: price))원")

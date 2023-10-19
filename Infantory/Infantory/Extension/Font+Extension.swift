@@ -38,3 +38,7 @@ extension Font {
     /// 11, regular
     static let infanCaption = Font.custom("SUIT-Regular", size: 11)
 }
+// 로고
+extension Font {
+    static let infanLogoTitle = Font.custom("Mentserrat-ExtraBold", size: 18)
+}

@@ -66,7 +66,6 @@ struct HomeApplyView: View {
                                     .foregroundColor(Color.infanDarkGray)
                             }
                             .font(.infanFootnote)
-                            .padding()
                         }
                     }
                 }
