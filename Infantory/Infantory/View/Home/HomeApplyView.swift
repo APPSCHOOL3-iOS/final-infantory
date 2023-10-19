@@ -55,9 +55,7 @@ struct HomeApplyView: View {
                                     .frame(width: (.screenWidth - 100) / 2,
                                            height: (.screenWidth - 100) / 2)
                                     .clipped()
-                                
                             }
-                            
                             VStack(alignment: .leading) {
                                 Text(product.influencerNickname)
                                     .foregroundColor(.infanBlack)
