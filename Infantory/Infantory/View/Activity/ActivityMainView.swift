@@ -145,7 +145,7 @@ struct ActivityRow: View {
                                 .cornerRadius(7)
                             if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
                                 if myApplyInfos?.product.isPaid == true {
-                                    Text("결재완료")
+                                    Text("결제완료")
                                         .padding(10)
                                         .bold()
                                         .foregroundColor(.white)
@@ -181,7 +181,7 @@ struct ActivityRow: View {
                             
                             if isWinner() {
                                 if myAuctionInfos?.product.isPaid == true {
-                                    Text("결재완료")
+                                    Text("결제완료")
                                         .padding(10)
                                         .bold()
                                         .foregroundColor(.white)

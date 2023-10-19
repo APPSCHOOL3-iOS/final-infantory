@@ -27,7 +27,6 @@ final class AuctionProductViewModel: ObservableObject {
         self.auctionProduct = products
         try await fetchData(products: products)
         try await fetchInfluencerProfile(products: products)
-        print("경매 2번이어야함")
     }
     
     @MainActor
@@ -65,7 +64,6 @@ final class AuctionProductViewModel: ObservableObject {
                 $0.auctionFilter == .inProgress
             }
             sortInProgressProduct(filter: progressSelectedFilter)
-            print("필터되는거임!!!!!!!!!")
         case .planned:
             selectedFilter = .planned
             filteredProduct = auctionProduct.filter {
@@ -142,7 +140,6 @@ final class AuctionProductViewModel: ObservableObject {
                     }
                     if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
                         self.auctionProduct[index].biddingInfo = parsedBiddingInfos
-                        print("fetchData 되는거임!!!!!!!")
                     }
                 })
         }

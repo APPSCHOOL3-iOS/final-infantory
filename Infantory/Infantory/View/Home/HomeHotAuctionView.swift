@@ -12,7 +12,6 @@ import SwiftUI
 
 // 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ 
 struct HomeHotAuctionView: View {
-    
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     private var sortFilteredProduct: [AuctionProduct] {
         return auctionViewModel.filteredProduct.sorted {
@@ -85,15 +84,10 @@ struct HomeHotAuctionView: View {
                                 Text(product.influencerNickname)
                                     .font(.infanFootnoteBold)
                                     .foregroundColor(.infanBlack)
-                                HStack {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.blue)
-                                    Text("\(product.winningPrice ?? 0) 원")
-                                        .foregroundColor(Color.infanDarkGray)
-                                }
-                                .font(.infanFootnote)
                             }
                             .padding()
+                            
+                            WinningPriceView(productID: product.id ?? "")
                         }
                     }
                 }
@@ -101,11 +95,31 @@ struct HomeHotAuctionView: View {
             }
             .scrollIndicators(.hidden)
         }
+
     }
 }
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
         HomeHotAuctionView(auctionViewModel: AuctionProductViewModel())
+    }
+}
+
+struct WinningPriceView: View {
+    let productID: String
+    
+    @StateObject var myActivityStore = MyActivityStore()
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "arrowtriangle.up.fill")
+                .foregroundColor(.blue)
+            Text("\(myActivityStore.winningPrice) 원")
+                .foregroundColor(Color.infanDarkGray)
+        }
+        .font(.infanFootnote)
+        .onAppear {
+            myActivityStore.fetchWinningPrice(productID: productID)
+        }
     }
 }

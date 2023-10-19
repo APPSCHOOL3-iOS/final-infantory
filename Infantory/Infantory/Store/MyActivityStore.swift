@@ -25,7 +25,6 @@ class MyActivityStore: ObservableObject {
     }
     
     func fetchMyLastBiddingPrice(userID: String, productID: String) {
-        print(productID)
         dbRef.child("biddingInfos/\(productID)")
             .queryOrdered(byChild: "userID")
             .queryEqual(toValue: userID)
@@ -39,13 +38,15 @@ class MyActivityStore: ObservableObject {
     }
     
     func fetchWinningPrice(productID: String) {
-        firestore.collection("AuctionProducts").document(productID).getDocument { document, _ in
-            guard let product = try? document?.data(as: AuctionProduct.self) else {
-                print("DEBUG: Failed to decode User not exist")
-                return
+        dbRef.child("biddingInfos/\(productID)")
+            .queryOrdered(byChild: "timeStamp")
+            .observe(.value) { (snapshot) in
+                if let infos = snapshot.children.allObjects as? [DataSnapshot] {
+                    if let biddingInfo = infos.last?.value as? [String: AnyObject] {
+                        self.winningPrice = biddingInfo["biddingPrice"] as? Int ?? 0
+                    }
+                }
             }
-            self.winningPrice = product.winningPrice ?? 0
-        }
     }
     
     func fetchApplyCount(userEmail: String, productID: String) {
