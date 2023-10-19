@@ -40,5 +40,5 @@ extension Font {
 }
 // 로고
 extension Font {
-    static let infanLogoTitle = Font.custom("Mentserrat-ExtraBold", size: 18)
+    static let infanLogoTitle = Font.custom("Montserrat-ExtraBold", size: 18)
 }

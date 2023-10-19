@@ -83,17 +83,21 @@ struct HomeHotAuctionView: View {
                             
                             VStack(alignment: .leading) {
                                 Text(product.influencerNickname)
-                                    .font(.infanFootnoteBold)
+                                    .bold()
                                     .foregroundColor(.infanBlack)
-                                HStack {
+                                Text(product.productName)
+                                    .foregroundColor(.infanBlack)
+                                    .lineLimit(1)
+                                HStack(spacing: 2) {
                                     Image(systemName: "arrowtriangle.up.fill")
                                         .foregroundColor(.infanRed)
                                     Text("\(product.winningPrice ?? 0) 원")
-                                        .foregroundColor(Color.infanDarkGray)
+                                        .foregroundColor(.infanRed)
                                 }
-                                .font(.infanFootnote)
                             }
+                            .font(.infanFootnote)
                         }
+                        .frame(width: (.screenWidth - 100) / 2)
                     }
                 }
                 .padding(.leading, 20)

@@ -62,11 +62,14 @@ struct HomeApplyView: View {
                                 Text(product.influencerNickname)
                                     .foregroundColor(.infanBlack)
                                     .bold()
+                                Text(product.productName)
+                                    .lineLimit(1)
                                 Text("전체 응모: \(product.applyUserIDs.count) 회")
                                     .foregroundColor(Color.infanDarkGray)
                             }
                             .font(.infanFootnote)
                         }
+                        .frame(width: (.screenWidth - 100) / 2)
                     }
                 }
                 .padding(.leading, 20)
