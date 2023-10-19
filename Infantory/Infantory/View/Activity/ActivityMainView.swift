@@ -10,7 +10,6 @@ struct ActivityMainView: View {
     @EnvironmentObject var loginStore: LoginStore
     @State var myAuctionInfos: [AuctionActivityData] = []
     @State var myApplyInfos: [ApplyActivityData] = []
-    
     @State private var selectedFilter: ActivityOption = .auction
     
     let applyStore: ApplyProductStore = ApplyProductStore()
@@ -28,8 +27,7 @@ struct ActivityMainView: View {
                                     AuctionDetailView(auctionStore: AuctionStore(product: info.product))
                                 } label: {
                                     ActivityRow(product: info.product,
-                                                myActivity: info.myPrice,
-                                                selectedFilter: $selectedFilter, 
+                                                selectedFilter: $selectedFilter,
                                                 myAuctionInfos: info)
                                     .padding()
                                     
@@ -45,7 +43,6 @@ struct ActivityMainView: View {
                                     ApplyDetailView(applyViewModel: applyStore, product: info.product)
                                 } label: {
                                     ActivityRow(product: info.product,
-                                                myActivity: info.myApplyCount,
                                                 selectedFilter: $selectedFilter, myApplyInfos: info)
                                     .padding()
                                 }
@@ -75,7 +72,7 @@ struct ActivityMainView: View {
         }
         .onAppear {
             Task {
-                let acticityInfo = ActivityInfo(loginStore: loginStore)
+                let acticityInfo = ActivityStore(loginStore: loginStore)
                 
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
@@ -88,11 +85,10 @@ struct ActivityMainView: View {
         .refreshable {
             
             Task {
-                let acticityInfo = ActivityInfo(loginStore: loginStore)
+                let acticityInfo = ActivityStore(loginStore: loginStore)
                 
                 myAuctionInfos = await acticityInfo.getMyAuctionInfos()
                 myApplyInfos = await acticityInfo.getMyApplyInfos()
-                print(myAuctionInfos)
                 myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
                     myApplyInfos.first { $0.product.id  == id }
                 }
@@ -112,16 +108,15 @@ struct ActivityMainView_Previews: PreviewProvider {
 
 struct ActivityRow: View {
     let product: Productable
-    let myActivity: Int
     
     @Binding var selectedFilter: ActivityOption
     
     var myAuctionInfos: AuctionActivityData?
     var myApplyInfos: ApplyActivityData?
-    
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
-    
+    @StateObject var myActivityStore: MyActivityStore = MyActivityStore()
+
     var body: some View {
         HStack {
             CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -139,24 +134,6 @@ struct ActivityRow: View {
                             .frame(width: 90, height: 90)
                             .clipShape(Rectangle())
                             .cornerRadius(7)
-                        
-                        // 응모 당첨자 구분 필요
-                        //                            if myApplyInfos?.product. == loginStore.currentUser.id {
-                        //                                Text("응모 당첨")
-                        //                                    .padding(10)
-                        //                                    .bold()
-                        //                                    .foregroundColor(.white)
-                        //                                    .background(Color.infanMain)
-                        //                                    .cornerRadius(20)
-                        //                            } else {
-                        //                                Text("경매 종료")
-                        //                                    .padding(10)
-                        //                                    .bold()
-                        //                                    .foregroundColor(.white)
-                        //                                    .background(Color.infanDarkGray)
-                        //                                    .cornerRadius(20)
-                        //                            }
-                        
                     } else if myApplyInfos?.product.applyFilter == .close {
                         ZStack {
                             image
@@ -166,9 +143,9 @@ struct ActivityRow: View {
                                 .blur(radius: 5)
                                 .clipShape(Rectangle())
                                 .cornerRadius(7)
-                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.id {
+                            if myApplyInfos?.product.winningUserID == loginStore.currentUser.email {
                                 if myApplyInfos?.product.isPaid == true {
-                                    Text("결재완료")
+                                    Text("결제완료")
                                         .padding(10)
                                         .bold()
                                         .foregroundColor(.white)
@@ -204,7 +181,7 @@ struct ActivityRow: View {
                             
                             if isWinner() {
                                 if myAuctionInfos?.product.isPaid == true {
-                                    Text("결재완료")
+                                    Text("결제완료")
                                         .padding(10)
                                         .bold()
                                         .foregroundColor(.white)
@@ -267,11 +244,13 @@ struct ActivityRow: View {
                     Text(selectedFilter.title == "경매" ? "최고 입찰가 " : "전체 응모수 ")
                     
                     if let auctionProduct = product as? AuctionProduct {
-                        Text("\(auctionProduct.winningPrice ?? 0)원")
+                        TextAnimateView(value: myActivityStore.winningPrice)
                             .font(.infanFootnoteBold)
+                            .monospacedDigit()
+                            .animation(Animation.easeInOut(duration: 1))
                             .padding(.bottom, 5)
                     } else if let applyProduct = product as? ApplyProduct {
-                        Text("\(applyProduct.applyUserIDs.count) 개")
+                        Text("\(myActivityStore.totalApplyCount) 개")
                             .font(.infanFootnoteBold)
                             .padding(.bottom, 5)
                     }
@@ -279,17 +258,30 @@ struct ActivityRow: View {
                     Text(selectedFilter.title == "경매" ? "나의 입찰가 " : "사용 응모권 ")
                         .foregroundColor(.infanMain)
                     
-                    HStack {
-                        Text( "\(myActivity)\(selectedFilter.title == "경매" ? "원" : "회")")
-                        
-                        Spacer()
+                    if let auctionProduct = product as? AuctionProduct {
+                        Text("\(myActivityStore.myBiddingPrice )원")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
+                            .foregroundColor(.infanMain)
+                    } else if let applyProduct = product as? ApplyProduct {
+                        Text("\(myActivityStore.myApplyCount) 개")
+                            .font(.infanFootnoteBold)
+                            .padding(.bottom, 5)
+                            .foregroundColor(.infanMain)
                     }
-                    .foregroundColor(.infanMain)
                 }
             }
             .font(.infanFootnote)
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
+        }
+        .onAppear {
+            let userID = loginStore.currentUser.id ?? ""
+            myActivityStore.fetchMyLastBiddingPrice(userID: userID,
+                                                    productID: product.id ?? "")
+            myActivityStore.fetchWinningPrice(productID: product.id ?? "")
+            myActivityStore.fetchApplyCount(userEmail: loginStore.currentUser.email,
+                                            productID: product.id ?? "")
         }
     }
     
