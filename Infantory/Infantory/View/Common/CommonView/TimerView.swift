@@ -14,10 +14,9 @@ struct TimerView: View {
     var body: some View {
         VStack(alignment: .leading) {
             if remainingTime <= 0 {
-                Text("\(Image(systemName: "timer")) 종료됨")
+                Text("종료됨")
                     .font(.infanFootnote)
-                    
-                    .frame(width: 110, alignment: .leading)
+                    .padding()
                     .foregroundColor(.gray)
                     
             } else {
@@ -26,7 +25,6 @@ struct TimerView: View {
                     Text("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))")
                 }
                 .frame(width: 110, alignment: .leading)
-                
                 .foregroundColor(remainingTime < 3600 ? .infanRed : .infanMain)
                 .font(.infanFootnote)
             }

@@ -120,11 +120,7 @@ final class ApplyProductStore: ObservableObject {
                 }
                 
                 let applyActivityInfo = ApplyActivityInfo(productId: product.id ?? "",
-                                                          ticketCount: product.applyUserIDs.filter {
-                    print("\($0)----- \(userID)   ")
-                    print($0 == userID)
-                    return $0 == userID
-                }.count,
+                                                          ticketCount: product.applyUserIDs.filter { $0 == userID }.count,
                                                           timestamp: Date().timeIntervalSince1970)
                 self.updateAuctionActivityInfo(applyActivityInfo: applyActivityInfo)
             } else {

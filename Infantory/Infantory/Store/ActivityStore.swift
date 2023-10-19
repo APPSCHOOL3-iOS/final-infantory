@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-struct ActivityInfo {
+struct ActivityStore {
     var loginStore: LoginStore
     
     let database = Firestore.firestore()
