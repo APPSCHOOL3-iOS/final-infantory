@@ -50,14 +50,15 @@ struct InfluencerImageView: View {
                     .foregroundColor(.infanBlack)
             }
             VStack {
-                Text("0")
+                Text("\(influencerStore.influencerAuctionProduct.count)")
                     .font(.infanHeadlineBold)
                 Text("경매품")
             }
             .foregroundColor(.infanBlack)
             
             VStack {
-                Text("0").font(.infanHeadlineBold)
+                Text("\(influencerStore.influencerApplyProduct.count)")
+                    .font(.infanHeadlineBold)
                 Text("응모품")
             }
             .foregroundColor(.infanBlack)

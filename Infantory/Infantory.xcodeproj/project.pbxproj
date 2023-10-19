@@ -82,6 +82,8 @@
 		844BB4F32ACF9D7F004891DD /* ApplyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F22ACF9D7F004891DD /* ApplyFilter.swift */; };
 		844BB4F52ACF9E4F004891DD /* ApplyFilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F42ACF9E4F004891DD /* ApplyFilterButtonView.swift */; };
 		844BB4F92AD5AB00004891DD /* ApplyAddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */; };
+		84580BE92AE007DF003A8A8A /* InfluencerApplyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84580BE82AE007DF003A8A8A /* InfluencerApplyListView.swift */; };
+		84580BEB2AE02056003A8A8A /* InfluencerAuctionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84580BEA2AE02056003A8A8A /* InfluencerAuctionListView.swift */; };
 		8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */; };
 		849B64B02ABD595B00C4AC8D /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 849B64AF2ABD595B00C4AC8D /* KakaoSDK */; };
 		849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B64C22ABD600D00C4AC8D /* LoginStore.swift */; };
@@ -237,6 +239,8 @@
 		844BB4F42ACF9E4F004891DD /* ApplyFilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyFilterButtonView.swift; sourceTree = "<group>"; };
 		844BB4F62ACFD7BF004891DD /* FetchUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUser.swift; sourceTree = "<group>"; };
 		844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyAddButtonView.swift; sourceTree = "<group>"; };
+		84580BE82AE007DF003A8A8A /* InfluencerApplyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerApplyListView.swift; sourceTree = "<group>"; };
+		84580BEA2AE02056003A8A8A /* InfluencerAuctionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerAuctionListView.swift; sourceTree = "<group>"; };
 		8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessage.swift; sourceTree = "<group>"; };
 		849B64AD2ABD526B00C4AC8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		849B64C22ABD600D00C4AC8D /* LoginStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStore.swift; sourceTree = "<group>"; };
@@ -737,6 +741,8 @@
 			children = (
 				EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */,
 				ECB5A9152ADFC2BC00E63E87 /* InfluencerTabBarView.swift */,
+				84580BE82AE007DF003A8A8A /* InfluencerApplyListView.swift */,
+				84580BEA2AE02056003A8A8A /* InfluencerAuctionListView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -905,8 +911,7 @@
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
 				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
-				112E5D442AC555D40007BBE8 /* AuctionBuyerView.swift in Sources */,
-				01910C972ADE720600D9CCA2 /* PaymentDetailsView.swift in Sources */,
+				01910C972ADE720600D9CCA2 /* MyPaymentsListView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				0CF546732AD6209F0075C3FD /* PhotosSelector.swift in Sources */,
 				11183A6F2ACD40D30010012C /* AuctionStore.swift in Sources */,
@@ -929,6 +934,7 @@
 				A091E5A72ABC740D000894FC /* Font+Extension.swift in Sources */,
 				ECB5A9142ADFA54100E63E87 /* SearchTabBarView.swift in Sources */,
 				A08EECBA2ACEF842009DFCDE /* RoundedTextEditor.swift in Sources */,
+				84580BE92AE007DF003A8A8A /* InfluencerApplyListView.swift in Sources */,
 				64A6826D2AC28C43007BF628 /* PaymentCardAddView.swift in Sources */,
 				A091E5912ABAA61C000894FC /* LoginMainView.swift in Sources */,
 				11F0E0642AD6302300B49420 /* ActivityOptionBar.swift in Sources */,
@@ -938,6 +944,7 @@
 				A0B5AFE42AC3FE130055E714 /* PaymentCost.swift in Sources */,
 				11F7EEBA2ABBD812003E3A8C /* AuctionProduct.swift in Sources */,
 				843B34582ADC1D6700EAA7D3 /* HomeInfluencerImageView.swift in Sources */,
+				84580BEB2AE02056003A8A8A /* InfluencerAuctionListView.swift in Sources */,
 				849B64C32ABD600D00C4AC8D /* LoginStore.swift in Sources */,
 				EC98B6422AD931D7001B7102 /* AuctionInfluencerImageView.swift in Sources */,
 				9E5A8FBB2ABAD8B400654850 /* PayButtonView.swift in Sources */,

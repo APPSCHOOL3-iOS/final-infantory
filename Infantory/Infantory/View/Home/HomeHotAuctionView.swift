@@ -87,13 +87,12 @@ struct HomeHotAuctionView: View {
                                     .foregroundColor(.infanBlack)
                                 HStack {
                                     Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.blue)
+                                        .foregroundColor(.infanRed)
                                     Text("\(product.winningPrice ?? 0) 원")
                                         .foregroundColor(Color.infanDarkGray)
                                 }
                                 .font(.infanFootnote)
                             }
-                            .padding()
                         }
                     }
                 }
