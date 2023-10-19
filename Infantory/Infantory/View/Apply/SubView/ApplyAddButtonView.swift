@@ -14,7 +14,7 @@ struct ApplyAddButtonView: View {
     @Binding var isShowingLoginSheet: Bool
     @Binding var isShowingPaymentSheet: Bool
     var product: ApplyProduct
-    
+    @State private var isShowingWinning: Bool = false
     var body: some View {
         VStack {
             if product.applyFilter == .inProgress {
@@ -46,7 +46,7 @@ struct ApplyAddButtonView: View {
                             .frame(width: CGFloat.screenWidth - 40, height: 54)
                     )
             } else if product.applyCloseFilter == .afterRaffle {
-                if product.winningUserID == loginStore.currentUser.id {
+                if product.winningUserID == loginStore.currentUser.email {
                     Button {
                         isShowingPaymentSheet = true
                     } label: {
@@ -94,6 +94,19 @@ struct ApplyAddButtonView: View {
             }
         }
         .offset(y: -20)
+        .alert(isPresented: $isShowingWinning) {
+            Alert(title: Text("🎉응모 당첨!!🎉"),
+                  message: Text("응모에 당첨되셨습니다. 3일 이내 미결제시 당첨이 취소됩니다."),
+                  primaryButton: .default(Text("취소")),
+                  secondaryButton: .default(Text("확인")))
+        }
+        .onAppear{
+            if product.winningUserID == loginStore.currentUser.email {
+                isShowingWinning = true
+            } else {
+                isShowingWinning = false
+            }
+        }
     }
 }
 
