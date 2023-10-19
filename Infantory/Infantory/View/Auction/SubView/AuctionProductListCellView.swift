@@ -101,6 +101,7 @@ struct AuctionProductListCellView: View {
                             .foregroundColor(.infanDarkGray)
                             .multilineTextAlignment(.leading)
                             .padding(.vertical, 10)
+                        
                         Text("\(product.winningPrice ?? 0)원")
                             .font(.infanHeadlineBold)
                             .foregroundColor(.infanDarkGray)

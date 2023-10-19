@@ -17,6 +17,8 @@ struct ApplyTimerView: View {
             Text("\(Image(systemName: "timer")) \(InfanDateFormatter.shared.dateTimeString(from: product.startDate)) OPEN")
                 .font(.infanFootnote)
                 .foregroundColor(.infanOrange)
+        } else if product.applyFilter == .close {
+            
         } else {
             TimerView(remainingTime: applyViewModel.remainingTime(product: product))
         }
