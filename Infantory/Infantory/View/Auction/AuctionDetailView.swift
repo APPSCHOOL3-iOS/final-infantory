@@ -88,14 +88,24 @@ struct Footer: View {
         VStack {
             ToastMessage(content: Text("입찰 성공!!!"), isPresented: $showAlert)
             Button {
-                if loginStore.userUid.isEmpty {
+                if loginStore.currentUser.id?.isEmpty ?? true {
                     isShowingLoginSheet = true
-                }
-                if loginStore.warning == false {
-                    isShowingAuctionBidSheet = true
                 } else {
-                    isShowingAuctionNoticeSheet = true
+                    if loginStore.warning == false {
+                        isShowingAuctionBidSheet = true
+                    } else {
+                        isShowingAuctionNoticeSheet = true
+                    }
                 }
+                
+//                if loginStore.userUid.isEmpty {
+//                    isShowingLoginSheet = true
+//                }
+//                if loginStore.warning == false {
+//                    isShowingAuctionBidSheet = true
+//                } else {
+//                    isShowingAuctionNoticeSheet = true
+//                }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
                     RoundedRectangle(cornerRadius: 10)

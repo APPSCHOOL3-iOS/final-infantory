@@ -26,7 +26,7 @@ struct AuctionMainView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                                 Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.infanBlack)
                             }
                         }
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -51,7 +51,7 @@ struct AuctionMainView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                             Image(systemName: "magnifyingglass")
-                                .foregroundColor(.black)
+                                .foregroundColor(.infanBlack)
                         }
                     }
                     

@@ -18,6 +18,7 @@ struct AuctionBuyerDetailView: View {
                         VStack(alignment: .leading) {
                                 Text("\(index.userNickname)")
                                     .font(.infanHeadlineBold)
+                            
                             Spacer()
                             Text("\(InfanDateFormatter.shared.dateTimeString(from: index.timeStamp))")
                                 .font(.infanFootnoteBold)

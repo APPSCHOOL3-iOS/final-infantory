@@ -19,7 +19,7 @@ struct ActivityOptionBar: View {
                     Text(item.title)
                         .font(.infanBody)
                         .fontWeight(selectedFilter == item ? .semibold : .regular)
-                        .foregroundColor(selectedFilter == item ? .black : .gray)
+                        .foregroundColor(selectedFilter == item ? .infanBlack : .gray)
                     
                     if selectedFilter == item {
                         Capsule()
