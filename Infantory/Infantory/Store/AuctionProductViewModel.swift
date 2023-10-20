@@ -17,15 +17,13 @@ final class AuctionProductViewModel: ObservableObject {
     @Published var filteredProduct: [AuctionProduct] = []
     @Published var progressSelectedFilter: AuctionInprogressFilter = .deadline
     
-    //현재 유저 패치작업
-    
     @MainActor
     func fetchAuctionProducts() async throws {
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
         self.auctionProduct = products
-        try await fetchData(products: products)
+        self.fetchAuctionCount(products: products)
         try await fetchInfluencerProfile(products: products)
     }
     
@@ -39,6 +37,19 @@ final class AuctionProductViewModel: ObservableObject {
                 self.auctionProduct[index].influencerProfile = influencerProfile
                 self.updateFilter(filter: self.selectedFilter)
             }
+        }
+    }
+    
+    func fetchAuctionCount(products: [AuctionProduct]) {
+        for product in products {
+            let dbRef = Database.database().reference()
+            dbRef.child("biddingInfos/\(product.id ?? "")")
+                .queryOrdered(byChild: "timeStamp")
+                .observe(.value, with: { snapshot in
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].count = Int(snapshot.childrenCount)
+                }
+            })
         }
     }
     
@@ -98,42 +109,9 @@ final class AuctionProductViewModel: ObservableObject {
         }
     }
     
-    func fetchData(products: [AuctionProduct]) async throws {
-        for product in products {
-            guard let productId = product.id else { return }
-            let dbRef = Database.database().reference()
-            dbRef.child("biddingInfos/\(productId)")
-                .queryOrdered(byChild: "timeStamp")
-                .observe(.value, with: { snapshot in
-                    var parsedBiddingInfos: [BiddingInfo] = []
-                    for child in snapshot.children {
-                        if let childSnapshot = child as? DataSnapshot,
-                           let bidData = childSnapshot.value as? [String: Any],
-                           let userID = bidData["userID"] as? String,
-                           let userNickname = bidData["userNickname"] as? String,
-                           let biddingPrice = bidData["biddingPrice"] as? Int,
-                           let timeStamp = (bidData["timeStamp"] as? Double).map({ Date(timeIntervalSince1970: $0) }) {
-                            
-                            let biddingInfo = BiddingInfo(
-                                id: UUID(uuidString: childSnapshot.key) ?? UUID(),
-                                timeStamp: timeStamp,
-                                userID: userID,
-                                userNickname: userNickname,
-                                biddingPrice: biddingPrice
-                            )
-                            parsedBiddingInfos.append(biddingInfo)
-                        }
-                    }
-                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-                        self.auctionProduct[index].biddingInfo = parsedBiddingInfos
-                    }
-                })
-        }
-    }
-    
     func sortFilteredProduct() {
         filteredProduct = filteredProduct.sorted {
-            $0.biddingInfo?.count ?? 0 > $1.biddingInfo?.count ?? 0
+            $0.count ?? 0 > $1.count ?? 0
         }
     }
 }
