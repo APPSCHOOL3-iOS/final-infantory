@@ -41,10 +41,12 @@ final class ApplyProductStore: ObservableObject {
             documentReference.getDocument { (document, _ ) in
                 if let document = document, document.exists {
                     let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    
                     if let index = self.applyProduct.firstIndex(where: { $0.id == product.id}) {
                         self.applyProduct[index].influencerProfile = influencerProfile
                         self.updateFilter(filter: self.selectedFilter)
                     }
+                    
                 }
                 
             }

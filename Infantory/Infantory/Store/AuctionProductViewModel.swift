@@ -23,15 +23,16 @@ final class AuctionProductViewModel: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
         self.auctionProduct = products
-        self.fetchAuctionCount(products: products) { success in
+        self.fetchInfluencerProfile(products: products) { success in
             if success {
-                self.fetchInfluencerProfile(products: products)
+                print("❤️❤️❤️❤️❤️❤️❤️❤️❤️\(success)")
+                self.updateFilter(filter: self.selectedFilter)
             }
         }
     }
     
     @MainActor
-    func fetchInfluencerProfile(products: [AuctionProduct]) {
+    func fetchInfluencerProfile(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
         for product in products {
             let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
             documentReference.getDocument { (document, _ ) in
@@ -41,28 +42,19 @@ final class AuctionProductViewModel: ObservableObject {
                         self.auctionProduct[index].influencerProfile = influencerProfile
                     }
                 }
-                
+                let dbRef = Database.database().reference()
+                dbRef.child("biddingInfos/\(product.id ?? "")")
+                    .queryOrdered(byChild: "timeStamp")
+                    .observe(.value, with: { snapshot in
+                        if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                            self.auctionProduct[index].count = Int(snapshot.childrenCount)
+                        }
+                })
             }
-        }
-        
-    }
-    
-    @MainActor
-    func fetchAuctionCount(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
-        for product in products {
-            let dbRef = Database.database().reference()
-            dbRef.child("biddingInfos/\(product.id ?? "")")
-                .queryOrdered(byChild: "timeStamp")
-                .observe(.value, with: { snapshot in
-                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-                        self.auctionProduct[index].count = Int(snapshot.childrenCount)
-                        self.updateFilter(filter: self.selectedFilter)
-                    }
-            })
         }
         completion(true)
     }
-    
+   
     func updateFilter(filter: AuctionFilter) {
         switch filter {
         case .inProgress:
@@ -103,23 +95,20 @@ final class AuctionProductViewModel: ObservableObject {
             self.auctionProduct = []
         }
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
-        print("일단 1")
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
-        print("일단 2")
         let newProducts: [AuctionProduct] = products
-        await self.fetchInfluencerProfile(products: newProducts)
-        print("일단 3")
-        let filteredProducts = newProducts.filter { product in
-            product.productName.localizedCaseInsensitiveContains(keyword)
-        }
-        print("일단 4")
-        let sortedProducts: [AuctionProduct] = filteredProducts.sorted {
-            $0.endRemainingTime > $1.endRemainingTime
-        }
-        print("일단 5")
-        DispatchQueue.main.async {
-            self.auctionProduct = sortedProducts
-            print("옥션 가져옴 ")
+        await self.fetchInfluencerProfile(products: newProducts) { success in
+            if success {
+                let filteredProducts = newProducts.filter { product in
+                    product.productName.localizedCaseInsensitiveContains(keyword)
+                }
+                let sortedProducts: [AuctionProduct] = filteredProducts.sorted {
+                    $0.endRemainingTime > $1.endRemainingTime
+                }
+                DispatchQueue.main.async {
+                    self.auctionProduct = sortedProducts
+                }
+            }
         }
     }
     

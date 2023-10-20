@@ -113,7 +113,7 @@ struct SearchResultView: View {
         .overlay {
             ToastMessage(content: Text("키워드를 입력해주세요."), isPresented: $isShowingToastMessage)
         }
-        .onAppear {
+        .task {
             searchStore.selectedCategory = searchCategory
             searchStore.findSearchKeyword(keyword: searchText)
             auctionViewModel.findSearchKeyword(keyword: searchText)
