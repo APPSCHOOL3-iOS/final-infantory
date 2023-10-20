@@ -39,7 +39,7 @@ struct SearchResultView: View {
                                     } else {
                                         SearchTotalCellView(category: "인플루언서", content: SearchInfluencerView(searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
                                             .padding(.bottom)
-                                        SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .influencer)
+                                        SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .influencer, searchCategory: $searchCategory)
                                             .padding()
                                         
                                         SearchRectangleView()
@@ -53,7 +53,7 @@ struct SearchResultView: View {
                                         EmptyView()
                                     } else {
                                         SearchTotalCellView(category: "경매", content: SearchAuctionView(auctionViewModel: auctionViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
-                                        SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .auction)
+                                        SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .auction, searchCategory: $searchCategory)
                                             .padding()
                                         
                                         SearchRectangleView()
@@ -68,7 +68,7 @@ struct SearchResultView: View {
                                     } else {
                                         SearchTotalCellView(category: "응모", content: SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
                                         VStack {
-                                            SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .apply)
+                                            SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .apply, searchCategory: $searchCategory)
                                                 .padding()
                                         }
                                         .padding(.bottom)
