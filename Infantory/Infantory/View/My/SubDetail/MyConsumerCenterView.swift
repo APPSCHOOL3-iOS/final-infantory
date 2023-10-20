@@ -47,7 +47,3 @@ struct MyConsumerCenterView: View {
         }
     }
 }
-
-#Preview {
-    MyConsumerCenterView()
-}
