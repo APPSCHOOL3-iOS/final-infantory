@@ -10,7 +10,7 @@ import SwiftUI
 // 1. 진행중인 상품목록을 가져온다
 // 2. 진행중인 상품목록 중 참여를 많이한 순으로 Sort한다.
 
-// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ 
+// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ
 struct HomeHotAuctionView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     private var sortFilteredProduct: [AuctionProduct] {
@@ -92,6 +92,11 @@ struct HomeHotAuctionView: View {
                             .font(.infanFootnote)
                         }
                         .padding()
+<<<<<<< HEAD
+=======
+                        
+                        WinningPriceView(productID: product.id ?? "")
+>>>>>>> a9f53eb (Feat: 경매 리스트 가격 실시간 동기화)
                     }
                     .frame(width: (.screenWidth - 100) / 2)
                 }
@@ -102,6 +107,7 @@ struct HomeHotAuctionView: View {
     }
     
 }
+
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
@@ -117,8 +123,8 @@ struct WinningPriceView: View {
     var body: some View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
-                .foregroundColor(.infanRed)
-            TextAnimateView(value: myActivityStore.winningPrice)
+                .foregroundColor(.blue)
+            TextAnimateView(value: Double(myActivityStore.winningPrice))
                 .foregroundColor(Color.infanDarkGray)
                 .monospacedDigit()
                 .animation(Animation.easeInOut(duration: 1))
