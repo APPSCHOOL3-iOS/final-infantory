@@ -20,7 +20,6 @@ struct ActivityMainView: View {
         NavigationStack {
             VStack {
                 Section {
-                    
                     if selectedFilter.title == "경매" {
                         if myAuctionInfos.isEmpty {
                             VStack {
@@ -40,7 +39,6 @@ struct ActivityMainView: View {
                                                     selectedFilter: $selectedFilter, isSorted: $isSorted,
                                                     myAuctionInfos: info)
                                         .padding()
-                                        
                                     }
                                     .foregroundColor(.black)
                                     
@@ -85,7 +83,7 @@ struct ActivityMainView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
+                            .foregroundColor(.infanBlack)
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -301,6 +299,7 @@ struct ActivityRow: View {
                 }
             }
             .font(.infanFootnote)
+            .foregroundColor(.infanBlack)
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
         }

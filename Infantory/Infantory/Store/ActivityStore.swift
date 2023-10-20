@@ -13,7 +13,6 @@ struct ActivityStore {
     var loginStore: LoginStore
     let database = Firestore.firestore()
     
-    
     func getMyAuctionInfos() async -> [AuctionActivityData] {
         let products: [AuctionProduct] = await fetchAuctionProducts()
         try? await loginStore.fetchUser(userUID: loginStore.userUid)

@@ -21,7 +21,7 @@ struct AuctionLogoCell: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.infanDarkGray)
+                    .foregroundColor(.infanBlack)
             }
             .padding(5)
             Button {
