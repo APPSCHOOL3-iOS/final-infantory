@@ -120,9 +120,9 @@ struct WinningPriceView: View {
     var body: some View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
-                .foregroundColor(.blue)
-            TextAnimateView(value: Double(myActivityStore.winningPrice))
-                .foregroundColor(Color.infanDarkGray)
+                .foregroundColor(.infanRed)
+            TextAnimateView(value: myActivityStore.winningPrice)
+                .foregroundColor(Color.infanRed)
                 .monospacedDigit()
                 .animation(Animation.easeInOut(duration: 1))
         }

@@ -22,11 +22,11 @@ struct ApplyDetailView: View {
                     ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
                     Spacer()
                     
-                    Button(action: {
+                    Button {
                         isShowingActionSheet = true
-                    }, label: {
+                    } label: {
                         Image(systemName: "ellipsis")
-                    })
+                    }
                     .buttonStyle(.plain)
                 }
                 .horizontalPadding()
