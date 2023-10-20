@@ -40,7 +40,7 @@ struct HomeMainView: View {
                 .padding([.top, .bottom])
                 
                 VStack(alignment: .leading) {
-                    Text("⏳곧 마감되는 응모에 참여해보세요!⌛️")
+                    Text("⏳곧 마감되는 응모에 참여해보세요!")
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
@@ -61,12 +61,13 @@ struct HomeMainView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Text("INFANTORY")
                         .font(.infanLogoTitle)
-                        .foregroundColor(.infanBlack)
+                        .foregroundColor(.infanMain)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
+            .task {
                 Task {
+                    print("task 시작")
                     try await searchStore.fetchInfluencer(keyword: "")
                     try await auctionViewModel.fetchAuctionProducts()
                     try await applyViewModel.fetchApplyProducts()

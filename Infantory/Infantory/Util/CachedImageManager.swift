@@ -14,23 +14,27 @@ final class CachedImageManager: ObservableObject {
     private let imageRetriver = ImageRetriver()
     
     @MainActor
+    private func updateState(_ state: CurrentState) {
+        self.currentState = state
+    }
+    
     func load(_ imgUrl: String,
               cache: ImageCache = .shared) async {
-        
-        self.currentState = .loading
+
+        await updateState(.loading)
         
         if let imageData = cache.get(forkey: imgUrl as NSString) {
-            self.currentState = .success(data: imageData)
+            await updateState(.success(data: imageData))
             return
         }
         
         do {
             let data = try await imageRetriver.fetch(imgUrl)
-            self.currentState = .success(data: data)
+            await updateState(.success(data: data))
             cache.set(object: data as NSData,
                       forKey: imgUrl as NSString)
         } catch {
-            self.currentState = .failed(error: error)
+            await updateState(.failed(error: error))
         }
     }
 }

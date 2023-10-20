@@ -39,11 +39,13 @@ final class InfluencerStore: ObservableObject {
             do {
                 var influencerProduct = try document.data(as: ApplyProduct.self)
                 influencerProduct.influencerProfile = influencer.profileImageURLString
-                DispatchQueue.main.sync {
-                    self.influencerApplyProduct.append(influencerProduct)
-                    self.influencerApplyProduct.sort {
-                        $0.registerDate > $1.registerDate
-                    }
+                var nowInfluencerProduct = self.influencerApplyProduct
+                nowInfluencerProduct.append(influencerProduct)
+                let sortedArray = nowInfluencerProduct.sorted {
+                    $0.registerDate > $1.registerDate
+                }
+                DispatchQueue.main.async {
+                    self.influencerApplyProduct = sortedArray
                 }
             } catch {
                 print("error: 해당 인플루언서의 응모 상품을 불러오지 못했습니다.")
@@ -62,11 +64,13 @@ final class InfluencerStore: ObservableObject {
             do {
                 var influencerProduct = try document.data(as: AuctionProduct.self)
                 influencerProduct.influencerProfile = influencer.profileImageURLString
-                DispatchQueue.main.sync {
-                    self.influencerAuctionProduct.append(influencerProduct)
-                    self.influencerAuctionProduct.sort {
-                        $0.registerDate > $1.registerDate
-                    }
+                var nowInfluencerProduct = self.influencerAuctionProduct
+                nowInfluencerProduct.append(influencerProduct)
+                let sortedArray = nowInfluencerProduct.sorted {
+                    $0.registerDate > $1.registerDate
+                }
+                DispatchQueue.main.async {
+                    self.influencerAuctionProduct = sortedArray
                 }
             } catch {
                 print("error: 해당 인플루언서의 경매 상품을 불러오지 못했습니다.")
