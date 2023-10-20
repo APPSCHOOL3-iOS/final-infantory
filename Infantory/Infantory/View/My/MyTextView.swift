@@ -1,21 +1,19 @@
 //
-//  MyUserProfileView.swift
+//  MyTextView.swift
 //  Infantory
 //
-//  Created by 봉주헌 on 2023/10/19.
+//  Created by 봉주헌 on 2023/10/20.
 //
 
 import SwiftUI
 
-struct MyUserProfileView: View {
+struct MyTextView: View {
     @ObservedObject var myProfileEditStore: MyProfileEditStore
-    @ObservedObject var loginStore: LoginStore
+    @ObservedObject var myPaymentsStore: MyPaymentStore
+    var loginStore: LoginStore
     
-    @Binding var nickName: String
-    // 원래 저장돼있는 값 = loginStore.currentUser
-    // 바꿔준 값 = myPaymentStore.myPayments
     var body: some View {
-        HStack(spacing: 16) {
+        HStack {
             CachedImage(url: myProfileEditStore.user?.profileImageURLString ?? "") { phase in
                 switch phase {
                 case .empty:
@@ -35,17 +33,14 @@ struct MyUserProfileView: View {
                     EmptyView()
                 }
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                Text("\(nickName)")
-                    .font(.infanTitle2)
-                    .foregroundColor(.infanBlack)
+            VStack(alignment: .leading) {
+                Text("\(myProfileEditStore.user?.nickName ?? "")")
                 HStack {
                     NavigationLink {
                         EntryTicketView()
                     } label: {
                         Text("응모권: ")
-                        Text("\(myProfileEditStore.user?.applyTicket?.count ?? 0)장")
+                        Text("\(loginStore.totalApplyTicketCount)장")
                             .font(.infanFootnoteBold)
                             .foregroundColor(.infanMain)
                             .padding(.leading, -5)
@@ -66,14 +61,13 @@ struct MyUserProfileView: View {
                 .font(.infanFootnote)
                 .foregroundColor(.infanBlack)
             }
-            Spacer()
         }
-        
+        Spacer()
     }
 }
 
-struct MyUserProfileView_Previews: PreviewProvider {
+struct MyTextView_Previews: PreviewProvider {
     static var previews: some View {
-        MyUserProfileView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore(), nickName: .constant(""))
+        MyTextView(myProfileEditStore: MyProfileEditStore(), myPaymentsStore: MyPaymentStore(), loginStore: LoginStore())
     }
 }

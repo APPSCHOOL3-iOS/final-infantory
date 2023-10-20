@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyPaymentStatusView: View {
+    @ObservedObject var myProfileEditStore: MyProfileEditStore
     var myPaymentStore: MyPaymentStore
     var body: some View {
         VStack(spacing: 16) {
@@ -24,6 +25,6 @@ struct MyPaymentStatusView: View {
 
 struct MyPaymentStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPaymentStatusView(myPaymentStore: MyPaymentStore())
+        MyPaymentStatusView(myProfileEditStore: MyProfileEditStore(), myPaymentStore: MyPaymentStore())
     }
 }
