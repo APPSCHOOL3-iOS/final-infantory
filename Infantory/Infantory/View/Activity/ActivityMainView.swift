@@ -232,6 +232,7 @@ struct ActivityRow: View {
                     Text("\(product.productName)")
                         .font(.infanHeadlineBold)
                         .frame(alignment: .leading)
+                        .multilineTextAlignment(.leading)
                     
                     Spacer()
                 }
