@@ -76,7 +76,6 @@ struct HomeMainView: View {
             }
             .task {
                 Task {
-                    try await searchStore.fetchInfluencer(keyword: "")
                     try await auctionViewModel.fetchAuctionProducts()
                     try await applyViewModel.fetchApplyProducts()
                     applyViewModel.updateFilter(filter: .inProgress)

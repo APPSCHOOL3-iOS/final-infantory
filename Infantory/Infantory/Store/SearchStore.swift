@@ -81,6 +81,22 @@ final class SearchStore: ObservableObject {
             }
         }
     }
+    
+    func fetchRandomInfluencer() async throws {
+        influencer = []
+        let query = Firestore.firestore().collection("Users").whereField("isInfluencer", isEqualTo: "influencer")
+        let snapshot = try await query.getDocuments()
+        let documents = snapshot.documents
+        for document in documents {
+            do {
+                let influencerUser = try document.data(as: User.self)
+                influencer.append(influencerUser)
+                influencer.shuffle()
+            } catch {
+                print("error: 인플루언서를 불러오지 못했습니다.")
+            }
+        }
+    }
 }
 
 enum SearchResultCategory: String, CaseIterable {
