@@ -87,28 +87,20 @@ struct HomeHotAuctionView: View {
                                 Text(product.productName)
                                     .foregroundColor(.infanBlack)
                                     .lineLimit(1)
-                                HStack(spacing: 2) {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.infanRed)
-                                    Text("\(product.winningPrice ?? 0) 원")
-                                        .foregroundColor(.infanRed)
-                                }
+                                WinningPriceView(productID: product.id ?? "")
                             }
                             .font(.infanFootnote)
-                            }
-                            .padding()
-                            
-                            WinningPriceView(productID: product.id ?? "")
                         }
-                        .frame(width: (.screenWidth - 100) / 2)
+                        .padding()
                     }
+                    .frame(width: (.screenWidth - 100) / 2)
                 }
-                .padding(.leading, 20)
             }
-            .scrollIndicators(.hidden)
+            .padding(.leading, 20)
         }
-
+        .scrollIndicators(.hidden)
     }
+    
 }
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
@@ -125,7 +117,7 @@ struct WinningPriceView: View {
     var body: some View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
-                .foregroundColor(.blue)
+                .foregroundColor(.infanRed)
             TextAnimateView(value: myActivityStore.winningPrice)
                 .foregroundColor(Color.infanDarkGray)
                 .monospacedDigit()
