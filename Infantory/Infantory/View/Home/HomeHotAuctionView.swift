@@ -92,8 +92,6 @@ struct HomeHotAuctionView: View {
                             .font(.infanFootnote)
                         }
                         .padding()
-
-                        WinningPriceView(productID: product.id ?? "")
                     }
                     .frame(width: (.screenWidth - 100) / 2)
                 }
@@ -102,9 +100,7 @@ struct HomeHotAuctionView: View {
         }
         .scrollIndicators(.hidden)
     }
-    
 }
-
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
