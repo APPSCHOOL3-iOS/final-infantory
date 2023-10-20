@@ -92,11 +92,8 @@ struct HomeHotAuctionView: View {
                             .font(.infanFootnote)
                         }
                         .padding()
-<<<<<<< HEAD
-=======
-                        
+
                         WinningPriceView(productID: product.id ?? "")
->>>>>>> a9f53eb (Feat: 경매 리스트 가격 실시간 동기화)
                     }
                     .frame(width: (.screenWidth - 100) / 2)
                 }
@@ -107,7 +104,6 @@ struct HomeHotAuctionView: View {
     }
     
 }
-
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
