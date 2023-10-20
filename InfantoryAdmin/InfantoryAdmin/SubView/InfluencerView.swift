@@ -9,7 +9,9 @@ import SwiftUI
 
 struct InfluencerView: View {
     var body: some View {
-        Text("InfluencerView")
+        VStack {
+                
+        }
     }
 }
 

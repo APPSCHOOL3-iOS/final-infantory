@@ -105,6 +105,7 @@ struct HomeHotAuctionView: View {
     
 }
 
+
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
         HomeHotAuctionView(auctionViewModel: AuctionProductViewModel())

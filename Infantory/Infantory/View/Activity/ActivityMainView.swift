@@ -20,39 +20,63 @@ struct ActivityMainView: View {
         NavigationStack {
             VStack {
                 Section {
-                    ScrollView {
+                    
                         if selectedFilter.title == "경매" {
-                            ForEach(myAuctionInfos, id: \.product.id ) { info in
-                                NavigationLink {
-                                    AuctionDetailView(auctionStore: AuctionStore(product: info.product))
-                                } label: {
-                                    ActivityRow(product: info.product,
-                                                selectedFilter: $selectedFilter,
-                                                myAuctionInfos: info)
-                                    .padding()
-                                    
+                            if myAuctionInfos.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    Text("참여한 경매가 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanGray)
+                                    Spacer()
                                 }
-                                .foregroundColor(.black)
-                                
-                                Divider()
+                            } else {
+                                ScrollView {
+                                    ForEach(myAuctionInfos, id: \.product.id ) { info in
+                                        NavigationLink {
+                                            AuctionDetailView(auctionStore: AuctionStore(product: info.product))
+                                        } label: {
+                                            ActivityRow(product: info.product,
+                                                        selectedFilter: $selectedFilter,
+                                                        myAuctionInfos: info)
+                                            .padding()
+                                            
+                                        }
+                                        .foregroundColor(.black)
+                                        
+                                        Divider()
+                                    }
+                                }
                                 
                             }
                         } else {
-                            ForEach(myApplyInfos, id: \.product.id) { info in
-                                NavigationLink {
-                                    ApplyDetailView(applyViewModel: applyStore, product: info.product)
-                                } label: {
-                                    ActivityRow(product: info.product,
-                                                selectedFilter: $selectedFilter, myApplyInfos: info)
-                                    .padding()
+                            if myApplyInfos.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    Text("참여한 응모가 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanGray)
+                                    Spacer()
                                 }
-                                .foregroundColor(.black)
-                                
-                                Divider()
+                            } else {
+                                ScrollView {
+                                    ForEach(myApplyInfos, id: \.product.id) { info in
+                                        NavigationLink {
+                                            ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                        } label: {
+                                            ActivityRow(product: info.product,
+                                                        selectedFilter: $selectedFilter, myApplyInfos: info)
+                                            .padding()
+                                        }
+                                        .foregroundColor(.black)
+                                        
+                                        Divider()
+                                    }
+                                }
                             }
                             
                         }
-                    }
+                    
                 } header: {
                     ActivityOptionBar(selectedFilter: $selectedFilter)
                 }
@@ -301,3 +325,21 @@ struct ActivityRow: View {
         return false
     }
 }
+
+//extension ActivityMainView {
+//    var emptyListItemCell: some View {
+//        VStack {
+//            Spacer()
+//            if myAuctionInfos.selectedFilter == .inProgress {
+//                Text("진행중인 경매가 없습니다.")
+//            } else if auctionViewModel.selectedFilter == .planned {
+//                Text("진행 예정인 경매가 없습니다.")
+//            } else {
+//                Text("종료된 경매가 없습니다.")
+//            }
+//            Spacer()
+//        }
+//        .font(.infanBody)
+//        .foregroundColor(.infanGray)
+//    }
+//}
