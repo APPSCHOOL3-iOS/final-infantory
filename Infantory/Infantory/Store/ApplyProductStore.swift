@@ -165,18 +165,24 @@ final class ApplyProductStore: ObservableObject {
             .addDocument(from: applyTicket)
     }
     
-    @MainActor
     func fetchSearchApplyProduct(keyword: String) async throws {
+        DispatchQueue.main.async {
+            self.applyProduct = []
+        }
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
-        self.applyProduct = products
-        fetchInfluencerProfile(products: products)
-        applyProduct = applyProduct.filter { product in
+        let newProducts: [ApplyProduct] = products
+        await fetchInfluencerProfile(products: newProducts)
+        var filteredProduct = newProducts.filter { product in
             product.productName.localizedCaseInsensitiveContains(keyword)
         }
-        applyProduct.sort {
+        let sortedProducts: [ApplyProduct] = filteredProduct.sorted {
             $0.endRemainingTime > $1.endRemainingTime
+        }
+        DispatchQueue.main.async {
+            self.applyProduct = sortedProducts
+            print("어플라이 ㄱㅈㅇ")
         }
     }
     

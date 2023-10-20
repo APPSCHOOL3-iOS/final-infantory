@@ -23,24 +23,32 @@ final class AuctionProductViewModel: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
         self.auctionProduct = products
-        self.fetchAuctionCount(products: products)
-        try await fetchInfluencerProfile(products: products)
-    }
-    
-    @MainActor
-    func fetchInfluencerProfile(products: [AuctionProduct]) async throws {
-        for product in products {
-            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
-            let snapShot = try await documentReference.getDocument()
-            let influencerProfile = snapShot.data()?["profileImageURLString"] as? String? ?? nil
-            if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-                self.auctionProduct[index].influencerProfile = influencerProfile
-                self.updateFilter(filter: self.selectedFilter)
+        self.fetchAuctionCount(products: products) { success in
+            if success {
+                self.fetchInfluencerProfile(products: products)
             }
         }
     }
     
-    func fetchAuctionCount(products: [AuctionProduct]) {
+    @MainActor
+    func fetchInfluencerProfile(products: [AuctionProduct]) {
+        for product in products {
+            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
+            documentReference.getDocument { (document, _ ) in
+                if let document = document, document.exists {
+                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].influencerProfile = influencerProfile
+                    }
+                }
+                
+            }
+        }
+        
+    }
+    
+    @MainActor
+    func fetchAuctionCount(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
         for product in products {
             let dbRef = Database.database().reference()
             dbRef.child("biddingInfos/\(product.id ?? "")")
@@ -48,9 +56,11 @@ final class AuctionProductViewModel: ObservableObject {
                 .observe(.value, with: { snapshot in
                     if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
                         self.auctionProduct[index].count = Int(snapshot.childrenCount)
-                }
+                        self.updateFilter(filter: self.selectedFilter)
+                    }
             })
         }
+        completion(true)
     }
     
     func updateFilter(filter: AuctionFilter) {
@@ -88,18 +98,28 @@ final class AuctionProductViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchSearchActionProduct(keyword: String) async throws {
+        DispatchQueue.main.async {
+            self.auctionProduct = []
+        }
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
+        print("일단 1")
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
-        
-        self.auctionProduct = products
-        try await fetchInfluencerProfile(products: products)
-        auctionProduct = auctionProduct.filter { product in
+        print("일단 2")
+        let newProducts: [AuctionProduct] = products
+        await self.fetchInfluencerProfile(products: newProducts)
+        print("일단 3")
+        let filteredProducts = newProducts.filter { product in
             product.productName.localizedCaseInsensitiveContains(keyword)
         }
-        auctionProduct.sort {
+        print("일단 4")
+        let sortedProducts: [AuctionProduct] = filteredProducts.sorted {
             $0.endRemainingTime > $1.endRemainingTime
+        }
+        print("일단 5")
+        DispatchQueue.main.async {
+            self.auctionProduct = sortedProducts
+            print("옥션 가져옴 ")
         }
     }
     
