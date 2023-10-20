@@ -91,7 +91,7 @@ struct SearchMainView: View {
                     .frame(width: .screenWidth - 72)
             }
         }
-        .onAppear {
+        .task {
             focus = searchText
         }
     }
