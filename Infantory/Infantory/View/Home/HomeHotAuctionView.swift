@@ -10,7 +10,7 @@ import SwiftUI
 // 1. 진행중인 상품목록을 가져온다
 // 2. 진행중인 상품목록 중 참여를 많이한 순으로 Sort한다.
 
-// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ 
+// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ
 struct HomeHotAuctionView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     private var sortFilteredProduct: [AuctionProduct] {
@@ -87,29 +87,24 @@ struct HomeHotAuctionView: View {
                                 Text(product.productName)
                                     .foregroundColor(.infanBlack)
                                     .lineLimit(1)
-                                HStack(spacing: 2) {
-                                    Image(systemName: "arrowtriangle.up.fill")
-                                        .foregroundColor(.infanRed)
-                                    Text("\(product.winningPrice ?? 0) 원")
-                                        .foregroundColor(.infanRed)
-                                }
+                                WinningPriceView(productID: product.id ?? "")
                             }
                             .font(.infanFootnote)
-                            }
-                            .padding()
-                            
-                            WinningPriceView(productID: product.id ?? "")
                         }
-                        .frame(width: (.screenWidth - 100) / 2)
-                    }
-                }
-                .padding(.leading, 20)
-            }
-            .scrollIndicators(.hidden)
-        }
+                        .padding()
 
+                        WinningPriceView(productID: product.id ?? "")
+                    }
+                    .frame(width: (.screenWidth - 100) / 2)
+                }
+            }
+            .padding(.leading, 20)
+        }
+        .scrollIndicators(.hidden)
     }
+    
 }
+
 
 struct HomeHotAuctionView_Previews: PreviewProvider {
     static var previews: some View {
@@ -125,9 +120,9 @@ struct WinningPriceView: View {
     var body: some View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
-                .foregroundColor(.blue)
+                .foregroundColor(.infanRed)
             TextAnimateView(value: myActivityStore.winningPrice)
-                .foregroundColor(Color.infanDarkGray)
+                .foregroundColor(Color.infanRed)
                 .monospacedDigit()
                 .animation(Animation.easeInOut(duration: 1))
         }

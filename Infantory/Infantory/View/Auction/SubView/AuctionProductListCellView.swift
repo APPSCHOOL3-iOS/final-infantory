@@ -10,6 +10,7 @@ import SwiftUI
 struct AuctionProductListCellView: View {
     @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
+    @StateObject var myActivityStore = MyActivityStore()
     var product: AuctionProduct
     
     var body: some View {
@@ -102,9 +103,10 @@ struct AuctionProductListCellView: View {
                             .multilineTextAlignment(.leading)
                             .padding(.vertical, 10)
                         
-                        Text("\(product.winningPrice ?? 0)원")
-                            .font(.infanHeadlineBold)
-                            .foregroundColor(.infanDarkGray)
+                        TextAnimateView(value: myActivityStore.winningPrice)
+                            .foregroundColor(Color.infanDarkGray)
+                            .monospacedDigit()
+                            .animation(Animation.easeInOut(duration: 1))
                         
                         Spacer()
                         VStack(alignment: .leading) {
@@ -122,6 +124,9 @@ struct AuctionProductListCellView: View {
                 Divider()
             }
             .horizontalPadding()
+            .onAppear {
+                myActivityStore.fetchWinningPrice(productID: product.id ?? "")
+            }
         }
     }
 }

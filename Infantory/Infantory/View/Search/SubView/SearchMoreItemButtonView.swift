@@ -11,11 +11,13 @@ struct SearchMoreItemButtonView: View {
     
     @ObservedObject var searchStore: SearchStore
     var selectedCategory: SearchResultCategory
+    @Binding var searchCategory: SearchResultCategory
     
     var body: some View {
         VStack {
             Button {
                 searchStore.selectedCategory = selectedCategory
+                searchCategory = selectedCategory
             } label: {
                 HStack {
                     Text("\(selectedCategory.rawValue) 더보기")
@@ -36,6 +38,6 @@ struct SearchMoreItemButtonView: View {
 
 struct SearchMoreItemButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMoreItemButtonView(searchStore: SearchStore(), selectedCategory: SearchResultCategory.apply)
+        SearchMoreItemButtonView(searchStore: SearchStore(), selectedCategory: SearchResultCategory.apply, searchCategory: .constant(.apply))
     }
 }
