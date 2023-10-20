@@ -167,6 +167,7 @@
 		ECA453CD2AE14D1000F338B5 /* MyPaymentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */; };
 		ECA453CE2AE14D1300F338B5 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402F0B22AD7A64500FE9256 /* ActivityStore.swift */; };
 		ECA453D22AE1617500F338B5 /* BlinkingAnimationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D12AE1617500F338B5 /* BlinkingAnimationModifier.swift */; };
+		ECA453D42AE21F8D00F338B5 /* ApplyReportSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */; };
 		ECB5A9142ADFA54100E63E87 /* SearchTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5A9132ADFA54100E63E87 /* SearchTabBarView.swift */; };
 		ECB5A9162ADFC2BC00E63E87 /* InfluencerTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5A9152ADFC2BC00E63E87 /* InfluencerTabBarView.swift */; };
 		ECC7B90F2ADF5D300028BB4E /* FetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F62ACFD7BF004891DD /* FetchUser.swift */; };
@@ -329,6 +330,7 @@
 		EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageView.swift; sourceTree = "<group>"; };
 		ECA453CB2AE149E800F338B5 /* TextAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimateView.swift; sourceTree = "<group>"; };
 		ECA453D12AE1617500F338B5 /* BlinkingAnimationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkingAnimationModifier.swift; sourceTree = "<group>"; };
+		ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyReportSheetView.swift; sourceTree = "<group>"; };
 		ECB5A9132ADFA54100E63E87 /* SearchTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabBarView.swift; sourceTree = "<group>"; };
 		ECB5A9152ADFC2BC00E63E87 /* InfluencerTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerTabBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,6 +399,7 @@
 				844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */,
 				844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */,
 				844BB4F02ACD4E8B004891DD /* ApplyMyTicketView.swift */,
+				ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */,
 				844BB4EA2ACD2CCC004891DD /* ApplySheetView.swift */,
 				0C82A3332AC29625009F6D97 /* ApplyDetailDescriptionView.swift */,
 				0CED224F2ACCFB4300CD1456 /* ProductImagePickerView.swift */,
@@ -1004,6 +1007,7 @@
 				0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */,
 				0CD2F7052ABD50F500FCF88E /* User.swift in Sources */,
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
+				ECA453D42AE21F8D00F338B5 /* ApplyReportSheetView.swift in Sources */,
 				EC9E6D152ADCCC4B00FD0831 /* InfluencerStore.swift in Sources */,
 				016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */,
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,

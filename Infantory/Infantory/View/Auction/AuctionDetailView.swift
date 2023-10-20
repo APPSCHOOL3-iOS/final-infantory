@@ -52,7 +52,7 @@ struct AuctionDetailView: View {
         .navigationBar(title: "상세정보")
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
             
-            Button("차단하기", role: .destructive) {
+            Button("신고하기", role: .destructive) {
                 
             }
             

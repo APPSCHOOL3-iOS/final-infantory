@@ -14,6 +14,7 @@ struct ApplyDetailView: View {
     var product: ApplyProduct
     
     @State private var isShowingActionSheet: Bool = false
+    @State private var isShowingReportSheet: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
@@ -69,14 +70,18 @@ struct ApplyDetailView: View {
         .navigationBar(title: "상세정보")
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
             
-            Button("차단하기", role: .destructive) {
-                
+            Button("신고하기", role: .destructive) {
+                isShowingActionSheet = false
+                isShowingReportSheet = true
             }
             
             Button("저장하기", role: .none) {
                 
             }
             Button("취소", role: .cancel) {}
+        }
+        .sheet(isPresented: $isShowingReportSheet) {
+            ApplyReportSheetView(product: product)
         }
     }
 }
