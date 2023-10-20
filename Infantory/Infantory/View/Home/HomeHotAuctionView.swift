@@ -15,7 +15,7 @@ struct HomeHotAuctionView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     private var sortFilteredProduct: [AuctionProduct] {
         return auctionViewModel.filteredProduct.sorted {
-            $0.biddingInfo?.count ?? 0 > $1.biddingInfo?.count ?? 0
+            $0.count ?? 0 > $1.count ?? 0
         }
     }
     
@@ -27,25 +27,7 @@ struct HomeHotAuctionView: View {
                         AuctionDetailView(auctionStore: AuctionStore(product: product))
                     } label: {
                         VStack(alignment: .leading) {
-                            ZStack(alignment: .center) {
-                                Rectangle()
-                                    .padding(3)
-                                    .foregroundColor(.clear)
-                                    .frame(width: (.screenWidth - 200) / 2, height: .screenHeight * 0.025)
-                                    .background(Color.clear)
-                                    .cornerRadius(10)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .inset(by: 0.5)
-                                            .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom), lineWidth: 1.5)
-                                        
-                                    )
-                                
-                                Label("\(product.biddingInfo?.count ?? 0)회 참여", systemImage: "person.2.fill")
-                                    .font(.infanFootnote)
-                                    .foregroundColor(.infanBlack)
-                            }
-                            
+                            AuctionCountView(productID: product.id ?? "")
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
                                     switch phase {
@@ -109,8 +91,8 @@ struct HomeHotAuctionView_Previews: PreviewProvider {
 }
 
 struct WinningPriceView: View {
-    let productID: String
     
+    let productID: String
     @StateObject var myActivityStore = MyActivityStore()
     
     var body: some View {
@@ -125,6 +107,36 @@ struct WinningPriceView: View {
         .font(.infanFootnote)
         .onAppear {
             myActivityStore.fetchWinningPrice(productID: productID)
+        }
+    }
+}
+
+struct AuctionCountView: View {
+    
+    let productID: String
+    @StateObject var myActivityStore = MyActivityStore()
+    
+    var body: some View {
+        ZStack(alignment: .center) {
+            Rectangle()
+                .padding(3)
+                .foregroundColor(.clear)
+                .frame(width: (.screenWidth - 200) / 2, height: .screenHeight * 0.025)
+                .background(Color.clear)
+                .cornerRadius(10)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .inset(by: 0.5)
+                        .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .top, endPoint: .bottom), lineWidth: 1.5)
+                    
+                )
+            
+            Label("\(myActivityStore.auctionCount)회 참여", systemImage: "person.2.fill")
+                .font(.infanFootnote)
+                .foregroundColor(.infanBlack)
+        }
+        .onAppear {
+            myActivityStore.fetchAuctionCount(productID: productID)
         }
     }
 }

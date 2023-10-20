@@ -48,7 +48,7 @@ struct AuctionProduct: Productable, Identifiable, Codable {
         return .planned
     }
     
-    var biddingInfo: [BiddingInfo]? = nil
+    var count: Int? = nil
 }
 
 #if DEBUG
