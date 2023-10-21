@@ -10,27 +10,29 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class ApplyLotteryStore: ObservableObject {
-    @Published var applyLotteries: [ApplyProduct] = []
+    @Published var applyBeforeLotteries: [ApplyProduct] = []
+    @Published var applyAfterLotteries: [ApplyProduct] = []
     @Published var selectedCatogory: ApplyCloseFilter = .beforeRaffle
     private let dbRef = Firestore.firestore().collection("ApplyProducts")
     
     func fetchApplyProduct() async throws {
         let snapshot = try await dbRef.whereField("endDate", isLessThan: Date()).getDocuments()
-        
         var product = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
-        
-        product = product.filter({ product in
-            product.winningUserID == nil
-        })
-        
-        
         await updateApplyLotteriesProduct(product)
     }
     
     @MainActor
     private func updateApplyLotteriesProduct(_ applyLotteries: [ApplyProduct]) {
-        self.applyLotteries = applyLotteries
+        self.applyBeforeLotteries = applyLotteries
+        self.applyAfterLotteries = applyLotteries
         
+        applyBeforeLotteries = applyBeforeLotteries.filter({ product in
+            product.winningUserID == nil
+        })
+        
+        applyAfterLotteries = applyAfterLotteries.filter({ product in
+            product.winningUserID != nil
+        })
     }
     
     func addWinningUser(product: ApplyProduct) {
@@ -49,7 +51,7 @@ final class ApplyLotteryStore: ObservableObject {
     }
     
     func lotteryApply() {
-        for var product in applyLotteries {
+        for var product in applyBeforeLotteries {
             if let winningUser = product.applyUserIDs.randomElement() {
                 product.winningUserID = winningUser
                 self.addWinningUser(product: product)

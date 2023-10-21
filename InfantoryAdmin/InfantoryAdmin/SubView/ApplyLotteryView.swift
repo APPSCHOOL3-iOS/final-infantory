@@ -20,7 +20,7 @@ struct ApplyLotteryView: View {
                     case .beforeRaffle:
                         ScrollView {
                             VStack {
-                                if applyLotteryStore.applyLotteries.isEmpty {
+                                if applyLotteryStore.applyBeforeLotteries.isEmpty {
                                     Spacer()
                                     Text("추첨 할 상품이 없습니다.")
                                     Spacer()
@@ -36,7 +36,7 @@ struct ApplyLotteryView: View {
                                         }
                                     }
                                     .padding()
-                                    ForEach(applyLotteryStore.applyLotteries) { product in
+                                    ForEach(applyLotteryStore.applyBeforeLotteries) { product in
                                         ApplyListCellView(applyViewModel: applyLotteryStore, product: product)
                                     }
                                 }
@@ -45,7 +45,7 @@ struct ApplyLotteryView: View {
                     case .afterRaffle:
                         ScrollView {
                             VStack {
-                                ForEach(applyLotteryStore.applyLotteries) { product in
+                                ForEach(applyLotteryStore.applyAfterLotteries) { product in
                                     ApplyListCellView(applyViewModel: applyLotteryStore, product: product)
                                 }
                             }

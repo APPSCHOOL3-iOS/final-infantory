@@ -92,6 +92,13 @@ struct ApplyListCellView: View {
                             }
                         }
                         
+                        if product.winningUserID != nil {
+                            Text("당첨자: \(product.winningUserID ?? "")")
+                                .font(.footnote)
+                                .foregroundColor(.blue)
+                                .multilineTextAlignment(.leading)
+                        }
+                        
                     }
                     Spacer()
                 }
