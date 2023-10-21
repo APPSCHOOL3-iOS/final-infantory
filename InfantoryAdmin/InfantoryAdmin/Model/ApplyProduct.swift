@@ -78,3 +78,8 @@ enum ApplyCloseFilter: String, CaseIterable {
     case beforeRaffle = "추첨중"
     case afterRaffle = "추첨완료"
 }
+
+enum ProductPaidFilter: String, CaseIterable {
+    case beforePaid = "결제전"
+    case afterPaid = "결제완료"
+}
