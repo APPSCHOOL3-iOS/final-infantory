@@ -23,16 +23,21 @@ final class AuctionProductViewModel: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
         self.auctionProduct = products
-        self.fetchInfluencerProfile(products: products) { success in
+        print("페치1")
+        self.fetchAuctionCount(products: products) { success in
             if success {
-                print("❤️❤️❤️❤️❤️❤️❤️❤️❤️\(success)")
-                self.updateFilter(filter: self.selectedFilter)
+                self.fetchInfluencerProfile(products: products) { success in
+                    if success {
+                        self.updateFilter(filter: self.selectedFilter)
+                    }
+                }
             }
         }
     }
     
     @MainActor
     func fetchInfluencerProfile(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
+        print("페치3")
         for product in products {
             let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
             documentReference.getDocument { (document, _ ) in
@@ -40,22 +45,32 @@ final class AuctionProductViewModel: ObservableObject {
                     let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
                     if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
                         self.auctionProduct[index].influencerProfile = influencerProfile
+
                     }
                 }
-                let dbRef = Database.database().reference()
-                dbRef.child("biddingInfos/\(product.id ?? "")")
-                    .queryOrdered(byChild: "timeStamp")
-                    .observe(.value, with: { snapshot in
-                        if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-                            self.auctionProduct[index].count = Int(snapshot.childrenCount)
-                        }
-                })
             }
         }
         completion(true)
     }
    
+    @MainActor
+    func fetchAuctionCount(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
+        print("페치2")
+        let dbRef = Database.database().reference()
+        for product in products {
+            dbRef.child("biddingInfos/\(product.id ?? "")")
+                .queryOrdered(byChild: "timeStamp")
+                .observe(.value, with: { snapshot in
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].count = Int(snapshot.childrenCount)
+                }
+            })
+        }
+        completion(true)
+    }
+    @MainActor
     func updateFilter(filter: AuctionFilter) {
+        print("페치4")
         switch filter {
         case .inProgress:
             selectedFilter = .inProgress
