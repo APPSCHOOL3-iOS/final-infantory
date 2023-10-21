@@ -20,4 +20,8 @@ extension View {
     func onAppearFetchUser() -> some View {
         modifier(FetchUser())
     }
+    
+    func setSkeletonView(opacity: Double, shouldShow: Bool) -> some View {
+        self.modifier(BlinkingAnimationModifier(shouldShow: shouldShow, opacity: opacity))
+    }
 }

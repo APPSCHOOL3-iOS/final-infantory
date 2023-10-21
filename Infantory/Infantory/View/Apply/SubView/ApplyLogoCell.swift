@@ -21,7 +21,7 @@ struct ApplyLogoCell: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.infanDarkGray)
+                    .foregroundColor(.infanBlack)
             }
             Button {
                 // alramView 알람창 (네비게이션으로 변경 해야할 것 같습니다.)

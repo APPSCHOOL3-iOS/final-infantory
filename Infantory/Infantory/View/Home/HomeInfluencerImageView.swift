@@ -43,6 +43,7 @@ struct HomeInfluencerImageView: View {
                                     EmptyView()
                                 }
                             }
+                          
                             Text(influencer.nickName)
                                 .font(.infanFootnote)
                                 .foregroundColor(.infanBlack)

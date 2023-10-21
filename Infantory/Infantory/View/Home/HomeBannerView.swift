@@ -17,7 +17,6 @@ struct HomeBannerView: View {
             product.applyCloseFilter == .afterRaffle
         }
     }
-    
     var body: some View {
         TabView {
             ForEach(selectedProducts) { product in

@@ -8,10 +8,10 @@ import SwiftUI
 
 struct ActivityMainView: View {
     @EnvironmentObject var loginStore: LoginStore
+    @State private var selectedFilter: ActivityOption = .auction
+    @State private var isSorted: Bool = false
     @State var myAuctionInfos: [AuctionActivityData] = []
     @State var myApplyInfos: [ApplyActivityData] = []
-    @State private var selectedFilter: ActivityOption = .auction
-    
     let applyStore: ApplyProductStore = ApplyProductStore()
     
     var searchCategory: SearchResultCategory = .total
@@ -20,62 +20,60 @@ struct ActivityMainView: View {
         NavigationStack {
             VStack {
                 Section {
-                    
-                        if selectedFilter.title == "경매" {
-                            if myAuctionInfos.isEmpty {
-                                VStack {
-                                    Spacer()
-                                    Text("참여한 경매가 없습니다.")
-                                        .font(.infanBody)
-                                        .foregroundColor(.infanGray)
-                                    Spacer()
-                                }
-                            } else {
-                                ScrollView {
-                                    ForEach(myAuctionInfos, id: \.product.id ) { info in
-                                        NavigationLink {
-                                            AuctionDetailView(auctionStore: AuctionStore(product: info.product))
-                                        } label: {
-                                            ActivityRow(product: info.product,
-                                                        selectedFilter: $selectedFilter,
-                                                        myAuctionInfos: info)
-                                            .padding()
-                                            
-                                        }
-                                        .foregroundColor(.black)
-                                        
-                                        Divider()
-                                    }
-                                }
-                                
+                    if selectedFilter.title == "경매" {
+                        if myAuctionInfos.isEmpty {
+                            VStack {
+                                Spacer()
+                                Text("참여한 경매가 없습니다.")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanGray)
+                                Spacer()
                             }
                         } else {
-                            if myApplyInfos.isEmpty {
-                                VStack {
-                                    Spacer()
-                                    Text("참여한 응모가 없습니다.")
-                                        .font(.infanBody)
-                                        .foregroundColor(.infanGray)
-                                    Spacer()
-                                }
-                            } else {
-                                ScrollView {
-                                    ForEach(myApplyInfos, id: \.product.id) { info in
-                                        NavigationLink {
-                                            ApplyDetailView(applyViewModel: applyStore, product: info.product)
-                                        } label: {
-                                            ActivityRow(product: info.product,
-                                                        selectedFilter: $selectedFilter, myApplyInfos: info)
-                                            .padding()
-                                        }
-                                        .foregroundColor(.black)
-                                        
-                                        Divider()
+                            ScrollView {
+                                ForEach(myAuctionInfos, id: \.product.id ) { info in
+                                    NavigationLink {
+                                        AuctionDetailView(auctionStore: AuctionStore(product: info.product))
+                                    } label: {
+                                        ActivityRow(product: info.product,
+                                                    selectedFilter: $selectedFilter, isSorted: $isSorted,
+                                                    myAuctionInfos: info)
+                                        .padding()
                                     }
+                                    .foregroundColor(.black)
+                                    
+                                    Divider()
                                 }
                             }
                             
                         }
+                    } else {
+                        if myApplyInfos.isEmpty {
+                            VStack {
+                                Spacer()
+                                Text("참여한 응모가 없습니다.")
+                                    .font(.infanBody)
+                                    .foregroundColor(.infanGray)
+                                Spacer()
+                            }
+                        } else {
+                            ScrollView {
+                                ForEach(myApplyInfos, id: \.product.id) { info in
+                                    NavigationLink {
+                                        ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                    } label: {
+                                        ActivityRow(product: info.product,
+                                                    selectedFilter: $selectedFilter, isSorted: $isSorted, myApplyInfos: info)
+                                        .padding()
+                                    }
+                                    .foregroundColor(.black)
+                                    
+                                    Divider()
+                                }
+                            }
+                        }
+                        
+                    }
                     
                 } header: {
                     ActivityOptionBar(selectedFilter: $selectedFilter)
@@ -85,7 +83,7 @@ struct ActivityMainView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
                         Image(systemName: "magnifyingglass")
-                            .foregroundColor(.black)
+                            .foregroundColor(.infanBlack)
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -94,28 +92,31 @@ struct ActivityMainView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                let acticityInfo = ActivityStore(loginStore: loginStore)
-                
-                myAuctionInfos = await acticityInfo.getMyAuctionInfos()
-                myApplyInfos = await acticityInfo.getMyApplyInfos()
-                
-                myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
-                    myApplyInfos.first { $0.product.id  == id }
-                }
-            }
+        .task {
+            sortApplyProduct()
         }
         .refreshable {
+            sortApplyProduct()
+        }
+    }
+    func sortApplyProduct() {
+        Task {
+            let activityStore = ActivityStore(loginStore: loginStore)
+            self.loginStore.currentUser.applyActivityInfos?.sort {
+                $0.timestamp < $1.timestamp
+            }
             
-            Task {
-                let acticityInfo = ActivityStore(loginStore: loginStore)
-                
-                myAuctionInfos = await acticityInfo.getMyAuctionInfos()
-                myApplyInfos = await acticityInfo.getMyApplyInfos()
-                myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
-                    myApplyInfos.first { $0.product.id  == id }
-                }
+            myAuctionInfos = await activityStore.getMyAuctionInfos()
+            myApplyInfos = await activityStore.getMyApplyInfos()
+            myApplyInfos = Array(Set(myApplyInfos.map { $0.product.id })).compactMap { id in
+                myApplyInfos.reversed().first { $0.product.id  == id }
+            }
+            myAuctionInfos.sort {
+                $0.timeStamp > $1.timeStamp
+            }
+
+            myApplyInfos.sort {
+                return $0.timeStamp > $1.timeStamp
             }
         }
     }
@@ -134,13 +135,14 @@ struct ActivityRow: View {
     let product: Productable
     
     @Binding var selectedFilter: ActivityOption
+    @Binding var isSorted: Bool
     
     var myAuctionInfos: AuctionActivityData?
     var myApplyInfos: ApplyActivityData?
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @StateObject var myActivityStore: MyActivityStore = MyActivityStore()
-
+    
     var body: some View {
         HStack {
             CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -297,21 +299,23 @@ struct ActivityRow: View {
                 }
             }
             .font(.infanFootnote)
+            .foregroundColor(.infanBlack)
             
             TimerView(remainingTime: product.endDate.timeIntervalSinceNow)
         }
-        .onAppear {
+        .task {
             let userID = loginStore.currentUser.id ?? ""
             myActivityStore.fetchMyLastBiddingPrice(userID: userID,
                                                     productID: product.id ?? "")
             myActivityStore.fetchWinningPrice(productID: product.id ?? "")
             myActivityStore.fetchApplyCount(userEmail: loginStore.currentUser.email,
                                             productID: product.id ?? "")
+            
         }
     }
     
     func isWinner() -> Bool {
-        if let activityInfos = loginStore.currentUser.auctionActivityInfos, 
+        if let activityInfos = loginStore.currentUser.auctionActivityInfos,
             let price = product.winningPrice {
             for info in activityInfos {
                 if info.productId == product.id {
@@ -325,21 +329,3 @@ struct ActivityRow: View {
         return false
     }
 }
-
-//extension ActivityMainView {
-//    var emptyListItemCell: some View {
-//        VStack {
-//            Spacer()
-//            if myAuctionInfos.selectedFilter == .inProgress {
-//                Text("진행중인 경매가 없습니다.")
-//            } else if auctionViewModel.selectedFilter == .planned {
-//                Text("진행 예정인 경매가 없습니다.")
-//            } else {
-//                Text("종료된 경매가 없습니다.")
-//            }
-//            Spacer()
-//        }
-//        .font(.infanBody)
-//        .foregroundColor(.infanGray)
-//    }
-//}

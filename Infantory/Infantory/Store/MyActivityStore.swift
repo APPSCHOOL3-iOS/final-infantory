@@ -16,7 +16,7 @@ class MyActivityStore: ObservableObject {
     
     @Published var myApplyCount: Int = 0
     @Published var totalApplyCount: Int = 0
-    
+    @Published var auctionCount: Int = 0
     private var dbRef: DatabaseReference!
     private let firestore = Firestore.firestore()
     
@@ -37,6 +37,14 @@ class MyActivityStore: ObservableObject {
             }
     }
     
+    func fetchAuctionCount(productID: String) {
+            dbRef.child("biddingInfos/\(productID)")
+                .queryOrdered(byChild: "timeStamp")
+                .observe(.value, with: { snapshot in
+                    self.auctionCount = Int(snapshot.childrenCount)
+                })
+            }
+
     func fetchWinningPrice(productID: String) {
         dbRef.child("biddingInfos/\(productID)")
             .queryOrdered(byChild: "timeStamp")

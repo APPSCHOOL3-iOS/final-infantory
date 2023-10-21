@@ -5,12 +5,12 @@
 //  Created by 이희찬 on 10/12/23.
 //
 
-import Foundation
+import SwiftUI
 import Firebase
 
 struct ActivityStore {
-    var loginStore: LoginStore
     
+    var loginStore: LoginStore
     let database = Firestore.firestore()
     
     func getMyAuctionInfos() async -> [AuctionActivityData] {
@@ -20,7 +20,8 @@ struct ActivityStore {
             products.filter { $0.id == info.productId }.map { product in
                 AuctionActivityData(
                     product: product,
-                    myPrice: info.price
+                    myPrice: info.price,
+                    timeStamp: info.timestamp
                 )
             }
         } ?? []
@@ -44,10 +45,12 @@ struct ActivityStore {
             products.filter { $0.id == info.productId }.map { product in
                 ApplyActivityData(
                     product: product,
-                    myApplyCount: info.ticketCount
+                    myApplyCount: info.ticketCount,
+                    timeStamp: info.timestamp
                 )
             }
         } ?? []
+        
     }
     
     func fetchApplyProducts() async -> [ApplyProduct] {
@@ -66,9 +69,11 @@ struct ActivityStore {
 struct AuctionActivityData {
     let product: AuctionProduct
     let myPrice: Int
+    let timeStamp: Double
 }
 
 struct ApplyActivityData {
     let product: ApplyProduct
     let myApplyCount: Int
+    let timeStamp: Double
 }
