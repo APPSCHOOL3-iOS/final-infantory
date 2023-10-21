@@ -15,6 +15,10 @@ struct AuctionDetailView: View {
     @ObservedObject var auctionStore: AuctionStore
     
     @State private var isShowingActionSheet: Bool = false
+    @State private var isShowingReportSheet: Bool = false
+    
+    @State private var toastMessage: String = ""
+    @State private var isShowingToastMessage: Bool = false
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -41,7 +45,7 @@ struct AuctionDetailView: View {
                 AuctionItemImage(imageString: auctionStore.product.productImageURLStrings)
                     .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                     .cornerRadius(10)
-                
+                ToastMessage(content: Text("\(toastMessage)"), isPresented: $isShowingToastMessage)
                 productInfo
             }
             Footer(auctionStore: auctionStore)
@@ -53,7 +57,8 @@ struct AuctionDetailView: View {
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
             
             Button("신고하기", role: .destructive) {
-                
+                isShowingActionSheet = false
+                isShowingReportSheet = true
             }
             
             Button("저장하기", role: .none) {
@@ -61,6 +66,9 @@ struct AuctionDetailView: View {
             }
             Button("취소", role: .cancel) {}
             
+        }
+        .sheet(isPresented: $isShowingReportSheet) {
+            AuctionReportSheetView(product: auctionStore.product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
         }
     }
     

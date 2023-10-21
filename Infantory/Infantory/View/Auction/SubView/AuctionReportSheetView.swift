@@ -1,17 +1,17 @@
 //
-//  ReportSheetView.swift
+//  AuctionReportSheetView.swift
 //  Infantory
 //
-//  Created by 민근의 mac on 10/20/23.
+//  Created by 민근의 mac on 10/21/23.
 //
 
 import SwiftUI
 import FirebaseFirestore
 
-struct ApplyReportSheetView: View {
+struct AuctionReportSheetView: View {
     @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) var dismiss
-    var product: ApplyProduct
+    var product: AuctionProduct
     @State private var reportString: String = ""
     @State private var reportCase4: String = ""
     @State private var reportCase: ReportCase = .case1
@@ -21,7 +21,7 @@ struct ApplyReportSheetView: View {
         VStack(spacing: 15) {
             
             VStack(alignment: .leading) {
-                Text("'\(product.productName)'\n응모 상품을 신고하는 이유를 선택해주세요.")
+                Text("'\(product.productName)'\n경 상품을 신고하는 이유를 선택해주세요.")
                     .font(.infanHeadlineBold)
                     .foregroundColor(.infanBlack)
                 
@@ -84,7 +84,7 @@ struct ApplyReportSheetView: View {
     
     func reportApply() {
         let dbRef = Firestore.firestore().collection("Report")
-        let report = Report(reportProductType: "ApplyProducts", reportProductID: product.id ?? "", reportReason: reportCase4.isEmpty ? reportString : reportCase4, reportDate: Date(), reporterID: loginStore.currentUser.email)
+        let report = Report(reportProductType: "AuctionProducts", reportProductID: product.id ?? "", reportReason: reportCase4.isEmpty ? reportString : reportCase4, reportDate: Date(), reporterID: loginStore.currentUser.email)
         do {
             try dbRef.addDocument(from: report)
             toastMessage = "신고가 완료되었습니다"

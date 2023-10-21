@@ -15,6 +15,9 @@ struct ApplyDetailView: View {
     
     @State private var isShowingActionSheet: Bool = false
     @State private var isShowingReportSheet: Bool = false
+    
+    @State private var toastMessage: String = ""
+    @State private var isShowingToastMessage: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             ScrollView {
@@ -61,11 +64,11 @@ struct ApplyDetailView: View {
                 .tabViewStyle(PageTabViewStyle())
                 .frame(width: .screenWidth - 40, height: .screenWidth - 40)
                 .cornerRadius(10)
-                
+                ToastMessage(content: Text("\(toastMessage)"), isPresented: $isShowingToastMessage)
                 productInfo
             }
             
-            ApplyFooter(applyViewModel: applyViewModel, product: product)
+            ApplyFooter(applyViewModel: applyViewModel, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
         }
         .navigationBar(title: "상세정보")
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
@@ -81,20 +84,20 @@ struct ApplyDetailView: View {
             Button("취소", role: .cancel) {}
         }
         .sheet(isPresented: $isShowingReportSheet) {
-            ApplyReportSheetView(product: product)
+            ApplyReportSheetView(product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
         }
     }
 }
 
 struct ApplyFooter: View {
-    
     @EnvironmentObject var loginStore: LoginStore
     @ObservedObject var applyViewModel: ApplyProductStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @State private var isShowingPaymentSheet: Bool = false
     var product: ApplyProduct
-    
+    @Binding var toastMessage: String
+    @Binding var isShowingToastMessage: Bool
     var body: some View {
         VStack {
             ApplyAddButtonView(isShowingApplySheet: $isShowingApplySheet, 
@@ -111,7 +114,7 @@ struct ApplyFooter: View {
                 try await applyViewModel.fetchApplyProducts()
             }
         }, content: {
-            ApplySheetView(applyViewModel: applyViewModel, isShowingApplySheet: $isShowingApplySheet, product: product)
+            ApplySheetView(applyViewModel: applyViewModel, isShowingApplySheet: $isShowingApplySheet, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
             

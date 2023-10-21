@@ -24,7 +24,7 @@ struct ToastMessage<Content: View>: View {
                     .transition(.scale)
                     .animation(.easeInOut(duration: 0.5), value: isPresented)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
                                 isPresented = false
                             }
