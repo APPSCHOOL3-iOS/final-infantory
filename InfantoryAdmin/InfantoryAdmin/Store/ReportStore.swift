@@ -60,7 +60,9 @@ final class ReportStore: ObservableObject {
                     
                 }
         }
-        try await fetchApplyReport()
+        Task {
+            try await fetchApplyReport()
+        }
     }
     
     func fetchApplyReport() async throws {
@@ -72,6 +74,7 @@ final class ReportStore: ObservableObject {
             let applyProduct = try await documentReference.getDocument(as: ApplyProduct.self)
             DispatchQueue.main.async {
                 self.reportApplyList.append(applyProduct)
+                print("\(self.reportApplyList)")
             }
         }
     }
@@ -116,7 +119,9 @@ final class ReportStore: ObservableObject {
                     
                 }
         }
-        try await fetchAuctionReport()
+        Task {
+            try await fetchAuctionReport()
+        }
     }
     
     

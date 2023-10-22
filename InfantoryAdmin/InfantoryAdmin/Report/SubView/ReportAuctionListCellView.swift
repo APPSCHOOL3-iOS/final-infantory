@@ -37,7 +37,7 @@ struct ReportAuctionListCellView: View {
                     .font(.title2.bold())
                 Spacer()
                 Text("신고 횟수 \(reportCount)회")
-                    .font(.title2.bold())
+                    .font(.headline.bold())
             }
             HStack(spacing: 16) {
                 if product.productImageURLStrings.count > 0 {
