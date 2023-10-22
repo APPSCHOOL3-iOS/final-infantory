@@ -44,7 +44,7 @@ struct InfluencerView: View {
                                 .foregroundColor(.black)
                             Spacer()
                             Button {
-                                alertTitle = user.isInfluencer == .user ? "유저 -> 인플루언서" : "인플루언서 -> 유저"
+                                alertTitle = user.isInfluencer == .user ? "유저 → 인플루언서" : "인플루언서 → 유저"
                                 alertMessage = user.isInfluencer == .user ? "\(user.nickName)님을 인플루언서로 등록하시겠습니까?" : "\(user.nickName)님을 유저로 등록하시겠습니까?"
                                 userID = user.id ?? ""
                                 userType = user.isInfluencer

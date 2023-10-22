@@ -21,7 +21,7 @@ struct AuctionReportSheetView: View {
         VStack(spacing: 15) {
             
             VStack(alignment: .leading) {
-                Text("'\(product.productName)'\n경 상품을 신고하는 이유를 선택해주세요.")
+                Text("'\(product.productName)'\n경매 상품을 신고하는 이유를 선택해주세요.")
                     .font(.infanHeadlineBold)
                     .foregroundColor(.infanBlack)
                 
