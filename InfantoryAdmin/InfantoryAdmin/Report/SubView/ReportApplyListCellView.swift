@@ -1,21 +1,37 @@
 //
-//  ApplyListCellView.swift
+//  ReportListCellView.swift
 //  InfantoryAdmin
 //
-//  Created by 변상필 on 10/19/23.
+//  Created by 민근의 mac on 10/22/23.
 //
 
 import SwiftUI
 
-struct ApplyListCellView: View {
+struct ReportApplyListCellView: View {
     
-    @ObservedObject var applyViewModel: ApplyLotteryStore
+    @ObservedObject var reportStore: ReportStore
     var product: ApplyProduct
-    
+    @State private var isShowReportDetailSheet: Bool = false
+    var reportCount: Int {
+        let filteredproducts = reportStore.groupApplies.filter { apply in
+            apply.reportProductID == product.id
+        }
+        
+        var countArray: [String] = []
+        for filteredproduct in filteredproducts {
+            countArray = filteredproduct.reporters
+        }
+        return countArray.count
+    }
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("\(product.influencerNickname)")
-                .font(.title2.bold())
+            HStack {
+                Text("\(product.influencerNickname)")
+                    .font(.title2.bold())
+                Spacer()
+                Text("신고 횟수 \(reportCount)회")
+                    .font(.title2.bold())
+            }
             HStack(spacing: 16) {
                 if product.productImageURLStrings.count > 0 {
                     AsyncImage(url: URL(string: product.productImageURLStrings[0])) { image in
@@ -91,17 +107,14 @@ struct ApplyListCellView: View {
                             }
                         }
                         
-                        if product.raffleDate != nil {
-                            Text("당첨자: \(product.winningUserID ?? "")")
-                                .font(.footnote)
-                                .foregroundColor(.blue)
-                                .multilineTextAlignment(.leading)
-                            
-                            Text("추첨일: \(product.dateToString)")
-                                .font(.footnote)
-                                .foregroundColor(.orange)
-                                .multilineTextAlignment(.leading)
+                        
+                        Button {
+                            isShowReportDetailSheet = true
+                        } label: {
+                            Text("신고 상세보기")
                         }
+                        .buttonStyle(.bordered)
+                        
                         
                     }
                     Spacer()
@@ -110,11 +123,8 @@ struct ApplyListCellView: View {
             }
         }
         .padding()
-    }
-}
-
-struct ApplyListCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        ApplyListCellView(applyViewModel: ApplyLotteryStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
+        .sheet(isPresented: $isShowReportDetailSheet, content: {
+            ReportApplyDetailSheetView(reportStore: reportStore, product: product)
+        })
     }
 }

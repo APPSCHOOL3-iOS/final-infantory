@@ -17,33 +17,27 @@ import SwiftUI
 struct AdminMainView: View {
     @State private var selectedTab: Int = 0
     var body: some View {
-        NavigationStack {
-            VStack {
-                TabView(selection: $selectedTab) {
-                    ApplyLotteryView()
-                        .tabItem {
-                            Text(AdminFeature.applyLottery.title)
-                        }
-                        .tag(0)
-                    PaymentProductView()
-                        .tabItem {
-                            Text(AdminFeature.paymentProduct.title)
-                        }
-                        .tag(1)
-                    InfluencerView()
-                        .tabItem {
-                            Text(AdminFeature.influencer.title)
-                        }
-                        .tag(2)
-                    ReportView()
-                        .tabItem {
-                            Image("person")
-                            Text(AdminFeature.report.title)
-                        }
-                        .tag(3)
+        TabView(selection: $selectedTab) {
+            ApplyLotteryView()
+                .tabItem {
+                    Text(AdminFeature.applyLottery.title)
                 }
-            }
-            .navigationTitle("관리자")
+                .tag(0)
+            PaymentProductView()
+                .tabItem {
+                    Text(AdminFeature.paymentProduct.title)
+                }
+                .tag(1)
+            InfluencerView()
+                .tabItem {
+                    Text(AdminFeature.influencer.title)
+                }
+                .tag(2)
+            ReportView()
+                .tabItem {
+                    Text(AdminFeature.report.title)
+                }
+                .tag(3)
         }
     }
 }

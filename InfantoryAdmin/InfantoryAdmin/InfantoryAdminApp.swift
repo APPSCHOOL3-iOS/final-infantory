@@ -23,7 +23,10 @@ struct InfantoryAdminApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AdminMainView()
+            NavigationStack {
+                AdminMainView()
+                    .navigationTitle("관리자")
+            }
         }
     }
 }

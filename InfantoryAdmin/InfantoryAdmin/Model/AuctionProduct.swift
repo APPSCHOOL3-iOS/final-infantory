@@ -2,7 +2,7 @@
 //  AuctionProduct.swift
 //  InfantoryAdmin
 //
-//  Created by 변상필 on 10/22/23.
+//  Created by 민근의 mac on 10/22/23.
 //
 
 import Foundation

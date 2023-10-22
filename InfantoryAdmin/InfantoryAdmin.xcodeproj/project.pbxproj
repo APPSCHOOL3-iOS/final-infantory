@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */; };
 		116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116033952AE0B74000F6E940 /* AdminMainView.swift */; };
-		11645FA52AE51BDC0015172D /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA42AE51BDC0015172D /* AuctionProduct.swift */; };
 		11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA62AE51C050015172D /* PaidProductStore.swift */; };
 		11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA92AE51C6E0015172D /* PaymentProductView.swift */; };
 		11645FAC2AE51CB10015172D /* PaymentProductTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */; };
@@ -36,6 +35,13 @@
 		ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */; };
 		ECA453E42AE423CC00F338B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E32AE423CC00F338B5 /* User.swift */; };
 		ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */; };
+		ECA453E82AE4D76400F338B5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E72AE4D76400F338B5 /* Report.swift */; };
+		ECA453EB2AE4F56100F338B5 /* ReportTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */; };
+		ECA453EF2AE4F91400F338B5 /* ReportApplyListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */; };
+		ECA453F12AE4F98F00F338B5 /* ReportAuctionListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */; };
+		ECA453F32AE54EF200F338B5 /* ReportApplyDetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */; };
+		ECA453F52AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */; };
+		ECA453F72AE5625A00F338B5 /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +64,6 @@
 /* Begin PBXFileReference section */
 		114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyListCellView.swift; sourceTree = "<group>"; };
 		116033952AE0B74000F6E940 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
-		11645FA42AE51BDC0015172D /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 		11645FA62AE51C050015172D /* PaidProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidProductStore.swift; sourceTree = "<group>"; };
 		11645FA92AE51C6E0015172D /* PaymentProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductView.swift; sourceTree = "<group>"; };
 		11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductTabbarView.swift; sourceTree = "<group>"; };
@@ -82,6 +87,13 @@
 		ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerStore.swift; sourceTree = "<group>"; };
 		ECA453E32AE423CC00F338B5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
+		ECA453E72AE4D76400F338B5 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTabBarView.swift; sourceTree = "<group>"; };
+		ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApplyListCellView.swift; sourceTree = "<group>"; };
+		ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAuctionListCellView.swift; sourceTree = "<group>"; };
+		ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApplyDetailSheetView.swift; sourceTree = "<group>"; };
+		ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAuctionDetailSheetView.swift; sourceTree = "<group>"; };
+		ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				11B4F7A12AE0CA530076F040 /* ReportView.swift */,
+				ECA453E92AE4F54900F338B5 /* SubView */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -147,8 +160,9 @@
 			isa = PBXGroup;
 			children = (
 				11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */,
+				ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */,
 				ECA453E32AE423CC00F338B5 /* User.swift */,
-				11645FA42AE51BDC0015172D /* AuctionProduct.swift */,
+				ECA453E72AE4D76400F338B5 /* Report.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +271,18 @@
 				11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */,
 			);
 			path = Influencer;
+			sourceTree = "<group>";
+		};
+		ECA453E92AE4F54900F338B5 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */,
+				ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */,
+				ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */,
+				ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */,
+				ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */,
+			);
+			path = SubView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,11 +427,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA453F32AE54EF200F338B5 /* ReportApplyDetailSheetView.swift in Sources */,
+				ECA453EF2AE4F91400F338B5 /* ReportApplyListCellView.swift in Sources */,
 				ECA453E42AE423CC00F338B5 /* User.swift in Sources */,
-				11645FA52AE51BDC0015172D /* AuctionProduct.swift in Sources */,
+				ECA453F72AE5625A00F338B5 /* AuctionProduct.swift in Sources */,
+				ECA453F52AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift in Sources */,
 				ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */,
+				ECA453F12AE4F98F00F338B5 /* ReportAuctionListCellView.swift in Sources */,
 				11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */,
 				ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */,
+				ECA453EB2AE4F56100F338B5 /* ReportTabBarView.swift in Sources */,
 				ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */,
 				11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */,
 				11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */,
@@ -415,6 +446,7 @@
 				ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */,
 				11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */,
 				114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */,
+				ECA453E82AE4D76400F338B5 /* Report.swift in Sources */,
 				116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */,
 				11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */,
 				A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */,

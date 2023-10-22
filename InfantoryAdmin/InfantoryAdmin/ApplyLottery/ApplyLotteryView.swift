@@ -13,50 +13,50 @@ struct ApplyLotteryView: View {
     @State private var closeCategory: ApplyCloseFilter = .beforeRaffle
     @State private var isShowToastMessage: Bool = false
     var body: some View {
-        VStack {
-            ApplyTabBarView(applyLotteryStore: applyLotteryStore, closeCategory: $closeCategory)
-            TabView(selection: $closeCategory) {
-                ForEach(ApplyCloseFilter.allCases, id: \.self) { category in
-                    switch closeCategory {
-                    case .beforeRaffle:
-                        ScrollView {
-                            VStack {
-                                if applyLotteryStore.applyBeforeLotteries.isEmpty {
-                                    Spacer()
-                                    Text("추첨 할 상품이 없습니다.")
-                                    Spacer()
-                                } else {
-                                    HStack {
+        NavigationStack {
+            VStack {
+                ApplyTabBarView(applyLotteryStore: applyLotteryStore, closeCategory: $closeCategory)
+                TabView(selection: $closeCategory) {
+                    ForEach(ApplyCloseFilter.allCases, id: \.self) { category in
+                        switch closeCategory {
+                        case .beforeRaffle:
+                            ScrollView {
+                                VStack {
+                                    if applyLotteryStore.applyBeforeLotteries.isEmpty {
                                         Spacer()
-                                        
-                                        Button {
-                                            isShowAlert = true
-                                        } label: {
-                                            Text("일괄추첨")
+                                        Text("추첨 할 상품이 없습니다.")
+                                        Spacer()
+                                    } else {
+                                        HStack {
+                                            Spacer()
+                                            
+                                            Button {
+                                                isShowAlert = true
+                                            } label: {
+                                                Text("일괄추첨")
+                                            }
+                                        }
+                                        .padding()
+                                        ForEach(applyLotteryStore.applyBeforeLotteries) { product in
+                                            ApplyListCellView(applyViewModel: applyLotteryStore, product: product)
                                         }
                                     }
-                                    .padding()
-                                    ForEach(applyLotteryStore.applyBeforeLotteries) { product in
-                                        ApplyListCellView(applyViewModel: applyLotteryStore, product: product)
-                                    }
                                 }
-                            }
-                        }.tag(category)
-                    case .afterRaffle:
-                        ScrollView {
-                            VStack {
+                            }.tag(category)
+                        case .afterRaffle:
+                            ScrollView {
                                 ForEach(applyLotteryStore.applyAfterLotteries) { product in
                                     ApplyListCellView(applyViewModel: applyLotteryStore, product: product)
                                 }
-                            }
-                        }.tag(category)
+                            }.tag(category)
+                        }
                     }
                 }
+                ToastMessageView(content: Text("추첨이 완료되었습니다."), isPresented: $isShowToastMessage)
             }
-            ToastMessageView(content: Text("추첨이 완료되었습니다."), isPresented: $isShowToastMessage)
-            .refreshable {
-                try? await applyLotteryStore.fetchApplyProduct()
-            }
+        }
+        .refreshable {
+            try? await applyLotteryStore.fetchApplyProduct()
         }
         .task {
             try? await applyLotteryStore.fetchApplyProduct()
