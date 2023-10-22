@@ -23,26 +23,41 @@ final class AuctionProductViewModel: ObservableObject {
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
         
         self.auctionProduct = products
-        self.fetchAuctionCount(products: products)
-        try await fetchInfluencerProfile(products: products)
-    }
-    
-    @MainActor
-    func fetchInfluencerProfile(products: [AuctionProduct]) async throws {
-        for product in products {
-            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
-            let snapShot = try await documentReference.getDocument()
-            let influencerProfile = snapShot.data()?["profileImageURLString"] as? String? ?? nil
-            if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
-                self.auctionProduct[index].influencerProfile = influencerProfile
-                self.updateFilter(filter: self.selectedFilter)
+        print("페치1")
+        self.fetchAuctionCount(products: products) { success in
+            if success {
+                self.fetchInfluencerProfile(products: products) { success in
+                    if success {
+                        self.updateFilter(filter: self.selectedFilter)
+                    }
+                }
             }
         }
     }
     
-    func fetchAuctionCount(products: [AuctionProduct]) {
+    @MainActor
+    func fetchInfluencerProfile(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
+        print("페치3")
         for product in products {
-            let dbRef = Database.database().reference()
+            let documentReference = Firestore.firestore().collection("Users").document(product.influencerID)
+            documentReference.getDocument { (document, _ ) in
+                if let document = document, document.exists {
+                    let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    if let index = self.auctionProduct.firstIndex(where: { $0.id == product.id}) {
+                        self.auctionProduct[index].influencerProfile = influencerProfile
+
+                    }
+                }
+            }
+        }
+        completion(true)
+    }
+   
+    @MainActor
+    func fetchAuctionCount(products: [AuctionProduct], completion: @escaping (Bool) -> Void) {
+        print("페치2")
+        let dbRef = Database.database().reference()
+        for product in products {
             dbRef.child("biddingInfos/\(product.id ?? "")")
                 .queryOrdered(byChild: "timeStamp")
                 .observe(.value, with: { snapshot in
@@ -51,9 +66,11 @@ final class AuctionProductViewModel: ObservableObject {
                 }
             })
         }
+        completion(true)
     }
-    
+    @MainActor
     func updateFilter(filter: AuctionFilter) {
+        print("페치4")
         switch filter {
         case .inProgress:
             selectedFilter = .inProgress
@@ -88,18 +105,25 @@ final class AuctionProductViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchSearchActionProduct(keyword: String) async throws {
+        DispatchQueue.main.async {
+            self.auctionProduct = []
+        }
         let snapshot = try await Firestore.firestore().collection("AuctionProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: AuctionProduct.self) }
-        
-        self.auctionProduct = products
-        try await fetchInfluencerProfile(products: products)
-        auctionProduct = auctionProduct.filter { product in
-            product.productName.localizedCaseInsensitiveContains(keyword)
-        }
-        auctionProduct.sort {
-            $0.endRemainingTime > $1.endRemainingTime
+        let newProducts: [AuctionProduct] = products
+        await self.fetchInfluencerProfile(products: newProducts) { success in
+            if success {
+                let filteredProducts = newProducts.filter { product in
+                    product.productName.localizedCaseInsensitiveContains(keyword)
+                }
+                let sortedProducts: [AuctionProduct] = filteredProducts.sorted {
+                    $0.endRemainingTime > $1.endRemainingTime
+                }
+                DispatchQueue.main.async {
+                    self.auctionProduct = sortedProducts
+                }
+            }
         }
     }
     

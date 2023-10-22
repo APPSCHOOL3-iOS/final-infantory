@@ -65,10 +65,18 @@ struct HomeMainView: View {
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
+            .refreshable {
+                Task {
+                    try await searchStore.fetchRandomInfluencer()
+                    try await auctionViewModel.fetchAuctionProducts()
+                    try await applyViewModel.fetchApplyProducts()
+                    applyViewModel.updateFilter(filter: .inProgress)
+                    applyViewModel.sortInProgressProduct(filter: .deadline)
+                }
+            }
             .task {
                 Task {
-                    print("task 시작")
-                    try await searchStore.fetchInfluencer(keyword: "")
+                    try await searchStore.fetchRandomInfluencer()
                     try await auctionViewModel.fetchAuctionProducts()
                     try await applyViewModel.fetchApplyProducts()
                     applyViewModel.updateFilter(filter: .inProgress)

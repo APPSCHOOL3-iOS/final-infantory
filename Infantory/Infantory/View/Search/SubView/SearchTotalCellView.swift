@@ -13,7 +13,8 @@ struct SearchTotalCellView<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("\(category)")
-                .font(.infanBody.bold())
+                .font(.infanBody)
+                .bold()
                 .foregroundColor(.infanMain.opacity(0.7))
                 .padding()
             content

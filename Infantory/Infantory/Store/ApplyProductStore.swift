@@ -41,10 +41,12 @@ final class ApplyProductStore: ObservableObject {
             documentReference.getDocument { (document, _ ) in
                 if let document = document, document.exists {
                     let influencerProfile = document.data()?["profileImageURLString"] as? String? ?? nil
+                    
                     if let index = self.applyProduct.firstIndex(where: { $0.id == product.id}) {
                         self.applyProduct[index].influencerProfile = influencerProfile
                         self.updateFilter(filter: self.selectedFilter)
                     }
+                    
                 }
                 
             }
@@ -165,18 +167,24 @@ final class ApplyProductStore: ObservableObject {
             .addDocument(from: applyTicket)
     }
     
-    @MainActor
     func fetchSearchApplyProduct(keyword: String) async throws {
+        DispatchQueue.main.async {
+            self.applyProduct = []
+        }
         let snapshot = try await Firestore.firestore().collection("ApplyProducts").getDocuments()
         let products = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         
-        self.applyProduct = products
-        fetchInfluencerProfile(products: products)
-        applyProduct = applyProduct.filter { product in
+        let newProducts: [ApplyProduct] = products
+        await fetchInfluencerProfile(products: newProducts)
+        var filteredProduct = newProducts.filter { product in
             product.productName.localizedCaseInsensitiveContains(keyword)
         }
-        applyProduct.sort {
+        let sortedProducts: [ApplyProduct] = filteredProduct.sorted {
             $0.endRemainingTime > $1.endRemainingTime
+        }
+        DispatchQueue.main.async {
+            self.applyProduct = sortedProducts
+            print("어플라이 ㄱㅈㅇ")
         }
     }
     

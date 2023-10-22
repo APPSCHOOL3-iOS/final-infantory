@@ -17,6 +17,7 @@ struct SearchMainView: View {
     @State private var isShowingToastMessage: Bool = false
     var searchCategory: SearchResultCategory
     @FocusState private var focus: String?
+    
     var body: some View {
         VStack {
             VStack {

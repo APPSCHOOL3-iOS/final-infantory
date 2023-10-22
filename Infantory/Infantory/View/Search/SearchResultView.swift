@@ -113,11 +113,12 @@ struct SearchResultView: View {
         .overlay {
             ToastMessage(content: Text("키워드를 입력해주세요."), isPresented: $isShowingToastMessage)
         }
-        .onAppear {
+        .task {
             searchStore.selectedCategory = searchCategory
             searchStore.findSearchKeyword(keyword: searchText)
-            applyViewModel.findSearchKeyword(keyword: searchText)
             auctionViewModel.findSearchKeyword(keyword: searchText)
+            applyViewModel.findSearchKeyword(keyword: searchText)
+           
         }
         .navigationBar(title: "")
         .toolbar {
@@ -140,8 +141,9 @@ struct SearchResultView: View {
                         searchStore.addSearchHistory(keyword: searchText)
                         searchStore.selectedCategory = searchCategory
                         searchStore.findSearchKeyword(keyword: searchText)
-                        applyViewModel.findSearchKeyword(keyword: searchText)
                         auctionViewModel.findSearchKeyword(keyword: searchText)
+                        applyViewModel.findSearchKeyword(keyword: searchText)
+                        
                     }
                     .submitLabel(.search)
                     .frame(width: .screenWidth - 72)

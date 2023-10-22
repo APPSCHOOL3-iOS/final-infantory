@@ -20,12 +20,21 @@ struct ApplyProduct: Identifiable, Codable {
     var influencerNickname: String
     var influencerProfile: String? = nil
     var winningUserID: String? = nil
-
+    
     // 응모 시작일, 마감일
     var startDate: Date
     var endDate: Date
     var registerDate: Date
     var raffleDate: Date? = nil
+    
+    var dateToString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/dd E a h:mm"
+        formatter.locale = Locale(identifier: "ko_kr") // 한국 시간 지정
+        formatter.timeZone = TimeZone(abbreviation: "KST") // 한국 시간대 지정
+        return formatter.string(from: raffleDate ?? Date())
+    }
+    
     var startRemainingTime: Double {
         return startDate.timeIntervalSince(Date())
     }

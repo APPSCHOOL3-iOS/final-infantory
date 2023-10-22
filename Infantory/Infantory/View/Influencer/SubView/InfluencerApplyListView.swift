@@ -15,7 +15,7 @@ struct InfluencerApplyListView: View {
     let columns = [GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3))]
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 1) {
+        LazyVGrid(columns: columns, spacing: 0) {
             ForEach(influencerStore.influencerApplyProduct) { product in
                 NavigationLink {
                     ApplyDetailView(applyViewModel: applyViewModel, product: product)
@@ -33,7 +33,7 @@ struct InfluencerApplyListView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(height: .screenWidth / 3)
+                                            .frame(width: (.screenWidth - 2) / 3, height: .screenWidth / 3)
                                             .blur(radius: 5)
                                             .clipped()
                                         
@@ -50,7 +50,7 @@ struct InfluencerApplyListView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(height: .screenWidth / 3)
+                                            .frame(width: (.screenWidth - 2) / 3, height: (.screenWidth - 2) / 3)
                                             .blur(radius: 5)
                                             .clipped()
                                         
@@ -65,7 +65,7 @@ struct InfluencerApplyListView: View {
                                     image
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(height: .screenWidth / 3)
+                                        .frame(width: (.screenWidth - 2) / 3, height: (.screenWidth - 2) / 3)
                                         .clipped()
                                 }
                             case .failure:

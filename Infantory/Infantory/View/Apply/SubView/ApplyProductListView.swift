@@ -43,12 +43,10 @@ struct ApplyProductListView: View {
             }
         }
         .task {
-            Task {
-                do {
-                    try await applyViewModel.fetchApplyProducts()
-                } catch {
-                    
-                }
+            do {
+                try await applyViewModel.fetchApplyProducts()
+            } catch {
+                
             }
         }
     }

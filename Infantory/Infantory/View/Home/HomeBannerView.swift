@@ -70,35 +70,28 @@ struct HomeBannerView: View {
                             Spacer()
                                 .frame(width: .screenWidth * 0.6)
                             
-                            if product.influencerProfile == nil {
-                                Image("smallAppIcon")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 70, height: 70)
-                                    .cornerRadius(35)
-                            } else {
-                                CachedImage(url: product.influencerProfile ?? "") { phase in
-                                    switch phase {
-                                    case .empty:
-                                        ProgressView()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 70, height: 70)
-                                            .cornerRadius(35)
-                                    case .success(let image):
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 70, height: 70)
-                                            .cornerRadius(35)
-                                    case .failure:
-                                        Image(systemName: "xmark")
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 70, height: 70)
-                                            .cornerRadius(35)
-                                        
-                                    @unknown default:
-                                        EmptyView()
-                                    }
+                            CachedImage(url: product.influencerProfile ?? "") { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 70, height: 70)
+                                        .cornerRadius(35)
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 70, height: 70)
+                                        .cornerRadius(35)
+                                case .failure:
+                                    Image("smallAppIcon")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 70, height: 70)
+                                        .cornerRadius(35)
+                                    
+                                @unknown default:
+                                    EmptyView()
                                 }
                             }
                         }

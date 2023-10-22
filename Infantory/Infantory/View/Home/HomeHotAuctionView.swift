@@ -77,8 +77,8 @@ struct HomeHotAuctionView: View {
                     }
                     .frame(width: (.screenWidth - 100) / 2)
                 }
+                .padding(.leading, 20)
             }
-            .padding(.leading, 20)
         }
         .scrollIndicators(.hidden)
     }

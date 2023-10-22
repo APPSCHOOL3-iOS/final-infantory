@@ -1,13 +1,13 @@
 //
-//  ToastMessage.swift
-//  Infantory
+//  ToastMessageView.swift
+//  InfantoryAdmin
 //
-//  Created by 안지영 on 2023/09/27.
+//  Created by 민근의 mac on 10/22/23.
 //
 
 import SwiftUI
 
-struct ToastMessage<Content: View>: View {
+struct ToastMessageView<Content: View>: View {
     
     let content: Content
     
@@ -18,7 +18,7 @@ struct ToastMessage<Content: View>: View {
             VStack {
                 content
                     .padding()
-                    .background(Color.infanMain.opacity(0.7))
+                    .background(Color.purple)
                     .foregroundColor(.white)
                     .cornerRadius(10)
                     .transition(.scale)

@@ -167,6 +167,10 @@
 		ECA453CD2AE14D1000F338B5 /* MyPaymentsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01910C962ADE720600D9CCA2 /* MyPaymentsListView.swift */; };
 		ECA453CE2AE14D1300F338B5 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402F0B22AD7A64500FE9256 /* ActivityStore.swift */; };
 		ECA453D22AE1617500F338B5 /* BlinkingAnimationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D12AE1617500F338B5 /* BlinkingAnimationModifier.swift */; };
+		ECA453D42AE21F8D00F338B5 /* ApplyReportSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */; };
+		ECA453D62AE402C700F338B5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D52AE402C700F338B5 /* Report.swift */; };
+		ECA453D82AE407EF00F338B5 /* RadioButtonGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D72AE407EF00F338B5 /* RadioButtonGroups.swift */; };
+		ECA453DA2AE4094900F338B5 /* AuctionReportSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453D92AE4094900F338B5 /* AuctionReportSheetView.swift */; };
 		ECB5A9142ADFA54100E63E87 /* SearchTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5A9132ADFA54100E63E87 /* SearchTabBarView.swift */; };
 		ECB5A9162ADFC2BC00E63E87 /* InfluencerTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB5A9152ADFC2BC00E63E87 /* InfluencerTabBarView.swift */; };
 		ECC7B90F2ADF5D300028BB4E /* FetchUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844BB4F62ACFD7BF004891DD /* FetchUser.swift */; };
@@ -329,6 +333,10 @@
 		EC9E6D172ADCD06300FD0831 /* InfluencerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerImageView.swift; sourceTree = "<group>"; };
 		ECA453CB2AE149E800F338B5 /* TextAnimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAnimateView.swift; sourceTree = "<group>"; };
 		ECA453D12AE1617500F338B5 /* BlinkingAnimationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkingAnimationModifier.swift; sourceTree = "<group>"; };
+		ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyReportSheetView.swift; sourceTree = "<group>"; };
+		ECA453D52AE402C700F338B5 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		ECA453D72AE407EF00F338B5 /* RadioButtonGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonGroups.swift; sourceTree = "<group>"; };
+		ECA453D92AE4094900F338B5 /* AuctionReportSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionReportSheetView.swift; sourceTree = "<group>"; };
 		ECB5A9132ADFA54100E63E87 /* SearchTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTabBarView.swift; sourceTree = "<group>"; };
 		ECB5A9152ADFC2BC00E63E87 /* InfluencerTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerTabBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -397,6 +405,7 @@
 				844BB4F82AD5AB00004891DD /* ApplyAddButtonView.swift */,
 				844BB4EC2ACD2F22004891DD /* ApplyBuyerView.swift */,
 				844BB4F02ACD4E8B004891DD /* ApplyMyTicketView.swift */,
+				ECA453D32AE21F8D00F338B5 /* ApplyReportSheetView.swift */,
 				844BB4EA2ACD2CCC004891DD /* ApplySheetView.swift */,
 				0C82A3332AC29625009F6D97 /* ApplyDetailDescriptionView.swift */,
 				0CED224F2ACCFB4300CD1456 /* ProductImagePickerView.swift */,
@@ -417,6 +426,7 @@
 				0157833D2AC121E2001FEC98 /* AuctionDetailImageView.swift */,
 				112E5D432AC555D40007BBE8 /* AuctionBuyerView.swift */,
 				112E5D452AC561550007BBE8 /* AuctionBuyerDetailView.swift */,
+				ECA453D92AE4094900F338B5 /* AuctionReportSheetView.swift */,
 				11BAE3742ACCE82400F887C7 /* AuctionBidSheetView.swift */,
 				A05C94F42ACFFF06003243B7 /* AuctionItemImage.swift */,
 				110233B72AD4D5E700772A3B /* AuctionNoticeSheetView.swift */,
@@ -558,6 +568,7 @@
 				849B64C42ABD691600C4AC8D /* SignUpUser.swift */,
 				11F7EEB92ABBD812003E3A8C /* AuctionProduct.swift */,
 				11F7EEBB2ABBE382003E3A8C /* ApplyProduct.swift */,
+				ECA453D52AE402C700F338B5 /* Report.swift */,
 				849B64C62ABD742F00C4AC8D /* ApplyTicket.swift */,
 				A0B5AFD22AC2ACF40055E714 /* AuctionFilter.swift */,
 				844BB4F22ACF9D7F004891DD /* ApplyFilter.swift */,
@@ -671,6 +682,7 @@
 			children = (
 				8483640B2AC41FDE00FEAE23 /* ToastMessage.swift */,
 				A00EE0A02ACE447200E03146 /* UnderlineTextField.swift */,
+				ECA453D72AE407EF00F338B5 /* RadioButtonGroups.swift */,
 				A08EECB92ACEF842009DFCDE /* RoundedTextEditor.swift */,
 				A05C94F22ACF1374003243B7 /* MainColorButton.swift */,
 				A031F3AE2AD5829F00F67988 /* CachedImage.swift */,
@@ -950,6 +962,7 @@
 				849B64C72ABD742F00C4AC8D /* ApplyTicket.swift in Sources */,
 				0C25176E2AC1453200B0EF03 /* AuctionDetailDescriptionView.swift in Sources */,
 				A086C7A12ABD205F00F0BF9B /* NavigationBar.swift in Sources */,
+				ECA453DA2AE4094900F338B5 /* AuctionReportSheetView.swift in Sources */,
 				111924862ABAC7B9003821FD /* PaymentView.swift in Sources */,
 				A0B5AFDE2AC3EC2B0055E714 /* Appkey.swift in Sources */,
 				842D6C2F2ADF7E6B0013F1FB /* ApplyTimerView.swift in Sources */,
@@ -958,6 +971,7 @@
 				0136D64D2AE0C8E50024E68C /* MyProfileEditButton.swift in Sources */,
 				843BE8202AD667D200C54943 /* SearchResultView.swift in Sources */,
 				0136D6572AE102BB0024E68C /* MyConsumerCenterView.swift in Sources */,
+				ECA453D82AE407EF00F338B5 /* RadioButtonGroups.swift in Sources */,
 				843B34552ADBED1200EAA7D3 /* HomeBannerView.swift in Sources */,
 				016AAEDB2AD51C3D000B69E4 /* ApplyRegisterStore.swift in Sources */,
 				0CF546732AD6209F0075C3FD /* PhotosSelector.swift in Sources */,
@@ -1004,6 +1018,7 @@
 				0157833E2AC121E2001FEC98 /* AuctionDetailImageView.swift in Sources */,
 				0CD2F7052ABD50F500FCF88E /* User.swift in Sources */,
 				015783402AC3BDBB001FEC98 /* ApplyProductListView.swift in Sources */,
+				ECA453D42AE21F8D00F338B5 /* ApplyReportSheetView.swift in Sources */,
 				EC9E6D152ADCCC4B00FD0831 /* InfluencerStore.swift in Sources */,
 				016AAEDE2AD5317B000B69E4 /* MyInfoMainView.swift in Sources */,
 				A05C94F32ACF1374003243B7 /* MainColorButton.swift in Sources */,
@@ -1060,6 +1075,7 @@
 				843B345A2ADC275F00EAA7D3 /* HomeHotAuctionView.swift in Sources */,
 				8483640C2AC41FDE00FEAE23 /* ToastMessage.swift in Sources */,
 				843B345C2ADCBAE800EAA7D3 /* HomeApplyView.swift in Sources */,
+				ECA453D62AE402C700F338B5 /* Report.swift in Sources */,
 				844BB4F12ACD4E8B004891DD /* ApplyMyTicketView.swift in Sources */,
 				110233B82AD4D5E700772A3B /* AuctionNoticeSheetView.swift in Sources */,
 				EC98B6342AD8018F001B7102 /* SearchInfluencerView.swift in Sources */,

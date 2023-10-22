@@ -12,12 +12,12 @@ struct ApplySheetView: View {
     @State private var tempCount: Int = 0
     @State private var applyTicketCount: String = "0"
     @State private var isShowingAlert: Bool = false
-    @State private var toastMessage: String = ""
-    @State private var isShowingToastMessage: Bool = false
     
     @ObservedObject var applyViewModel: ApplyProductStore
     @Binding var isShowingApplySheet: Bool
     var product: ApplyProduct
+    @Binding var toastMessage: String
+    @Binding var isShowingToastMessage: Bool
     var body: some View {
         VStack {
             ApplyMyTicketView()
@@ -111,15 +111,14 @@ struct ApplySheetView: View {
             }
             .padding()
         }
-        .overlay(
-            ToastMessage(content: Text("\(toastMessage)"), isPresented: $isShowingToastMessage)
-        )
         .alert(isPresented: $isShowingAlert) {
             Alert(title: Text("응모하기"),
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
                 applyViewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid)
+                toastMessage = "응모가 완료되었습니다"
+                isShowingToastMessage = true
                 isShowingApplySheet = false
             })
         }
@@ -128,7 +127,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
+        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]), toastMessage: .constant(""), isShowingToastMessage: .constant(false))
             .environmentObject(LoginStore())
     }
 }

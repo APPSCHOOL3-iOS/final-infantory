@@ -23,13 +23,16 @@
 		11B4F7B52AE0E2FA0076F040 /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */; };
 		11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */; };
 		A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */; };
-		A08061D92AE0AEAA00AD5DBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061D82AE0AEAA00AD5DBE /* ContentView.swift */; };
 		A08061DB2AE0AEAD00AD5DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */; };
 		A08061DE2AE0AEAD00AD5DBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08061DD2AE0AEAD00AD5DBE /* Preview Assets.xcassets */; };
 		A08061E82AE0AEAE00AD5DBE /* InfantoryAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061E72AE0AEAE00AD5DBE /* InfantoryAdminTests.swift */; };
 		A08061F22AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061F12AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift */; };
 		A08061F42AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */; };
 		ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */; };
+		ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453DB2AE4201600F338B5 /* ReportStore.swift */; };
+		ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */; };
+		ECA453E42AE423CC00F338B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E32AE423CC00F338B5 /* User.swift */; };
+		ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +64,6 @@
 		11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLotteryStore.swift; sourceTree = "<group>"; };
 		A08061D32AE0AEAA00AD5DBE /* InfantoryAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfantoryAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminApp.swift; sourceTree = "<group>"; };
-		A08061D82AE0AEAA00AD5DBE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A08061DD2AE0AEAD00AD5DBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A08061E32AE0AEAE00AD5DBE /* InfantoryAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfantoryAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +72,10 @@
 		A08061F12AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminUITests.swift; sourceTree = "<group>"; };
 		A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTabBarView.swift; sourceTree = "<group>"; };
+		ECA453DB2AE4201600F338B5 /* ReportStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
+		ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerStore.swift; sourceTree = "<group>"; };
+		ECA453E32AE423CC00F338B5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,23 +109,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11B4F79C2AE0C6E70076F040 /* SubView */ = {
+		11B4F79C2AE0C6E70076F040 /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */,
-				ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */,
-				114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */,
-				11B4F79D2AE0C9680076F040 /* PaymentProductView.swift */,
-				11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */,
 				11B4F7A12AE0CA530076F040 /* ReportView.swift */,
+				11B4F79D2AE0C9680076F040 /* PaymentProductView.swift */,
 			);
-			path = SubView;
+			path = Report;
 			sourceTree = "<group>";
 		};
 		11B4F7B22AE0CF4D0076F040 /* Store */ = {
 			isa = PBXGroup;
 			children = (
 				11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */,
+				ECA453DB2AE4201600F338B5 /* ReportStore.swift */,
+				ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */,
+				ECA453E32AE423CC00F338B5 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,9 +141,11 @@
 			isa = PBXGroup;
 			children = (
 				A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */,
-				A08061D82AE0AEAA00AD5DBE /* ContentView.swift */,
-				116033952AE0B74000F6E940 /* AdminMainView.swift */,
-				11B4F79C2AE0C6E70076F040 /* SubView */,
+				ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */,
+				ECA453DD2AE4213700F338B5 /* MainTab */,
+				ECA453DE2AE4214400F338B5 /* ApplyLottery */,
+				11B4F79C2AE0C6E70076F040 /* Report */,
+				ECA453E02AE421A400F338B5 /* Influencer */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -199,6 +206,40 @@
 				A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */,
 			);
 			path = InfantoryAdminUITests;
+			sourceTree = "<group>";
+		};
+		ECA453DD2AE4213700F338B5 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				116033952AE0B74000F6E940 /* AdminMainView.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		ECA453DE2AE4214400F338B5 /* ApplyLottery */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */,
+				ECA453DF2AE4216500F338B5 /* SubView */,
+			);
+			path = ApplyLottery;
+			sourceTree = "<group>";
+		};
+		ECA453DF2AE4216500F338B5 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */,
+				114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		ECA453E02AE421A400F338B5 /* Influencer */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */,
+			);
+			path = Influencer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,15 +384,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECA453E42AE423CC00F338B5 /* User.swift in Sources */,
+				ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */,
 				11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */,
 				ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */,
+				ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */,
 				11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */,
 				11B4F7A22AE0CA530076F040 /* ReportView.swift in Sources */,
 				11B4F7B52AE0E2FA0076F040 /* ApplyProduct.swift in Sources */,
+				ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */,
 				11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */,
 				114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */,
 				116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */,
-				A08061D92AE0AEAA00AD5DBE /* ContentView.swift in Sources */,
 				A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */,
 				11B4F79E2AE0C9680076F040 /* PaymentProductView.swift in Sources */,
 			);
