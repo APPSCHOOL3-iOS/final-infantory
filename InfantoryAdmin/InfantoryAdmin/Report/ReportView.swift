@@ -53,10 +53,14 @@ struct ReportView: View {
             }
         }
         .refreshable {
-            try? await reportStore.fetchReport()
+            Task {
+                try? await reportStore.fetchReport()
+            }
         }
         .task {
-            try? await reportStore.fetchReport()
+            Task {
+                try? await reportStore.fetchReport()
+            }
         }
     }
 }
