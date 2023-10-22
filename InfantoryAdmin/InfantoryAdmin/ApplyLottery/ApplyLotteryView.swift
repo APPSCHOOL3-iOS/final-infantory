@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ApplyLotteryView: View {
-    @StateObject var applyLotteryStore = ApplyLotteryStore()
+    @StateObject private var applyLotteryStore = ApplyLotteryStore()
     @State private var isShowAlert: Bool = false
     @State private var closeCategory: ApplyCloseFilter = .beforeRaffle
+    @State private var isShowToastMessage: Bool = false
     var body: some View {
         VStack {
             ApplyTabBarView(applyLotteryStore: applyLotteryStore, closeCategory: $closeCategory)
@@ -29,7 +30,6 @@ struct ApplyLotteryView: View {
                                         Spacer()
                                         
                                         Button {
-                                           
                                             isShowAlert = true
                                         } label: {
                                             Text("일괄추첨")
@@ -53,6 +53,7 @@ struct ApplyLotteryView: View {
                     }
                 }
             }
+            ToastMessageView(content: Text("추첨이 완료되었습니다."), isPresented: $isShowToastMessage)
             .refreshable {
                 try? await applyLotteryStore.fetchApplyProduct()
             }
@@ -66,6 +67,7 @@ struct ApplyLotteryView: View {
                   primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("추첨하기")) {
                 applyLotteryStore.lotteryApply()
+                isShowToastMessage = true
             })
         }
     }

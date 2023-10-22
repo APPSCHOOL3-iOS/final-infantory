@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ApplyTabBarView: View {
+    
     @ObservedObject var applyLotteryStore: ApplyLotteryStore
     @Binding var closeCategory: ApplyCloseFilter
     

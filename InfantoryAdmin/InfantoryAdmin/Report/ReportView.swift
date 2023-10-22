@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ReportView: View {
+    
+    @StateObject private var reportStore: ReportStore = ReportStore()
+    
     var body: some View {
         Text("ReportView")
     }

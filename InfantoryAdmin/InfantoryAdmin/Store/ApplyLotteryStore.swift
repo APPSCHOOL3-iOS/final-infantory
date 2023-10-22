@@ -17,7 +17,7 @@ final class ApplyLotteryStore: ObservableObject {
     
     func fetchApplyProduct() async throws {
         let snapshot = try await dbRef.whereField("endDate", isLessThan: Date()).getDocuments()
-        var product = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
+        let product = snapshot.documents.compactMap { try? $0.data(as: ApplyProduct.self) }
         await updateApplyLotteriesProduct(product)
     }
     
@@ -38,7 +38,7 @@ final class ApplyLotteryStore: ObservableObject {
     func addWinningUser(product: ApplyProduct) {
         let documentReference = Firestore.firestore().collection("ApplyProducts").document(product.id ?? "")
        
-        documentReference.updateData(["winningUserID": product.winningUserID ?? "응모자 없음"]) { (error) in
+        documentReference.updateData(["winningUserID": product.winningUserID ?? "응모자 없음" , "raffleDate": Date()]) { (error) in
             if error != nil {
             
             } else {

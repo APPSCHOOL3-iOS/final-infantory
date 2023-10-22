@@ -16,7 +16,6 @@ struct ApplyListCellView: View {
         VStack(alignment: .leading, spacing: 20) {
             Text("\(product.influencerNickname)")
                 .font(.title2.bold())
-                .padding(.horizontal)
             HStack(spacing: 16) {
                 if product.productImageURLStrings.count > 0 {
                     AsyncImage(url: URL(string: product.productImageURLStrings[0])) { image in
@@ -92,21 +91,25 @@ struct ApplyListCellView: View {
                             }
                         }
                         
-                        if product.winningUserID != nil {
+                        if product.raffleDate != nil {
                             Text("당첨자: \(product.winningUserID ?? "")")
                                 .font(.footnote)
                                 .foregroundColor(.blue)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("추첨일: \(product.dateToString)")
+                                .font(.footnote)
+                                .foregroundColor(.orange)
                                 .multilineTextAlignment(.leading)
                         }
                         
                     }
                     Spacer()
                 }
-                    
-                Divider()
+
             }
-            .padding(.horizontal)
         }
+        .padding()
     }
 }
 
