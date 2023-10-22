@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */; };
 		116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116033952AE0B74000F6E940 /* AdminMainView.swift */; };
+		11645FA52AE51BDC0015172D /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA42AE51BDC0015172D /* AuctionProduct.swift */; };
+		11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA62AE51C050015172D /* PaidProductStore.swift */; };
+		11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA92AE51C6E0015172D /* PaymentProductView.swift */; };
+		11645FAC2AE51CB10015172D /* PaymentProductTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */; };
 		11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */; };
-		11B4F79E2AE0C9680076F040 /* PaymentProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F79D2AE0C9680076F040 /* PaymentProductView.swift */; };
 		11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */; };
 		11B4F7A22AE0CA530076F040 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7A12AE0CA530076F040 /* ReportView.swift */; };
 		11B4F7A52AE0CD600076F040 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7A42AE0CD600076F040 /* FirebaseAuth */; };
@@ -55,8 +58,11 @@
 /* Begin PBXFileReference section */
 		114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyListCellView.swift; sourceTree = "<group>"; };
 		116033952AE0B74000F6E940 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
+		11645FA42AE51BDC0015172D /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
+		11645FA62AE51C050015172D /* PaidProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidProductStore.swift; sourceTree = "<group>"; };
+		11645FA92AE51C6E0015172D /* PaymentProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductView.swift; sourceTree = "<group>"; };
+		11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductTabbarView.swift; sourceTree = "<group>"; };
 		11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLotteryView.swift; sourceTree = "<group>"; };
-		11B4F79D2AE0C9680076F040 /* PaymentProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductView.swift; sourceTree = "<group>"; };
 		11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerView.swift; sourceTree = "<group>"; };
 		11B4F7A12AE0CA530076F040 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		11B4F7B02AE0CEB70076F040 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -109,11 +115,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11645FA82AE51C440015172D /* PaidProduct */ = {
+			isa = PBXGroup;
+			children = (
+				11645FA92AE51C6E0015172D /* PaymentProductView.swift */,
+				11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */,
+			);
+			path = PaidProduct;
+			sourceTree = "<group>";
+		};
 		11B4F79C2AE0C6E70076F040 /* Report */ = {
 			isa = PBXGroup;
 			children = (
 				11B4F7A12AE0CA530076F040 /* ReportView.swift */,
-				11B4F79D2AE0C9680076F040 /* PaymentProductView.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -124,6 +138,7 @@
 				11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */,
 				ECA453DB2AE4201600F338B5 /* ReportStore.swift */,
 				ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */,
+				11645FA62AE51C050015172D /* PaidProductStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -133,6 +148,7 @@
 			children = (
 				11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */,
 				ECA453E32AE423CC00F338B5 /* User.swift */,
+				11645FA42AE51BDC0015172D /* AuctionProduct.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,12 +156,14 @@
 		11B4F7B92AE0F85A0076F040 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */,
 				A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */,
 				ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */,
 				ECA453DD2AE4213700F338B5 /* MainTab */,
 				ECA453DE2AE4214400F338B5 /* ApplyLottery */,
 				11B4F79C2AE0C6E70076F040 /* Report */,
 				ECA453E02AE421A400F338B5 /* Influencer */,
+				11645FA82AE51C440015172D /* PaidProduct */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -177,7 +195,6 @@
 				11B4F7B92AE0F85A0076F040 /* View */,
 				11B4F7B32AE0E2E30076F040 /* Model */,
 				11B4F7B22AE0CF4D0076F040 /* Store */,
-				A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */,
 				A08061DC2AE0AEAD00AD5DBE /* Preview Content */,
 			);
 			path = InfantoryAdmin;
@@ -385,19 +402,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECA453E42AE423CC00F338B5 /* User.swift in Sources */,
+				11645FA52AE51BDC0015172D /* AuctionProduct.swift in Sources */,
 				ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */,
 				11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */,
 				ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */,
 				ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */,
 				11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */,
+				11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */,
 				11B4F7A22AE0CA530076F040 /* ReportView.swift in Sources */,
+				11645FAC2AE51CB10015172D /* PaymentProductTabbarView.swift in Sources */,
 				11B4F7B52AE0E2FA0076F040 /* ApplyProduct.swift in Sources */,
 				ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */,
 				11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */,
 				114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */,
 				116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */,
+				11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */,
 				A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */,
-				11B4F79E2AE0C9680076F040 /* PaymentProductView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
