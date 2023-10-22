@@ -145,7 +145,10 @@ struct PaymentProductView: View {
                     }
                 }
             }
-            
+            .padding()
+        }
+        .refreshable {
+            try? await payProductStore.fetchProduct()
         }
         .task {
             try? await payProductStore.fetchProduct()
