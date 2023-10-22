@@ -16,14 +16,15 @@ struct ProfileEditView: View {
     @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
     
-    @State var nickName: String = ""
-    @State var phoneNumber: String = ""
-    @State var selectedUIImageString: String?
+    @State private var nickName: String = ""
+    @State private var phoneNumber: String = ""
+    @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
+    @State var imageURLString: String = ""
     @State var image: Image?
-    @State var myZipCode: String = ""
-    @State var myAddress: String = ""
-    @State var myDetailAddress: String = ""
+    @State private var myZipCode: String = ""
+    @State private var myAddress: String = ""
+    @State private var myDetailAddress: String = ""
     @State private var showAlert: Bool = false
     @State private var isCheckedNickName: Bool = false
     @State private var isCheckedButton: Bool = false
@@ -32,17 +33,15 @@ struct ProfileEditView: View {
     @State private var toastMessageText: String = ""
     
     @State private var cameraSheetShowing = false
-    @State var showImagePicker = false
-//    @Binding var selectedUIImage: UIImage?
-//    @Binding var selectedUIImageString: String?
-//    
+    //    @Binding var selectedUIImage: UIImage?
+    //    @Binding var selectedUIImageString: String?
+    //
     @State var selectedImage: Image?
-//    @State var image: Image?
+    //    @State var image: Image?
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
         image = Image(uiImage: selectedImage)
-        print("이미지 넘어옴")
     }
     
     var body: some View {
@@ -50,25 +49,41 @@ struct ProfileEditView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-//                    PhotosSelector(myProfileEditStore: myProfileEditStore, selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
-                    CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
-                        switch phase {
-                        case .empty:
-                            ProgressView()
-                                .frame(width: 80, height: 80)
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .clipShape(Circle())
-                                .frame(width: 80, height: 80)
-                        case .failure:
-                            Image("smallAppIcon")
-                                .resizable()
-                                .clipShape(Circle())
-                                .frame(width: 80, height: 80)
-                        @unknown default:
-                            EmptyView()
-                        }
+                    //                    PhotosSelector(myProfileEditStore: myProfileEditStore, selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
+                    //                    CachedImage(url: myProfileEditStore.user?.profileImageURLString ?? "") { phase in
+                    //                        switch phase {
+                    //                        case .empty:
+                    //                            ProgressView()
+                    //                                .frame(width: 80, height: 80)
+                    //                        case .success(let image):
+                    //                            image
+                    //                                .resizable()
+                    //                                .clipShape(Circle())
+                    //                                .frame(width: 80, height: 80)
+                    //                        case .failure:
+                    //                            Image("smallAppIcon")
+                    //                                .resizable()
+                    //                                .clipShape(Circle())
+                    //                                .frame(width: 80, height: 80)
+                    //                        @unknown default:
+                    //                            EmptyView()
+                    //                        }
+                    //                    }
+                    if let image = image {
+                        image
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
+                    } else if ((loginStore.currentUser.profileImageURLString?.isEmpty) == nil) {
+                        Image("\(loginStore.currentUser.profileImageURLString ?? "")")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
+                    } else {
+                        Image("smallAppIcon")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
                     }
                     VStack {
                         HStack(alignment: .top) {
@@ -138,17 +153,17 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
-                            Text(checkNickNameResult)
-                                .font(.infanFootnote)
-                                .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
+                        Text(checkNickNameResult)
+                            .font(.infanFootnote)
+                            .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
                     }
                     UnderlineTextField(textFieldTitle: "전화번호",
-                                       placeholder: loginStore.currentUser.phoneNumber,
+                                       placeholder: myProfileEditStore.user?.phoneNumber ?? "",
                                        text: $phoneNumber)
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
-                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: loginStore.currentUser.address.zonecode, text: $myZipCode)
+                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZipCode)
                                 .disabled(true)
                             
                             NavigationLink {
@@ -167,19 +182,17 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
-                        UnderlineTextField(textFieldTitle: "주소", placeholder: loginStore.currentUser.address.address, text: $myAddress)
+                        UnderlineTextField(textFieldTitle: "주소", placeholder: myProfileEditStore.user?.address.address ?? "", text: $myAddress)
                             .disabled(true)
                         
-                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: loginStore.currentUser.address.addressDetail, text: $myDetailAddress)
+                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myDetailAddress)
                     }
                     .padding(.bottom, 30)
-
+                    
                     MainColorButton(text: "변경하기") {
                         Task {
                             if let currentUserId = loginStore.currentUser.id {
-                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: selectedUIImageString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
-                                
-                                dismiss()
+                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
                             }
                         }
                     }
@@ -187,7 +200,7 @@ struct ProfileEditView: View {
                 .sheet(isPresented: $showImagePicker, onDismiss: {
                     loadImage()
                 }) {
-                    ProfileImagePicker(selectedUIImageString: $selectedUIImageString, selectedUIImage: $selectedUIImage)
+                    ProfileImagePicker(image: $selectedUIImage)
                 }
                 .sheet(isPresented: $cameraSheetShowing) {
                     UseCameraView()

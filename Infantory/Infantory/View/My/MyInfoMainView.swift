@@ -23,7 +23,7 @@ struct MyInfoMainView: View {
                 VStack(spacing: 20) {
                     HStack {
 //                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore, nickName: $nickName)
-                        MyTextView(myProfileEditStore: myProfileEditStore, myPaymentsStore: myPaymentStore, loginStore: loginStore)
+                        MyTextView(myProfileEditStore: myProfileEditStore, loginStore: loginStore)
                         
                         // 프로필 관리, 배송지 관리 버튼
                         MyProfileEditButton(myProfileEditStore: myProfileEditStore)
@@ -32,7 +32,7 @@ struct MyInfoMainView: View {
                     
                     // 상품 내역, 결제완료~배송완료
                     Divider()
-                    MyPaymentStatusView(myProfileEditStore: myProfileEditStore, myPaymentStore: myPaymentStore)
+                    MyPaymentStatusView(myPaymentStore: myPaymentStore, loginStore: loginStore)
                         .horizontalPadding()
                     Divider()
                     // 입찰내역, 응모내역, 결제정보, 로그아웃
@@ -49,7 +49,6 @@ struct MyInfoMainView: View {
         .task {
             Task {
                 myProfileEditStore.fetchUser(userID: loginStore.currentUser.id ?? "")
-                myProfileEditStore.uploadImage(image: myProfileEditStore.user?.profileImageURLString ?? "", userId: <#T##String#>, completion: <#T##(String) -> Void#>)
             }
         }
         .toolbar {

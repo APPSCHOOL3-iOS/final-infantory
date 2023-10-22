@@ -9,12 +9,11 @@ import SwiftUI
 
 struct MyTextView: View {
     @ObservedObject var myProfileEditStore: MyProfileEditStore
-    @ObservedObject var myPaymentsStore: MyPaymentStore
     var loginStore: LoginStore
     
     var body: some View {
         HStack {
-            CachedImage(url: myProfileEditStore.user?.profileImageURLString ?? "") { phase in
+            CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
                 switch phase {
                 case .empty:
                     ProgressView()
@@ -34,7 +33,7 @@ struct MyTextView: View {
                 }
             }
             VStack(alignment: .leading) {
-                Text("\(myProfileEditStore.user?.nickName ?? "")")
+                Text("\(loginStore.currentUser.nickName)")
                 HStack {
                     NavigationLink {
                         EntryTicketView()
@@ -68,6 +67,6 @@ struct MyTextView: View {
 
 struct MyTextView_Previews: PreviewProvider {
     static var previews: some View {
-        MyTextView(myProfileEditStore: MyProfileEditStore(), myPaymentsStore: MyPaymentStore(), loginStore: LoginStore())
+        MyTextView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore())
     }
 }

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct MyPaymentStatusView: View {
-    @ObservedObject var myProfileEditStore: MyProfileEditStore
-    var myPaymentStore: MyPaymentStore
+    @ObservedObject var myPaymentStore: MyPaymentStore
+    @ObservedObject var loginStore: LoginStore
     var body: some View {
         VStack(spacing: 16) {
             HStack(alignment: .top) {
@@ -18,13 +18,13 @@ struct MyPaymentStatusView: View {
                     .foregroundColor(.infanBlack)
                 Spacer()
             }
-            MyPaymentStatusCountView(myPaymentStore: myPaymentStore)
+            MyPaymentStatusCountView(myPaymentStore: myPaymentStore, loginStore: loginStore)
         }
     }
 }
 
 struct MyPaymentStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPaymentStatusView(myProfileEditStore: MyProfileEditStore(), myPaymentStore: MyPaymentStore())
+        MyPaymentStatusView(myPaymentStore: MyPaymentStore(), loginStore: LoginStore())
     }
 }
