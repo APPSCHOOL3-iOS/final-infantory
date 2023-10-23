@@ -20,8 +20,8 @@ final class InfluencerStore: ObservableObject {
         let query = try await Firestore.firestore().collection("Users").document(influencerID).getDocument()
         DispatchQueue.main.async {
             do {
+                self.influencer = User()
                 self.influencer = try query.data(as: User.self)
-                
             } catch {
                 print("error: 인플루언서를 불러오지 못했습니다.")
             }

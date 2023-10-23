@@ -20,13 +20,13 @@ struct MyMainView: View {
             if loginStore.userUid.isEmpty {
                 MyLoginView()
             } else {
-                MyInfoMainView(loginStore: loginStore, nickName: myProfileEditStore.user?.nickName ?? "")
+                MyInfoMainView(nickName: myProfileEditStore.user?.nickName ?? "")
             }
         }
         .onAppear {
-            myProfileEditStore.fetchUser(userID: loginStore.userUid)
-            print(myProfileEditStore.user ?? "유저 없음")
-            
+            if !loginStore.userUid.isEmpty {
+                myProfileEditStore.fetchUser(userID: loginStore.userUid)
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ import Photos
 struct MyInfoMainView: View {
     @StateObject var myPaymentStore: MyPaymentStore = MyPaymentStore()
     @StateObject var myProfileEditStore: MyProfileEditStore = MyProfileEditStore()
-    @StateObject var loginStore: LoginStore
+    @EnvironmentObject var loginStore: LoginStore
     //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     @State var nickName: String
     
@@ -23,7 +23,7 @@ struct MyInfoMainView: View {
                 VStack(spacing: 20) {
                     HStack {
 //                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore, nickName: $nickName)
-                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore)
+                        MyUserProfileView(myProfileEditStore: myProfileEditStore)
                         
                         // 프로필 관리, 배송지 관리 버튼
                         MyProfileEditButton(myProfileEditStore: myProfileEditStore)
@@ -48,7 +48,9 @@ struct MyInfoMainView: View {
         }
         .task {
             Task {
-                myProfileEditStore.fetchUser(userID: loginStore.currentUser.id ?? "")
+                if !loginStore.userUid.isEmpty {
+                    myProfileEditStore.fetchUser(userID: loginStore.userUid)
+                }
             }
         }
         .toolbar {
@@ -62,6 +64,6 @@ struct MyInfoMainView: View {
 }
 struct MyInfoMainView_Previews: PreviewProvider {
     static var previews: some View {
-        MyInfoMainView(loginStore: LoginStore(), nickName: "")
+        MyInfoMainView(nickName: "")
     }
 }

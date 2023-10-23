@@ -14,28 +14,14 @@ struct InfluencerImageView: View {
     var body: some View {
         HStack(spacing: 50) {
             VStack(alignment: .leading) {
-                CachedImage(url: influencerStore.influencer.profileImageURLString ?? "") { phase in
-                    switch phase {
-                    case .empty:
-                        ProgressView()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .cornerRadius(45)
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .cornerRadius(45)
-                    case .failure:
-                        Image("smallAppIcon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 90, height: 90)
-                            .cornerRadius(45)
-                    @unknown default:
-                        EmptyView()
-                    }
+                AsyncImage(url: URL(string: influencerStore.influencer.profileImageURLString ?? "")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 90, height: 90)
+                        .cornerRadius(45)
+                } placeholder: {
+                    ProgressView()
                 }
                 Text("\(influencerStore.influencer.name)")
                     .font(.infanHeadlineBold)
