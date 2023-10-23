@@ -103,7 +103,7 @@ struct AuctionProductListCellView: View {
                             .multilineTextAlignment(.leading)
                             .padding(.vertical, 10)
                         
-                        TextAnimateView(value: myActivityStore.winningPrice)
+                        TextAnimateView(value: myActivityStore.winningPrice == 0 ? Double(product.minPrice) : myActivityStore.winningPrice)
                             .foregroundColor(Color.infanDarkGray)
                             .monospacedDigit()
                             .animation(Animation.easeInOut(duration: 1))
