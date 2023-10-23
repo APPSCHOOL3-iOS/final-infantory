@@ -86,6 +86,7 @@ class AuctionRegisterStore: ObservableObject {
                                                      description: itemDescription,
                                                      influencerID: user.id ?? UUID().uuidString,
                                                      influencerNickname: user.nickName,
+                                                     influencerProfile: user.profileImageURLString,
                                                      startDate: startDate,
                                                      endDate: endDate,
                                                      registerDate: Date(), minPrice: Int(startingPrice) ?? 0,

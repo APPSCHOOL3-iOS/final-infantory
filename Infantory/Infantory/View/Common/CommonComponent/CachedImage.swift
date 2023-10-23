@@ -10,7 +10,7 @@ import SwiftUI
 struct CachedImage<Content: View>: View {
     
     @StateObject private var manager = CachedImageManager()
-    let url: String
+    @State var url: String
     let animation: Animation?
     let transition: AnyTransition
     let content: (AsyncImagePhase) -> Content

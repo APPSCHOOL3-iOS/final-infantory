@@ -36,6 +36,7 @@ struct HomeMainView: View {
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
                     HomeHotAuctionView(auctionViewModel: auctionViewModel)
+                    
                 }
                 .padding([.top, .bottom])
                 
@@ -47,6 +48,7 @@ struct HomeMainView: View {
                     HomeApplyView(applyViewModel: applyViewModel)
                 }
                 .padding([.top, .bottom])
+               
                 
             }
             .scrollIndicators(.hidden)

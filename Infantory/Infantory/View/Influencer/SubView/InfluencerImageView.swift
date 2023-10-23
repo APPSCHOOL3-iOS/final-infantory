@@ -22,6 +22,8 @@ struct InfluencerImageView: View {
                         .cornerRadius(45)
                 } placeholder: {
                     ProgressView()
+                        .frame(width: 90, height: 90)
+                        .cornerRadius(45)
                 }
                 Text("\(influencerStore.influencer.name)")
                     .font(.infanHeadlineBold)

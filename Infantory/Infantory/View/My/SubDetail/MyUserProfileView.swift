@@ -13,15 +13,26 @@ struct MyUserProfileView: View {
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: loginStore.currentUser.profileImageURLString ?? "")) { image in
-                image
+            if let image = loginStore.currentUser.profileImageURLString {
+                AsyncImage(url: URL(string: image)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(45)
+                } placeholder: {
+                    ProgressView()
+                        .frame(width: 80, height: 80)
+                        .cornerRadius(45)
+                }
+            } else {
+                Image("smallAppIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 80, height: 80)
                     .cornerRadius(45)
-            } placeholder: {
-                ProgressView()
             }
+            
             VStack(alignment: .leading) {
                 Text("\(loginStore.currentUser.nickName)")
                 HStack {
