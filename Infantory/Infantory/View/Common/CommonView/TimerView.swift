@@ -37,9 +37,6 @@ struct TimerView: View {
                 remainingTime = 0
             }
         }
-        .onDisappear {
-            timer.upstream.connect().cancel()
-        }
     }
 }
 
