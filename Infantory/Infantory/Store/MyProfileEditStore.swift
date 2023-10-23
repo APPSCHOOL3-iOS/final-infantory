@@ -10,10 +10,22 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class MyProfileEditStore: ObservableObject {
+    @Published var user: User?
+    
     private let dbRef = Firestore.firestore().collection("Users")
     private let storage = Storage.storage().reference()
     
     var urlFullPath: String = "aha"
+    
+    func fetchUser(userID: String) {
+        dbRef.document(userID).getDocument { document, _ in
+            if let document = document {
+               let user = try? document.data(as: User.self)
+                self.user = user
+                print(self.user)
+            }
+        }
+    }
     
     func updateUser(image: UIImage? = nil,
                     imageURL: String? = nil,

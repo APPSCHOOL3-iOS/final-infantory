@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProfileImagePicker: UIViewControllerRepresentable {
-    @Binding var selectedUIImageString: String?
-    @Binding var selectedUIImage: UIImage?
+    
+    @Binding var image: UIImage?
     @Environment(\.presentationMode) var mode
     
     func makeCoordinator() -> Coordinator {
@@ -37,8 +37,7 @@ extension ProfileImagePicker {
         
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             guard let image = info[.originalImage] as? UIImage else { return }
-            self.parent.selectedUIImage = image
-            self.parent.selectedUIImageString = UUID().uuidString
+            parent.image = image
             parent.mode.wrappedValue.dismiss()
         }
     }

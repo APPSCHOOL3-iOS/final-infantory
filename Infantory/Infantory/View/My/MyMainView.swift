@@ -8,17 +8,25 @@
 import SwiftUI
 
 struct MyMainView: View {
-    
+    @StateObject var myProfileEditStore: MyProfileEditStore = MyProfileEditStore()
+    @StateObject var myPaymentStore: MyPaymentStore = MyPaymentStore()
     @EnvironmentObject var loginStore: LoginStore
     @State private var isShowingLoginSheet: Bool = false
+    @State private var selectedUIImage: UIImage?
+    @State private var selectedUIImageString: String?
     
     var body: some View {
         NavigationStack {
             if loginStore.userUid.isEmpty {
                 MyLoginView()
             } else {
-                MyInfoMainView()
+                MyInfoMainView(loginStore: loginStore, nickName: myProfileEditStore.user?.nickName ?? "")
             }
+        }
+        .onAppear {
+            myProfileEditStore.fetchUser(userID: loginStore.userUid)
+            print(myProfileEditStore.user ?? "유저 없음")
+            
         }
     }
 }

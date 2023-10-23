@@ -10,6 +10,7 @@ import SwiftUI
 struct MyPaymentsListView: View {
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @ObservedObject var myPaymentStore: MyPaymentStore
+    @ObservedObject var loginStore: LoginStore
     
     @State private var showingModal: Bool = false
     @State private var selectedIndex: Int = 0
@@ -119,6 +120,6 @@ struct MyPaymentsListView: View {
 
 struct MyPaymentsListView_Previews: PreviewProvider {
     static var previews: some View {
-        MyPaymentsListView(myPaymentStore: MyPaymentStore())
+        MyPaymentsListView(myPaymentStore: MyPaymentStore(), loginStore: LoginStore())
     }
 }

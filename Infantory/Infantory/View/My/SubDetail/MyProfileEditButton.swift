@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct MyProfileEditButton: View {
-    var loginStore: LoginStore
+    @ObservedObject var myProfileEditStore: MyProfileEditStore
+//    @Binding var selectedUIImage: UIImage?
+//    @Binding var selectedUIImageString: String?
     var body: some View {
         NavigationLink {
-            ProfileEditView(nickName: loginStore.currentUser.nickName, phoneNumber: loginStore.currentUser.phoneNumber, myZipCode: loginStore.currentUser.address.zonecode, myAddress: loginStore.currentUser.address.address, myDetailAddress: loginStore.currentUser.address.addressDetail)
+            ProfileEditView(myProfileEditStore: myProfileEditStore)
         } label: {
             Text("편집")
                 .font(.infanFootnote)
@@ -29,6 +31,6 @@ struct MyProfileEditButton: View {
 
 struct MyProfileEditButton_Previews: PreviewProvider {
     static var previews: some View {
-        MyProfileEditButton(loginStore: LoginStore())
+        MyProfileEditButton(myProfileEditStore: MyProfileEditStore())
     }
 }

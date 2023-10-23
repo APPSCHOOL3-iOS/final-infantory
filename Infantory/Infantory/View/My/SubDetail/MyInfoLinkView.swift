@@ -16,7 +16,7 @@ struct MyInfoLinkView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             NavigationLink {
-                MyPaymentsListView(myPaymentStore: myPaymentStore)
+                MyPaymentsListView(myPaymentStore: myPaymentStore, loginStore: loginStore)
             } label: {
                 HStack {
                     Image(systemName: "list.bullet.rectangle.portrait")

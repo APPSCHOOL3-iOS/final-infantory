@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 struct User: Identifiable, Codable {
     @DocumentID var id: String?
     var isInfluencer: UserType = .user
-    var profileImageURLString: String? = nil
+    var profileImageURLString: String?
     var name: String = ""
     var nickName: String = ""
     var phoneNumber: String = ""

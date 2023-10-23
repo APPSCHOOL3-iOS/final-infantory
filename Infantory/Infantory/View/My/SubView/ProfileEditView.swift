@@ -6,21 +6,25 @@
 //
 
 import SwiftUI
+import PhotosUI
+import Photos
 
 struct ProfileEditView: View {
     //    @StateObject var photosSelectorStore = PhotosSelectorStore.shared
-    @StateObject var myStore: MyProfileEditStore = MyProfileEditStore()
+    @ObservedObject var myProfileEditStore: MyProfileEditStore
+    
     @EnvironmentObject var loginStore: LoginStore
     @Environment(\.dismiss) private var dismiss
     
-    @State var nickName: String = ""
-    @State var phoneNumber: String = ""
-    @State private var selectedUIImageString: String?
-    @State private var selectedUIImage: UIImage?
+    @State private var nickName: String = ""
+    @State private var phoneNumber: String = ""
+    @State var showImagePicker = false
+    @State var selectedUIImage: UIImage?
+    @State var imageURLString: String = ""
     @State var image: Image?
-    @State var myZipCode: String = ""
-    @State var myAddress: String = ""
-    @State var myDetailAddress: String = ""
+    @State private var myZipCode: String = ""
+    @State private var myAddress: String = ""
+    @State private var myDetailAddress: String = ""
     @State private var showAlert: Bool = false
     @State private var isCheckedNickName: Bool = false
     @State private var isCheckedButton: Bool = false
@@ -28,15 +32,102 @@ struct ProfileEditView: View {
     @State private var showToastMessage: Bool = false
     @State private var toastMessageText: String = ""
     
+    @State private var cameraSheetShowing = false
+    //    @Binding var selectedUIImage: UIImage?
+    //    @Binding var selectedUIImageString: String?
+    //
+    @State var selectedImage: Image?
+    //    @State var image: Image?
+    
+    func loadImage() {
+        guard let selectedImage = selectedUIImage else { return }
+        image = Image(uiImage: selectedImage)
+    }
+    
     var body: some View {
+        
         NavigationStack {
             ScrollView {
                 VStack {
-                    PhotosSelector(selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
+                    //                    PhotosSelector(myProfileEditStore: myProfileEditStore, selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
+                    //                    CachedImage(url: myProfileEditStore.user?.profileImageURLString ?? "") { phase in
+                    //                        switch phase {
+                    //                        case .empty:
+                    //                            ProgressView()
+                    //                                .frame(width: 80, height: 80)
+                    //                        case .success(let image):
+                    //                            image
+                    //                                .resizable()
+                    //                                .clipShape(Circle())
+                    //                                .frame(width: 80, height: 80)
+                    //                        case .failure:
+                    //                            Image("smallAppIcon")
+                    //                                .resizable()
+                    //                                .clipShape(Circle())
+                    //                                .frame(width: 80, height: 80)
+                    //                        @unknown default:
+                    //                            EmptyView()
+                    //                        }
+                    //                    }
+                    if let image = image {
+                        image
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
+                    } else if ((loginStore.currentUser.profileImageURLString?.isEmpty) == nil) {
+                        Image("\(loginStore.currentUser.profileImageURLString ?? "")")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
+                    } else {
+                        Image("smallAppIcon")
+                            .resizable()
+                            .clipShape(Circle())
+                            .frame(width: 80, height: 80)
+                    }
+                    VStack {
+                        HStack(alignment: .top) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .frame(width: 160, height: 30)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.infanDarkGray, lineWidth: 1)
+                                    )
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                Button {
+                                    cameraSheetShowing = true
+                                } label: {
+                                    Text("사진촬영")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanDarkGray)
+                                }
+                            }
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .frame(width: 160, height: 30)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.infanDarkGray, lineWidth: 1)
+                                    )
+                                    .foregroundColor(.white)
+                                    .padding(2)
+                                Button {
+                                    showImagePicker.toggle()
+                                } label: {
+                                    Text("앨범에서 선택")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanDarkGray)
+                                }
+                            }
+                        }
+                    }
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
                             
-                            UnderlineTextField(textFieldTitle: "닉네임", placeholder: loginStore.userName, text: $nickName)
+                            UnderlineTextField(textFieldTitle: "닉네임", placeholder: myProfileEditStore.user?.nickName ?? "", text: $nickName)
                             Button {
                                 
                                 loginStore.duplicateNickName(nickName: nickName) { result in
@@ -62,17 +153,17 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
-                            Text(checkNickNameResult)
-                                .font(.infanFootnote)
-                                .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
+                        Text(checkNickNameResult)
+                            .font(.infanFootnote)
+                            .foregroundColor(isCheckedNickName ? .infanGreen : .infanRed)
                     }
                     UnderlineTextField(textFieldTitle: "전화번호",
-                                       placeholder: phoneNumber,
+                                       placeholder: myProfileEditStore.user?.phoneNumber ?? "",
                                        text: $phoneNumber)
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
-                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myZipCode, text: $myZipCode)
+                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZipCode)
                                 .disabled(true)
                             
                             NavigationLink {
@@ -91,29 +182,32 @@ struct ProfileEditView: View {
                                 }
                             }
                         }
-                        UnderlineTextField(textFieldTitle: "주소", placeholder: myAddress, text: $myAddress)
+                        UnderlineTextField(textFieldTitle: "주소", placeholder: myProfileEditStore.user?.address.address ?? "", text: $myAddress)
                             .disabled(true)
                         
-                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myDetailAddress, text: $myDetailAddress)
+                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myDetailAddress)
                     }
                     .padding(.bottom, 30)
-
+                    
                     MainColorButton(text: "변경하기") {
                         Task {
                             if let currentUserId = loginStore.currentUser.id {
-                                try await myStore.updateUser(image: selectedUIImage, imageURL: selectedUIImageString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
-                                
-                                dismiss()
+                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
                             }
                         }
                     }
                 }
+                .sheet(isPresented: $showImagePicker, onDismiss: {
+                    loadImage()
+                }) {
+                    ProfileImagePicker(image: $selectedUIImage)
+                }
+                .sheet(isPresented: $cameraSheetShowing) {
+                    UseCameraView()
+                }
                 .padding(.bottom)
                 .horizontalPadding()
                 .navigationBar(title: "내 프로필 편집")
-                .task({
-                    
-                })
             }
         }
     }

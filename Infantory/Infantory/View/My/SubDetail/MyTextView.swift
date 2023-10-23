@@ -1,16 +1,18 @@
 //
-//  MyUserProfileView.swift
+//  MyTextView.swift
 //  Infantory
 //
-//  Created by 봉주헌 on 2023/10/19.
+//  Created by 봉주헌 on 2023/10/20.
 //
 
 import SwiftUI
 
 struct MyUserProfileView: View {
+    @ObservedObject var myProfileEditStore: MyProfileEditStore
     var loginStore: LoginStore
+    
     var body: some View {
-        HStack(spacing: 16) {
+        HStack {
             CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
                 switch phase {
                 case .empty:
@@ -30,11 +32,8 @@ struct MyUserProfileView: View {
                     EmptyView()
                 }
             }
-            
-            VStack(alignment: .leading, spacing: 10) {
-                    Text("\(loginStore.currentUser.nickName)")
-                        .font(.infanTitle2)
-                        .foregroundColor(.infanBlack)
+            VStack(alignment: .leading) {
+                Text("\(loginStore.currentUser.nickName)")
                 HStack {
                     NavigationLink {
                         EntryTicketView()
@@ -49,7 +48,7 @@ struct MyUserProfileView: View {
                         .frame(height: 15)
                         .background(Color.gray)
                     NavigationLink {
-                            Text("내가 팔로우한 인플루언서가 보여질 예정입니다.")
+                        Text("내가 팔로우한 인플루언서가 보여질 예정입니다.")
                     } label: {
                         Text("팔로잉: ")
                         Text("15K")
@@ -61,13 +60,13 @@ struct MyUserProfileView: View {
                 .font(.infanFootnote)
                 .foregroundColor(.infanBlack)
             }
-            Spacer()
         }
+        Spacer()
     }
 }
 
 struct MyUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        MyUserProfileView(loginStore: LoginStore())
+        MyUserProfileView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore())
     }
 }
