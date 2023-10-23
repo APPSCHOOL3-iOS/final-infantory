@@ -9,28 +9,18 @@ import SwiftUI
 
 struct MyUserProfileView: View {
     @ObservedObject var myProfileEditStore: MyProfileEditStore
-    var loginStore: LoginStore
+    @EnvironmentObject var loginStore: LoginStore
     
     var body: some View {
         HStack {
-            CachedImage(url: loginStore.currentUser.profileImageURLString ?? "") { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: 80, height: 80)
-                case .success(let image):
-                    image
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 80, height: 80)
-                case .failure:
-                    Image("smallAppIcon")
-                        .resizable()
-                        .clipShape(Circle())
-                        .frame(width: 80, height: 80)
-                @unknown default:
-                    EmptyView()
-                }
+            AsyncImage(url: URL(string: loginStore.currentUser.profileImageURLString ?? "")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 90, height: 90)
+                    .cornerRadius(45)
+            } placeholder: {
+                ProgressView()
             }
             VStack(alignment: .leading) {
                 Text("\(loginStore.currentUser.nickName)")
@@ -67,6 +57,6 @@ struct MyUserProfileView: View {
 
 struct MyUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        MyUserProfileView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore())
+        MyUserProfileView(myProfileEditStore: MyProfileEditStore())
     }
 }
