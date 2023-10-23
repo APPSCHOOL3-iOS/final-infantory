@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MyTextView: View {
+struct MyUserProfileView: View {
     @ObservedObject var myProfileEditStore: MyProfileEditStore
     var loginStore: LoginStore
     
@@ -65,8 +65,8 @@ struct MyTextView: View {
     }
 }
 
-struct MyTextView_Previews: PreviewProvider {
+struct MyUserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        MyTextView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore())
+        MyUserProfileView(myProfileEditStore: MyProfileEditStore(), loginStore: LoginStore())
     }
 }

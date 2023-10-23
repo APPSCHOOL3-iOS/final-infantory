@@ -23,7 +23,7 @@ struct MyInfoMainView: View {
                 VStack(spacing: 20) {
                     HStack {
 //                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore, nickName: $nickName)
-                        MyTextView(myProfileEditStore: myProfileEditStore, loginStore: loginStore)
+                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore)
                         
                         // 프로필 관리, 배송지 관리 버튼
                         MyProfileEditButton(myProfileEditStore: myProfileEditStore)

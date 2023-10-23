@@ -114,14 +114,12 @@ struct ActivityMainView: View {
             myAuctionInfos.sort {
                 $0.timeStamp > $1.timeStamp
             }
-
             myApplyInfos.sort {
                 return $0.timeStamp > $1.timeStamp
             }
         }
     }
 }
-
 struct ActivityMainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
@@ -130,7 +128,6 @@ struct ActivityMainView_Previews: PreviewProvider {
         }
     }
 }
-
 struct ActivityRow: View {
     let product: Productable
     

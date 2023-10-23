@@ -12,7 +12,7 @@ struct MyPaymentStatusCountView: View {
     @ObservedObject var loginStore: LoginStore
     var body: some View {
             HStack {
-                MyPaymentStatusItemView(title: "결제완료", count: loginStore.currentUser.applyActivityInfos?.count ?? 0)
+                MyPaymentStatusItemView(title: "결제완료", count: myPaymentStore.myPayments.count )
                 MyPaymentStatusItemView(title: "준비중", count: 0)
                 MyPaymentStatusItemView(title: "배송중", count: 0)
                 MyPaymentStatusItemView(title: "배송완료", count: 0)
@@ -20,7 +20,7 @@ struct MyPaymentStatusCountView: View {
             .foregroundColor(.infanBlack)
             .onAppear {
                 Task {
-                    print("이게 진짜 임 \(loginStore.currentUser.applyActivityInfos?.count ?? 0)")
+                   try await myPaymentStore.fetchMyPayments(userId: loginStore.userUid)
                 }
             }
     }

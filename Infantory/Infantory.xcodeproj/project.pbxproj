@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		010B8A862AD7907600973E6A /* DressedUpImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010B8A852AD7907600973E6A /* DressedUpImageView.swift */; };
 		0136D6442AE01D830024E68C /* MyPaymentsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6432AE01D830024E68C /* MyPaymentsDetailView.swift */; };
-		0136D64B2AE0C8070024E68C /* MyUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D64A2AE0C8070024E68C /* MyUserProfileView.swift */; };
 		0136D64D2AE0C8E50024E68C /* MyProfileEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D64C2AE0C8E50024E68C /* MyProfileEditButton.swift */; };
 		0136D64F2AE0C9A10024E68C /* MyPaymentStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D64E2AE0C9A10024E68C /* MyPaymentStatusView.swift */; };
 		0136D6512AE0C9CF0024E68C /* MyPaymentStatusCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */; };
@@ -178,7 +177,6 @@
 /* Begin PBXFileReference section */
 		010B8A852AD7907600973E6A /* DressedUpImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressedUpImageView.swift; sourceTree = "<group>"; };
 		0136D6432AE01D830024E68C /* MyPaymentsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentsDetailView.swift; sourceTree = "<group>"; };
-		0136D64A2AE0C8070024E68C /* MyUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUserProfileView.swift; sourceTree = "<group>"; };
 		0136D64C2AE0C8E50024E68C /* MyProfileEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileEditButton.swift; sourceTree = "<group>"; };
 		0136D64E2AE0C9A10024E68C /* MyPaymentStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStatusView.swift; sourceTree = "<group>"; };
 		0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPaymentStatusCountView.swift; sourceTree = "<group>"; };
@@ -362,7 +360,7 @@
 		0136D6472AE0C7AA0024E68C /* SubDetail */ = {
 			isa = PBXGroup;
 			children = (
-				0136D64A2AE0C8070024E68C /* MyUserProfileView.swift */,
+				0136D6582AE26ACD0024E68C /* MyTextView.swift */,
 				0136D64C2AE0C8E50024E68C /* MyProfileEditButton.swift */,
 				0136D64E2AE0C9A10024E68C /* MyPaymentStatusView.swift */,
 				0136D6502AE0C9CF0024E68C /* MyPaymentStatusCountView.swift */,
@@ -618,7 +616,6 @@
 				A091E5B12ABC7A20000894FC /* MyMainView.swift */,
 				01CE788C2ADE26DF00790A56 /* MyLoginVIew.swift */,
 				016AAEDD2AD5317B000B69E4 /* MyInfoMainView.swift */,
-				0136D6582AE26ACD0024E68C /* MyTextView.swift */,
 				0136D6472AE0C7AA0024E68C /* SubDetail */,
 				016AAEDC2AD5316D000B69E4 /* SubView */,
 			);
@@ -1075,7 +1072,6 @@
 				A05C94F52ACFFF06003243B7 /* AuctionItemImage.swift in Sources */,
 				9E5A8FB92ABACD7C00654850 /* PaymentMethodView.swift in Sources */,
 				A086C7BA2ABD308200F0BF9B /* View+Modifier.swift in Sources */,
-				0136D64B2AE0C8070024E68C /* MyUserProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
