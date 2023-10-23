@@ -12,91 +12,110 @@ struct ActivityMainView: View {
     @State private var isSorted: Bool = false
     @State var myAuctionInfos: [AuctionActivityData] = []
     @State var myApplyInfos: [ApplyActivityData] = []
+    @State var isShowingLoginSheet: Bool = false
     let applyStore: ApplyProductStore = ApplyProductStore()
     
     var searchCategory: SearchResultCategory = .total
     
     var body: some View {
         NavigationStack {
-            VStack {
-                Section {
-                    if selectedFilter.title == "경매" {
-                        if myAuctionInfos.isEmpty {
-                            VStack {
-                                Spacer()
-                                Text("참여한 경매가 없습니다.")
-                                    .font(.infanBody)
-                                    .foregroundColor(.infanGray)
-                                Spacer()
+            if loginStore.userUid.isEmpty {
+                Button {
+                    isShowingLoginSheet = true
+                } label: {
+                    Text("로그인")
+                        .bold()
+                }
+            } else {
+                VStack {
+                    
+                    Section {
+                        if selectedFilter.title == "경매" {
+                            if myAuctionInfos.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    Text("참여한 경매가 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanGray)
+                                    Spacer()
+                                }
+                            } else {
+                                ScrollView {
+                                    ForEach(myAuctionInfos, id: \.product.id ) { info in
+                                        NavigationLink {
+                                            AuctionDetailView(auctionStore: AuctionStore(product: info.product))
+                                        } label: {
+                                            ActivityRow(product: info.product,
+                                                        selectedFilter: $selectedFilter, isSorted: $isSorted,
+                                                        myAuctionInfos: info)
+                                            .padding()
+                                        }
+                                        .foregroundColor(.black)
+                                        
+                                        Divider()
+                                    }
+                                }
+                                
                             }
                         } else {
-                            ScrollView {
-                                ForEach(myAuctionInfos, id: \.product.id ) { info in
-                                    NavigationLink {
-                                        AuctionDetailView(auctionStore: AuctionStore(product: info.product))
-                                    } label: {
-                                        ActivityRow(product: info.product,
-                                                    selectedFilter: $selectedFilter, isSorted: $isSorted,
-                                                    myAuctionInfos: info)
-                                        .padding()
+                            if myApplyInfos.isEmpty {
+                                VStack {
+                                    Spacer()
+                                    Text("참여한 응모가 없습니다.")
+                                        .font(.infanBody)
+                                        .foregroundColor(.infanGray)
+                                    Spacer()
+                                }
+                            } else {
+                                ScrollView {
+                                    ForEach(myApplyInfos, id: \.product.id) { info in
+                                        NavigationLink {
+                                            ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                        } label: {
+                                            ActivityRow(product: info.product,
+                                                        selectedFilter: $selectedFilter, isSorted: $isSorted, myApplyInfos: info)
+                                            .padding()
+                                        }
+                                        .foregroundColor(.black)
+                                        
+                                        Divider()
                                     }
-                                    .foregroundColor(.black)
-                                    
-                                    Divider()
                                 }
                             }
                             
                         }
-                    } else {
-                        if myApplyInfos.isEmpty {
-                            VStack {
-                                Spacer()
-                                Text("참여한 응모가 없습니다.")
-                                    .font(.infanBody)
-                                    .foregroundColor(.infanGray)
-                                Spacer()
-                            }
-                        } else {
-                            ScrollView {
-                                ForEach(myApplyInfos, id: \.product.id) { info in
-                                    NavigationLink {
-                                        ApplyDetailView(applyViewModel: applyStore, product: info.product)
-                                    } label: {
-                                        ActivityRow(product: info.product,
-                                                    selectedFilter: $selectedFilter, isSorted: $isSorted, myApplyInfos: info)
-                                        .padding()
-                                    }
-                                    .foregroundColor(.black)
-                                    
-                                    Divider()
-                                }
-                            }
-                        }
                         
-                    }
-                    
-                } header: {
-                    ActivityOptionBar(selectedFilter: $selectedFilter)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.infanBlack)
+                    } header: {
+                        ActivityOptionBar(selectedFilter: $selectedFilter)
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Text("활동현황")
-                        .font(.infanHeadlineBold)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: SearchMainView(searchCategory: searchCategory)) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.infanBlack)
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text("활동현황")
+                            .font(.infanHeadlineBold)
+                    }
                 }
             }
+        }
+        .sheet(isPresented: $isShowingLoginSheet) {
+            LoginSheetView()
+                .environmentObject(loginStore)
         }
         .task {
-            sortApplyProduct()
+            if !loginStore.userUid.isEmpty {
+                sortApplyProduct()
+            }
         }
         .refreshable {
-            sortApplyProduct()
+            if !loginStore.userUid.isEmpty {
+                sortApplyProduct()
+            }
         }
     }
     func sortApplyProduct() {
@@ -313,7 +332,7 @@ struct ActivityRow: View {
     
     func isWinner() -> Bool {
         if let activityInfos = loginStore.currentUser.auctionActivityInfos,
-            let price = product.winningPrice {
+           let price = product.winningPrice {
             for info in activityInfos {
                 if info.productId == product.id {
                     print(price)
