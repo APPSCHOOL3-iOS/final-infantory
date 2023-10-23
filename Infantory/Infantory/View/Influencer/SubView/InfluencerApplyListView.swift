@@ -33,7 +33,7 @@ struct InfluencerApplyListView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: (.screenWidth - 2) / 3, height: .screenWidth / 3)
+                                            .frame(width: (.screenWidth - 2) / 3, height: (.screenWidth - 2) / 3)
                                             .blur(radius: 5)
                                             .clipped()
                                         
