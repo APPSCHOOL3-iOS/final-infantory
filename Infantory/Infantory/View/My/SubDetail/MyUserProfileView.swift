@@ -17,7 +17,7 @@ struct MyUserProfileView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 90, height: 90)
+                    .frame(width: 80, height: 80)
                     .cornerRadius(45)
             } placeholder: {
                 ProgressView()
@@ -41,7 +41,7 @@ struct MyUserProfileView: View {
                         Text("내가 팔로우한 인플루언서가 보여질 예정입니다.")
                     } label: {
                         Text("팔로잉: ")
-                        Text("15K")
+                        Text("\(myProfileEditStore.user?.follower?.count ?? 0)")
                             .font(.infanFootnoteBold)
                             .foregroundColor(.infanMain)
                             .padding(.leading, -5)
