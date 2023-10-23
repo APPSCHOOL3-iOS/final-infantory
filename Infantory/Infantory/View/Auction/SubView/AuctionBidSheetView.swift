@@ -38,7 +38,7 @@ struct AuctionBidSheetView: View {
                     auctionStore.addBid(biddingInfo: BiddingInfo(id: UUID(),
                                                                      timeStamp: Date(),
                                                                  userID: "\(loginStore.userUid)",
-                                                                 userNickname: "\(loginStore.currentUser.name)",
+                                                                 userNickname: "\(loginStore.currentUser.nickName)",
                                                                      biddingPrice: selectedAmount))
                     isShowingAuctionBidSheet.toggle()
                     showAlert = true
