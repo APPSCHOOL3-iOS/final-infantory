@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyMainView: View {
     @EnvironmentObject var loginStore: LoginStore
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     var searchCategory: SearchResultCategory = .apply
     
     var body: some View {
@@ -17,8 +17,8 @@ struct ApplyMainView: View {
             NavigationStack {
                 ZStack {
                     VStack {
-                        ApplyFilterButtonView(applyViewModel: applyViewModel)
-                        ApplyProductListView(applyViewModel: applyViewModel)
+                        ApplyFilterButtonView(applyProductStore: applyProductStore)
+                        ApplyProductListView(applyProductStore: applyProductStore)
                         Divider()
                     }
                     .navigationBarTitleDisplayMode(.inline)
@@ -43,8 +43,8 @@ struct ApplyMainView: View {
         } else {
             NavigationStack {
                 VStack {
-                    ApplyFilterButtonView(applyViewModel: applyViewModel)
-                    ApplyProductListView(applyViewModel: applyViewModel)
+                    ApplyFilterButtonView(applyProductStore: applyProductStore)
+                    ApplyProductListView(applyProductStore: applyProductStore)
                     Divider()
                 }
                 .navigationBarTitleDisplayMode(.inline)

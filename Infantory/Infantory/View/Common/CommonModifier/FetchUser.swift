@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FetchUser: ViewModifier {
-    
     @EnvironmentObject var loginStore: LoginStore
     
     func body(content: Content) -> some View {

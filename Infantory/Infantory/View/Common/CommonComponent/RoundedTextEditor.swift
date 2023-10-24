@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RoundedTextEditor: View {
-    
     var textFieldTitle: String? = nil
     var width: CGFloat = .screenWidth - 40
     var height: CGFloat = 140
@@ -22,6 +21,7 @@ struct RoundedTextEditor: View {
                 Text("\(textFieldTitle)")
                     .font(.infanHeadlineBold)
             }
+            
             RoundedRectangle(cornerRadius: 10)
                 .stroke(isFocused == true ? Color.black : Color.infanGray)
                 .overlay {
@@ -36,9 +36,7 @@ struct RoundedTextEditor: View {
                             .font(.infanBody)
                             .focused($isFocused)
                             .padding(6)
-
                     }
-                    
                 }
                 .frame(width: width, height: height)
         }

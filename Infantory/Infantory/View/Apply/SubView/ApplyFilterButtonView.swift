@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ApplyFilterButtonView: View {
 
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     
     var body: some View {
         VStack {
             HStack {
                 ForEach(ApplyFilter.allCases, id: \.rawValue) { filter in
                     Button {
-                        applyViewModel.updateFilter(filter: filter)
+                        applyProductStore.updateFilter(filter: filter)
                     } label: {
-                        if applyViewModel.selectedFilter == filter {
+                        if applyProductStore.selectedFilter == filter {
                             Text(filter.rawValue)
                                 .padding(10)
                                 .font(.infanFootnoteBold)
@@ -39,14 +39,14 @@ struct ApplyFilterButtonView: View {
                 }
                 Spacer()
             }
-            if applyViewModel.selectedFilter == .inProgress {
+            if applyProductStore.selectedFilter == .inProgress {
                 HStack {
                     ForEach(ApplyInprogressFilter.allCases, id: \.rawValue) { filter in
                         Button {
-                            applyViewModel.progressSelectedFilter = filter
-                            applyViewModel.sortInProgressProduct(filter: filter)
+                            applyProductStore.progressSelectedFilter = filter
+                            applyProductStore.sortInProgressProduct(filter: filter)
                         } label: {
-                            if applyViewModel.progressSelectedFilter == filter {
+                            if applyProductStore.progressSelectedFilter == filter {
                                 Text(filter.rawValue)
                                     .padding(10)
                                     .font(.infanFootnoteBold)
@@ -70,6 +70,6 @@ struct ApplyFilterButtonView: View {
 
 struct ApplyFilterButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyFilterButtonView(applyViewModel: ApplyProductStore())
+        ApplyFilterButtonView(applyProductStore: ApplyProductStore())
     }
 }

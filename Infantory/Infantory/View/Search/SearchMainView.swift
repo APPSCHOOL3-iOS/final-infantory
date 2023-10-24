@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchMainView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var searchStore: SearchStore = SearchStore()
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @State private var searchText: String = ""
     @State private var isShowingSearchResult: Bool = false
@@ -70,7 +70,7 @@ struct SearchMainView: View {
             
         }
         .navigationDestination(isPresented: $isShowingSearchResult) {
-            SearchResultView(applyViewModel: applyViewModel, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText, searchCategory: searchCategory)
+            SearchResultView(applyProductStore: applyProductStore, auctionViewModel: auctionViewModel, searchStore: searchStore, searchText: $searchText, searchCategory: searchCategory)
         }
         .navigationBar(title: "")
         .toolbar {
@@ -100,7 +100,7 @@ struct SearchMainView: View {
 
 struct SearchMainView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchMainView(applyViewModel: ApplyProductStore(), searchCategory: .total)
+        SearchMainView(applyProductStore: ApplyProductStore(), searchCategory: .total)
     
     }
 }

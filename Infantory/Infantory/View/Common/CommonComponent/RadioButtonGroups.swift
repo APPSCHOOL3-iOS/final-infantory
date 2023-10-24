@@ -16,7 +16,6 @@ enum ReportCase: String, CaseIterable {
 
 struct RadioButtonGroups: View {
     let callback: (String) -> Void
-    
     @State var selectedId: String = ""
     
     var body: some View {
@@ -108,10 +107,14 @@ struct RadioButtonField: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: self.size, height: self.size)
                     .foregroundColor(.infanMain)
+                
                 Text(label)
                     .font(Font.system(size: textSize))
+                
                 Spacer()
-            }.foregroundColor(self.color)
+                
+            }
+            .foregroundColor(self.color)
         }
         .foregroundColor(Color.white)
     }

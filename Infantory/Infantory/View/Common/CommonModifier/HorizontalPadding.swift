@@ -8,10 +8,8 @@
 import SwiftUI
 
 struct HorizontalPadding: ViewModifier {
-
     func body(content: Content) -> some View {
         content
             .padding(.horizontal, 20)
     }
-    
 }

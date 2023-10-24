@@ -21,10 +21,11 @@ struct ProfileEditView: View {
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var imageURLString: String = ""
+    @State var selectedImage: Image?
     @State var image: Image?
-    @State private var myZipCode: String = ""
+    @State private var myZoneCode: String = ""
     @State private var myAddress: String = ""
-    @State private var myDetailAddress: String = ""
+    @State private var myAddressDetail: String = ""
     @State private var showAlert: Bool = false
     @State private var isCheckedNickName: Bool = false
     @State private var isCheckedButton: Bool = false
@@ -33,11 +34,6 @@ struct ProfileEditView: View {
     @State private var toastMessageText: String = ""
     
     @State private var cameraSheetShowing = false
-    //    @Binding var selectedUIImage: UIImage?
-    //    @Binding var selectedUIImageString: String?
-    //
-    @State var selectedImage: Image?
-    //    @State var image: Image?
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
@@ -49,32 +45,12 @@ struct ProfileEditView: View {
         NavigationStack {
             ScrollView {
                 VStack {
-                    //                    PhotosSelector(myProfileEditStore: myProfileEditStore, selectedUIImage: $selectedUIImage, selectedUIImageString: $selectedUIImageString)
-                    //                    CachedImage(url: myProfileEditStore.user?.profileImageURLString ?? "") { phase in
-                    //                        switch phase {
-                    //                        case .empty:
-                    //                            ProgressView()
-                    //                                .frame(width: 80, height: 80)
-                    //                        case .success(let image):
-                    //                            image
-                    //                                .resizable()
-                    //                                .clipShape(Circle())
-                    //                                .frame(width: 80, height: 80)
-                    //                        case .failure:
-                    //                            Image("smallAppIcon")
-                    //                                .resizable()
-                    //                                .clipShape(Circle())
-                    //                                .frame(width: 80, height: 80)
-                    //                        @unknown default:
-                    //                            EmptyView()
-                    //                        }
-                    //                    }
                     if let image = image {
                         image
                             .resizable()
                             .clipShape(Circle())
                             .frame(width: 80, height: 80)
-                    } else if ((loginStore.currentUser.profileImageURLString?.isEmpty) == nil) {
+                    } else if (loginStore.currentUser.profileImageURLString?.isEmpty) == nil {
                         Image("\(loginStore.currentUser.profileImageURLString ?? "")")
                             .resizable()
                             .clipShape(Circle())
@@ -163,11 +139,11 @@ struct ProfileEditView: View {
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
-                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZipCode)
+                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZoneCode)
                                 .disabled(true)
                             
                             NavigationLink {
-                                LoginAddressWebView(zipCode: $myZipCode, address: $myAddress)
+                                LoginAddressWebView(zipCode: $myZoneCode, address: $myAddress)
                                     .navigationBarBackButtonHidden(true)
                             } label: {
                                 VStack {
@@ -185,14 +161,14 @@ struct ProfileEditView: View {
                         UnderlineTextField(textFieldTitle: "주소", placeholder: myProfileEditStore.user?.address.address ?? "", text: $myAddress)
                             .disabled(true)
                         
-                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myDetailAddress)
+                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myAddressDetail)
                     }
                     .padding(.bottom, 30)
                     
                     MainColorButton(text: "변경하기") {
                         Task {
                             if let currentUserId = loginStore.currentUser.id {
-                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
+                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZoneCode, addressDetail: myAddressDetail, userId: currentUserId)
                             }
                         }
                     }
@@ -222,8 +198,8 @@ struct ProfileEditView: View {
     }
 }
 
-//struct ProfileEditView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileEditView(myStore: MyProfileEditStore(), selectedImage: .constant(nil))
-//    }
-//}
+struct ProfileEditView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileEditView(myProfileEditStore: MyProfileEditStore())
+    }
+}

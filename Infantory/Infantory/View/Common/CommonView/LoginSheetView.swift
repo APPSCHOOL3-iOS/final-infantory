@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct LoginSheetView: View {
-    
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject private var loginStore: LoginStore
     @State private var isShowingSignUp = false
@@ -102,6 +101,7 @@ struct LoginButton: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: image == "appleLogo" ? 27 : 35)
+                    
                     Text(text)
                         .font(.subheadline)
                         .foregroundColor(textColor)

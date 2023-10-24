@@ -25,6 +25,7 @@ struct OptionRowView: View {
         VStack {
             HStack {
                 Image(systemName: option.imageName)
+                
                 Text(option.title)
             }
         }

@@ -10,7 +10,7 @@ import SwiftUI
 struct InfluencerApplyListView: View {
     
     @EnvironmentObject private var influencerStore: InfluencerStore
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
 
     let columns = [GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3)), GridItem(.fixed(.screenWidth / 3))]
     
@@ -18,7 +18,7 @@ struct InfluencerApplyListView: View {
         LazyVGrid(columns: columns, spacing: 0) {
             ForEach(influencerStore.influencerApplyProduct) { product in
                 NavigationLink {
-                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                    ApplyDetailView(applyProductStore: applyProductStore, product: product)
                 } label: {
                     if product.productImageURLStrings.count > 0 {
                         CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -90,6 +90,6 @@ struct InfluencerApplyListView: View {
 
 struct InfluencerApplyListView_Previews: PreviewProvider {
     static var previews: some View {
-        InfluencerApplyListView(applyViewModel: ApplyProductStore())
+        InfluencerApplyListView(applyProductStore: ApplyProductStore())
     }
 }
