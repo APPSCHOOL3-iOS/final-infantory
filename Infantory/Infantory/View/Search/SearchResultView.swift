@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchResultView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     @ObservedObject var searchStore: SearchStore
     @Namespace private var animation
@@ -28,7 +28,7 @@ struct SearchResultView: View {
                     case .total:
                         ScrollView {
                             VStack {
-                                if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyViewModel.applyProduct.count == 0 {
+                                if searchStore.influencer.count == 0 && auctionViewModel.auctionProduct.count == 0 && applyProductStore.applyProduct.count == 0 {
                                     SearchResultEmptyView()
                                 } else {
                                     if searchStore.influencer.count > 0 && searchStore.influencer.count < 6 {
@@ -59,14 +59,14 @@ struct SearchResultView: View {
                                         SearchRectangleView()
                                     }
                                     
-                                    if applyViewModel.applyProduct.count > 0 &&
-                                        applyViewModel.applyProduct.count < 4 {
-                                        SearchTotalCellView(category: "응모", content: SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.underLimit))
+                                    if applyProductStore.applyProduct.count > 0 &&
+                                        applyProductStore.applyProduct.count < 4 {
+                                        SearchTotalCellView(category: "응모", content: SearchApplyView(applyProductStore: applyProductStore, searchStore: searchStore, showCellCount: SearchResultCount.underLimit))
                                         
-                                    } else if applyViewModel.applyProduct.count == 0 {
+                                    } else if applyProductStore.applyProduct.count == 0 {
                                         EmptyView()
                                     } else {
-                                        SearchTotalCellView(category: "응모", content: SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
+                                        SearchTotalCellView(category: "응모", content: SearchApplyView(applyProductStore: applyProductStore, searchStore: searchStore, showCellCount: SearchResultCount.overLimit))
                                         VStack {
                                             SearchMoreItemButtonView(searchStore: searchStore, selectedCategory: .apply, searchCategory: $searchCategory)
                                                 .padding()
@@ -96,10 +96,10 @@ struct SearchResultView: View {
                         }.tag(category)
                     case .apply:
                         VStack {
-                            if applyViewModel.applyProduct.count == 0 {
+                            if applyProductStore.applyProduct.count == 0 {
                                 SearchResultEmptyView()
                             } else {
-                                SearchApplyView(applyViewModel: applyViewModel, searchStore: searchStore, showCellCount: .underLimit)
+                                SearchApplyView(applyProductStore: applyProductStore, searchStore: searchStore, showCellCount: .underLimit)
                             }
                         }.tag(category)
                     }
@@ -117,7 +117,7 @@ struct SearchResultView: View {
             searchStore.selectedCategory = searchCategory
             searchStore.findSearchKeyword(keyword: searchText)
             auctionViewModel.findSearchKeyword(keyword: searchText)
-            applyViewModel.findSearchKeyword(keyword: searchText)
+            applyProductStore.findSearchKeyword(keyword: searchText)
            
         }
         .navigationBar(title: "")
@@ -142,7 +142,7 @@ struct SearchResultView: View {
                         searchStore.selectedCategory = searchCategory
                         searchStore.findSearchKeyword(keyword: searchText)
                         auctionViewModel.findSearchKeyword(keyword: searchText)
-                        applyViewModel.findSearchKeyword(keyword: searchText)
+                        applyProductStore.findSearchKeyword(keyword: searchText)
                         
                     }
                     .submitLabel(.search)
@@ -154,6 +154,6 @@ struct SearchResultView: View {
 
 struct SearchResultView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultView(applyViewModel: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"), searchCategory: .total)
+        SearchResultView(applyProductStore: ApplyProductStore(), auctionViewModel: AuctionProductViewModel(), searchStore: SearchStore(), searchText: .constant("서치텍스트"), searchCategory: .total)
     }
 }

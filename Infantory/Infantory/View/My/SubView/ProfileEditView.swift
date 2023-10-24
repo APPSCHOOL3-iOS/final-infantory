@@ -21,10 +21,11 @@ struct ProfileEditView: View {
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var imageURLString: String = ""
+    @State var selectedImage: Image?
     @State var image: Image?
-    @State private var myZipCode: String = ""
+    @State private var myZoneCode: String = ""
     @State private var myAddress: String = ""
-    @State private var myDetailAddress: String = ""
+    @State private var myAddressDetail: String = ""
     @State private var showAlert: Bool = false
     @State private var isCheckedNickName: Bool = false
     @State private var isCheckedButton: Bool = false
@@ -33,7 +34,6 @@ struct ProfileEditView: View {
     @State private var toastMessageText: String = ""
     
     @State private var cameraSheetShowing = false
-    @State var selectedImage: Image?
     
     func loadImage() {
         guard let selectedImage = selectedUIImage else { return }
@@ -139,11 +139,11 @@ struct ProfileEditView: View {
                     Spacer()
                     VStack(alignment: .leading, spacing: 20) {
                         HStack {
-                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZipCode)
+                            UnderlineTextField(textFieldTitle: "우편 번호", placeholder: myProfileEditStore.user?.address.zonecode ?? "", text: $myZoneCode)
                                 .disabled(true)
                             
                             NavigationLink {
-                                LoginAddressWebView(zipCode: $myZipCode, address: $myAddress)
+                                LoginAddressWebView(zipCode: $myZoneCode, address: $myAddress)
                                     .navigationBarBackButtonHidden(true)
                             } label: {
                                 VStack {
@@ -161,14 +161,14 @@ struct ProfileEditView: View {
                         UnderlineTextField(textFieldTitle: "주소", placeholder: myProfileEditStore.user?.address.address ?? "", text: $myAddress)
                             .disabled(true)
                         
-                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myDetailAddress)
+                        UnderlineTextField(textFieldTitle: "상세주소", placeholder: myProfileEditStore.user?.address.addressDetail ?? "", text: $myAddressDetail)
                     }
                     .padding(.bottom, 30)
                     
                     MainColorButton(text: "변경하기") {
                         Task {
                             if let currentUserId = loginStore.currentUser.id {
-                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZipCode, addressDetail: myDetailAddress, userId: currentUserId)
+                                try await myProfileEditStore.updateUser(image: selectedUIImage, imageURL: imageURLString, nickName: nickName, phoneNumber: phoneNumber, address: myAddress, zonecode: myZoneCode, addressDetail: myAddressDetail, userId: currentUserId)
                             }
                         }
                     }

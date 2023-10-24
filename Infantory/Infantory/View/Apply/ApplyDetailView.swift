@@ -10,7 +10,7 @@ import SwiftUI
 struct ApplyDetailView: View {
     
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     var product: ApplyProduct
     
     @State private var isShowingActionSheet: Bool = false
@@ -23,7 +23,7 @@ struct ApplyDetailView: View {
             ScrollView {
                 ApplyBuyerView(product: product)
                 HStack {
-                    ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                    ApplyInfluencerImageView(applyProductStore: applyProductStore, product: product)
                     Spacer()
                     
                     Button {
@@ -68,7 +68,7 @@ struct ApplyDetailView: View {
                 productInfo
             }
             
-            ApplyFooter(applyViewModel: applyViewModel, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
+            ApplyFooter(applyProductStore: applyProductStore, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
         }
         .navigationBar(title: "상세정보")
         .confirmationDialog("", isPresented: $isShowingActionSheet) {
@@ -91,7 +91,7 @@ struct ApplyDetailView: View {
 
 struct ApplyFooter: View {
     @EnvironmentObject var loginStore: LoginStore
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @State private var isShowingApplySheet: Bool = false
     @State private var isShowingLoginSheet: Bool = false
     @State private var isShowingPaymentSheet: Bool = false
@@ -111,10 +111,10 @@ struct ApplyFooter: View {
         .sheet(isPresented: $isShowingApplySheet, onDismiss: {
             Task {
                 try await loginStore.fetchUser(userUID: loginStore.userUid)
-                try await applyViewModel.fetchApplyProducts()
+                try await applyProductStore.fetchApplyProducts()
             }
         }, content: {
-            ApplySheetView(applyViewModel: applyViewModel, isShowingApplySheet: $isShowingApplySheet, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
+            ApplySheetView(applyProductStore: applyProductStore, isShowingApplySheet: $isShowingApplySheet, product: product, toastMessage: $toastMessage, isShowingToastMessage: $isShowingToastMessage)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.fraction(0.45)])
             
@@ -147,7 +147,7 @@ extension ApplyDetailView {
             HStack {
                 
                 // 남은 시간
-                TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                TimerView(remainingTime: applyProductStore.remainingTime(product: product))
                 Spacer()
             }
             .horizontalPadding()
@@ -172,7 +172,7 @@ extension ApplyDetailView {
 
 struct ApplyDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyDetailView(applyViewModel: ApplyProductStore(), product:
+        ApplyDetailView(applyProductStore: ApplyProductStore(), product:
                             ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
         .environmentObject(LoginStore())
     }

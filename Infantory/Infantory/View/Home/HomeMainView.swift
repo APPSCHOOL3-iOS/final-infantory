@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeMainView: View {
     
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @StateObject var searchStore: SearchStore = SearchStore()
     
@@ -19,14 +19,14 @@ struct HomeMainView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                HomeBannerView(applyViewModel: applyViewModel)
+                HomeBannerView(applyProductStore: applyProductStore)
                 
                 VStack(alignment: .leading) {
                     Text("다양한 인플루언서를 만나보세요!✨")
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
-                    HomeInfluencerImageView(applyViewModel: applyViewModel, searchStore: searchStore)
+                    HomeInfluencerImageView(applyProductStore: applyProductStore, searchStore: searchStore)
                 }
                 .padding([.top, .bottom])
                 
@@ -45,7 +45,7 @@ struct HomeMainView: View {
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
-                    HomeApplyView(applyViewModel: applyViewModel)
+                    HomeApplyView(applyProductStore: applyProductStore)
                 }
                 .padding([.top, .bottom])
                
@@ -71,18 +71,18 @@ struct HomeMainView: View {
                 Task {
                     try await searchStore.fetchRandomInfluencer()
                     try await auctionViewModel.fetchAuctionProducts()
-                    try await applyViewModel.fetchApplyProducts()
-                    applyViewModel.updateFilter(filter: .inProgress)
-                    applyViewModel.sortInProgressProduct(filter: .deadline)
+                    try await applyProductStore.fetchApplyProducts()
+                    applyProductStore.updateFilter(filter: .inProgress)
+                    applyProductStore.sortInProgressProduct(filter: .deadline)
                 }
             }
             .task {
                 Task {
                     try await searchStore.fetchRandomInfluencer()
                     try await auctionViewModel.fetchAuctionProducts()
-                    try await applyViewModel.fetchApplyProducts()
-                    applyViewModel.updateFilter(filter: .inProgress)
-                    applyViewModel.sortInProgressProduct(filter: .deadline)
+                    try await applyProductStore.fetchApplyProducts()
+                    applyProductStore.updateFilter(filter: .inProgress)
+                    applyProductStore.sortInProgressProduct(filter: .deadline)
                 }
             }
         }
