@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct AuctionMainView: View {
-    
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     var searchCategory: SearchResultCategory = .auction
+    
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
@@ -91,6 +91,7 @@ struct AuctionFloatingButton: View {
         }
     }
 }
+
 struct AuctionMainView_Previews: PreviewProvider {
     static var previews: some View {
         AuctionMainView()

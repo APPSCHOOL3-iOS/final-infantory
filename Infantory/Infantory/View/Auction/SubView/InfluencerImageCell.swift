@@ -20,6 +20,7 @@ struct InfluencerImageCell: View {
         }
     }
 }
+
 struct ItemIamgeView: View {
     var body: some View {
         ScrollView(.horizontal) {
@@ -33,6 +34,7 @@ struct ItemIamgeView: View {
         }
     }
 }
+
 struct ItemIamgeView_Previews: PreviewProvider {
     static var previews: some View {
         ItemIamgeView()

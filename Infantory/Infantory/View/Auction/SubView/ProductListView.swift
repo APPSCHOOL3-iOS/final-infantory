@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProductListView: View {
-    
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     @State private var heartButton: Bool = false
     
@@ -53,6 +52,7 @@ struct ProductListView: View {
         }
     }
 }
+
 struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {

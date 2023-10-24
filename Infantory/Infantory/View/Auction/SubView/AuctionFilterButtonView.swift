@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AuctionFilterButtonView: View {
-    
     @ObservedObject var auctionViewmodel: AuctionProductViewModel
     
     var body: some View {
@@ -39,6 +38,7 @@ struct AuctionFilterButtonView: View {
                 }
                 Spacer()
             }
+            
             if auctionViewmodel.selectedFilter == .inProgress {
                 HStack {
                     ForEach(AuctionInprogressFilter.allCases, id: \.rawValue) { filter in

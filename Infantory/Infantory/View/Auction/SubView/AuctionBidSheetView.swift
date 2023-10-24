@@ -7,21 +7,14 @@
 
 import SwiftUI
 
-// 헤드라인, 바디, 헤드라인 볼드, 풋노트?
-
 struct AuctionBidSheetView: View {
     @ObservedObject var auctionStore: AuctionStore
-    
     @EnvironmentObject var loginStore: LoginStore
-    
     @Binding var isShowingAuctionBidSheet: Bool
-    
     @State private var selectedIndex: Int = 4 // 선택된 버튼
     @State private var selectedAmount: Int = 0 // 선택된 금액
-    
     @Binding var showAlert: Bool
     @Binding var highestBidderState: Bool
-
     var isSelected: Bool {
         return selectedAmount == 0
     }
@@ -36,10 +29,10 @@ struct AuctionBidSheetView: View {
                 }
                 Button {
                     auctionStore.addBid(biddingInfo: BiddingInfo(id: UUID(),
-                                                                     timeStamp: Date(),
+                                                                 timeStamp: Date(),
                                                                  userID: "\(loginStore.userUid)",
                                                                  userNickname: "\(loginStore.currentUser.nickName)",
-                                                                     biddingPrice: selectedAmount))
+                                                                 biddingPrice: selectedAmount))
                     isShowingAuctionBidSheet.toggle()
                     showAlert = true
                     
