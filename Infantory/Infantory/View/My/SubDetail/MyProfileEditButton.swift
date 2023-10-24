@@ -9,8 +9,7 @@ import SwiftUI
 
 struct MyProfileEditButton: View {
     @ObservedObject var myProfileEditStore: MyProfileEditStore
-//    @Binding var selectedUIImage: UIImage?
-//    @Binding var selectedUIImageString: String?
+    
     var body: some View {
         NavigationLink {
             ProfileEditView(myProfileEditStore: myProfileEditStore)
