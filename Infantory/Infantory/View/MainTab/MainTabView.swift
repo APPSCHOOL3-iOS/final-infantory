@@ -11,7 +11,7 @@ import Photos
 struct MainTabView: View {
     @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     var body: some View {
         TabView(selection: $selectedIndex) {
             HomeMainView()
@@ -31,7 +31,7 @@ struct MainTabView: View {
                 }
                 .tag(1)
             
-            ApplyMainView(applyViewModel: applyViewModel)
+            ApplyMainView(applyProductStore: applyProductStore)
                 .tabItem {
                     Image("apply")
                         .renderingMode(.template)

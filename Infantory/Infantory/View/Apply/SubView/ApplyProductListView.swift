@@ -9,26 +9,26 @@ import SwiftUI
 
 struct ApplyProductListView: View {
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @State private var heartButton: Bool = false
     
     var body: some View {
         VStack {
-            if applyViewModel.filteredProduct.isEmpty {
+            if applyProductStore.filteredProduct.isEmpty {
                 applyEmptyListItemCell
             } else {
                 ScrollView {
-                    ForEach(applyViewModel.filteredProduct) { product in
+                    ForEach(applyProductStore.filteredProduct) { product in
                         HStack {
-                            ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                            ApplyInfluencerImageView(applyProductStore: applyProductStore, product: product)
                             
                             Spacer()
                             
-                            ApplyTimerView(applyViewModel: applyViewModel, product: product)
+                            ApplyTimerView(applyProductStore: applyProductStore, product: product)
                         }
                         .horizontalPadding()
                         
-                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyProductStore: applyProductStore, product: product)
                     }
                 }
             }
@@ -36,7 +36,7 @@ struct ApplyProductListView: View {
         .refreshable {
             Task {
                 do {
-                    try await applyViewModel.fetchApplyProducts()
+                    try await applyProductStore.fetchApplyProducts()
                 } catch {
                     
                 }
@@ -44,7 +44,7 @@ struct ApplyProductListView: View {
         }
         .task {
             do {
-                try await applyViewModel.fetchApplyProducts()
+                try await applyProductStore.fetchApplyProducts()
             } catch {
                 
             }
@@ -56,9 +56,9 @@ extension ApplyProductListView {
     var applyEmptyListItemCell: some View {
         VStack {
             Spacer()
-            if applyViewModel.selectedFilter == .inProgress {
+            if applyProductStore.selectedFilter == .inProgress {
                 Text("진행중인 응모가 없습니다.")
-            } else if applyViewModel.selectedFilter == .planned {
+            } else if applyProductStore.selectedFilter == .planned {
                 Text("진행 예정인 응모가 없습니다.")
             } else {
                 Text("종료된 응모가 없습니다.")
@@ -73,7 +73,7 @@ extension ApplyProductListView {
 struct ApplyProductListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            ApplyProductListView(applyViewModel: ApplyProductStore())
+            ApplyProductListView(applyProductStore: ApplyProductStore())
         }
     }
 }

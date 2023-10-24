@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyInfluencerImageView: View {
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     var product: ApplyProduct
     
     var body: some View {

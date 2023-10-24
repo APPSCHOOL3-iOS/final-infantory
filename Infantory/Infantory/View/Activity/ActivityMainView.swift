@@ -70,7 +70,7 @@ struct ActivityMainView: View {
                                 ScrollView {
                                     ForEach(myApplyInfos, id: \.product.id) { info in
                                         NavigationLink {
-                                            ApplyDetailView(applyViewModel: applyStore, product: info.product)
+                                            ApplyDetailView(applyProductStore: applyStore, product: info.product)
                                         } label: {
                                             ActivityRowView(product: info.product,
                                                         selectedFilter: $selectedFilter, isSorted: $isSorted, myApplyInfos: info)
