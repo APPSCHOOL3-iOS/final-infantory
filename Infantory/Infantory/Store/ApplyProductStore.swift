@@ -184,7 +184,6 @@ final class ApplyProductStore: ObservableObject {
         }
         DispatchQueue.main.async {
             self.applyProduct = sortedProducts
-            print("어플라이 ㄱㅈㅇ")
         }
     }
     

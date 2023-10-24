@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct HomeApplyView: View {
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(applyViewModel.filteredProduct.prefix(5)) { product in
+                ForEach(applyProductStore.filteredProduct.prefix(5)) { product in
                     NavigationLink {
-                        ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                        ApplyDetailView(applyProductStore: applyProductStore, product: product)
                     } label: {
-                        VStack(alignment: .leading) {
-                            TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+                        VStack(alignment: .leading) {           
+                            TimerView(remainingTime: applyProductStore.remainingTime(product: product))
                             
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
@@ -81,6 +81,6 @@ struct HomeApplyView: View {
 
 struct HomeApplyView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeApplyView(applyViewModel: ApplyProductStore())
+        HomeApplyView(applyProductStore: ApplyProductStore())
     }
 }

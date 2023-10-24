@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ApplyTimerView: View {
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     var product: ApplyProduct
     
     var body: some View {
@@ -20,13 +20,13 @@ struct ApplyTimerView: View {
         } else if product.applyFilter == .close {
             
         } else {
-            TimerView(remainingTime: applyViewModel.remainingTime(product: product))
+            TimerView(remainingTime: applyProductStore.remainingTime(product: product))
         }
     }
 }
 
 struct ApplyTimerView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyTimerView(applyViewModel: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
+        ApplyTimerView(applyProductStore: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
     }
 }

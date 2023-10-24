@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct HomeBannerView: View {
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
+  
     private var selectedProducts: [ApplyProduct] {
-        applyViewModel.applyProduct.filter { product in
+        applyProductStore.applyProduct.filter { product in
             product.applyFilter == .close
         }.filter { product in
             product.applyCloseFilter == .afterRaffle
@@ -21,7 +22,7 @@ struct HomeBannerView: View {
         TabView {
             ForEach(selectedProducts) { product in
                 NavigationLink {
-                    ApplyDetailView(applyViewModel: applyViewModel, product: product)
+                    ApplyDetailView(applyProductStore: applyProductStore, product: product)
                 } label: {
                     ZStack(alignment: .center) {
                         Image("finalApplyfinal")
@@ -118,6 +119,6 @@ struct HomeBannerView: View {
 
 struct HomeBannerView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeBannerView(applyViewModel: ApplyProductStore())
+        HomeBannerView(applyProductStore: ApplyProductStore())
     }
 }

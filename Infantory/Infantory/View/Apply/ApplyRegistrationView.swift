@@ -108,6 +108,7 @@ struct ApplyRegistrationView: View {
         }
         .navigationBar(title: "내 응모 등록")
     }
+    
     func calculateDateOffset(days: Int) {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
             let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
@@ -116,6 +117,7 @@ struct ApplyRegistrationView: View {
         }
     }
 }
+
 extension ApplyRegistrationView {
     func dateSelectButton(date: String) -> some View {
         
@@ -128,7 +130,6 @@ extension ApplyRegistrationView {
                     .stroke(lineWidth: 1)
                     .background(Color.infanMain)
                     .cornerRadius(10)
-                //                    .fill(Color.infanMain)
                     .opacity(0.3)
                     .overlay {
                         Text("\(date)일")

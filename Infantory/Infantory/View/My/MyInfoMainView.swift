@@ -13,7 +13,6 @@ struct MyInfoMainView: View {
     @StateObject var myPaymentStore: MyPaymentStore = MyPaymentStore()
     @StateObject var myProfileEditStore: MyProfileEditStore = MyProfileEditStore()
     @EnvironmentObject var loginStore: LoginStore
-    //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
     @State var nickName: String
     
     var body: some View {
@@ -22,7 +21,6 @@ struct MyInfoMainView: View {
                 // 프사이미지, 닉네임, 응모권 관심상품
                 VStack(spacing: 20) {
                     HStack {
-//                        MyUserProfileView(myProfileEditStore: myProfileEditStore, loginStore: loginStore, nickName: $nickName)
                         MyUserProfileView(myProfileEditStore: myProfileEditStore)
                         
                         // 프로필 관리, 배송지 관리 버튼

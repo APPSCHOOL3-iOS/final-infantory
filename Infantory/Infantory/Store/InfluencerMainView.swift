@@ -11,7 +11,7 @@ struct InfluencerMainView: View {
     
     @EnvironmentObject private var loginStore: LoginStore
     @EnvironmentObject private var influencerStore: InfluencerStore
-    @StateObject var applyViewModel: ApplyProductStore = ApplyProductStore()
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @State var searchCategory: InfluencerCategory = .auction
     
@@ -69,7 +69,7 @@ struct InfluencerMainView: View {
                                     .foregroundColor(.infanDarkGray)
                             } else {
                                 ScrollView {
-                                    InfluencerApplyListView(applyViewModel: applyViewModel)
+                                    InfluencerApplyListView(applyProductStore: applyProductStore)
                                 }
                             }
                         }

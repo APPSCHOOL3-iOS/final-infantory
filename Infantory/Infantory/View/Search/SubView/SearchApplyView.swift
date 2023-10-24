@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchApplyView: View {
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @ObservedObject var searchStore: SearchStore
     var showCellCount: SearchResultCount
     
@@ -17,26 +17,26 @@ struct SearchApplyView: View {
         ScrollView {
             VStack {
                 if showCellCount == .underLimit {
-                    ForEach(applyViewModel.applyProduct) { product in
+                    ForEach(applyProductStore.applyProduct) { product in
                         HStack {
-                            ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                            ApplyInfluencerImageView(applyProductStore: applyProductStore, product: product)
                             Spacer()
-                            ApplyTimerView(applyViewModel: applyViewModel, product: product)
+                            ApplyTimerView(applyProductStore: applyProductStore, product: product)
                         }
                         .horizontalPadding()
                         
-                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyProductStore: applyProductStore, product: product)
                     }
                 } else {
-                    ForEach(applyViewModel.applyProduct.prefix(3)) { product in
+                    ForEach(applyProductStore.applyProduct.prefix(3)) { product in
                         HStack {
-                            ApplyInfluencerImageView(applyViewModel: applyViewModel, product: product)
+                            ApplyInfluencerImageView(applyProductStore: applyProductStore, product: product)
                             Spacer()
-                            ApplyTimerView(applyViewModel: applyViewModel, product: product)
+                            ApplyTimerView(applyProductStore: applyProductStore, product: product)
                         }
                         .horizontalPadding()
                         
-                        ApplyProductListCellView(applyViewModel: applyViewModel, product: product)
+                        ApplyProductListCellView(applyProductStore: applyProductStore, product: product)
                     }
                 }
             }
@@ -47,6 +47,6 @@ struct SearchApplyView: View {
 
 struct SearchApplyView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchApplyView(applyViewModel: ApplyProductStore(), searchStore: SearchStore(), showCellCount: .overLimit)
+        SearchApplyView(applyProductStore: ApplyProductStore(), searchStore: SearchStore(), showCellCount: .overLimit)
     }
 }

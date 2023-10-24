@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ApplyProductListCellView: View {
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     var product: ApplyProduct
     
     var body: some View {
         NavigationLink {
-            ApplyDetailView(applyViewModel: applyViewModel, product: product)
+            ApplyDetailView(applyProductStore: applyProductStore, product: product)
         } label: {
             VStack(alignment: .leading, spacing: 20) {
                 HStack(spacing: 16) {
@@ -137,6 +137,6 @@ struct ApplyProductListCellView: View {
 
 struct ApplyProductListCellView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplyProductListCellView(applyViewModel: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
+        ApplyProductListCellView(applyProductStore: ApplyProductStore(), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]))
     }
 }

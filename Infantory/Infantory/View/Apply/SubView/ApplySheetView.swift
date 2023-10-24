@@ -13,7 +13,7 @@ struct ApplySheetView: View {
     @State private var applyTicketCount: String = "0"
     @State private var isShowingAlert: Bool = false
     
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @Binding var isShowingApplySheet: Bool
     var product: ApplyProduct
     @Binding var toastMessage: String
@@ -116,7 +116,7 @@ struct ApplySheetView: View {
                   message: Text("\(applyTicketCount)장 응모하시겠습니까?"),
                   primaryButton: .default(Text("취소")),
                   secondaryButton: .default(Text("응모하기")) {
-                applyViewModel.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid)
+                applyProductStore.addApplyTicketUserId(ticketCount: Int(applyTicketCount) ?? 0, product: product, userID: loginStore.currentUser.email, userUID: loginStore.userUid)
                 toastMessage = "응모가 완료되었습니다"
                 isShowingToastMessage = true
                 isShowingApplySheet = false
@@ -127,7 +127,7 @@ struct ApplySheetView: View {
 
 struct ApplySheetView_Previews: PreviewProvider {
     static var previews: some View {
-        ApplySheetView(applyViewModel: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]), toastMessage: .constant(""), isShowingToastMessage: .constant(false))
+        ApplySheetView(applyProductStore: ApplyProductStore(), isShowingApplySheet: .constant(true), product: ApplyProduct(productName: "", productImageURLStrings: [""], description: "", influencerID: "", influencerNickname: "볼빨간사춘기", startDate: Date(), endDate: Date(), registerDate: Date(), applyUserIDs: [""]), toastMessage: .constant(""), isShowingToastMessage: .constant(false))
             .environmentObject(LoginStore())
     }
 }

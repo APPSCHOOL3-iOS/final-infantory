@@ -30,6 +30,5 @@ class UserService {
         
         self.currentUser = user
         
-        print("Debug: User is \(user)")
     }
 }

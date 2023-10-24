@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeInfluencerImageView: View {
-    @ObservedObject var applyViewModel: ApplyProductStore
+    @ObservedObject var applyProductStore: ApplyProductStore
     @ObservedObject var searchStore: SearchStore
     
     var body: some View {
@@ -62,6 +62,6 @@ struct HomeInfluencerImageView: View {
 
 struct HomeInfluencerImageView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeInfluencerImageView(applyViewModel: ApplyProductStore(), searchStore: SearchStore())
+        HomeInfluencerImageView(applyProductStore: ApplyProductStore(), searchStore: SearchStore())
     }
 }
