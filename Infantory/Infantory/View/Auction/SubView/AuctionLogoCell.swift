@@ -15,17 +15,17 @@ struct AuctionLogoCell: View {
                 .foregroundColor(.infanDarkGray)
             Spacer()
             Button {
-                // SearchView 검색창 (네비게이션으로 변경해야할 것 같습니다.)
+       
             } label: {
                 Image(systemName: "magnifyingglass")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 20, height: 20)
-                    .foregroundColor(.infanDarkGray)
+                    .foregroundColor(.infanBlack)
             }
             .padding(5)
             Button {
-                // alramView 알람창 (네비게이션으로 변경 해야할 것 같습니다.)
+ 
             } label: {
                 Image(systemName: "bell.fill")
                     .resizable()

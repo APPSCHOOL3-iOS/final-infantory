@@ -6,32 +6,36 @@
 //
 
 import SwiftUI
+import Photos
 
 struct MainTabView: View {
-    
-    @StateObject private var loginStore = LoginStore()
-    
+    @EnvironmentObject var loginStore: LoginStore
     @State private var selectedIndex = 0
-    
+    @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
+
     var body: some View {
         TabView(selection: $selectedIndex) {
             HomeMainView()
                 .tabItem {
                     Image(systemName: "house")
+                        .environment(\.symbolVariants, .none)
                     Text("홈")
                 }
+                .foregroundColor(.black)
                 .tag(0)
             
             AuctionMainView()
                 .tabItem {
-                    Image(systemName: "dollarsign.circle")
+                    Image("auction")
+                        .renderingMode(.template)
                     Text("경매")
                 }
                 .tag(1)
             
-            ApplyMainView()
+            ApplyMainView(applyProductStore: applyProductStore)
                 .tabItem {
-                    Image(systemName: "ticket")
+                    Image("apply")
+                        .renderingMode(.template)
                     Text("응모")
                 }
                 .tag(2)
@@ -39,6 +43,7 @@ struct MainTabView: View {
             ActivityMainView()
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
+                        .foregroundColor(selectedIndex == 3 ? .infanMain : .black)
                     Text("활동")
                 }
                 .tag(3)
@@ -46,23 +51,19 @@ struct MainTabView: View {
             MyMainView()
                 .tabItem {
                     Image(systemName: "person")
+                        .environment(\.symbolVariants, .none)
                     Text("마이")
                 }
                 .tag(4)
-                .environmentObject(loginStore)
         }
-        .onAppear {
-            Task {
-                if !loginStore.userUid.isEmpty {
-                    try await loginStore.fetchUser(userUID: loginStore.userUid)
-                }
-            }
-        }
+        .tint(Color.infanMain)
+        .onAppearFetchUser()
     }
 }
 
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView()
+            .environmentObject(LoginStore())
     }
 }

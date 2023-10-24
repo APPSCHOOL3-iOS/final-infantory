@@ -15,7 +15,9 @@ struct PaymentChoiceView: View {
             VStack {
                 VStack {
                     accountChoiceView
+                    
                     Divider()
+                    
                     cashReceiptView
                 }
                 .padding()
@@ -23,18 +25,17 @@ struct PaymentChoiceView: View {
                 Spacer()
                 
                 Divider()
+                
                 saveAccountView
                     .padding(.trailing)
             }
-            .infanNavigationBar(title: "계좌선택")
+            .navigationBar(title: "계좌선택")
             .navigationBarTitleDisplayMode(.inline)
-        
     }
 }
 
 struct DotCircleToggleStyle: ToggleStyle {
     func makeBody(configuration: Configuration) -> some View {
-        
         Button(action: {
             configuration.isOn.toggle()
         }, label: {
@@ -56,7 +57,7 @@ extension PaymentChoiceView {
             ForEach(0..<5) { item in
                 Text("\(item)")
                     .overlay {
-                        RoundedRectangle(cornerRadius: 20)
+                        RoundedRectangle(cornerRadius: 10)
                             .stroke(
                                 .gray,
                                 style: StrokeStyle(
@@ -64,7 +65,6 @@ extension PaymentChoiceView {
                                     lineCap: .round,
                                     dash: [5, 10]
                                 ))
-                        
                             .frame(width: 250, height: 150)
                     }
                     .offset(y: -20)
@@ -79,7 +79,9 @@ extension PaymentChoiceView {
             HStack {
                 Text("현금 영수증")
                     .font(.infanHeadlineBold)
+                
                 Spacer()
+                
                 Toggle(isOn: Binding(
                     get: {
                         !isSelectedCashReceiptsNotApplied
@@ -118,7 +120,9 @@ extension PaymentChoiceView {
                 }
                 .font(.infanHeadline)
                 .fontWeight(.regular)
+                
                 Spacer()
+                
                 Button {
                     
                 } label: {
@@ -135,9 +139,9 @@ extension PaymentChoiceView {
                 .padding([.trailing, .top])
             }
             .opacity(isSelectedCashReceipts ? 1 : 0)
-
         }
     }
+    
     var saveAccountView: some View {
         HStack {
             Spacer()

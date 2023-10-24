@@ -12,3 +12,8 @@ enum AuctionFilter: String, CaseIterable {
     case planned = "예정 경매"
     case close = "종료 경매"
 }
+
+enum AuctionInprogressFilter: String, CaseIterable {
+    case deadline = "마감순"
+    case highPrice = "가격순"
+}

@@ -10,15 +10,15 @@ import FirebaseFirestoreSwift
 
 struct SignUpUser: Identifiable, Codable {
     @DocumentID var id: String?
-    var isInfluencer: String = "user" // influencer인지 일반 User인지?
+    var isInfluencer: UserType = .user // influencer인지 일반 User인지?
     var profileImageURLString: String? = nil
-    var name: String
-    var nickName: String
-    var phoneNumber: String
-    var email: String
+    var name: String = ""
+    var nickName: String = ""
+    var phoneNumber: String = ""
+    var email: String = ""
     
     var loginType: String = "kakao"
-    var address: Address
+    var address: Address = Address(address: "", zonecode: "", addressDetail: "")
     
     var follower: [String]? = nil
     var influencerIntroduce: String? = nil

@@ -5,7 +5,6 @@
 //  Created by 김성훈 on 2023/09/21.
 //
 
-import Foundation
 import SwiftUI
 
 extension Color {
@@ -17,4 +16,6 @@ extension Color {
     static let infanOrange = Color("Orange")
     static let infanYellow = Color("Yellow")
     static let infanGreen = Color("Green")
+    static let infanGray = Color("Gray")
+    static let infanBlack = Color("Black")
 }

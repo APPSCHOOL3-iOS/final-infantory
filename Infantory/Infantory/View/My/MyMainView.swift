@@ -8,32 +8,26 @@
 import SwiftUI
 
 struct MyMainView: View {
-    
+    @StateObject var myProfileEditStore: MyProfileEditStore = MyProfileEditStore()
+    @StateObject var myPaymentStore: MyPaymentStore = MyPaymentStore()
     @EnvironmentObject var loginStore: LoginStore
     @State private var isShowingLoginSheet: Bool = false
+    @State private var selectedUIImage: UIImage?
+    @State private var selectedUIImageString: String?
     
     var body: some View {
-        VStack {
+        NavigationStack {
             if loginStore.userUid.isEmpty {
-                Button(action: {
-                    isShowingLoginSheet = true
-                }, label: {
-                    Text("로그인")
-                })
+                MyLoginView()
             } else {
-                Button(action: {
-                    loginStore.kakaoLogout()
-                }, label: {
-                    Text("로그아웃")
-                })
+                MyInfoMainView(nickName: myProfileEditStore.user?.nickName ?? "")
             }
-            Text(loginStore.currentUser.email)
-            Text(loginStore.currentUser.address.address)
         }
-        .sheet(isPresented: $isShowingLoginSheet, content: {
-            LoginSheetView()
-                .environmentObject(loginStore)
-        })
+        .onAppear {
+            if !loginStore.userUid.isEmpty {
+                myProfileEditStore.fetchUser(userID: loginStore.userUid)
+            }
+        }
     }
 }
 

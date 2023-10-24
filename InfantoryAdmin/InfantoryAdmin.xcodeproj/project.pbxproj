@@ -1,0 +1,823 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */; };
+		116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116033952AE0B74000F6E940 /* AdminMainView.swift */; };
+		11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA62AE51C050015172D /* PaidProductStore.swift */; };
+		11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FA92AE51C6E0015172D /* PaymentProductView.swift */; };
+		11645FAC2AE51CB10015172D /* PaymentProductTabbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */; };
+		11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */; };
+		11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */; };
+		11B4F7A22AE0CA530076F040 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7A12AE0CA530076F040 /* ReportView.swift */; };
+		11B4F7A52AE0CD600076F040 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7A42AE0CD600076F040 /* FirebaseAuth */; };
+		11B4F7A72AE0CD600076F040 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7A62AE0CD600076F040 /* FirebaseDatabase */; };
+		11B4F7A92AE0CD600076F040 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7A82AE0CD600076F040 /* FirebaseDatabaseSwift */; };
+		11B4F7AB2AE0CD600076F040 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7AA2AE0CD600076F040 /* FirebaseFirestore */; };
+		11B4F7AD2AE0CD600076F040 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7AC2AE0CD600076F040 /* FirebaseFirestoreSwift */; };
+		11B4F7AF2AE0CD600076F040 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 11B4F7AE2AE0CD600076F040 /* FirebaseStorage */; };
+		11B4F7B12AE0CEB70076F040 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 11B4F7B02AE0CEB70076F040 /* GoogleService-Info.plist */; };
+		11B4F7B52AE0E2FA0076F040 /* ApplyProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */; };
+		11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */; };
+		A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */; };
+		A08061DB2AE0AEAD00AD5DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */; };
+		A08061DE2AE0AEAD00AD5DBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A08061DD2AE0AEAD00AD5DBE /* Preview Assets.xcassets */; };
+		A08061E82AE0AEAE00AD5DBE /* InfantoryAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061E72AE0AEAE00AD5DBE /* InfantoryAdminTests.swift */; };
+		A08061F22AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061F12AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift */; };
+		A08061F42AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */; };
+		ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */; };
+		ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453DB2AE4201600F338B5 /* ReportStore.swift */; };
+		ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */; };
+		ECA453E42AE423CC00F338B5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E32AE423CC00F338B5 /* User.swift */; };
+		ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */; };
+		ECA453E82AE4D76400F338B5 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453E72AE4D76400F338B5 /* Report.swift */; };
+		ECA453EB2AE4F56100F338B5 /* ReportTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */; };
+		ECA453EF2AE4F91400F338B5 /* ReportApplyListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */; };
+		ECA453F12AE4F98F00F338B5 /* ReportAuctionListCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */; };
+		ECA453F32AE54EF200F338B5 /* ReportApplyDetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */; };
+		ECA453F52AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */; };
+		ECA453F72AE5625A00F338B5 /* AuctionProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A08061E42AE0AEAE00AD5DBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A08061CB2AE0AEAA00AD5DBE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A08061D22AE0AEAA00AD5DBE;
+			remoteInfo = InfantoryAdmin;
+		};
+		A08061EE2AE0AEAE00AD5DBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A08061CB2AE0AEAA00AD5DBE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A08061D22AE0AEAA00AD5DBE;
+			remoteInfo = InfantoryAdmin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyListCellView.swift; sourceTree = "<group>"; };
+		116033952AE0B74000F6E940 /* AdminMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMainView.swift; sourceTree = "<group>"; };
+		11645FA62AE51C050015172D /* PaidProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidProductStore.swift; sourceTree = "<group>"; };
+		11645FA92AE51C6E0015172D /* PaymentProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductView.swift; sourceTree = "<group>"; };
+		11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProductTabbarView.swift; sourceTree = "<group>"; };
+		11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLotteryView.swift; sourceTree = "<group>"; };
+		11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerView.swift; sourceTree = "<group>"; };
+		11B4F7A12AE0CA530076F040 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		11B4F7B02AE0CEB70076F040 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyProduct.swift; sourceTree = "<group>"; };
+		11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyLotteryStore.swift; sourceTree = "<group>"; };
+		A08061D32AE0AEAA00AD5DBE /* InfantoryAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InfantoryAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminApp.swift; sourceTree = "<group>"; };
+		A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A08061DD2AE0AEAD00AD5DBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A08061E32AE0AEAE00AD5DBE /* InfantoryAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfantoryAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08061E72AE0AEAE00AD5DBE /* InfantoryAdminTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminTests.swift; sourceTree = "<group>"; };
+		A08061ED2AE0AEAE00AD5DBE /* InfantoryAdminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InfantoryAdminUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A08061F12AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminUITests.swift; sourceTree = "<group>"; };
+		A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfantoryAdminUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyTabBarView.swift; sourceTree = "<group>"; };
+		ECA453DB2AE4201600F338B5 /* ReportStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStore.swift; sourceTree = "<group>"; };
+		ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluencerStore.swift; sourceTree = "<group>"; };
+		ECA453E32AE423CC00F338B5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
+		ECA453E72AE4D76400F338B5 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTabBarView.swift; sourceTree = "<group>"; };
+		ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApplyListCellView.swift; sourceTree = "<group>"; };
+		ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAuctionListCellView.swift; sourceTree = "<group>"; };
+		ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportApplyDetailSheetView.swift; sourceTree = "<group>"; };
+		ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAuctionDetailSheetView.swift; sourceTree = "<group>"; };
+		ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProduct.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A08061D02AE0AEAA00AD5DBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11B4F7AD2AE0CD600076F040 /* FirebaseFirestoreSwift in Frameworks */,
+				11B4F7A92AE0CD600076F040 /* FirebaseDatabaseSwift in Frameworks */,
+				11B4F7AB2AE0CD600076F040 /* FirebaseFirestore in Frameworks */,
+				11B4F7A72AE0CD600076F040 /* FirebaseDatabase in Frameworks */,
+				11B4F7A52AE0CD600076F040 /* FirebaseAuth in Frameworks */,
+				11B4F7AF2AE0CD600076F040 /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061E02AE0AEAE00AD5DBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061EA2AE0AEAE00AD5DBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11645FA82AE51C440015172D /* PaidProduct */ = {
+			isa = PBXGroup;
+			children = (
+				11645FA92AE51C6E0015172D /* PaymentProductView.swift */,
+				11645FAB2AE51CB10015172D /* PaymentProductTabbarView.swift */,
+			);
+			path = PaidProduct;
+			sourceTree = "<group>";
+		};
+		11B4F79C2AE0C6E70076F040 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F7A12AE0CA530076F040 /* ReportView.swift */,
+				ECA453E92AE4F54900F338B5 /* SubView */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		11B4F7B22AE0CF4D0076F040 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F7B62AE0E4340076F040 /* ApplyLotteryStore.swift */,
+				ECA453DB2AE4201600F338B5 /* ReportStore.swift */,
+				ECA453E12AE4237D00F338B5 /* InfluencerStore.swift */,
+				11645FA62AE51C050015172D /* PaidProductStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		11B4F7B32AE0E2E30076F040 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F7B42AE0E2FA0076F040 /* ApplyProduct.swift */,
+				ECA453F62AE5625A00F338B5 /* AuctionProduct.swift */,
+				ECA453E32AE423CC00F338B5 /* User.swift */,
+				ECA453E72AE4D76400F338B5 /* Report.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		11B4F7B92AE0F85A0076F040 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A08061DA2AE0AEAD00AD5DBE /* Assets.xcassets */,
+				A08061D62AE0AEAA00AD5DBE /* InfantoryAdminApp.swift */,
+				ECA453E52AE4D39300F338B5 /* ToastMessageView.swift */,
+				ECA453DD2AE4213700F338B5 /* MainTab */,
+				ECA453DE2AE4214400F338B5 /* ApplyLottery */,
+				11B4F79C2AE0C6E70076F040 /* Report */,
+				ECA453E02AE421A400F338B5 /* Influencer */,
+				11645FA82AE51C440015172D /* PaidProduct */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		A08061CA2AE0AEAA00AD5DBE = {
+			isa = PBXGroup;
+			children = (
+				11B4F7B02AE0CEB70076F040 /* GoogleService-Info.plist */,
+				A08061D52AE0AEAA00AD5DBE /* InfantoryAdmin */,
+				A08061E62AE0AEAE00AD5DBE /* InfantoryAdminTests */,
+				A08061F02AE0AEAE00AD5DBE /* InfantoryAdminUITests */,
+				A08061D42AE0AEAA00AD5DBE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A08061D42AE0AEAA00AD5DBE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A08061D32AE0AEAA00AD5DBE /* InfantoryAdmin.app */,
+				A08061E32AE0AEAE00AD5DBE /* InfantoryAdminTests.xctest */,
+				A08061ED2AE0AEAE00AD5DBE /* InfantoryAdminUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A08061D52AE0AEAA00AD5DBE /* InfantoryAdmin */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F7B92AE0F85A0076F040 /* View */,
+				11B4F7B32AE0E2E30076F040 /* Model */,
+				11B4F7B22AE0CF4D0076F040 /* Store */,
+				A08061DC2AE0AEAD00AD5DBE /* Preview Content */,
+			);
+			path = InfantoryAdmin;
+			sourceTree = "<group>";
+		};
+		A08061DC2AE0AEAD00AD5DBE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A08061DD2AE0AEAD00AD5DBE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A08061E62AE0AEAE00AD5DBE /* InfantoryAdminTests */ = {
+			isa = PBXGroup;
+			children = (
+				A08061E72AE0AEAE00AD5DBE /* InfantoryAdminTests.swift */,
+			);
+			path = InfantoryAdminTests;
+			sourceTree = "<group>";
+		};
+		A08061F02AE0AEAE00AD5DBE /* InfantoryAdminUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A08061F12AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift */,
+				A08061F32AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift */,
+			);
+			path = InfantoryAdminUITests;
+			sourceTree = "<group>";
+		};
+		ECA453DD2AE4213700F338B5 /* MainTab */ = {
+			isa = PBXGroup;
+			children = (
+				116033952AE0B74000F6E940 /* AdminMainView.swift */,
+			);
+			path = MainTab;
+			sourceTree = "<group>";
+		};
+		ECA453DE2AE4214400F338B5 /* ApplyLottery */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F79A2AE0C6E20076F040 /* ApplyLotteryView.swift */,
+				ECA453DF2AE4216500F338B5 /* SubView */,
+			);
+			path = ApplyLottery;
+			sourceTree = "<group>";
+		};
+		ECA453DF2AE4216500F338B5 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				ECA453C92AE11C3600F338B5 /* ApplyTabBarView.swift */,
+				114873F12AE0FC3A00D9632F /* ApplyListCellView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		ECA453E02AE421A400F338B5 /* Influencer */ = {
+			isa = PBXGroup;
+			children = (
+				11B4F79F2AE0C9D80076F040 /* InfluencerView.swift */,
+			);
+			path = Influencer;
+			sourceTree = "<group>";
+		};
+		ECA453E92AE4F54900F338B5 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				ECA453EA2AE4F56100F338B5 /* ReportTabBarView.swift */,
+				ECA453EE2AE4F91400F338B5 /* ReportApplyListCellView.swift */,
+				ECA453F22AE54EF200F338B5 /* ReportApplyDetailSheetView.swift */,
+				ECA453F02AE4F98F00F338B5 /* ReportAuctionListCellView.swift */,
+				ECA453F42AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A08061D22AE0AEAA00AD5DBE /* InfantoryAdmin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08061F72AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdmin" */;
+			buildPhases = (
+				A08061CF2AE0AEAA00AD5DBE /* Sources */,
+				A08061D02AE0AEAA00AD5DBE /* Frameworks */,
+				A08061D12AE0AEAA00AD5DBE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InfantoryAdmin;
+			packageProductDependencies = (
+				11B4F7A42AE0CD600076F040 /* FirebaseAuth */,
+				11B4F7A62AE0CD600076F040 /* FirebaseDatabase */,
+				11B4F7A82AE0CD600076F040 /* FirebaseDatabaseSwift */,
+				11B4F7AA2AE0CD600076F040 /* FirebaseFirestore */,
+				11B4F7AC2AE0CD600076F040 /* FirebaseFirestoreSwift */,
+				11B4F7AE2AE0CD600076F040 /* FirebaseStorage */,
+			);
+			productName = InfantoryAdmin;
+			productReference = A08061D32AE0AEAA00AD5DBE /* InfantoryAdmin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A08061E22AE0AEAE00AD5DBE /* InfantoryAdminTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08061FA2AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdminTests" */;
+			buildPhases = (
+				A08061DF2AE0AEAE00AD5DBE /* Sources */,
+				A08061E02AE0AEAE00AD5DBE /* Frameworks */,
+				A08061E12AE0AEAE00AD5DBE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A08061E52AE0AEAE00AD5DBE /* PBXTargetDependency */,
+			);
+			name = InfantoryAdminTests;
+			productName = InfantoryAdminTests;
+			productReference = A08061E32AE0AEAE00AD5DBE /* InfantoryAdminTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A08061EC2AE0AEAE00AD5DBE /* InfantoryAdminUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A08061FD2AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdminUITests" */;
+			buildPhases = (
+				A08061E92AE0AEAE00AD5DBE /* Sources */,
+				A08061EA2AE0AEAE00AD5DBE /* Frameworks */,
+				A08061EB2AE0AEAE00AD5DBE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A08061EF2AE0AEAE00AD5DBE /* PBXTargetDependency */,
+			);
+			name = InfantoryAdminUITests;
+			productName = InfantoryAdminUITests;
+			productReference = A08061ED2AE0AEAE00AD5DBE /* InfantoryAdminUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A08061CB2AE0AEAA00AD5DBE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					A08061D22AE0AEAA00AD5DBE = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					A08061E22AE0AEAE00AD5DBE = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A08061D22AE0AEAA00AD5DBE;
+					};
+					A08061EC2AE0AEAE00AD5DBE = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = A08061D22AE0AEAA00AD5DBE;
+					};
+				};
+			};
+			buildConfigurationList = A08061CE2AE0AEAA00AD5DBE /* Build configuration list for PBXProject "InfantoryAdmin" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A08061CA2AE0AEAA00AD5DBE;
+			packageReferences = (
+				11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = A08061D42AE0AEAA00AD5DBE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A08061D22AE0AEAA00AD5DBE /* InfantoryAdmin */,
+				A08061E22AE0AEAE00AD5DBE /* InfantoryAdminTests */,
+				A08061EC2AE0AEAE00AD5DBE /* InfantoryAdminUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A08061D12AE0AEAA00AD5DBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08061DE2AE0AEAD00AD5DBE /* Preview Assets.xcassets in Resources */,
+				A08061DB2AE0AEAD00AD5DBE /* Assets.xcassets in Resources */,
+				11B4F7B12AE0CEB70076F040 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061E12AE0AEAE00AD5DBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061EB2AE0AEAE00AD5DBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A08061CF2AE0AEAA00AD5DBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA453F32AE54EF200F338B5 /* ReportApplyDetailSheetView.swift in Sources */,
+				ECA453EF2AE4F91400F338B5 /* ReportApplyListCellView.swift in Sources */,
+				ECA453E42AE423CC00F338B5 /* User.swift in Sources */,
+				ECA453F72AE5625A00F338B5 /* AuctionProduct.swift in Sources */,
+				ECA453F52AE552FB00F338B5 /* ReportAuctionDetailSheetView.swift in Sources */,
+				ECA453E22AE4237D00F338B5 /* InfluencerStore.swift in Sources */,
+				ECA453F12AE4F98F00F338B5 /* ReportAuctionListCellView.swift in Sources */,
+				11B4F7A02AE0C9D80076F040 /* InfluencerView.swift in Sources */,
+				ECA453CA2AE11C3600F338B5 /* ApplyTabBarView.swift in Sources */,
+				ECA453EB2AE4F56100F338B5 /* ReportTabBarView.swift in Sources */,
+				ECA453E62AE4D39300F338B5 /* ToastMessageView.swift in Sources */,
+				11B4F7B72AE0E4340076F040 /* ApplyLotteryStore.swift in Sources */,
+				11645FAA2AE51C6E0015172D /* PaymentProductView.swift in Sources */,
+				11B4F7A22AE0CA530076F040 /* ReportView.swift in Sources */,
+				11645FAC2AE51CB10015172D /* PaymentProductTabbarView.swift in Sources */,
+				11B4F7B52AE0E2FA0076F040 /* ApplyProduct.swift in Sources */,
+				ECA453DC2AE4201600F338B5 /* ReportStore.swift in Sources */,
+				11B4F79B2AE0C6E20076F040 /* ApplyLotteryView.swift in Sources */,
+				114873F22AE0FC3A00D9632F /* ApplyListCellView.swift in Sources */,
+				ECA453E82AE4D76400F338B5 /* Report.swift in Sources */,
+				116033962AE0B74000F6E940 /* AdminMainView.swift in Sources */,
+				11645FA72AE51C050015172D /* PaidProductStore.swift in Sources */,
+				A08061D72AE0AEAA00AD5DBE /* InfantoryAdminApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061DF2AE0AEAE00AD5DBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08061E82AE0AEAE00AD5DBE /* InfantoryAdminTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A08061E92AE0AEAE00AD5DBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A08061F22AE0AEAE00AD5DBE /* InfantoryAdminUITests.swift in Sources */,
+				A08061F42AE0AEAE00AD5DBE /* InfantoryAdminUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A08061E52AE0AEAE00AD5DBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A08061D22AE0AEAA00AD5DBE /* InfantoryAdmin */;
+			targetProxy = A08061E42AE0AEAE00AD5DBE /* PBXContainerItemProxy */;
+		};
+		A08061EF2AE0AEAE00AD5DBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A08061D22AE0AEAA00AD5DBE /* InfantoryAdmin */;
+			targetProxy = A08061EE2AE0AEAE00AD5DBE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		A08061F52AE0AEAE00AD5DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A08061F62AE0AEAE00AD5DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A08061F82AE0AEAE00AD5DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"InfantoryAdmin/Preview Content\"";
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.Infantory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A08061F92AE0AEAE00AD5DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"InfantoryAdmin/Preview Content\"";
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.Infantory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A08061FB2AE0AEAE00AD5DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.InfantoryAdminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InfantoryAdmin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InfantoryAdmin";
+			};
+			name = Debug;
+		};
+		A08061FC2AE0AEAE00AD5DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.InfantoryAdminTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InfantoryAdmin.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InfantoryAdmin";
+			};
+			name = Release;
+		};
+		A08061FE2AE0AEAE00AD5DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.InfantoryAdminUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = InfantoryAdmin;
+			};
+			name = Debug;
+		};
+		A08061FF2AE0AEAE00AD5DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6R3M7VGRP2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.techit.InfantoryAdminUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = InfantoryAdmin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A08061CE2AE0AEAA00AD5DBE /* Build configuration list for PBXProject "InfantoryAdmin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08061F52AE0AEAE00AD5DBE /* Debug */,
+				A08061F62AE0AEAE00AD5DBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08061F72AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdmin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08061F82AE0AEAE00AD5DBE /* Debug */,
+				A08061F92AE0AEAE00AD5DBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08061FA2AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdminTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08061FB2AE0AEAE00AD5DBE /* Debug */,
+				A08061FC2AE0AEAE00AD5DBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A08061FD2AE0AEAE00AD5DBE /* Build configuration list for PBXNativeTarget "InfantoryAdminUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A08061FE2AE0AEAE00AD5DBE /* Debug */,
+				A08061FF2AE0AEAE00AD5DBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.16.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		11B4F7A42AE0CD600076F040 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		11B4F7A62AE0CD600076F040 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		11B4F7A82AE0CD600076F040 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		11B4F7AA2AE0CD600076F040 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		11B4F7AC2AE0CD600076F040 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		11B4F7AE2AE0CD600076F040 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 11B4F7A32AE0CD600076F040 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A08061CB2AE0AEAA00AD5DBE /* Project object */;
+}

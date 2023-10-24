@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.techit.Infantory</string>
+	<string>education.techit.infantory</string>
 	<key>PROJECT_ID</key>
 	<string>infantory-816bc</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:675040774735:ios:7db2c73f31c7541dc6383a</string>
+	<string>1:675040774735:ios:9aa56aebc3bca2edc6383a</string>
+	<key>DATABASE_URL</key>
+	<string>https://infantory-816bc-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

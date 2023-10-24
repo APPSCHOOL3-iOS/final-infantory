@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct PayButtonView: View {
-    @ObservedObject var viewModel: PaymentViewModel
+    @Binding var paymentInfo: PaymentInfo
     var payName: PaymentMethod
     
     var body: some View {
-        let isSelectedMethod =  viewModel.paymentInfo.paymentMethod == payName
+        let isSelectedMethod =  paymentInfo.paymentMethod == payName
         
         return (
             Button {
-                viewModel.paymentInfo.paymentMethod = payName
+                paymentInfo.paymentMethod = payName
             } label: {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10)
@@ -40,9 +40,14 @@ struct PayButtonView: View {
 struct PayButtonView_Previews: PreviewProvider {
     static var previews: some View {
         PayButtonView(
-            viewModel: PaymentViewModel(user: User.dummyUser,
-                                        product: AuctionProduct.dummyProduct),
-            payName: PaymentMethod.naverPay
+            paymentInfo: .constant(PaymentInfo(userId: "",
+                                               address: Address.init(address: "",
+                                                                     zonecode: "",
+                                                                     addressDetail: ""),
+                                               deliveryRequest: .door,
+                                               deliveryCost: 3000,
+                                               paymentMethod: .accountTransfer)),
+            payName: .naverPay
         )
     }
 }

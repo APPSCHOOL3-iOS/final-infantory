@@ -13,14 +13,14 @@ struct PaymentCardAddView: View {
     var body: some View {
         VStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 10)
-                .stroke( .gray.opacity(0.5), lineWidth: 1 )
+                .stroke(Color.infanLightGray, lineWidth: 1 )
                 .frame(width: CGFloat.screenWidth - 40, height: 50)
                 .overlay(
                     Button {
                         
                     } label: {
                         Text("+ 새 카드 추가하기")
-                            .foregroundColor(.black.opacity(0.75))
+                            .foregroundColor(.black)
                             .frame(width: CGFloat.screenWidth - 60)
                             .padding()
                     }
@@ -37,13 +37,14 @@ struct PaymentCardAddView: View {
                                 .font(.headline)
                         )
                         .frame(width: CGFloat.screenWidth / 5, height: CGFloat.screenHeight / 15)
+                    
                     VStack(alignment: .leading) {
                         Text("••••-••••-••••-1234")
                             .foregroundColor(.black)
                         
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 10)
                             .frame(width: 70, height: 25)
-                            .foregroundColor(.gray.opacity(0.15))
+                            .foregroundColor(.infanLightGray)
                             .overlay(
                                 Text("기본결제")
                                     .font(.caption)
@@ -58,9 +59,8 @@ struct PaymentCardAddView: View {
             
             Spacer()
         }
-        .infanNavigationBar(title: "결제 정보")
+        .navigationBar(title: "결제 정보")
         .padding()
-        
     }
 }
 

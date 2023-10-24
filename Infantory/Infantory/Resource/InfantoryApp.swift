@@ -9,6 +9,7 @@ import SwiftUI
 import KakaoSDKCommon
 import KakaoSDKAuth
 import FirebaseCore
+import Photos
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -25,17 +26,24 @@ struct InfantoryApp: App {
     
     init() {
         // Kakao SDK 초기화
-        KakaoSDK.initSDK(appKey: "45ce2063d86a5a5c18e38528aae46993")
+        KakaoSDK.initSDK(appKey: AppKey.kakaoAppKey)
     }
     
+    @StateObject private var loginStore = LoginStore()
+    @StateObject var influencerStore: InfluencerStore = InfluencerStore()
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .onOpenURL { url in
-                    if AuthApi.isKakaoTalkLoginUrl(url) {
-                        _ = AuthController.handleOpenUrl(url: url)
+            VStack {
+                MainTabView()
+                    .onOpenURL { url in
+                        if AuthApi.isKakaoTalkLoginUrl(url) {
+                            _ = AuthController.handleOpenUrl(url: url)
+                        }
                     }
-                }
+                
+            }
+            .environmentObject(loginStore)
+            .environmentObject(influencerStore)
         }
     }
 }

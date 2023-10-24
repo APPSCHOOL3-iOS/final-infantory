@@ -26,5 +26,24 @@
 		<string>kakaokompassauth</string>
 		<string>kakaolink</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SUIT-Bold.otf</string>
+		<string>SUIT-Medium.otf</string>
+		<string>SUIT-Regular.otf</string>
+		<string>SUIT-SemiBold.otf</string>
+		<string>Montserrat-ExtraBold.ttf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>Splash</string>
+		<key>UIImageName</key>
+		<string>launchScreenLogo</string>
+	</dict>
 </dict>
 </plist>

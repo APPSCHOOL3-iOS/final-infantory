@@ -11,7 +11,7 @@ struct InfluencerImageCell: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                Image("Influencer1")
+                Image("smallAppIcon")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 150, height: 200)
@@ -20,6 +20,7 @@ struct InfluencerImageCell: View {
         }
     }
 }
+
 struct ItemIamgeView: View {
     var body: some View {
         ScrollView(.horizontal) {
@@ -33,6 +34,7 @@ struct ItemIamgeView: View {
         }
     }
 }
+
 struct ItemIamgeView_Previews: PreviewProvider {
     static var previews: some View {
         ItemIamgeView()
