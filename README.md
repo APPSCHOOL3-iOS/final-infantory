@@ -1,6 +1,10 @@
-# 프로젝트 이름
+# INFANTORY
 
 ## A. 프로젝트 개요
+
+### 1) INFANTORY?
+
+- Influencer, Fan, Inventory의 합성어로 인플루언서의 애장품들을 팬들이 획득하여 저장하는 저장소의 의미
 
 ### 2) 개발 동기
 
