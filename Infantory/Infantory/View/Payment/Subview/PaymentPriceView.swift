@@ -13,23 +13,19 @@ struct PaymentPriceView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            
             Text(viewTitle)
                 .font(.headline)
                 .padding(.horizontal)
             
             VStack(alignment: .leading, spacing: 22) {
-                
                 ForEach(PaymentCost.allCases, id: \.rawValue) { item in
                     if item == .totalPrice {
                         TotalPriceRow(item: item, price: price)
                     } else {
                         PriceDetailRow(item: item, price: price)
                     }
-                    
                 }
             }
-            
         }
     }
 }
@@ -46,19 +42,26 @@ struct TotalPriceRow: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
+            
             Divider()
+            
             HStack {
                 Text(PaymentCost.totalPrice.title)
                     .padding(.horizontal)
             }
+            
             HStack {
+                
                 Spacer()
+                
                 Text("\(item.receipt(productPrice: price))원")
                     .foregroundColor(.red)
                     .font(.headline)
                     .padding(.horizontal)
             }
+            
             Divider()
+            
         }
         .background(Color.gray.opacity(0.1))
     }
@@ -72,6 +75,7 @@ struct PriceDetailRow: View {
         HStack {
             Text(item.title)
                 .foregroundColor(.gray)
+            
             if item == .commission {
                 Button {
                     //수수료 안내 액션
@@ -80,6 +84,7 @@ struct PriceDetailRow: View {
                         .foregroundColor(.gray)
                 }
             }
+            
             Spacer()
             
             Text("\(item.receipt(productPrice: price))원")

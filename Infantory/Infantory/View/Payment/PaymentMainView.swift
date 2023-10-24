@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PaymentView: View {
+struct PaymentMainView: View {
     var paymentStore: PaymentStore
     @State var paymentInfo: PaymentInfo
     @Binding var isShowingPaymentSheet: Bool
@@ -37,7 +37,7 @@ struct PaymentView: View {
 struct PaymentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            PaymentView(paymentStore: PaymentStore(user: User.dummyUser, product: AuctionProduct.dummyProduct),
+            PaymentMainView(paymentStore: PaymentStore(user: User.dummyUser, product: AuctionProduct.dummyProduct),
                         paymentInfo: PaymentInfo(userId: "",
                                                  address: Address.init(address: "",
                                                                        zonecode: "",
@@ -51,8 +51,7 @@ struct PaymentView_Previews: PreviewProvider {
     }
 }
 
-extension PaymentView {
-    
+extension PaymentMainView {
     var payButton: some View {
         NavigationLink {
             PaymentReceiptView(paymentStore: paymentStore,

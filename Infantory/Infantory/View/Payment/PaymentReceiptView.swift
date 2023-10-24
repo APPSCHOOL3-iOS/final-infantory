@@ -11,7 +11,6 @@ import FirebaseFirestore
 struct PaymentReceiptView: View {
     let paymentStore: PaymentStore
     let paymentInfo: PaymentInfo
-    
     @Binding var isShowingPaymentSheet: Bool
     
     var body: some View {
@@ -40,10 +39,12 @@ struct PaymentReceiptView: View {
                 
                 PaymentPriceView(price: paymentStore.product.winningPrice ?? 0)
             }
+            
             Spacer()
             
             Button {
                 isShowingPaymentSheet = false
+                
                 Task {
                     updateIsPaid()
                 }
@@ -56,7 +57,6 @@ struct PaymentReceiptView: View {
                             .foregroundColor(.white)
                     )
                     .padding()
-                
             }
         }
         .navigationBar(title: "구매완료")
@@ -67,6 +67,7 @@ struct PaymentReceiptView: View {
     
     func updateIsPaid() {
         let firestore = Firestore.firestore()
+        
         firestore.collection("AuctionProducts").document(paymentStore.product.id ?? "").updateData([
             "isPaid": true
         ]) { error in

@@ -198,7 +198,7 @@ struct Footer: View {
                 .environmentObject(loginStore)
         }
         .sheet(isPresented: $isShowingPaymentSheet) {
-            PaymentView(paymentStore: PaymentStore(user: loginStore.currentUser, product: auctionStore.product),
+            PaymentMainView(paymentStore: PaymentStore(user: loginStore.currentUser, product: auctionStore.product),
                         paymentInfo: PaymentInfo(userId: loginStore.currentUser.id ?? "",
                                                  auctionProduct: auctionStore.product,
                                                  applyProduct: nil,

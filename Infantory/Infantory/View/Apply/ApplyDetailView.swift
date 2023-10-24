@@ -121,7 +121,7 @@ struct ApplyFooter: View {
         })
         
         .sheet(isPresented: $isShowingPaymentSheet) {
-            PaymentView(paymentStore: PaymentStore(user: loginStore.currentUser,
+            PaymentMainView(paymentStore: PaymentStore(user: loginStore.currentUser,
                                                    product: product),
                         paymentInfo: PaymentInfo(userId: loginStore.currentUser.id ?? "",
                                                  auctionProduct: nil,
