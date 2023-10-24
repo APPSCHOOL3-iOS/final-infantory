@@ -63,26 +63,11 @@
 # B. 프로젝트 소개
 
 <style>
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  td {
-    padding: 10px;
-    vertical-align: top;
-  }
-  img {
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  strong {
-    font-size: 1.2em;
-    color: #B15EFF;
-  }
-  td:nth-child(2) {
-    padding-left: 20px;
-  }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 10px; border: none; }
+  img { border-radius: 10px; }
 </style>
+
 <table>
   <tr>
     <td><img src="image.png" width="200" height="370"></td>
