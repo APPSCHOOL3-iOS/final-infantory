@@ -502,7 +502,6 @@
 				EC9E6D0F2ADCC98B00FD0831 /* Search */,
 				A091E58B2ABAA5AD000894FC /* Common */,
 				A091E5AA2ABC76B6000894FC /* MainTab */,
-				A091E57A2ABAA4C3000894FC /* Splash */,
 				111924822ABAC70F003821FD /* Payment */,
 				A091E5792ABAA4AF000894FC /* Login */,
 				A091E5872ABAA584000894FC /* Home */,
@@ -584,13 +583,6 @@
 				844BB4E82ACBE8A3004891DD /* LoginAddressWebView.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		A091E57A2ABAA4C3000894FC /* Splash */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Splash;
 			sourceTree = "<group>";
 		};
 		A091E57B2ABAA4D3000894FC /* Apply */ = {
