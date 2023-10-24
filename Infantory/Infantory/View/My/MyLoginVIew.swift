@@ -14,7 +14,7 @@ struct MyLoginView: View {
     @Environment(\.dismiss) private var dismiss
     @State var showingAlert: Bool = false
     @State private var isShowingLoginSheet: Bool = false
-    //    @StateObject var photosSelectorStore: PhotosSelectorStore = PhotosSelectorStore.shared
+    
     var body: some View {
         NavigationStack {
             ScrollView {

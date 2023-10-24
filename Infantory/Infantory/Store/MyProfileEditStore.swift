@@ -22,7 +22,6 @@ class MyProfileEditStore: ObservableObject {
             if let document = document {
                let user = try? document.data(as: User.self)
                 self.user = user
-                print(self.user)
             }
         }
     }
