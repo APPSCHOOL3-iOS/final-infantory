@@ -79,6 +79,7 @@ struct AuctionRegistrationView: View {
                                 .font(.infanHeadlineBold)
                         }
                     }
+                    
                     DatePicker("경매시작일", selection: $selectedDate, in: Date()..., displayedComponents: [.hourAndMinute, .date])
                         .font(.infanHeadlineBold)
                         .padding(.vertical)
@@ -133,6 +134,7 @@ struct AuctionRegistrationView: View {
         }
         .navigationBar(title: "내 경매 등록")
     }
+    
     func calculateDateOffset(days: Int) {
         if let newDate = Calendar.current.date(byAdding: .day, value: days, to: selectedDate) {
             let newDateText = InfanDateFormatter.shared.dateTimeString(from: newDate)
@@ -141,6 +143,7 @@ struct AuctionRegistrationView: View {
         }
     }
 }
+
 extension AuctionRegistrationView {
     func dateSelectButton(date: String) -> some View {
         
@@ -153,7 +156,6 @@ extension AuctionRegistrationView {
                     .stroke(lineWidth: 1)
                     .background(Color.infanMain)
                     .cornerRadius(10)
-                //                    .fill(Color.infanMain)
                     .opacity(0.3)
                     .overlay {
                         Text("\(date)일")
