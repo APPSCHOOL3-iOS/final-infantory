@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct MainColorButton: View {
-    
     let text: String
     let action: () -> Void
     

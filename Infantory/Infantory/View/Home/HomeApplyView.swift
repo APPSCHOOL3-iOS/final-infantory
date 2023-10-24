@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct HomeApplyView: View {
-    
     @ObservedObject var applyViewModel: ApplyProductStore
     
     var body: some View {
-        
         ScrollView(.horizontal) {
             HStack {
                 ForEach(applyViewModel.filteredProduct.prefix(5)) { product in
@@ -20,7 +18,6 @@ struct HomeApplyView: View {
                         ApplyDetailView(applyViewModel: applyViewModel, product: product)
                     } label: {
                         VStack(alignment: .leading) {
-                            
                             TimerView(remainingTime: applyViewModel.remainingTime(product: product))
                             
                             if product.productImageURLStrings.count > 0 {
@@ -32,12 +29,14 @@ struct HomeApplyView: View {
                                             .frame(width: (.screenWidth - 100) / 2,
                                                    height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                        
                                     case .success(let image):
                                         image
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                        
                                     case .failure:
                                         Image(systemName: "xmark")
                                             .frame(width: (.screenWidth - 100) / 2,
@@ -60,8 +59,10 @@ struct HomeApplyView: View {
                                 Text(product.influencerNickname)
                                     .foregroundColor(.infanBlack)
                                     .bold()
+                                
                                 Text(product.productName)
                                     .lineLimit(1)
+                                
                                 Text("전체 응모: \(product.applyUserIDs.count) 회")
                                     .foregroundColor(Color.infanDarkGray)
                             }

@@ -9,8 +9,6 @@ import SwiftUI
 
 // 1. 진행중인 상품목록을 가져온다
 // 2. 진행중인 상품목록 중 참여를 많이한 순으로 Sort한다.
-
-// 여기 auctionStore가져와서 많이 경매참여한 순으로 바꿔야함 ㅜ
 struct HomeHotAuctionView: View {
     @ObservedObject var auctionViewModel: AuctionProductViewModel
     private var sortFilteredProduct: [AuctionProduct] {
@@ -28,6 +26,7 @@ struct HomeHotAuctionView: View {
                     } label: {
                         VStack(alignment: .leading) {
                             AuctionCountView(productID: product.id ?? "")
+                            
                             if product.productImageURLStrings.count > 0 {
                                 CachedImage(url: product.productImageURLStrings[0]) { phase in
                                     switch phase {
@@ -37,12 +36,14 @@ struct HomeHotAuctionView: View {
                                             .frame(width: (.screenWidth - 100) / 2,
                                                    height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                        
                                     case .success(let image):
                                         image
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: (.screenWidth - 100) / 2, height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                        
                                     case .failure:
                                         Image(systemName: "xmark")
                                             .frame(width: (.screenWidth - 100) / 2,
@@ -66,9 +67,11 @@ struct HomeHotAuctionView: View {
                                 Text(product.influencerNickname)
                                     .bold()
                                     .foregroundColor(.infanBlack)
+                                
                                 Text(product.productName)
                                     .foregroundColor(.infanBlack)
                                     .lineLimit(1)
+                                
                                 WinningPriceView(productID: product.id ?? "")
                             }
                             .font(.infanFootnote)
@@ -92,7 +95,6 @@ struct HomeHotAuctionView_Previews: PreviewProvider {
 }
 
 struct WinningPriceView: View {
-    
     let productID: String
     @StateObject var myActivityStore = MyActivityStore()
     
@@ -100,6 +102,7 @@ struct WinningPriceView: View {
         HStack {
             Image(systemName: "arrowtriangle.up.fill")
                 .foregroundColor(.infanRed)
+            
             TextAnimateView(value: myActivityStore.winningPrice)
                 .foregroundColor(Color.infanRed)
                 .monospacedDigit()
@@ -113,7 +116,6 @@ struct WinningPriceView: View {
 }
 
 struct AuctionCountView: View {
-    
     let productID: String
     @StateObject var myActivityStore = MyActivityStore()
     
