@@ -37,6 +37,7 @@ struct PaymentCardAddView: View {
                                 .font(.headline)
                         )
                         .frame(width: CGFloat.screenWidth / 5, height: CGFloat.screenHeight / 15)
+                    
                     VStack(alignment: .leading) {
                         Text("••••-••••-••••-1234")
                             .foregroundColor(.black)
@@ -60,7 +61,6 @@ struct PaymentCardAddView: View {
         }
         .navigationBar(title: "결제 정보")
         .padding()
-        
     }
 }
 

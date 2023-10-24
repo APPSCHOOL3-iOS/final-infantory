@@ -45,7 +45,6 @@ struct PaymentAddressView_Previews: PreviewProvider {
 }
 
 extension PaymentAddressView {
-    
     var productInfo: some View {
         VStack {
             HStack(alignment: .top) {
@@ -56,6 +55,7 @@ extension PaymentAddressView {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 90, height: 90)
                             .cornerRadius(20)
+                        
                     case .success(let image):
                         image
                             .resizable()
@@ -88,7 +88,6 @@ extension PaymentAddressView {
                     Text(paymentStore.product.description)
                         .foregroundColor(.gray)
                 }
-                
             }
         }
     }
@@ -121,10 +120,10 @@ extension PaymentAddressView {
                 HStack {
                     Text(item.title)
                         .frame(width: 50, alignment: .leading)
+                    
                     Text(item.content(paymentStore: paymentStore))
                 }
             }
-            
         }
     }
     
@@ -151,7 +150,6 @@ extension PaymentAddressView {
                         .padding(.leading, -20)
                 }
             }
-            
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(lineWidth: 1)

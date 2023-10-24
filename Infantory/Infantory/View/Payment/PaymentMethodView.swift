@@ -16,12 +16,12 @@ struct PaymentMethodView: View {
             Text("결제 방법")
                 .bold()
                 .padding(.bottom, 7)
-            //계좌로 간편결제 선택, 계좌등록
-            accountButton
-            //카드로 간편결제 선택, 카드등록
-            cardButton
-            //페이 간편결제 선택
-            easyPaymentButton
+            
+            accountButton //계좌로 간편결제 선택, 계좌등록
+            
+            cardButton //카드로 간편결제 선택, 카드등록
+            
+            easyPaymentButton //페이 간편결제 선택
         }
     }
 }
@@ -44,7 +44,6 @@ struct PaymentMethodView_Previews: PreviewProvider {
 }
 
 extension PaymentMethodView {
-    
     var accountButton: some View {
         let isSelectedMethod = paymentInfo.paymentMethod == .accountTransfer
         
@@ -52,6 +51,7 @@ extension PaymentMethodView {
             VStack(alignment: .leading) {
                 Text("계좌 간편결제")
                     .font(.callout)
+                
                 Button {
                     paymentInfo.paymentMethod  = .accountTransfer
                 } label: {

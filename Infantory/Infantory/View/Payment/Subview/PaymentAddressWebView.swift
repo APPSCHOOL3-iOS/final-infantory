@@ -35,20 +35,17 @@ struct PaymentAddressWebView_Previews: PreviewProvider {
 
 struct WebView: UIViewRepresentable {
     @Environment(\.presentationMode) var presentationMode
-    
     @Binding var paymentInfo: PaymentInfo
-    
     let url: URL
     let contentController = WKUserContentController()
 
-    // SwiftUI 뷰를 생성할 때 호출됩니다.
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
-        // JavaScript 메시지 핸들러
+        
         webView.configuration.userContentController = contentController
         webView.configuration.userContentController.add(context.coordinator, name: "callBackHandler")
-        // 네비게이션 델리게이트를 설정합니다.
         webView.navigationDelegate = context.coordinator
+        
         return webView
     }
     
