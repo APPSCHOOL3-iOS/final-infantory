@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AuctionTimerView: View {
-    
     var product: AuctionProduct
     
     var body: some View {

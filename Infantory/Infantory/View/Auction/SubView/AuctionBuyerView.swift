@@ -9,11 +9,9 @@ import SwiftUI
 
 struct AuctionBuyerView: View {
     @State private var currentIndex = 0
-    
     @ObservedObject var auctionStore: AuctionStore
     
     var body: some View {
-        
         NavigationLink {
             AuctionBuyerDetailView(receivedBiddingData: $auctionStore.biddingInfos)
         } label: {
@@ -28,7 +26,6 @@ struct AuctionBuyerView: View {
                     .foregroundColor(.infanBlack)
                     .monospacedDigit()
                     .animation(Animation.easeInOut(duration: 1))
-
             }
             .foregroundStyle(.black)
             .padding()
@@ -56,6 +53,4 @@ struct AuctionBuyerView_Previews: PreviewProvider {
         AuctionBuyerView(auctionStore: AuctionStore(product: AuctionProduct.dummyProduct))
     }
 }
-//#Preview {
-//    AuctionBuyerView()
-//}
+

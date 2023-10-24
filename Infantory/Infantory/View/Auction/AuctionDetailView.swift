@@ -105,15 +105,6 @@ struct Footer: View {
                         isShowingAuctionNoticeSheet = true
                     }
                 }
-                
-//                if loginStore.userUid.isEmpty {
-//                    isShowingLoginSheet = true
-//                }
-//                if loginStore.warning == false {
-//                    isShowingAuctionBidSheet = true
-//                } else {
-//                    isShowingAuctionNoticeSheet = true
-//                }
             } label: {
                 if auctionStore.product.auctionFilter == .inProgress {
                     RoundedRectangle(cornerRadius: 10)

@@ -17,6 +17,7 @@ struct AuctionReportSheetView: View {
     @State private var reportCase: ReportCase = .case1
     @Binding var toastMessage: String
     @Binding var isShowingToastMessage: Bool
+    
     var body: some View {
         VStack(spacing: 15) {
             

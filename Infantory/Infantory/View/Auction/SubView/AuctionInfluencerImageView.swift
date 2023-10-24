@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct AuctionInfluencerImageView: View {
-    
     var product: AuctionProduct
     
     var body: some View {

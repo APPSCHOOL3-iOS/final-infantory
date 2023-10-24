@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct ApplyMainView: View {
-    
     @EnvironmentObject var loginStore: LoginStore
     @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     var searchCategory: SearchResultCategory = .apply
+    
     var body: some View {
         if loginStore.currentUser.isInfluencer == UserType.influencer {
             NavigationStack {
@@ -67,6 +67,7 @@ struct ApplyMainView: View {
         }
     }
 }
+
 struct ApplyFloatingButton: View {
     let action: () -> Void
     let icon: String
