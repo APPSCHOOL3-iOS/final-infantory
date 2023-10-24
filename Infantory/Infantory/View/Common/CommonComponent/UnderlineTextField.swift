@@ -7,7 +7,6 @@
 import SwiftUI
 
 struct UnderlineTextField: View {
-    
     var textFieldTitle: String? = nil
     let placeholder: String
     @Binding var text: String
@@ -19,6 +18,7 @@ struct UnderlineTextField: View {
                 Text("\(textFieldTitle)")
                     .font(.infanHeadlineBold)
             }
+            
             TextField(placeholder, text: $text)
                 .font(.infanBody)
                 .foregroundColor(.black)
@@ -26,17 +26,10 @@ struct UnderlineTextField: View {
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .padding(.bottom, 4)
+            
             Rectangle()
                 .foregroundColor(isFocused ? Color.black : Color.infanGray)
                 .frame(height: 1)
-     
         }
-       
-//        .onChange(of: text, perform: { newValue in
-//            if newValue.count > maxLength {
-//                text = String(newValue.prefix(maxLength))
-//                isFocused = false
-//            }
-//        })
     }
 }

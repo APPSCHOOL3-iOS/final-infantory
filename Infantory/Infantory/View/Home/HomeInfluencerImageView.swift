@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HomeInfluencerImageView: View {
-    
     @ObservedObject var applyProductStore: ApplyProductStore
     @ObservedObject var searchStore: SearchStore
     
@@ -27,18 +26,21 @@ struct HomeInfluencerImageView: View {
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 60, height: 60)
                                         .cornerRadius(40)
+                                    
                                 case .success(let image):
                                     image
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 60, height: 60)
                                         .cornerRadius(40)
+                                    
                                 case .failure:
                                     Image("smallAppIcon")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 60, height: 60)
                                         .cornerRadius(40)
+                                    
                                 @unknown default:
                                     EmptyView()
                                 }

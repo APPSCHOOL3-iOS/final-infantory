@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct HomeMainView: View {
-    
     @StateObject var applyProductStore: ApplyProductStore = ApplyProductStore()
     @StateObject var auctionViewModel: AuctionProductViewModel = AuctionProductViewModel()
     @StateObject var searchStore: SearchStore = SearchStore()
-    
     @State private var isShowingDetail = false
     var searchCategory: SearchResultCategory = .total
     
@@ -26,6 +24,7 @@ struct HomeMainView: View {
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
+
                     HomeInfluencerImageView(applyProductStore: applyProductStore, searchStore: searchStore)
                 }
                 .padding([.top, .bottom])
@@ -35,8 +34,8 @@ struct HomeMainView: View {
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
-                    HomeHotAuctionView(auctionViewModel: auctionViewModel)
                     
+                    HomeHotAuctionView(auctionViewModel: auctionViewModel)
                 }
                 .padding([.top, .bottom])
                 
@@ -45,7 +44,9 @@ struct HomeMainView: View {
                         .font(.infanTitle2)
                         .foregroundColor(.infanBlack)
                         .horizontalPadding()
+
                     HomeApplyView(applyProductStore: applyProductStore)
+
                 }
                 .padding([.top, .bottom])
                

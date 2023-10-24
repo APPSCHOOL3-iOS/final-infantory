@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CachedImage<Content: View>: View {
-    
     @StateObject private var manager = CachedImageManager()
     @State var url: String
     let animation: Animation?
@@ -31,6 +30,7 @@ struct CachedImage<Content: View>: View {
             case .loading:
                 content(.empty)
                     .transition(transition)
+                
             case .success(let data):
                 if let image = UIImage(data: data) {
                     content(.success(Image(uiImage: image)))
@@ -39,9 +39,11 @@ struct CachedImage<Content: View>: View {
                     content(.failure(CachedImageError.inavlidData))
                         .transition(transition)
                 }
+                
             case .failed(let error):
                 content(.failure(error))
                     .transition(transition)
+                
             default:
                 content(.empty)
                     .transition(transition)
@@ -53,7 +55,6 @@ struct CachedImage<Content: View>: View {
             await manager.load(url)
         }
     }
-
 }
 
 extension CachedImage {

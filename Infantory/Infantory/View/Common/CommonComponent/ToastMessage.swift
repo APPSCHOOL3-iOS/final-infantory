@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct ToastMessage<Content: View>: View {
-    
     let content: Content
-    
     @Binding var isPresented: Bool
     
     var body: some View {

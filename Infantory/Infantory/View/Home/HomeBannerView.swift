@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HomeBannerView: View {
-    
     @ObservedObject var applyProductStore: ApplyProductStore
+  
     private var selectedProducts: [ApplyProduct] {
         applyProductStore.applyProduct.filter { product in
             product.applyFilter == .close
@@ -17,6 +17,7 @@ struct HomeBannerView: View {
             product.applyCloseFilter == .afterRaffle
         }
     }
+    
     var body: some View {
         TabView {
             ForEach(selectedProducts) { product in
@@ -40,12 +41,14 @@ struct HomeBannerView: View {
                                             .frame(width: (.screenWidth - 100) / 2,
                                                    height: (.screenWidth - 100) / 2)
                                             .clipped()
+                                        
                                     case .success(let image):
                                         image
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: .screenWidth * 0.585, height: (.screenWidth * 0.666) / 2 - 1)
                                             .clipped()
+                                        
                                     case .failure:
                                         Image(systemName: "xmark")
                                             .frame(width: (.screenWidth - 100) / 2,
@@ -55,7 +58,6 @@ struct HomeBannerView: View {
                                         EmptyView()
                                     }
                                 }
-                                
                             } else {
                                 Image("smallAppIcon")
                                     .resizable()
@@ -79,12 +81,14 @@ struct HomeBannerView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 70, height: 70)
                                             .cornerRadius(35)
+                                        
                                     case .success(let image):
                                         image
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 70, height: 70)
                                             .cornerRadius(35)
+                                        
                                     case .failure:
                                         Image("smallAppIcon")
                                             .resizable()

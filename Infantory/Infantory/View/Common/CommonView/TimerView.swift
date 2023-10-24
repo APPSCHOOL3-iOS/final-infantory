@@ -18,10 +18,10 @@ struct TimerView: View {
                     .font(.infanFootnote)
                     .padding()
                     .foregroundColor(.gray)
-                    
             } else {
                 HStack {
                     Image(systemName: "timer")
+                    
                     Text("\(InfanDateFormatter.shared.dateToSecondString(from: remainingTime))")
                 }
                 .frame(width: 110, alignment: .leading)
