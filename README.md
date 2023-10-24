@@ -84,7 +84,7 @@
 
 <table>
   <tr>
-    <td><img src="image-1.png" width="400" height="370"></td>
+    <td><img src="image-1.png" width="550" height="370"></td>
     <td>
       <strong>최근 검색어</strong><br>
       최근에 검색했던 내용을 쉽게 다시 찾을 수 있습니다.<br><br>
@@ -98,7 +98,7 @@
 
 <table>
   <tr>
-    <td><img src="image-2.png" width="700" height="370"></td>
+    <td><img src="image-2.png" width="1300" height="370"></td>
     <td>
       <strong>애장품 경매 목록</strong><br>
       다양한 인플루언서들의 애장품들이 경매에 올라와 있습니다. 원하는 애장품을 찾아보세요.<br><br>
@@ -114,7 +114,7 @@
 
 <table>
   <tr>
-    <td><img src="image-3.png" width="700" height="370"></td>
+    <td><img src="image-3.png" width="1300" height="370"></td>
     <td>
       <strong>애장품 응모 목록</strong><br>
       다양한 인플루언서들이 제공하는 특별한 애장품들을 응모할 수 있는 목록입니다. 마음에 드는 아이템을 찾아보세요.<br><br>
@@ -128,7 +128,7 @@
 
 <table>
   <tr>
-    <td><img src="image-4.png" width="400" height="370"></td>
+    <td><img src="image-4.png" width="550" height="370"></td>
     <td>
       <strong>내 경매/응모 활동 목록</strong><br>
       참여한 경매와 응모 이벤트의 목록을 한 눈에 확인할 수 있습니다. 자신의 활동을 쉽게 추적하고 관리하세요.<br><br>
@@ -140,7 +140,7 @@
 
 <table>
   <tr>
-    <td><img src="image-5.png" width="650" height="370"></td>
+    <td><img src="image-5.png" width="1100" height="370"></td>
      <td>
       <strong>계좌 등록, 간편 결제</strong><br>
       계좌를 등록하고 간편 결제 기능을 사용하여 빠르고 쉽게 경매에 참여하거나 응모할 수 있습니다.<br><br>
@@ -152,7 +152,7 @@
 
 <table>
   <tr>
-    <td><img src="image-6.png" width="700" height="370"></td>
+    <td><img src="image-6.png" width="1400" height="370"></td>
        <td>
       <strong>인플루언서 등록 플로팅 버튼</strong><br>
       인플루언서로서 활동하기 위해 자신을 등록할 수 있는 플로팅 버튼이 제공됩니다. 간단한 클릭으로 등록 절차를 시작하세요.<br><br>
@@ -164,7 +164,7 @@
 
 <table>
   <tr>
-    <td><img src="image-7.png" width="700" height="370"></td>
+    <td><img src="image-7.png" width="1150" height="370"></td>
     <td>
       <strong>인플루언서 팔로우 기능</strong><br>
       좋아하는 인플루언서를 팔로우하여 그들의 최신 활동을 빠르게 받아볼 수 있습니다. 팔로우하여 커뮤니티에 참여하세요.<br><br>
