@@ -15,11 +15,3 @@ struct BiddingInfo: Codable, Hashable {
     var userNickname: String
     var biddingPrice: Int
 }
-
-/* 경매 가져올때 가정
- 1. User 안에 auctionProductsIDs 안에 있는 상품 아이디로 리얼타임데이터베이스에 접근
- 2. DB와 ID가 일치하는 상품의 BiddingInfos를 가져온다
- 3. 자기와 같은 ID를 가지고 있는 BiddingInfo를 가져오기
-
-
- */
