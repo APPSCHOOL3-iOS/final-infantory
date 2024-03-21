@@ -238,12 +238,12 @@
 
 |[ 김성훈 ]<br/> []()<br/> "삐엠" | [ 변상필 ]<br/> []()<br/> "말하는 감자에오" | [ 봉주헌 ]<br/> []()<br/> "눈물뿐인 개발" | [ 안지영 ]<br/>[]()<br/> ""  |
 | :----------------------------------------------------------: | :---------------------------------------------: | :------: | :-------------------------------------------------: |
-|| <img src =  "cheese.JPG" width="150"> | <img src = "bongJooHeon.png" width="150">  |  |
+| <img src = "" width="150"> | <img src =  "cheese.JPG" width="150"> | <img src = "bongJooHeon.png" width="150">  | <img src = "" width="150">  |
 
 
 |[ 윤경환 ]<br/> [@kempt007](https://github.com/kempt007)<br/> "공학에 인생 건 남자" | [ 이희찬 ]<br/> []()<br/> "" | [ 전민석 ]<br/> []()<br/> "옥같은 개발자가 될거야" | [ 조민근 ]<br/>[]()<br/> ""  |
 |:-----------------------------------------------------------: | :---------------------------------------------: | :------: | :--------------------------------------------------: | 
-|<img src = "https://github.com/APPSCHOOL3-iOS/final-infantory/assets/133959724/15d4e326-03c4-4b32-873b-29aebbafce32" width="150"> | <img src =  width="150"> | <img src = "Jade.jpg" width="150">  | <img src =  width="150"> |
+|<img src = "https://github.com/APPSCHOOL3-iOS/final-infantory/assets/133959724/15d4e326-03c4-4b32-873b-29aebbafce32" width="150"> | <img src = "" width="150">  | <img src = "Jade.jpg" width="150">  | <img src = "" width="150"> |
 
 </div>
 
